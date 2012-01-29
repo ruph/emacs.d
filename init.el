@@ -5,9 +5,6 @@
 (mouse-avoidance-mode 'jump)             ;; mouse ptr when cursor is too close
 (tool-bar-mode -1)                       ;; turn-off toolbar
 
-(setq cua-enable-cua-keys nil)           ;; only for rectangles
-(cua-mode t)
-
 (setq ;; scrolling
   scroll-margin 0                        ;; do smooth scrolling, ...
   scroll-conservatively 100000           ;; ... the defaults ...
@@ -47,14 +44,22 @@
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
 
+(cua-mode t)
+
 ;; especially for osx
 (if (eq system-type 'darwin)
+    (progn
     (setq ns-right-alternate-modifier nil)   ;; unbind right alt
-    (global-set-key (kbd "<f6>") 'ns-toggle-fullscreen)) ;; Full screen mode
+    (global-set-key (kbd "<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
+    (setq cua-enable-cua-keys nil)))           ;; only for rectangles
 
 ;; especially for windows
 (if (eq system-type 'windows-nt)
-    (set-face-attribute 'default nil :font "ProggyCleanTT CE 12"))
+    (progn
+    (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
+    (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
+           cua-keep-region-after-copy t) ;; Standard Windows behaviour
+    (transient-mark-mode 1)))            ;; No region when it is not highlighted
 
 ;; theme
 (load-theme 'wombat)
@@ -177,8 +182,12 @@
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 (set-default 'semantic-case-fold t)
 
-(setq semantic-python-dependency-system-include-path
-      '("/usr/lib/python2.7/"))
+(if (eq system-type 'darwin)
+  (setq semantic-python-dependency-system-include-path
+      '("/usr/lib/python2.7/")))
+(if (eq system-type 'windows-nt)
+  (setq semantic-python-dependency-system-include-path
+      '("C:/Python26/")))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
