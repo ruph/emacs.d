@@ -47,9 +47,19 @@
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
 
-(setq ns-right-alternate-modifier nil)   ;; unbind right alt
+
+;; especially for osx
+(if (or (string-match "Carbon" (emacs-version))
+	(string-match "apple-darwin" (emacs-version)))
+    (setq ns-right-alternate-modifier nil))   ;; unbind right alt
+
+;; change font on windows
+(if (eq system-type 'windows-nt)
+    (set-face-attribute 'default nil :font "ProggyCleanTT CE 12"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; color theme
+(load-theme 'wombat)
 
 ;; keyboard / input method settings
 (setq locale-coding-system 'utf-8)
@@ -267,19 +277,3 @@
         (append '((width . 110) (height . 50) (left . 100) (top . 100))
                 default-frame-alist))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (wombat)))
- '(custom-safe-themes (quote ("c1e8be651e81c0dac7783e49d3a93c5f6091b828" default)))
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
