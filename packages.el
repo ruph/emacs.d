@@ -84,6 +84,10 @@
 ; Just M-n, M-p for ac-next/previous
  (define-key ac-completing-map (kbd "<down>") nil)
  (define-key ac-completing-map (kbd "<up>") nil)
+
+;; + yasnippet
+(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-yasnippet/")
+(require 'auto-complete-yasnippet)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
