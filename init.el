@@ -47,19 +47,19 @@
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
 
-
 ;; especially for osx
-(if (or (string-match "Carbon" (emacs-version))
-	(string-match "apple-darwin" (emacs-version)))
-    (setq ns-right-alternate-modifier nil))   ;; unbind right alt
+(if (eq system-type 'darwin)
+    (setq ns-right-alternate-modifier nil)   ;; unbind right alt
+    (global-set-key (kbd "<f6>") 'ns-toggle-fullscreen)) ;; Full screen mode
 
-;; change font on windows
+;; especially for windows
 (if (eq system-type 'windows-nt)
     (set-face-attribute 'default nil :font "ProggyCleanTT CE 12"))
+
+;; theme
+(load-theme 'wombat)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; color theme
-(load-theme 'wombat)
 
 ;; keyboard / input method settings
 (setq locale-coding-system 'utf-8)
@@ -113,9 +113,6 @@
 ;; File search & in-file search
 (global-set-key (kbd "<f7>") 'find-name-dired)
 (global-set-key (kbd "S-<f7>") 'rgrep)
-
-;; Full screen mode
-(global-set-key (kbd "<f6>") 'ns-toggle-fullscreen)
 
 ;; Recent files
 (require 'recentf)
