@@ -15,6 +15,7 @@
 
 
 ;; random
+(add-to-list 'load-path "~/.emacs.d/elpa/php-mode-1.5.0/")
 (require 'php-mode)
 ;(setq-default php-mode-warn-if-mumamo-off nil)
 
@@ -44,8 +45,7 @@
 
 ;; Eproject
 (load-file "~/.emacs.d/elpa/eproject-0.4/eproject.el")
-; Disable automatic addition/removal of files from projects. Optional.
-(setq prj-autotracking nil)
+(setq prj-autotracking nil) ; Disable automatic add/remove files from project
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -115,16 +115,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EMACS-NAV
-(add-to-list 'load-path "~/.emacs.d/emacs-nav")
-(require 'nav)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ;; EVERNOTE
-;(setq evernote-ruby-command "/opt/local/bin/ruby1.9")
+(add-to-list 'load-path "~/.emacs.d/elpa/evernote-mode-0.41/")
 (require 'evernote-mode)
-(setq evernote-username "davor.strehar@gmail.com") ; optional: you can use this username as default.
 (setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8")) ; option
 (global-set-key "\C-cec" 'evernote-create-note)
 (global-set-key "\C-ceo" 'evernote-open-note)
