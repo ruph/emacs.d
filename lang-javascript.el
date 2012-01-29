@@ -10,8 +10,8 @@
 (add-hook 'js2-mode-hook
       (lambda ()
         (setq indent-tabs-mode t)
-        (setq tab-width 2)
-        (setq js-indent-level 2)
+        (setq tab-width 4)
+        (setq js2-indent-level 4)
 	(setq js2-missing-semi-one-line-override t)))
 
 (provide 'lang-javascript)
