@@ -12,6 +12,7 @@
         (setq indent-tabs-mode t)
         (setq tab-width 4)
         (setq js2-indent-level 4)
+        (local-set-key (kbd "RET") 'newline-and-indent)
 	(setq js2-missing-semi-one-line-override t)))
 
 (provide 'lang-javascript)

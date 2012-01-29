@@ -119,6 +119,9 @@
 (global-set-key (kbd "<f7>") 'find-name-dired)
 (global-set-key (kbd "S-<f7>") 'rgrep)
 
+;; Indent everywhere
+(global-set-key (kbd "RET") 'newline-and-indent)
+
 ;; Recent files
 (require 'recentf)
 (recentf-mode 1)
