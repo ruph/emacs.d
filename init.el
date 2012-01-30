@@ -129,8 +129,25 @@
 (setq recentf-max-menu-items 60)
 (global-set-key (kbd "C-x f") 'recentf-open-files)
 
+
+;; OSX has problems with PATH when running Emacs.app
+;; = flymake doesn't work :-/
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when (and window-system (eq system-type 'darwin))
+  ;; When started from Emacs.app or similar, ensure $PATH
+  ;; is the same the user would see in Terminal.app
+  (set-exec-path-from-shell-PATH))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ido-mode
+
+
+;; IDO mode
 ;; http://www.emacswiki.org/cgi-bin/wiki/InteractivelyDoThings
 ; - old
 ;(setq ido-enable-flex-matching t)
@@ -191,6 +208,14 @@
 (if (eq system-type 'windows-nt)
   (setq semantic-python-dependency-system-include-path
       '("C:/Python26/")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; SPEEDBAR
+(setq speedbar-default-position 'right)
+(setq speedbar-load-hook nil)
+(setq speedbar-show-unknown-files t)
+(setq speedbar-use-images t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
