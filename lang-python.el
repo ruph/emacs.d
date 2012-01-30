@@ -35,6 +35,11 @@
 
 ;; Pyflakes & PEP8 checks
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+; define python checker
+(if (eq system-type 'windows-nt)
+  (defvar pychecker "pycheckers")
+  (defvar pychecker "pyflakespep8.py"))
+; use python checker
 (when (load "flymake" t)
   (defun flymake-pychecker-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -42,7 +47,7 @@
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list "pycheckers" (list local-file))))
+      (list pychecker (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pychecker-init)))
 (add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0/")
