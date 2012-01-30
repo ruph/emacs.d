@@ -42,9 +42,10 @@
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list "/usr/local/bin/pyflakespep8.py" (list local-file))))
+      (list "pycheckers" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pychecker-init)))
+(add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0/")
 (load-library "flymake-cursor")
 (global-set-key [S-f5] 'flymake-goto-prev-error)
 (global-set-key [f5] 'flymake-goto-next-error)
