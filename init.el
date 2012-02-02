@@ -22,8 +22,7 @@
 (setq completion-ignore-case t           ;; ignore case when completing...
   read-file-name-completion-ignore-case t) ;; ...filenames too
 
-(setq initial-scratch-message
-  ";; scratch pad\n\n")
+(setq initial-scratch-message ";; scratch pad\n\n")
 
 (setq-default
  frame-title-format
@@ -118,9 +117,6 @@
 ;; File search & in-file search
 (global-set-key (kbd "<f7>") 'find-name-dired)
 (global-set-key (kbd "S-<f7>") 'rgrep)
-
-;; Indent everywhere
-(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; Recent files
 (require 'recentf)
