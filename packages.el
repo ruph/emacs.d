@@ -120,6 +120,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; MMM Mode
+(add-to-list 'load-path "~/.emacs.d/el-get/mmm-mode")
+(require 'mmm-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; nXhtml
+;(load "~/.emacs.d/el-get/nxhtml/autostart")
+;(setq
+;  nxhtml-global-minor-mode t
+;  mumamo-chunk-coloring 'submode-colored
+;  nxhtml-skip-welcome t
+;  indent-region-mode t
+;  rng-nxml-auto-validate-flag nil
+;)
+;(setq nxml-degraded t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; EVERNOTE
 (add-to-list 'load-path "~/.emacs.d/elpa/evernote-mode-0.41/")
 (require 'evernote-mode)

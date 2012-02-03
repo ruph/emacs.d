@@ -34,7 +34,8 @@
 
 
 ;; Pyflakes & PEP8 checks
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+;(add-hook 'find-file-hook 'flymake-find-file-hook)
+(add-hook 'python-mode-hook 'flymake-find-file-hook)
 ; define python checker
 (if (eq system-type 'windows-nt)
   (defvar pychecker "pycheckers")
