@@ -4,6 +4,7 @@
         (setq indent-tabs-mode t)
         (setq tab-width 4)
         (setq python-indent 4)
+	(local-set-key (kbd "RET") 'newline-and-indent)
         (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; Initialize Pymacs
