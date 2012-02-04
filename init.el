@@ -1,3 +1,8 @@
+;; Start a server
+(require 'server)
+(or (server-running-p)
+	    (server-start))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; general settings
 ;;
@@ -88,6 +93,7 @@
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'packages)
 (require 'lang-python)
+(require 'lang-clojure)
 (require 'lang-javascript)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -105,6 +111,8 @@
   (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
   (setq tab-width 4)
   (setq indent-tabs-mode t)  ; use spaces only if nil
+
+  (local-set-key (kbd "RET") 'newline-and-indent)
 )
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
@@ -194,8 +202,10 @@
 (global-semantic-stickyfunc-mode -1)
 ;(global-semantic-idle-summary-mode 1)
 (global-semantic-mru-bookmark-mode 1)
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
+;; gnu global support
+;(require 'semanticdb-global)
+;(semanticdb-enable-gnu-global-databases 'c-mode)
+;(semanticdb-enable-gnu-global-databases 'c++-mode)
 (set-default 'semantic-case-fold t)
 
 (if (eq system-type 'darwin)
