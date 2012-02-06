@@ -95,6 +95,7 @@
 (require 'lang-python)
 (require 'lang-clojure)
 (require 'lang-javascript)
+(require 'lang-php)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

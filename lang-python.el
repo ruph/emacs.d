@@ -33,9 +33,7 @@
 ;;   (setq ac-sources (append (list 'ac-source-ropemacs) ac-sources))
 ;;   (setq ac-omni-completion-sources '(("\\." ac-source-ropemacs))))
 
-
 ;; Pyflakes & PEP8 checks
-;(add-hook 'find-file-hook 'flymake-find-file-hook)
 (add-hook 'python-mode-hook 'flymake-find-file-hook)
 ; define python checker
 (if (eq system-type 'windows-nt)
@@ -52,10 +50,13 @@
       (list pychecker (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pychecker-init)))
+
 (add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0/")
 (load-library "flymake-cursor")
-(global-set-key [S-f5] 'flymake-goto-prev-error)
-(global-set-key [f5] 'flymake-goto-next-error)
+(add-hook 'python-mode-hook
+      (lambda ()
+	    (local-set-key [S-f5] 'flymake-goto-prev-error)
+	    (local-set-key [f5] 'flymake-goto-next-error)))
 
 ; PYSMELL
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/pysmell-0.7.2/")

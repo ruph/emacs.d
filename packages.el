@@ -14,11 +14,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; random
-(add-to-list 'load-path "~/.emacs.d/elpa/php-mode-1.5.0/")
-(require 'php-mode)
-;(setq-default php-mode-warn-if-mumamo-off nil)
-
+;; SVN, YML
 (add-to-list 'load-path "~/.emacs.d/el-get/psvn")
 (require 'psvn)
 
@@ -95,8 +91,15 @@
 ;; Automatic "" ()
 (add-to-list 'load-path "~/.emacs.d/el-get/autopair")
 (require 'autopair)
-(autopair-global-mode)
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'sldb-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'repl-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'slime-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'lisp-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'slime-repl-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'clojure-mode)))
+(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'html-mode)))
 (setq autopair-blink nil)
+(autopair-global-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -118,25 +121,6 @@
 (global-set-key [f3] 'highlight-symbol-next)
 (global-set-key [(shift f3)] 'highlight-symbol-prev)
 (global-set-key [(meta f3)] 'highlight-symbol-prev)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; MMM Mode
-(add-to-list 'load-path "~/.emacs.d/el-get/mmm-mode")
-(require 'mmm-mode)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; nXhtml
-;(load "~/.emacs.d/el-get/nxhtml/autostart")
-;(setq
-;  nxhtml-global-minor-mode t
-;  mumamo-chunk-coloring 'submode-colored
-;  nxhtml-skip-welcome t
-;  indent-region-mode t
-;  rng-nxml-auto-validate-flag nil
-;)
-;(setq nxml-degraded t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
