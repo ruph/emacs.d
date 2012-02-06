@@ -7,4 +7,9 @@
 ;; lein plugin install swank-clojure 1.4.0
 ;; M-x clojure-jack-in
 
+;; yasnippet
+;; https://github.com/swannodette/clojure-snippets
+;; git clone https://github.com/swannodette/clojure-snippets.git clojure-mode
+;; ..& add to snippets dir
+
 (provide 'lang-clojure)
