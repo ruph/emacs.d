@@ -65,22 +65,22 @@
 (ac-config-default)
 
 ; Invoke auto-completion with TAB
- (setq ac-auto-start t)
- (ac-set-trigger-key "TAB")
+(setq ac-auto-start t)
+(ac-set-trigger-key "TAB")
 ; case sensitivity is important when finding matches
- (setq ac-ignore-case nil)
+(setq ac-ignore-case nil)
 
 ; showing the menu
- (setq ac-auto-show-menu nil)
- (setq ac-show-menu-immediately-on-auto-complete t)
+(setq ac-auto-show-menu nil)
+(setq ac-show-menu-immediately-on-auto-complete t)
 
 ; TAB completes the word, ENTER exists
- (define-key ac-complete-mode-map "\t" 'ac-complete)
- (define-key ac-complete-mode-map "\r" nil)
- (define-key ac-complete-mode-map "ESC" nil)
+(define-key ac-complete-mode-map "\t" 'ac-complete)
+(define-key ac-complete-mode-map "\r" nil)
+(define-key ac-complete-mode-map "ESC" nil)
 ; Just M-n, M-p for ac-next/previous
- (define-key ac-completing-map (kbd "<down>") nil)
- (define-key ac-completing-map (kbd "<up>") nil)
+(define-key ac-completing-map (kbd "<down>") nil)
+(define-key ac-completing-map (kbd "<up>") nil)
 
 ;; + yasnippet
 (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-yasnippet/")
@@ -91,15 +91,13 @@
 ;; Automatic "" ()
 (add-to-list 'load-path "~/.emacs.d/el-get/autopair")
 (require 'autopair)
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'sldb-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'repl-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'slime-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'lisp-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'slime-repl-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'clojure-mode)))
-(set-default 'autopair-dont-activate #'(lambda () (eq major-mode 'html-mode)))
-(setq autopair-blink nil)
 (autopair-global-mode)
+(setq autopair-blink nil)
+(set-default 'autopair-dont-activate #'(lambda ()
+					 (or
+					  (eq major-mode 'clojure-mode)
+					  (eq major-mode 'emacs-lisp-mode)
+					  (eq major-mode 'sldb-mode))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
