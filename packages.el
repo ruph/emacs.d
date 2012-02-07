@@ -97,7 +97,25 @@
 					 (or
 					  (eq major-mode 'clojure-mode)
 					  (eq major-mode 'emacs-lisp-mode)
+					  (eq major-mode 'lisp-mode)
+					  (eq major-mode 'emacs-interaction-mode)
+					  (eq major-mode 'scheme-mode)
+					  (eq major-mode 'slime-repl-mode)
 					  (eq major-mode 'sldb-mode))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Paredit () for lisps
+(add-to-list 'load-path "~/.emacs.d/elpa/paredit-22")
+(require 'paredit)
+(autoload 'paredit-mode "paredit"
+  "Minor mode for pseudo-structurally editing Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+(add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode +1)))
+(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
