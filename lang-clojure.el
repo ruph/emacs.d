@@ -10,6 +10,6 @@
 ;; yasnippet
 ;; https://github.com/swannodette/clojure-snippets
 ;; git clone https://github.com/swannodette/clojure-snippets.git clojure-mode
-;; ..& add to snippets dir
+;; ..in snippets dir preferably
 
 (provide 'lang-clojure)
