@@ -116,6 +116,12 @@
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
 (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode +1)))
 (add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
+
+;; these are used for moving lines/regions
+(keymap-unset-key (kbd "M-<up>") "paredit-mode")
+(keymap-unset-key (kbd "M-<down>") "paredit-mode")
+(keymap-unset-key [?\e up] "paredit-mode")
+(keymap-unset-key [?\e down] "paredit-mode")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

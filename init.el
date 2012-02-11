@@ -89,16 +89,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; local imports
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'packages)
-(require 'lang-python)
-(require 'lang-clojure)
-(require 'lang-javascript)
-(require 'lang-php)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ;; Needed elsewhere
 (global-unset-key (kbd "<f12>"))
 
@@ -258,31 +248,45 @@
 
 
 ;; MOVE LINE
-(defun move-line (n)
-  "Move the current line up or down by N lines."
-  (interactive "p")
-  (setq col (current-column))
-  (beginning-of-line) (setq start (point))
-  (end-of-line) (forward-char) (setq end (point))
-  (let ((line-text (delete-and-extract-region start end)))
-    (forward-line n)
-    (insert line-text)
-    ;; restore point to original column in moved line
-    (forward-line -1)
-    (forward-char col)))
+(defun move-text-internal (arg)
+  (cond
+   ((and mark-active transient-mark-mode)
+    (if (> (point) (mark))
+        (exchange-point-and-mark))
+    (let ((column (current-column))
+          (text (delete-and-extract-region (point) (mark))))
+      (forward-line arg)
+      (move-to-column column t)
+      (set-mark (point))
+      (insert text)
+      (exchange-point-and-mark)
+      (setq deactivate-mark nil)))
+   (t
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (when (or (> arg 0) (not (bobp)))
+        (forward-line)
+        (when (or (< arg 0) (not (eobp)))
+          (transpose-lines arg))
+        (forward-line -1))
+      (move-to-column column t)))))
 
-(defun move-line-up (n)
-  "Move the current line up by N lines."
-  (interactive "p")
-  (move-line (if (null n) -1 (- n))))
+(defun move-text-down (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines down."
+  (interactive "*p")
+  (move-text-internal arg))
 
-(defun move-line-down (n)
-  "Move the current line down by N lines."
-  (interactive "p")
-  (move-line (if (null n) 1 n)))
+(defun move-text-up (arg)
+  "Move region (transient-mark-mode active) or current line
+  arg lines up."
+  (interactive "*p")
+  (move-text-internal (- arg)))
 
-(global-set-key (kbd "M-<up>") 'move-line-up)
-(global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key (kbd "M-<up>") 'move-text-up)
+(global-set-key (kbd "M-<down>") 'move-text-down)
+(global-set-key [?\e up] 'move-text-up)              ; moving lines
+(global-set-key [?\e down] 'move-text-down)          ; in console
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -321,9 +325,37 @@
 
 ;; INITIAL WINDOW SIZE
 (setq initial-frame-alist
-        (append '((width . 110) (height . 50) (left . 100) (top . 100))
+        (append '((width . 117) (height . 57) (left . 59) (top . 27))
                 initial-frame-alist))
 (setq default-frame-alist
-        (append '((width . 110) (height . 50) (left . 100) (top . 100))
+        (append '((width . 117) (height . 57) (left . 59) (top . 27))
                 default-frame-alist))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; UNSETTING KEYS
+(defun get-key-combo (key)
+  "Just return the key combo entered by the user"
+  (interactive "kKey combo: ")
+  key)
+(defun keymap-unset-key (key keymap)
+  "Remove binding of KEY in a keymap
+    KEY is a string or vector representing a sequence of keystrokes."
+  (interactive
+   (list (call-interactively #'get-key-combo)
+	 (completing-read "Which map: " minor-mode-map-alist nil t)))
+  (let ((map (rest (assoc (intern keymap) minor-mode-map-alist))))
+    (when map
+      (define-key map key nil)
+      (message  "%s unbound for %s" key keymap))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; IMPORTS
+(add-to-list 'load-path "~/.emacs.d/")
+(require 'packages)
+(require 'lang-python)
+(require 'lang-clojure)
+(require 'lang-javascript)
+(require 'lang-php)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
