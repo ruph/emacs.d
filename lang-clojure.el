@@ -10,6 +10,12 @@
 ;; M-x clojure-jack-in
 
 
+;; slime autocompletion module
+(add-to-list 'load-path "~/.emacs.d/elpa/ac-slime-0.1/")
+(require 'ac-slime)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+
+
 ;; yasnippet
 ;; https://github.com/swannodette/clojure-snippets
 ;; git clone https://github.com/swannodette/clojure-snippets.git clojure-mode
