@@ -3,6 +3,9 @@
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
+;; clojurescript
+(add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
+
 
 ;; swank-clojure
 ;; https://github.com/technomancy/swank-clojure
