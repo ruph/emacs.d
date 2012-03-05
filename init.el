@@ -63,7 +63,11 @@
     (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
     (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
            cua-keep-region-after-copy t) ;; Standard Windows behaviour
-    (transient-mark-mode 1)))            ;; No region when it is not highlighted
+    (transient-mark-mode 1)              ;; No region when it is not highlighted
+    (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
+    (setenv "PATH"
+	    (concat cygwin-bin ";" (getenv "PATH")))
+    ))            
 
 ;; theme
 (load-theme 'wombat)
