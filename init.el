@@ -67,7 +67,7 @@
     (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
     (setenv "PATH"
 	    (concat cygwin-bin ";" (getenv "PATH")))
-    ))            
+    ))
 
 ;; theme
 (load-theme 'wombat)
@@ -175,7 +175,7 @@
 (semantic-mode 1)
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
-(global-semantic-idle-completions-mode 1)
+;(global-semantic-idle-completions-mode 1)
 ;(global-semantic-decoration-mode 1)
 (global-semantic-highlight-func-mode 1)
 (global-semantic-stickyfunc-mode -1)
