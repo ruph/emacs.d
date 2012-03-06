@@ -26,7 +26,7 @@
 ;; ..in snippets dir preferably
 
 
-;; ParEdit slime settings
+;; paredit slime settings
 (defun setup-slime-repl-paredit ()
   (define-key slime-repl-mode-map
     (kbd "DEL") 'paredit-backward-delete)
@@ -42,8 +42,9 @@
   (modify-syntax-entry ?, "    ")
   (modify-syntax-entry ?^ "'")
   (modify-syntax-entry ?= "'"))
+(add-hook 'slime-repl-mode-hook 'setup-slime-repl-paredit)
 
-;; add paredit to all relevant modes
+;; add paredit to slime and to all other relevant modes
 (mapc (lambda (mode)
 	(let ((hook (intern (concat (symbol-name mode) "-mode-hook"))))
 	  (add-hook hook (lambda () (paredit-mode +1)))))
