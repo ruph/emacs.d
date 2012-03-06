@@ -3,6 +3,7 @@
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
+
 ;; clojurescript
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 
@@ -42,8 +43,11 @@
   (modify-syntax-entry ?^ "'")
   (modify-syntax-entry ?= "'"))
 
-(add-hook 'slime-repl-mode-hook 'setup-slime-repl-paredit)
-(add-hook 'slime-repl-mode-hook 'enable-paredit-mode)
+;; add paredit to all relevant modes
+(mapc (lambda (mode)
+	(let ((hook (intern (concat (symbol-name mode) "-mode-hook"))))
+	  (add-hook hook (lambda () (paredit-mode +1)))))
+      '(emacs-lisp lisp inferior-lisp slime slime-repl))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
