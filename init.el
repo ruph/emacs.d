@@ -113,10 +113,12 @@
 ;; Recent files
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-saved-items 500)
-(setq recentf-max-menu-items 60)
+(setq recentf-max-saved-items 256)
+(setq recentf-max-menu-items 32)
 (global-set-key (kbd "C-x f") 'recentf-open-files)
 
+;; Default tab width
+(setq tab-width 4)
 
 ;; OSX has problems with PATH when running Emacs.app
 ;; = flymake doesn't work :-/

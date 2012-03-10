@@ -82,9 +82,9 @@
 (define-key ac-completing-map (kbd "<down>") nil)
 (define-key ac-completing-map (kbd "<up>") nil)
 
-;; + yasnippet
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-yasnippet/")
-(require 'auto-complete-yasnippet)
+;; + etags
+(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
+(require 'auto-complete-etags)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
