@@ -19,8 +19,9 @@
 (require 'psvn)
 
 ;; GIT ~ http://files.taesoo.org/git-emacs/git-emacs.html
-(add-to-list 'load-path "~/.emacs.d/el-get/git-emacs")
-(require 'git-emacs)
+; ~ slows down emacs
+;(add-to-list 'load-path "~/.emacs.d/el-get/git-emacs")
+;(require 'git-emacs)
 
 ;; YML
 (add-to-list 'load-path "~/.emacs.d/el-get/yaml-mode")
