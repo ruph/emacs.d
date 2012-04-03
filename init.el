@@ -359,6 +359,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; RANDOM
+(defun which-active-modes ()
+ "Give a message of which minor modes are enabled in the current buffer."
+ (interactive)
+ (let ((active-modes))
+   (mapc (lambda (mode) (condition-case nil
+                            (if (and (symbolp mode) (symbol-value mode))
+                                (add-to-list 'active-modes mode))
+                          (error nil) ))
+         minor-mode-list)
+   (message "Active modes are %s" active-modes)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'packages)
