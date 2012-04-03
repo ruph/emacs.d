@@ -47,7 +47,20 @@
 
 ;; Eproject
 (load-file "~/.emacs.d/elpa/eproject-0.4/eproject.el")
-(setq prj-autotracking nil) ; Disable automatic add/remove files from project
+
+;; change pesky M-left/right to C-,/."
+(defun prj-setup-all ()
+  (progn
+   (prj-setkeys)
+   (prj-setmenu)
+   (prj-settitle)
+   (prj-config-print)
+   (message ">> EPROJECT setup" )
+   (keymap-unset-key [M-left] "eproject-mode")
+   (keymap-unset-key [M-right] "eproject-mode")
+ ))
+(global-set-key (kbd "C-.") 'eproject-nextfile)
+(global-set-key (kbd "C-,") 'eproject-prevfile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
