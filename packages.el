@@ -59,8 +59,8 @@
    (keymap-unset-key [M-left] "eproject-mode")
    (keymap-unset-key [M-right] "eproject-mode")
  ))
-(global-set-key (kbd "C-.") 'eproject-nextfile)
-(global-set-key (kbd "C-,") 'eproject-prevfile)
+(global-set-key (kbd "C->") 'eproject-nextfile)
+(global-set-key (kbd "C-<") 'eproject-prevfile)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
