@@ -23,14 +23,14 @@ KEY BINDINGS
 
 ### EDITOR ###
 * **C+<space>**   - normal selection
-* **C+RET**       - rectengular selection
+* **C+RET**       - rectangular selection
 * **M+<up>**      - move line up
 * **M+<down>**    - move line down
 * **C+S+<right>** - indent
 * **C+S+<left>**  - outdent
 * **S+TAB**       - outdent
 * **C+k**         - delete to the end of the line
-* **C+;**         - delete to the beginig of the line
+* **C+;**         - delete to the begining of the line
 * **C+l**         - goto line
 * **M+<space>**   - delete excessive spaces
 
