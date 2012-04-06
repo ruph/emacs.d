@@ -1,10 +1,10 @@
 KEY BINDINGS
-------------
+============
 C-x f - list recent open files
 
 
 > WINDOW
-------------
+--------
 C+x 2 - split window horizontally
 C+x 3 - split window vertically
 M+h   - move left
@@ -23,7 +23,7 @@ S+F6  - go full screen (osx only)
 
 
 > EDITOR
-------------
+--------
 C+<space>   - normal selection
 C+RET       - rectengular selection
 M+<up>      - move line up
@@ -38,7 +38,7 @@ M+<space>   - delete excessive spaces
 
 
 > EDITOR :: SEARCH
-------------
+------------------
 F7    - search files
 S+F7  - search in files
 C+S   - search in current buffer
@@ -50,7 +50,7 @@ C+F3  - highlight word in buffer
 
 
 > EDITOR :: DEV
------------
+---------------
 TAB   - autocompletes
 M+n   - next autocomplete option
 M+p   - previous autocomplete option
@@ -59,10 +59,10 @@ S+F5  - go to previous error (flymake)
 
 
 > EPROJECT
-------------
+----------
 C+>       - next file
 C+<       - previous file
-C+F5      - project settings
-F5        - project dired (! flymake)
+F5        - project settings (! flymake)
+C+F5      - project dired
 (S/C+)F8  - not bind (for the use in eproject commands)
 (S/C+)F9  - not bind (for the use in eproject commands)
