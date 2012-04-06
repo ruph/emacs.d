@@ -22,17 +22,17 @@ KEY BINDINGS
 
 
 ### EDITOR ###
-* **C+<space>**   - normal selection
-* **C+RET**       - rectangular selection
-* **M+<up>**      - move line up
-* **M+<down>**    - move line down
-* **C+S+<right>** - indent
-* **C+S+<left>**  - outdent
-* **S+TAB**       - outdent
-* **C+k**         - delete to the end of the line
-* **C+;**         - delete to the begining of the line
-* **C+l**         - goto line
-* **M+<space>**   - delete excessive spaces
+* **C+space**   - normal selection
+* **C+RET**     - rectangular selection
+* **M+up**      - move line up
+* **M+down**    - move line down
+* **C+S+right** - indent
+* **C+S+left**  - outdent
+* **S+TAB**     - outdent
+* **C+k**       - delete to the end of the line
+* **C+;**       - delete to the begining of the line
+* **C+l**       - goto line
+* **M+space**   - delete excessive spaces
 
 
 ### EDITOR :: SEARCH ###
@@ -40,7 +40,9 @@ KEY BINDINGS
 * **S+F7**  - search in files
 * **C+S**   - search in current buffer
 * **C+R**   - search backwards in current buffer
+* **M+C+S** - regex search in current buffer
 * **M+%**   - search & replace in current buffer
+* **C+M+%** - regex search & replace in current buffer
 * **F3**    - find next symbol in buffer
 * **S+F3**  - find previous symbol in buffer
 * **C+F3**  - highlight word in buffer
