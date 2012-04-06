@@ -54,7 +54,7 @@
 (if (eq system-type 'darwin)
     (progn
     (setq ns-right-alternate-modifier nil)   ;; unbind right alt
-    (global-set-key (kbd "<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
+    (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
     (setq cua-enable-cua-keys nil)))           ;; only for rectangles
 
 ;; especially for windows
