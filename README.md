@@ -56,6 +56,11 @@ KEY BINDINGS
 * **S+F5**  - go to previous error (flymake)
 
 
+### BUFFERS ###
+* **C+x right** - switch to right buffer
+* **C+x left**  - switch to left buffer
+
+
 ### EPROJECT ###
 * **C+>**       - next file
 * **C+<**       - previous file
