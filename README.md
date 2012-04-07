@@ -1,6 +1,7 @@
 WHAT IS THIS?
 -------------
 My emacs v24 settings, supporting:
+
 - project management with eproject
 - python with flymake
 - php & html
@@ -48,14 +49,14 @@ KEY BINDINGS
 * **M+j**   - move down
 * **M+k**   - move up
 * **M+l**   - move left
-* **C+M+J** - swap with down
-* **C+M+K** - swap with up
-* **C+M+H** - swap with left
-* **C+M+L** - swap with right
-* **M+J**   - enlarge window down
-* **M+K**   - enlarge window up
-* **M+H**   - enlarge window left
-* **M+L**   - enlarge window right
+* **C+M+J** - swap down
+* **C+M+K** - swap up
+* **C+M+H** - swap left
+* **C+M+L** - swap right
+* **M+J**   - enlarge bottom window
+* **M+K**   - enlarge upper window
+* **M+H**   - enlarge left window
+* **M+L**   - enlarge right window
 * **S+F6**  - go full screen (osx only)
 
 
