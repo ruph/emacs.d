@@ -1,3 +1,42 @@
+WHAT IS THIS?
+-------------
+My emacs v24 settings, supporting:
+
+- project management with eproject
+- python with flymake
+- php & html
+- javascript
+- clojure & clojurescript with paredit
+- autocomplete, snippets & etags
+
+Should work well in windows and osx, but was never tested on linux.
+
+
+PACKAGES
+--------
+- elpa
+ - php-mode
+ - clojure-mode
+ - ac-slime
+ - paredit
+ - eproject
+ - flymake-cursor
+ - evernote-mode
+ - sml-modeline
+ - yasnippet
+- el-get
+ - auto-complete
+ - auto-complete-etags
+ - auto-complte-yasnippet
+ - autopair
+ - highlight-parentheses
+ - highlight-symbol
+ - mmm-mode
+ - psvn
+ - pymacs
+ - yaml-mode
+
+
 KEY BINDINGS
 ------------
 * **C-x f** - list recent open files
@@ -10,14 +49,14 @@ KEY BINDINGS
 * **M+j**   - move down
 * **M+k**   - move up
 * **M+l**   - move left
-* **C+M+J** - swap with down
-* **C+M+K** - swap with up
-* **C+M+H** - swap with left
-* **C+M+L** - swap with right
-* **M+J**   - enlarge window down
-* **M+K**   - enlarge window up
-* **M+H**   - enlarge window left
-* **M+L**   - enlarge window right
+* **C+M+J** - swap down
+* **C+M+K** - swap up
+* **C+M+H** - swap left
+* **C+M+L** - swap right
+* **M+J**   - enlarge bottom window
+* **M+K**   - enlarge upper window
+* **M+H**   - enlarge left window
+* **M+L**   - enlarge right window
 * **S+F6**  - go full screen (osx only)
 
 
@@ -54,6 +93,8 @@ KEY BINDINGS
 * **M+p**   - previous autocomplete option
 * **F5**    - go to next error (flymake)
 * **S+F5**  - go to previous error (flymake)
+* **M+.**   - jump to definition 
+* **C+.**   - show arguments (php-mode)
 
 
 ### BUFFERS ###
