@@ -105,7 +105,7 @@ KEY BINDINGS
 ### EPROJECT ###
 * **C+>**       - next file
 * **C+<**       - previous file
-* **F5**        - project settings (! flymake)
+* **C+S+F5**    - project settings
 * **C+F5**      - project dired
 * **(S/C+)F8**  - not bind (for the use in eproject commands)
 * **(S/C+)F9**  - not bind (for the use in eproject commands)

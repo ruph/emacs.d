@@ -58,9 +58,11 @@
    (message ">> EPROJECT setup" )
    (keymap-unset-key [M-left] "eproject-mode")
    (keymap-unset-key [M-right] "eproject-mode")
+   (keymap-unset-key [C-f5] "eproject-mode")
  ))
 (global-set-key (kbd "C->") 'eproject-nextfile)
 (global-set-key (kbd "C-<") 'eproject-prevfile)
+(global-set-key (kbd "C-S-<f5>") 'eproject-setup-toggle)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
