@@ -6,7 +6,7 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
-;; Js-mode Tab Hook
+;; Js2-mode
 (add-hook 'js2-mode-hook
       (lambda ()
         (setq indent-tabs-mode t)
@@ -14,5 +14,12 @@
         (setq js2-indent-level 4)
         (local-set-key (kbd "RET") 'newline-and-indent)
 	(setq js2-missing-semi-one-line-override t)))
+
+;; default js-mode
+(add-hook 'js-mode-hook
+      (lambda ()
+        (setq tab-width 4)
+        (local-set-key (kbd "RET") 'newline-and-indent)
+        (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 (provide 'lang-javascript)
