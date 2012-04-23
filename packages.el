@@ -27,6 +27,13 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/yaml-mode")
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+;; CSS
+(add-hook 'css-mode-hook
+      (lambda ()
+        (setq tab-width 4)
+        (local-set-key (kbd "RET") 'newline-and-indent)
+        (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -58,7 +65,7 @@
    (message ">> EPROJECT setup" )
    (keymap-unset-key [M-left] "eproject-mode")
    (keymap-unset-key [M-right] "eproject-mode")
-   (keymap-unset-key [C-f5] "eproject-mode")
+   (keymap-unset-key [f5] "eproject-mode")
  ))
 (global-set-key (kbd "C->") 'eproject-nextfile)
 (global-set-key (kbd "C-<") 'eproject-prevfile)
