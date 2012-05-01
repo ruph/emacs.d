@@ -28,6 +28,7 @@
   read-file-name-completion-ignore-case t) ;; ...filenames too
 
 (setq initial-scratch-message ";; scratch pad\n\n")
+(setq initial-major-mode 'org-mode)      ;; org. scratch pad
 
 (setq-default
  frame-title-format
