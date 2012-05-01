@@ -94,9 +94,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Needed elsewhere
-(global-unset-key (kbd "<f12>"))
-
 ;; Goto-line short-cut key
 (global-set-key (kbd "C-l") 'goto-line)
 
@@ -135,6 +132,9 @@
   ;; When started from Emacs.app or similar, ensure $PATH
   ;; is the same the user would see in Terminal.app
   (set-exec-path-from-shell-PATH))
+
+;; Better buffer finder
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
