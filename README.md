@@ -4,7 +4,7 @@ My emacs v24 settings, supporting:
 
 - project management with eproject
 - python with flymake
-- php & html
+- php & html with mmm-mode
 - javascript
 - clojure & clojurescript with paredit
 - autocomplete, snippets & etags
@@ -24,6 +24,7 @@ PACKAGES
  - evernote-mode
  - sml-modeline
  - yasnippet
+ - ace-jump-mode
 - el-get
  - auto-complete
  - auto-complete-etags
@@ -35,7 +36,8 @@ PACKAGES
  - psvn
  - pymacs
  - yaml-mode
-
+- other
+ - js2-mode (github.com/mooz)
 
 KEY BINDINGS
 ------------
@@ -85,7 +87,7 @@ KEY BINDINGS
 * **F3**    - find next symbol in buffer
 * **S+F3**  - find previous symbol in buffer
 * **C+F3**  - highlight word in buffer
-
+* **C+0**   - ace jump
 
 ### EDITOR :: DEV ###
 * **TAB**   - autocomplete

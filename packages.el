@@ -174,6 +174,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Fast/direct cursor location minor mode.
+(add-to-list 'load-path "~/.emacs.d/elpa/ace-jump-mode-1.0")
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-0") 'ace-jump-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; EVERNOTE
 (add-to-list 'load-path "~/.emacs.d/elpa/evernote-mode-0.41/")
 (require 'evernote-mode)
