@@ -9,7 +9,7 @@ My emacs v24 settings, supporting:
 - clojure & clojurescript with paredit
 - autocomplete, snippets & etags
 
-Should work well in windows and osx, but was never tested on linux.
+Should work well in windows and osx, but was never tested on linux. COPY/PASTE freely :)
 
 
 PACKAGES
