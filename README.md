@@ -79,9 +79,9 @@ KEY BINDINGS
 ### EDITOR :: SEARCH ###
 * **F7**    - search files
 * **S+F7**  - search in files
-* **C+S**   - search in current buffer
-* **C+R**   - search backwards in current buffer
-* **M+C+S** - regex search in current buffer
+* **C+s**   - search in current buffer
+* **C+r**   - search backwards in current buffer
+* **M+C+s** - regex search in current buffer
 * **M+%**   - search & replace in current buffer
 * **C+M+%** - regex search & replace in current buffer
 * **F3**    - find next symbol in buffer
