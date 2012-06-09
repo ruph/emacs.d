@@ -52,14 +52,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Recursively generate tags for all *.clj files, 
+;; Recursively generate tags for all *.clj files,
 ;; creating tags for def* and namespaces
 (defun create-clj-tags (dir-name)
   "Create tags file."
   (interactive "Directory: ")
   (shell-command
-   (format "%s  --langdef=Clojure --langmap=Clojure:.clj --langmap=Clojure:.cljs --regex-Clojure='/[ \t\(]*def[a-z]* \([a-z!-]+\)/\1/'  --regex-Clojure='/[ \t\(]*ns \([a-z.]+\)/\1/' -f %s/TAGS -e -R %s" "ctags" dir-name (directory-file-name dir-name)))
-  )
+   (format "find %s -name \'*.clj*\' | xargs etags --regex=\'/[ \\t\\(]*def[a-z]* \\([a-z-!]+\\)/\\1/\' --regex=\'/[ \\t\\(]*ns \\([a-z.]+\\)/\\1/\' -o %s/TAGS" dir-name dir-name)
+))
 
 ;; (add-hook 'slime-edit-definition-hooks 'find-tag)
 
