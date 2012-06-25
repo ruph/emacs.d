@@ -108,6 +108,17 @@
   (kill-line 0))
 (global-set-key (kbd "C-;") 'kill-start-of-line)
 
+;; Indent the whole buffer
+(defun indent-buffer ()
+    "Indent the buffer"
+    (interactive)
+    (save-excursion
+        (delete-trailing-whitespace)
+        (indent-region (point-min) (point-max) nil)
+    )
+)
+(global-set-key (kbd "S-C-f") 'indent-buffer)
+
 ;; Recent files
 (require 'recentf)
 (recentf-mode 1)

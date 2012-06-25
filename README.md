@@ -74,6 +74,7 @@ KEY BINDINGS
 * **C+;**       - delete to the begining of the line
 * **C+l**       - goto line
 * **M+space**   - delete excessive spaces
+* **S-C-f**     - indent whole buffer
 
 
 ### EDITOR :: SEARCH ###
