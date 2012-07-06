@@ -26,13 +26,13 @@
 ;; ..in snippets dir preferably
 
 
-;; paredit slime settings
-(defun setup-slime-repl-paredit ()
-  (define-key slime-repl-mode-map
+;; curly & square brackets in paredit
+(defun setup-mode-paredit (mode-map)
+  (define-key mode-map
     (kbd "DEL") 'paredit-backward-delete)
-  (define-key slime-repl-mode-map
+  (define-key mode-map
     (kbd "{") 'paredit-open-curly)
-  (define-key slime-repl-mode-map
+  (define-key mode-map
     (kbd "}") 'paredit-close-curly)
   (modify-syntax-entry ?\{ "(}")
   (modify-syntax-entry ?\} "){")
@@ -42,7 +42,14 @@
   (modify-syntax-entry ?, "    ")
   (modify-syntax-entry ?^ "'")
   (modify-syntax-entry ?= "'"))
+
+(defun setup-slime-repl-paredit ()
+  (setup-mode-paredit slime-repl-mode-map))
 (add-hook 'slime-repl-mode-hook 'setup-slime-repl-paredit)
+
+(defun setup-inferior-lisp-paredit ()
+  (setup-mode-paredit inferior-lisp-mode-map))
+(add-hook 'inferior-lisp-mode-hook 'setup-inferior-lisp-paredit)
 
 ;; add paredit to slime and to all other relevant modes
 (mapc (lambda (mode)
