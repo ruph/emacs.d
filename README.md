@@ -41,10 +41,16 @@ PACKAGES
  - js2-mode ~ https://github.com/mooz/js2-mode
  - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fp
 
+
 KEY BINDINGS
 ------------
+
+### FILES ###
 * **C-x f** - list recent open files
 * **S-C-r** - find file in project directory tree
+* **F7**    - search for files
+* **S+F7**  - search in files (GNU Grep >= 2.5.2)
+
 
 ### WINDOW ###
 * **C+x 2** - split window horizontally
@@ -80,8 +86,6 @@ KEY BINDINGS
 
 
 ### EDITOR :: SEARCH ###
-* **F7**    - search files
-* **S+F7**  - search in files (GNU Grep >= 2.5.2)
 * **C+s**   - search in current buffer
 * **C+r**   - search backwards in current buffer
 * **M+C+s** - regex search in current buffer
@@ -91,6 +95,7 @@ KEY BINDINGS
 * **S+F3**  - find previous symbol in buffer
 * **C+F3**  - highlight word in buffer
 * **C+0**   - ace jump
+
 
 ### EDITOR :: DEV ###
 * **TAB**   - autocomplete
