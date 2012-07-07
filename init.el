@@ -99,7 +99,7 @@
 
 ;; File search & in-file search
 (global-set-key (kbd "<f7>") 'find-name-dired)
-(global-set-key (kbd "S-<f7>") 'rgrep)
+;;(global-set-key (kbd "S-<f7>") 'rgrep) ; moved to anything
 
 ;; Delete to start of the line
 (defun kill-start-of-line ()

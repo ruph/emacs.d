@@ -37,12 +37,14 @@ PACKAGES
  - pymacs
  - yaml-mode
 - other
- - js2-mode (github.com/mooz)
+ - eproject ~ https://github.com/gabrielelanaro/eproject
+ - js2-mode ~ https://github.com/mooz/js2-mode
+ - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fp
 
 KEY BINDINGS
 ------------
 * **C-x f** - list recent open files
-
+* **S-C-r** - find file in project directory tree
 
 ### WINDOW ###
 * **C+x 2** - split window horizontally
@@ -79,7 +81,7 @@ KEY BINDINGS
 
 ### EDITOR :: SEARCH ###
 * **F7**    - search files
-* **S+F7**  - search in files
+* **S+F7**  - search in files (GNU Grep >= 2.5.2)
 * **C+s**   - search in current buffer
 * **C+r**   - search backwards in current buffer
 * **M+C+s** - regex search in current buffer

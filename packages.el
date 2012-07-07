@@ -53,7 +53,7 @@
 
 
 ;; Eproject
-(load-file "~/.emacs.d/elpa/eproject-0.4/eproject.el")
+(load-file "~/.emacs.d/eproject/eproject.el")
 
 ;; change pesky M-left/right to C-,/."
 (defun prj-setup-all ()
@@ -70,6 +70,23 @@
 (global-set-key (kbd "C->") 'eproject-nextfile)
 (global-set-key (kbd "C-<") 'eproject-prevfile)
 (global-set-key (kbd "C-S-<f5>") 'eproject-setup-toggle)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; ANYTHING
+(add-to-list 'load-path "~/.emacs.d/elpa/anything-1.287")
+(require 'anything)
+(add-to-list 'load-path "~/.emacs.d/elpa/anything-config-0.4.1")
+(require 'anything-config)
+
+;; recursive anything-do-grep 
+(global-set-key (kbd "S-<f7>")
+                (lambda () (interactive)
+                  (let ((current-prefix-arg '(4))) ; C-u
+                    (call-interactively 'anything-do-grep))))
+
+(load-file "~/.emacs.d/emacs-anything-fpr/anything-find-project-resources.el")
+(global-set-key (kbd "S-C-r") 'anything-find-resource)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
