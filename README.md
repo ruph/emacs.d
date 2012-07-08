@@ -25,6 +25,8 @@ PACKAGES
  - sml-modeline
  - yasnippet
  - ace-jump-mode
+ - anything
+ - anything-config
 - el-get
  - auto-complete
  - auto-complete-etags
@@ -45,9 +47,10 @@ PACKAGES
 KEY BINDINGS
 ------------
 
+
 ### FILES ###
-* **C-x f** - list recent open files
-* **S-C-r** - find file in project directory tree
+* **C+x f** - list recent open files
+* **S+C+r** - find file in project directory tree
 * **F7**    - search for files
 * **S+F7**  - search in files (GNU Grep >= 2.5.2)
 
@@ -59,14 +62,14 @@ KEY BINDINGS
 * **M+j**   - move down
 * **M+k**   - move up
 * **M+l**   - move left
-* **C+M+J** - swap down
-* **C+M+K** - swap up
-* **C+M+H** - swap left
-* **C+M+L** - swap right
-* **M+J**   - enlarge bottom window
-* **M+K**   - enlarge upper window
-* **M+H**   - enlarge left window
-* **M+L**   - enlarge right window
+* **S+C+M+j** - swap down
+* **S+C+M+k** - swap up
+* **S+C+M+h** - swap left
+* **S+C+M+l** - swap right
+* **S+M+j**   - enlarge bottom window
+* **S+M+k**   - enlarge upper window
+* **S+M+h**   - enlarge left window
+* **S+M+l**   - enlarge right window
 * **S+F6**  - go full screen (osx only)
 
 
@@ -75,14 +78,14 @@ KEY BINDINGS
 * **C+RET**     - rectangular selection
 * **M+up**      - move line up
 * **M+down**    - move line down
-* **C+S+right** - indent
-* **C+S+left**  - outdent
+* **S+C+right** - indent
+* **S+C+left**  - outdent
 * **S+TAB**     - outdent
 * **C+k**       - delete to the end of the line
 * **C+;**       - delete to the begining of the line
 * **C+l**       - goto line
 * **M+space**   - delete excessive spaces
-* **S-C-f**     - indent whole buffer
+* **S+C+f**     - indent whole buffer
 
 
 ### EDITOR :: SEARCH ###
