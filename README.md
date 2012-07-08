@@ -41,7 +41,7 @@ PACKAGES
 - other
  - eproject ~ https://github.com/gabrielelanaro/eproject
  - js2-mode ~ https://github.com/mooz/js2-mode
- - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fp
+ - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
 
 
 KEY BINDINGS
