@@ -19,8 +19,12 @@
 ;; Flymake
 ;; some issues with html
 (delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
-;; turn on everywhere else
-(add-hook 'find-file-hook 'flymake-mode)
+
+;; turn flymake for php
+(add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
+(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
+;; turned on only for php (add-hook 'find-file-hook 'flymake-mode)
+
 (add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0/")
 (load-library "flymake-cursor")
 (add-hook 'php-mode-hook
@@ -28,6 +32,16 @@
 	    (local-set-key [S-f5] 'flymake-goto-prev-error)
 	    (local-set-key [f5] 'flymake-goto-next-error)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; HTML
+(add-hook 'html-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode t)
+        (setq tab-width 4)
+        (local-set-key (kbd "RET") 'newline-and-indent)
+        ))
+
 
 ;; MMM Mode
 (add-to-list 'load-path "~/.emacs.d/el-get/mmm-mode")
@@ -52,12 +66,24 @@ substituted for the corresponding REGEXP wherever it matches."
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
+;; php ~ double php direction sux, but it works better this way
+(mmm-add-group
+ 'php-php
+ '((php-default
+    :submode php-mode
+    :front "<[?]php"
+    :back "[?]>"
+    :delimiter-mode nil
+    )
+   ))
+(mmm-add-mode-ext-class nil "\\.php\\'" 'php-php)
 ;; html
+;; ~ flymake kills emacs if only \\` is set for start
 (mmm-add-group
  'html-php
  '((html-default
     :submode html-mode
-    :front "[?]>"
+    :front "\\`.\\|[?]>" ; begining of buffer or end of php
     :back "<[?]php"
     :delimiter-mode nil
     )
@@ -70,7 +96,8 @@ substituted for the corresponding REGEXP wherever it matches."
     :submode html-mode
     :front "</style>"
     :back "<\\?\\(php\\)?"
-    )))
+    )
+   ))
 (mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
 ;; css
 (mmm-add-group
