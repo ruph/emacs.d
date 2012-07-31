@@ -84,6 +84,7 @@
 (set-language-environment "UTF-8")       ; prefer utf-8 for language settings
 (set-input-method nil)                   ; no funky input for normal editing;
 (setq read-quoted-char-radix 10)         ; use decimal, not octal
+(setq-default buffer-file-coding-system 'utf-8-unix) ; utf-8 & unix EOL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
