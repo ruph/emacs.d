@@ -79,14 +79,34 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/anything-config-0.4.1")
 (require 'anything-config)
 
-;; recursive anything-do-grep 
+;; recursive anything-do-grep
 (global-set-key (kbd "S-<f7>")
                 (lambda () (interactive)
                   (let ((current-prefix-arg '(4))) ; C-u
                     (call-interactively 'anything-do-grep))))
 
+;; all files from current directory
 (load-file "~/.emacs.d/emacs-anything-fpr/anything-find-project-resources.el")
 (global-set-key (kbd "S-C-r") 'anything-find-resource)
+
+;; eproject integration
+(defun anything-eproject-resource ()
+  "Enumerate files belonging to the eproject"
+  (interactive)
+  (anything
+   '((
+      (name . "Files in eproject:")
+      (init . (lambda ()
+		(with-current-buffer (anything-candidate-buffer 'local)
+		  (mapcar
+		   (lambda (item)
+		     (insert (format "%s/%s\n" (cadr prj-current) (car item))))
+		   prj-files))))
+      (candidates-in-buffer)
+      (type . file)
+      ))
+   nil "resource files: " nil nil))
+(global-set-key (kbd "S-C-t") 'anything-eproject-resource)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

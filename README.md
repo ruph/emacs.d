@@ -50,7 +50,8 @@ KEY BINDINGS
 
 ### FILES ###
 * **C+x f** - list recent open files
-* **S+C+r** - find file in project directory tree
+* **S+C+r** - find file in project directory tree (doesn't work on win)
+* **S+C+t** - find file in current eproject
 * **F7**    - search for files
 * **S+F7**  - search in files (GNU Grep >= 2.5.2)
 
