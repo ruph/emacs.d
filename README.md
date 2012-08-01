@@ -28,9 +28,9 @@ PACKAGES
  - anything
  - anything-config
 - el-get
+ - popup
  - auto-complete
  - auto-complete-etags
- - auto-complte-yasnippet
  - autopair
  - highlight-parentheses
  - highlight-symbol
