@@ -78,12 +78,11 @@ substituted for the corresponding REGEXP wherever it matches."
    ))
 (mmm-add-mode-ext-class nil "\\.php\\'" 'php-php)
 ;; html
-;; ~ flymake kills emacs if only \\` is set for start
 (mmm-add-group
  'html-php
  '((html-default
     :submode html-mode
-    :front "\\`.\\|[?]>" ; begining of buffer or end of php
+    :front "\\`.\\|[?]>" ; flymake kills emacs if only \\` is set for start
     :back "<[?]php"
     :delimiter-mode nil
     )
@@ -97,6 +96,11 @@ substituted for the corresponding REGEXP wherever it matches."
     :front "</style>"
     :back "<\\?\\(php\\)?"
     )
+   (html-heredoc
+    :submode html-mode
+    :delimiter-mode nil
+    :front "<<<HTML"
+    :back "HTML;")
    ))
 (mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
 ;; css
