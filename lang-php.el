@@ -71,8 +71,8 @@ substituted for the corresponding REGEXP wherever it matches."
  'php-php
  '((php-default
     :submode php-mode
-    :front "<[?]php"
-    :back "[?]>"
+    :front "<\\?\\(php\\)?"
+    :back "\\?>"
     :delimiter-mode nil
     )
    ))
@@ -82,8 +82,8 @@ substituted for the corresponding REGEXP wherever it matches."
  'html-php
  '((html-default
     :submode html-mode
-    :front "\\`.\\|[?]>" ; flymake kills emacs if only \\` is set for start
-    :back "<[?]php"
+    :front "\\`.\\|\\?>" ; flymake kills emacs if only \` is set for start
+    :back "<\\?\\(php\\)?"
     :delimiter-mode nil
     )
    (html-js
