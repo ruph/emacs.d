@@ -34,52 +34,11 @@
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pychecker-init)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0/")
+(add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0.2/")
 (load-library "flymake-cursor")
 (add-hook 'python-mode-hook
 	  (lambda ()
 	    (local-set-key [S-f5] 'flymake-goto-prev-error)
 	    (local-set-key [f5] 'flymake-goto-next-error)))
-
-
-;; Initialize Pymacs
-;; (add-to-list 'load-path "~/.emacs.d/pinard-Pymacs-cebc80b/")
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-exec "pymacs" nil t)
-;; (autoload 'pymacs-load "pymacs" nil t)
-
-;; Initialize Rope
-;; (add-to-list 'load-path "~/.emacs.d/el-get/ropemacs")
-;; (pymacs-load "ropemacs" "rope-")
-;; (setq ropemacs-enable-autoimport t)
-
-;; (defun ac-ropemacs-require ()
-;;   (with-no-warnings
-;;     (unless ac-ropemacs-loaded
-;;       (pymacs-load "ropemacs" "rope-")
-;;       (if (boundp 'ropemacs-enable-autoimport)
-;;           (setq ropemacs-enable-autoimport t))
-;;       (setq ac-ropemacs-loaded t))))
-
-;; (defun ac-ropemacs-setup ()
-;;   (ac-ropemacs-require)
-;;   (setq ac-sources (append (list 'ac-source-ropemacs) ac-sources))
-;;   (setq ac-omni-completion-sources '(("\\." ac-source-ropemacs))))
-
-
-; PYSMELL
-;; (add-to-list 'load-path "~/.emacs.d/elpa/pysmell-0.7.2/")
-;; (require 'pysmell)
-;; (defvar ac-source-pysmell
-;;   '((candidates
-;;      . (lambda ()
-;;          (require 'pysmell)
-;;          (pysmell-get-all-completions))))
-;;   "Source for PySmell")
-;; (add-hook 'python-mode-hook
-;;           '(lambda ()
-;;              (set (make-local-variable 'ac-sources) (append ac-sources '(ac-source-pysmell)))))
 
 (provide 'lang-python)

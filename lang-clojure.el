@@ -15,7 +15,7 @@
 
 
 ;; slime autocompletion module
-(add-to-list 'load-path "~/.emacs.d/elpa/ac-slime-0.1/")
+(add-to-list 'load-path "~/.emacs.d/elpa/ac-slime-0.2/")
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 
@@ -67,7 +67,5 @@
   (shell-command
    (format "find %s -name \'*.clj*\' | xargs etags --regex=\'/[ \\t\\(]*def[a-z]* \\([a-z-!]+\\)/\\1/\' --regex=\'/[ \\t\\(]*ns \\([a-z.]+\\)/\\1/\' -o %s/TAGS" dir-name dir-name)
 ))
-
-;; (add-hook 'slime-edit-definition-hooks 'find-tag)
 
 (provide 'lang-clojure)
