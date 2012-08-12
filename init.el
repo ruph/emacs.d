@@ -144,9 +144,6 @@
   ;; When started from Emacs.app or similar, ensure $PATH
   ;; is the same the user would see in Terminal.app
   (set-exec-path-from-shell-PATH))
-
-;; Better buffer finder
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
