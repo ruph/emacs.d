@@ -107,6 +107,9 @@
       ))
    nil "resource files: " nil nil))
 (global-set-key (kbd "S-C-t") 'anything-eproject-resource)
+
+;; Better buffer finder
+(global-set-key (kbd "C-x C-b") 'anything-buffers+)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
