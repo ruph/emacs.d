@@ -16,11 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Flymake
-;; some issues with html
-(delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
-
-;; turn flymake for php
+;; Flymake for php
 (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
 (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 
@@ -40,6 +36,9 @@
         (setq tab-width 4)
         (local-set-key (kbd "RET") 'newline-and-indent)
         ))
+;; some issues with flymake
+(delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; MMM Mode
@@ -65,43 +64,6 @@ substituted for the corresponding REGEXP wherever it matches."
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
-;; php ~ double php direction sux, but it works better this way
-(mmm-add-group
- 'php-php
- '((php-default
-    :submode php-mode
-    :front "<\\?\\(php\\)?"
-    :back "\\?>"
-    :delimiter-mode nil
-    )
-   ))
-(mmm-add-mode-ext-class nil "\\.php\\'" 'php-php)
-;; html
-(mmm-add-group
- 'html-php
- '((html-default
-    :submode html-mode
-    :front "\\`.\\|\\?>" ; flymake kills emacs if only \` is set for start
-    :back "<\\?\\(php\\)?"
-    :delimiter-mode nil
-    )
-   (html-js
-    :submode html-mode
-    :front "</script>"
-    :back "<\\?\\(php\\)?"
-    )
-   (html-css
-    :submode html-mode
-    :front "</style>"
-    :back "<\\?\\(php\\)?"
-    )
-   (html-heredoc
-    :submode html-mode
-    :delimiter-mode nil
-    :front "<<<HTML"
-    :back "HTML;")
-   ))
-(mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
 ;; css
 (mmm-add-group
  'html-css
@@ -134,6 +96,24 @@ substituted for the corresponding REGEXP wherever it matches."
     :back "JS;")))
 (mmm-add-mode-ext-class nil "\\.html?\\'" 'html-js)
 (mmm-add-mode-ext-class nil "\\.php\\'" 'html-js)
+;; html
+(mmm-add-group
+ 'html-php
+ '(
+    (html-default
+    :submode html-mode
+    :front "\\`.\\|?>\\|</script[^>]*>\\|</style[^>]*>" ; flymake kills emacs if only \` is set for start
+    :back "\\'\\|<?php\\|<script[^>]*>\\|<style[^>]*>"
+    :delimiter-mode nil
+    )
+   (html-heredoc
+    :submode html-mode
+    :delimiter-mode nil
+    :front "<<<HTML"
+    :back "HTML;")
+   )
+ )
+(mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
