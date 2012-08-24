@@ -97,7 +97,7 @@ KEY BINDINGS
 * **C+M+%** - regex search & replace in current buffer
 * **F3**    - find next symbol in buffer
 * **S+F3**  - find previous symbol in buffer
-* **C+F3**  - highlight word in buffer
+* **M+F3**  - highlight symbol in buffer
 * **C+0**   - ace jump
 
 
