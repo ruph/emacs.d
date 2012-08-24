@@ -110,6 +110,10 @@
 
 ;; Better buffer finder
 (global-set-key (kbd "C-x C-b") 'anything-buffers+)
+
+;; Search kill-ring
+(global-set-key (kbd "S-C-v") 'anything-show-kill-ring)
+(global-set-key (kbd "s-V") 'anything-show-kill-ring)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

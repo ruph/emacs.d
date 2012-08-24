@@ -87,6 +87,7 @@ KEY BINDINGS
 * **C+l**       - goto line
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
+* **S-C-v**     - smart paste
 
 
 ### EDITOR :: SEARCH ###
