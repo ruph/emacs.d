@@ -236,17 +236,78 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EVERNOTE
-(add-to-list 'load-path "~/.emacs.d/elpa/evernote-mode-0.41/")
-(require 'evernote-mode)
-(setq evernote-enml-formatter-command '("w3m" "-dump" "-I" "UTF8" "-O" "UTF8")) ; option
-(global-set-key "\C-cec" 'evernote-create-note)
-(global-set-key "\C-ceo" 'evernote-open-note)
-(global-set-key "\C-ces" 'evernote-search-notes)
-(global-set-key "\C-ceS" 'evernote-do-saved-search)
-(global-set-key "\C-cew" 'evernote-write-note)
-(global-set-key "\C-cep" 'evernote-post-region)
-(global-set-key "\C-ceb" 'evernote-browser)
+;; Markdown
+(add-to-list 'load-path "~/.emacs.d/elpa/markdown-mode-1.8.1/")
+(require 'markdown-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Deft NOTES (markdown)
+(add-to-list 'load-path "~/.emacs.d/el-get/deft/")
+(require 'deft)
+(setq deft-directory "~/Dropbox/Apps/Byword/")
+(setq deft-extension "txt")
+(setq deft-text-mode 'markdown-mode)
+(setq deft-use-filename-as-title t)
+(global-set-key (kbd "C-c n") 'deft)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; ORG-MODE
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/Dropbox/Documents/ORG")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/Dropbox/Documents/ORG/inbox.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/MobileOrg")
+;; Including all org files from a directory into the agenda
+(setq org-agenda-files (append
+			(file-expand-wildcards "~/Dropbox/Documents/ORG/*.org")
+			(file-expand-wildcards "~/Dropbox/Documents/ORG/*/*.org")))
+;; Word-wrapping
+(add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+
+;; Cua compatibility
+(add-to-list 'load-path "~/.emacs.d/elpa/org-cua-dwim-0.5")
+(require 'org-cua-dwim)
+
+;; Fork the work (async) of pushing to mobile
+;; https://gist.github.com/3111823 ASYNC org mobile push...
+(require 'gnus-async)
+;; Define a timer variable
+(defvar org-mobile-push-timer nil
+  "Timer that `org-mobile-push-timer' used to reschedule itself, or nil.")
+;; Push to mobile when the idle timer runs out
+(defun org-mobile-push-with-delay (secs)
+  (when org-mobile-push-timer
+    (cancel-timer org-mobile-push-timer))
+  (setq org-mobile-push-timer
+        (run-with-idle-timer
+         (* 1 secs) nil 'org-mobile-push)))
+;; After saving files, start an idle timer after which we are going to push
+(add-hook 'after-save-hook
+	  (lambda ()
+	    (if (or (eq major-mode 'org-mode) (eq major-mode 'org-agenda-mode))
+		(dolist (file (org-mobile-files-alist))
+		  (if (string= (expand-file-name (car file)) (buffer-file-name))
+		      (org-mobile-push-with-delay 10)))
+	      )))
+;; Run after midnight each day (or each morning upon wakeup?).
+(run-at-time "00:01" 86400 '(lambda () (org-mobile-push-with-delay 1)))
+;; Run 1 minute after launch, and once a day after that.
+(run-at-time "1 min" 86400 '(lambda () (org-mobile-push-with-delay 1)))
+
+;; watch mobileorg.org for changes, and then call org-mobile-pull
+;; http://stackoverflow.com/questions/3456782/emacs-lisp-how-to-monitor-changes-of-a-file-directory
+(defun install-monitor (file secs)
+  (run-with-timer
+   0 secs
+   (lambda (f p)
+     (unless (< p (second (time-since (elt (file-attributes f) 5))))
+       (org-mobile-pull)))
+   file secs))
+(defvar monitor-timer (install-monitor (concat org-mobile-directory "/mobileorg.org") 30)
+  "Check if file changed every 30 s.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

@@ -21,12 +21,13 @@ PACKAGES
  - paredit
  - eproject
  - flymake-cursor
- - evernote-mode
  - sml-modeline
  - yasnippet
  - ace-jump-mode
  - anything
  - anything-config
+ - markdown-mode
+ - org-cua-dwim
 - el-get
  - popup
  - auto-complete
@@ -38,13 +39,14 @@ PACKAGES
  - psvn
  - pymacs
  - yaml-mode
+ - deft
 - other
  - eproject ~ https://github.com/gabrielelanaro/eproject
  - js2-mode ~ https://github.com/mooz/js2-mode
  - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
 
 
-KEY BINDINGS
+CHEAT SHEET
 ------------
 
 
@@ -108,7 +110,7 @@ KEY BINDINGS
 * **M+p**   - previous autocomplete option
 * **F5**    - go to next error (flymake)
 * **S+F5**  - go to previous error (flymake)
-* **M+.**   - jump to definition 
+* **M+.**   - jump to definition
 * **C+.**   - show arguments (php-mode)
 
 
@@ -124,3 +126,7 @@ KEY BINDINGS
 * **C+F5**      - project dired
 * **(S/C+)F8**  - not bind (for the use in eproject commands)
 * **(S/C+)F9**  - not bind (for the use in eproject commands)
+
+
+### NOTES ###
+* **C-c n**  - notes list
