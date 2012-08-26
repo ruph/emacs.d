@@ -128,5 +128,10 @@ CHEAT SHEET
 * **(S/C+)F9**  - not bind (for the use in eproject commands)
 
 
-### NOTES ###
-* **C-c n**  - notes list
+### NOTES (daft) ###
+* **C-c n**   - notes list (daft)
+* **C-c C-n** - new note with def. filename (in daft)
+* **C-c C-m** - new note (in daft)
+* **C-c C-r** - rename note (in daft)
+* **C-c C-d** - delete note (in daft)
+
