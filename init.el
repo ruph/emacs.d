@@ -1,7 +1,7 @@
 ;; Start a server
 (require 'server)
 (or (server-running-p)
-	    (server-start))
+    (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; general settings
@@ -11,21 +11,21 @@
 (tool-bar-mode -1)                       ;; turn-off toolbar
 
 (setq ;; scrolling
-  scroll-margin 0                        ;; do smooth scrolling, ...
-  scroll-conservatively 100000           ;; ... the defaults ...
-  scroll-up-aggressively 0               ;; ... are very ...
-  scroll-down-aggressively 0             ;; ... annoying
-  scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
+ scroll-margin 0                        ;; do smooth scrolling, ...
+ scroll-conservatively 100000           ;; ... the defaults ...
+ scroll-up-aggressively 0               ;; ... are very ...
+ scroll-down-aggressively 0             ;; ... annoying
+ scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
 
 (setq fringe-mode '(1 . 0))              ;; emacs 22+
 (delete-selection-mode 1)                ;; delete the sel with a keyp
 
 (setq search-highlight t                 ;; highlight when searching...
-  query-replace-highlight t)             ;; ...and replacing
+      query-replace-highlight t)             ;; ...and replacing
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
 (setq completion-ignore-case t           ;; ignore case when completing...
-  read-file-name-completion-ignore-case t) ;; ...filenames too
+      read-file-name-completion-ignore-case t) ;; ...filenames too
 
 (setq initial-scratch-message ";; scratch pad\n\n")
 (setq initial-major-mode 'html-mode)      ;;  scratch pad in html mode
@@ -43,7 +43,7 @@
 (file-name-shadow-mode t)                ;; be smart about filenames in mbuf
 
 (setq inhibit-startup-message t          ;; don't show ...
-  inhibit-startup-echo-area-message t)   ;; ... startup messages
+      inhibit-startup-echo-area-message t)   ;; ... startup messages
 (setq require-final-newline t)           ;; end files with a newline
 
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
@@ -54,21 +54,21 @@
 ;; especially for osx
 (if (eq system-type 'darwin)
     (progn
-    (setq ns-right-alternate-modifier nil)   ;; unbind right alt
-    (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
-    (setq cua-enable-cua-keys nil)))           ;; only for rectangles
+      (setq ns-right-alternate-modifier nil)   ;; unbind right alt
+      (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
+      (setq cua-enable-cua-keys nil)))           ;; only for rectangles
 
 ;; especially for windows
 (if (eq system-type 'windows-nt)
     (progn
-    (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
-    (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
-           cua-keep-region-after-copy t) ;; Standard Windows behaviour
-    (transient-mark-mode 1)              ;; No region when it is not highlighted
-    (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
-    (setenv "PATH"
-	    (concat cygwin-bin ";" (getenv "PATH")))
-    ))
+      (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
+      (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
+	    cua-keep-region-after-copy t) ;; Standard Windows behaviour
+      (transient-mark-mode 1)              ;; No region when it is not highlighted
+      (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
+      (setenv "PATH"
+	      (concat cygwin-bin ";" (getenv "PATH")))
+      ))
 
 ;; theme
 (load-theme 'wombat)
@@ -111,13 +111,13 @@
 
 ;; Indent the whole buffer
 (defun indent-buffer ()
-    "Indent the buffer"
-    (interactive)
-    (save-excursion
-        (delete-trailing-whitespace)
-        (indent-region (point-min) (point-max) nil)
+  "Indent the buffer"
+  (interactive)
+  (save-excursion
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
     )
-)
+  )
 (global-set-key (kbd "S-C-f") 'indent-buffer)
 
 ;; Recent files
@@ -152,30 +152,30 @@
 (require 'ido)
 (ido-mode 'both) ;; for buffers and files
 (setq
-  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-  ;; ido-ignore-buffers ;; ignore these guys
-  ;; '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
-  ;;    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
-  ;; ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
-  ido-case-fold  t                 ; be case-insensitive
-  ido-enable-last-directory-history t ; remember last used dirs
-  ido-max-work-directory-list 30   ; should be enough
-  ido-max-work-file-list      50   ; remember many
-  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
-  ido-use-url-at-point nil         ; don't use url at point (annoying)
-  ;; ido-enable-flex-matching nil     ; don't try to be too smart
-  ido-max-prospects 16             ; don't spam my minibuffer
-  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+ ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+ ;; ido-ignore-buffers ;; ignore these guys
+ ;; '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+ ;;    "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+ ;; ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
+ ido-case-fold  t                 ; be case-insensitive
+ ido-enable-last-directory-history t ; remember last used dirs
+ ido-max-work-directory-list 30   ; should be enough
+ ido-max-work-file-list      50   ; remember many
+ ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+ ido-use-url-at-point nil         ; don't use url at point (annoying)
+ ;; ido-enable-flex-matching nil     ; don't try to be too smart
+ ido-max-prospects 16             ; don't spam my minibuffer
+ ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
 ;; when using ido, the confirmation is rather annoying...
- (setq confirm-nonexistent-file-or-buffer nil)
+(setq confirm-nonexistent-file-or-buffer nil)
 
 ;; increase minibuffer size when ido completion is active
 (add-hook 'ido-minibuffer-setup-hook
-  (function
-    (lambda ()
-      (make-local-variable 'resize-minibuffer-window-max-height)
-      (setq resize-minibuffer-window-max-height 1))))
+	  (function
+	   (lambda ()
+	     (make-local-variable 'resize-minibuffer-window-max-height)
+	     (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -249,10 +249,10 @@
 (defun indent-rigidly-n (n)
   "Indent the region, or otherwise the current line, by N spaces."
   (let* ((use-region (and transient-mark-mode mark-active))
-		 (rstart (if use-region (region-beginning) (point-at-bol)))
-		 (rend   (if use-region (region-end)       (point-at-eol)))
-		 (deactivate-mark "irrelevant")) ; avoid deactivating mark
-	(indent-rigidly rstart rend n)))
+	 (rstart (if use-region (region-beginning) (point-at-bol)))
+	 (rend   (if use-region (region-end)       (point-at-eol)))
+	 (deactivate-mark "irrelevant")) ; avoid deactivating mark
+    (indent-rigidly rstart rend n)))
 (defun indent-rigidly-tab ()
   "Indent the region, or otherwise the current line, by 'tab' spaces."
   (interactive)
@@ -345,11 +345,11 @@
 
 ;; INITIAL WINDOW SIZE
 (setq initial-frame-alist
-        (append '((width . 117) (height . 57) (left . 59) (top . 27))
-                initial-frame-alist))
+      (append '((width . 117) (height . 57) (left . 59) (top . 27))
+	      initial-frame-alist))
 (setq default-frame-alist
-        (append '((width . 117) (height . 57) (left . 59) (top . 27))
-                default-frame-alist))
+      (append '((width . 117) (height . 57) (left . 59) (top . 27))
+	      default-frame-alist))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -373,15 +373,15 @@
 
 ;; RANDOM
 (defun which-active-modes ()
- "Give a message of which minor modes are enabled in the current buffer."
- (interactive)
- (let ((active-modes))
-   (mapc (lambda (mode) (condition-case nil
-                            (if (and (symbolp mode) (symbol-value mode))
-                                (add-to-list 'active-modes mode))
-                          (error nil) ))
-         minor-mode-list)
-   (message "Active modes are %s" active-modes)))
+  "Give a message of which minor modes are enabled in the current buffer."
+  (interactive)
+  (let ((active-modes))
+    (mapc (lambda (mode) (condition-case nil
+			     (if (and (symbolp mode) (symbol-value mode))
+				 (add-to-list 'active-modes mode))
+			   (error nil) ))
+	  minor-mode-list)
+    (message "Active modes are %s" active-modes)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
