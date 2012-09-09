@@ -254,6 +254,7 @@
 	    (visual-line-mode t)
 	    (remove-hook 'before-save-hook 'delete-trailing-whitespace)
 	    ))
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
