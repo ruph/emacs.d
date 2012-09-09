@@ -195,6 +195,15 @@
 (keymap-unset-key (kbd "M-<down>") "paredit-mode")
 (keymap-unset-key [?\e up] "paredit-mode")
 (keymap-unset-key [?\e down] "paredit-mode")
+(keymap-unset-key (kbd "M-J") "paredit-mode") ;; resize window conflict
+
+;; from emacs-starter-kit
+(defun esk-paredit-nonlisp ()
+  "Turn on paredit mode for non-lisps."
+  (interactive)
+  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
+       '((lambda (endp delimiter) nil)))
+  (paredit-mode 1))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

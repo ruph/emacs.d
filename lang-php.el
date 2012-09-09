@@ -6,13 +6,14 @@
 
 ;; Hooks
 (add-hook 'php-mode-hook
-      (lambda ()
-        (setq indent-tabs-mode t)
-        (setq tab-width 4)
-        (local-set-key (kbd "RET") 'newline-and-indent)
-        (local-unset-key (kbd "M-j"))
-        (add-hook 'before-save-hook 'delete-trailing-whitespace)
-        (setq flymake-gui-warnings-enabled nil)))
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (local-set-key (kbd "RET") 'newline-and-indent)
+	    (local-unset-key (kbd "M-j"))
+	    (add-hook 'before-save-hook 'delete-trailing-whitespace)
+	    (setq flymake-gui-warnings-enabled nil)))
+(add-hook 'php-mode-hook 'esk-paredit-nonlisp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -31,11 +32,11 @@
 
 ;; HTML
 (add-hook 'html-mode-hook
-      (lambda ()
-        (setq indent-tabs-mode t)
-        (setq tab-width 4)
-        (local-set-key (kbd "RET") 'newline-and-indent)
-        ))
+	  (lambda ()
+	    (setq indent-tabs-mode t)
+	    (setq tab-width 4)
+	    (local-set-key (kbd "RET") 'newline-and-indent)
+	    ))
 ;; some issues with flymake
 (delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -100,7 +101,7 @@ substituted for the corresponding REGEXP wherever it matches."
 (mmm-add-group
  'html-php
  '(
-    (html-default
+   (html-default
     :submode html-mode
     :front "\\`.\\|?>\\|</script[^>]*>\\|</style[^>]*>" ; flymake kills emacs if only \` is set for start
     :back "\\'\\|<?php\\|<script[^>]*>\\|<style[^>]*>"
