@@ -93,11 +93,12 @@ CHEAT SHEET
 
 
 ### EDITOR :: SEARCH ###
-* **C+s**   - search in current buffer
-* **C+r**   - search backwards in current buffer
-* **M+C+s** - regex search in current buffer
-* **M+%**   - search & replace in current buffer
-* **C+M+%** - regex search & replace in current buffer
+* **C+s**   - regex search in current buffer
+* **C+r**   - regex search backwards in current buffer
+* **M+C+s** - search in current buffer
+* **M+C+r** - search backwards in current buffer
+* **M+%**   - regex search & replace in current buffer
+* **C+M+%** - search & replace in current buffer
 * **F3**    - find next symbol in buffer
 * **S+F3**  - find previous symbol in buffer
 * **M+F3**  - highlight symbol in buffer
@@ -134,4 +135,3 @@ CHEAT SHEET
 * **C-c C-m** - new note (in deft)
 * **C-c C-r** - rename note (in deft)
 * **C-c C-d** - delete note (in deft)
-
