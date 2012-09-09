@@ -239,6 +239,12 @@
 ;; Markdown
 (add-to-list 'load-path "~/.emacs.d/elpa/markdown-mode-1.8.1/")
 (require 'markdown-mode)
+(add-hook 'markdown-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "RET") 'newline-and-indent)
+	    (visual-line-mode t)
+	    (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+	    ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -246,11 +252,11 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/deft/")
 (require 'deft)
 (if (eq system-type 'windows-nt)
-  (setq deft-directory "d:\\My Dropbox\\Notes")
+    (setq deft-directory "d:\\My Dropbox\\Notes")
   (setq deft-directory "~/Dropbox/Notes"))
 (setq deft-extension "txt")
-(setq deft-text-mode 'markdown-mode)
 (setq deft-use-filename-as-title t)
+(setq deft-text-mode 'markdown-mode)
 (global-set-key (kbd "C-c n") 'deft)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
