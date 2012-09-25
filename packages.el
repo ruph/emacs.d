@@ -118,10 +118,10 @@
 
 
 ;; Yasnippet
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.6.1/")
+(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0/")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/global-mode 1)
-(yas/load-directory "~/.emacs.d/elpa/yasnippet-0.6.1/snippets")
+(yas/load-directory "~/.emacs.d/elpa/yasnippet-0.8.0/snippets")
 (setq yas/wrap-around-region t)
 (setq yas/prompt-functions
       '(yas/x-prompt yas/ido-prompt))
