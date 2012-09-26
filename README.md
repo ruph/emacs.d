@@ -19,7 +19,6 @@ PACKAGES
  - clojure-mode
  - ac-slime
  - paredit
- - eproject
  - flymake-cursor
  - sml-modeline
  - yasnippet
