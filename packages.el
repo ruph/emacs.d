@@ -81,7 +81,7 @@
 ;; Eproject
 (load-file "~/.emacs.d/eproject/eproject.el")
 
-;; change pesky M-left/right to C-,/."
+;; remove pesky M-left/right
 (defun prj-setup-all ()
   (progn
     (prj-setkeys)
@@ -93,8 +93,8 @@
     (keymap-unset-key [M-right] "eproject-mode")
     (keymap-unset-key [f5] "eproject-mode")
     ))
-(global-set-key (kbd "C->") 'eproject-nextfile)
-(global-set-key (kbd "C-<") 'eproject-prevfile)
+;; (global-set-key (kbd "C->") 'eproject-nextfile)
+;; (global-set-key (kbd "C-<") 'eproject-prevfile)
 (global-set-key (kbd "C-S-<f5>") 'eproject-setup-toggle)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -213,7 +213,9 @@
 ;; Rectangular region mode
 (global-set-key (kbd "C-<return>") 'set-rectangular-region-anchor)
 ;; Mark more like this
-(global-set-key (kbd "C-c C-m") 'mc/mark-all-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
