@@ -61,7 +61,7 @@ CHEAT SHEET
 ### WINDOW ###
 * **C+x 2** - split window horizontally
 * **C+x 3** - split window vertically
-* **M+h**   - move left
+* **M+h**   - move letf
 * **M+j**   - move down
 * **M+k**   - move up
 * **M+l**   - move left

@@ -4,7 +4,7 @@
     (server-start))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; general settings
+;; General settings
 ;;
 (menu-bar-mode  t)                       ;; show the menu...
 (mouse-avoidance-mode 'jump)             ;; mouse ptr when cursor is too close
@@ -48,27 +48,6 @@
 
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
-
-(cua-mode t)
-
-;; especially for osx
-(if (eq system-type 'darwin)
-    (progn
-      (setq ns-right-alternate-modifier nil)   ;; unbind right alt
-      (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
-      (setq cua-enable-cua-keys nil)))           ;; only for rectangles
-
-;; especially for windows
-(if (eq system-type 'windows-nt)
-    (progn
-      (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
-      (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
-	    cua-keep-region-after-copy t) ;; Standard Windows behaviour
-      (transient-mark-mode 1)              ;; No region when it is not highlighted
-      (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
-      (setenv "PATH"
-	      (concat cygwin-bin ";" (getenv "PATH")))
-      ))
 
 ;; theme
 (load-theme 'wombat)
@@ -155,6 +134,31 @@
   ;; is the same the user would see in Terminal.app
   (set-exec-path-from-shell-PATH))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; CUA
+(cua-mode t)
+(setq cua-rectangle-mark-key (kbd "S-C-<return>"))
+
+;; especially for osx
+(if (eq system-type 'darwin)
+    (progn
+      (setq ns-right-alternate-modifier nil)   ;; unbind right alt
+      (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
+      (setq cua-enable-cua-keys nil)))           ;; only for rectangles
+
+;; especially for windows
+(if (eq system-type 'windows-nt)
+    (progn
+      (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
+      (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
+	    cua-keep-region-after-copy t) ;; Standard Windows behaviour
+      (transient-mark-mode 1)              ;; No region when it is not highlighted
+      (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
+      (setenv "PATH"
+	      (concat cygwin-bin ";" (getenv "PATH")))
+      ))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; IDO mode

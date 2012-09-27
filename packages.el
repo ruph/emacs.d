@@ -18,7 +18,8 @@
 
 ;; extra recipes
 (setq el-get-sources
-      '((:name ace-jump-mode :type elpa)
+      '((:name ace-jump-mode    :type elpa)
+      	(:name multiple-cursors :type elpa)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -28,10 +29,10 @@
 
 ;; for installation
 (setq my-el-get-packages
-	  (append '(popup auto-complete auto-complete-etags autopair
-			      highlight-parentheses highlight-symbol
-			      mmm-mode psvn pymacs yaml-mode deft)
-			  (mapcar 'el-get-source-name el-get-sources)))
+      (append '(popup auto-complete auto-complete-etags autopair
+		      highlight-parentheses highlight-symbol
+		      mmm-mode psvn pymacs yaml-mode deft)
+	      (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-el-get-packages)
 ;; main load path
@@ -203,6 +204,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Multiple-cursors
+(add-to-list 'load-path "~/.emacs.d/el-get/multiple-cursors")
+(require 'multiple-cursors)
+(global-set-key (kbd "C-c C-c") 'mc/edit-lines)
+(global-set-key (kbd "C-c C-e") 'mc/edit-ends-of-lines)
+(global-set-key (kbd "C-c C-a") 'mc/edit-beginnings-of-lines)
+;; Rectangular region mode
+(global-set-key (kbd "C-<return>") 'set-rectangular-region-anchor)
+;; Mark more like this
+(global-set-key (kbd "C-c C-m") 'mc/mark-all-like-this)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Paredit () for lisps
 (add-to-list 'load-path "~/.emacs.d/elpa/paredit-22")
 (require 'paredit)
@@ -254,7 +268,7 @@
 
 
 ;; Fast/direct cursor location minor mode.
-(add-to-list 'load-path "~/.emacs.d/elpa/ace-jump-mode-1.0")
+(add-to-list 'load-path "~/.emacs.d/el-get/ace-jump-mode")
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-0") 'ace-jump-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
