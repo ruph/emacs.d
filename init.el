@@ -96,7 +96,7 @@
   "kill from point to start of line"
   (interactive)
   (kill-line 0))
-(global-set-key (kbd "C-;") 'kill-start-of-line)
+(global-set-key (kbd "S-C-k") 'kill-start-of-line)
 
 ;; Indent the whole buffer
 (defun indent-buffer ()

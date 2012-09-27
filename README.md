@@ -61,7 +61,7 @@ CHEAT SHEET
 ### WINDOW ###
 * **C+x 2**   - split window horizontally
 * **C+x 3**   - split window vertically
-* **M+h**     - move letf
+* **M+h**     - move left
 * **M+j**     - move down
 * **M+k**     - move up
 * **M+l**     - move left
@@ -84,8 +84,8 @@ CHEAT SHEET
 * **S+C+left**  - outdent
 * **S+TAB**     - outdent
 * **C+k**       - delete to the end of the line
-* **C+;**       - delete to the begining of the line
-* **C+l**       - goto line
+* **S-C+k**     - delete to the beginning of the line
+* **C+l**       - go to line
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
