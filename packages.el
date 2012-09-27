@@ -1,14 +1,39 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Additional PACKAGES
+
 ;; sources for elpa
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "http://marmalade-repo.org/packages/")))
+
 ;; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (unless (require 'el-get nil t)
-  (url-retrieve "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-		(lambda (s) (end-of-buffer) (eval-print-last-sexp))))
+  (url-retrieve
+   "http://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
+       (goto-char (point-max))
+       (eval-print-last-sexp)))))
+
+;; extra recipes
+(setq el-get-sources
+      '((:name ace-jump-mode :type elpa)
+        (:name js2-mode-mooz
+               :type git
+               :url "git://github.com/mooz/js2-mode.git"
+               :load "js2-mode.el"
+               :compile ("js2-mode.el")
+               :features js2-mode)))
+
+;; for installation
+(setq my-el-get-packages
+	  (append '(popup auto-complete auto-complete-etags autopair
+			      highlight-parentheses highlight-symbol
+			      mmm-mode psvn pymacs yaml-mode deft)
+			  (mapcar 'el-get-source-name el-get-sources)))
+
+(el-get 'sync my-el-get-packages)
 ;; main load path
 (add-to-list 'load-path "~/.emacs.d/")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

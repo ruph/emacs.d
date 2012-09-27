@@ -39,10 +39,11 @@ PACKAGES
  - pymacs
  - yaml-mode
  - deft
-- other
+- other:
  - eproject ~ https://github.com/gabrielelanaro/eproject
  - js2-mode ~ https://github.com/mooz/js2-mode
  - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
+- windows note: http://stackoverflow.com/questions/3777075/https-github-access/4454754#4454754
 
 
 CHEAT SHEET
