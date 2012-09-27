@@ -34,7 +34,7 @@
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pychecker-init)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0.2/")
+(add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
 (load-library "flymake-cursor")
 (add-hook 'python-mode-hook
 	  (lambda ()

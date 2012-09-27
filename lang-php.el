@@ -1,5 +1,5 @@
 ;; PHP mode
-(add-to-list 'load-path "~/.emacs.d/elpa/php-mode-1.5.0/")
+(add-to-list 'load-path "~/.emacs.d/el-get/php-mode")
 (require 'php-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -21,7 +21,7 @@
 (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
 (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 
-(add-to-list 'load-path "~/.emacs.d/elpa/flymake-cursor-1.0.2/")
+(add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
 (load-library "flymake-cursor")
 (add-hook 'php-mode-hook
 	  (lambda ()

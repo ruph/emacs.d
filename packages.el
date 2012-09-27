@@ -16,10 +16,27 @@
        (goto-char (point-max))
        (eval-print-last-sexp)))))
 
-;; extra recipes
+;; Extra recipes
 (setq el-get-sources
-      '((:name ace-jump-mode    :type elpa)
+      '((:name php-mode         :type elpa)
+	(:name clojure-mode     :type elpa)
+	(:name ac-slime         :type elpa)
+	(:name paredit          :type elpa)
+	(:name flymake-cursor   :type elpa)
+	(:name sml-modeline     :type elpa)
+	(:name yasnippet        :type elpa)
+	(:name ace-jump-mode    :type elpa)
+	(:name anything         :type elpa)
+	(:name anything-config  :type elpa)
+	(:name markdown-mode    :type elpa)
+	(:name org-cua-dwim     :type elpa)
       	(:name multiple-cursors :type elpa)
+	(:name anything-find-project-resources
+               :type git
+               :url "git://github.com/ruph/emacs-anything-fpr.git"
+               :load "anything-find-project-resources.el"
+               :compile ("anything-find-project-resources.el")
+               :features anything-find-project-resources)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -27,17 +44,20 @@
                :compile ("js2-mode.el")
                :features js2-mode)))
 
-;; for installation
+;; All packages for installation
 (setq my-el-get-packages
       (append '(popup auto-complete auto-complete-etags autopair
 		      highlight-parentheses highlight-symbol
 		      mmm-mode psvn pymacs yaml-mode deft)
 	      (mapcar 'el-get-source-name el-get-sources)))
 
+;; Install packages
 (el-get 'sync my-el-get-packages)
-;; main load path
-(add-to-list 'load-path "~/.emacs.d/")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Main load path
+(add-to-list 'load-path "~/.emacs.d/")
 
 
 ;; SVN
@@ -64,7 +84,7 @@
 
 
 ;; the modeline
-(add-to-list 'load-path "~/.emacs.d/elpa/sml-modeline-0.5/")
+(add-to-list 'load-path "~/.emacs.d/el-get/sml-modeline")
 (line-number-mode t)                     ;; show line numbers
 (column-number-mode t)                   ;; show column numbers
 (size-indication-mode t)                 ;; show file size (emacs 22+)
@@ -100,9 +120,9 @@
 
 
 ;; ANYTHING
-(add-to-list 'load-path "~/.emacs.d/elpa/anything-1.287")
+(add-to-list 'load-path "~/.emacs.d/el-get/anything")
 (require 'anything)
-(add-to-list 'load-path "~/.emacs.d/elpa/anything-config-0.4.1")
+(add-to-list 'load-path "~/.emacs.d/el-get/anything-config")
 (require 'anything-config)
 
 ;; recursive anything-do-grep
@@ -112,7 +132,7 @@
                     (call-interactively 'anything-do-grep))))
 
 ;; all files from current directory
-(load-file "~/.emacs.d/emacs-anything-fpr/anything-find-project-resources.el")
+(load-file "~/.emacs.d/el-get/anything-find-project-resources/anything-find-project-resources.elc")
 (global-set-key (kbd "S-C-r") 'anything-find-resource)
 
 ;; eproject integration
@@ -144,10 +164,10 @@
 
 
 ;; Yasnippet
-(add-to-list 'load-path "~/.emacs.d/elpa/yasnippet-0.8.0/")
+(add-to-list 'load-path "~/.emacs.d/el-get/yasnippet")
 (require 'yasnippet) ;; not yasnippet-bundle
 (yas/global-mode 1)
-(yas/load-directory "~/.emacs.d/elpa/yasnippet-0.8.0/snippets")
+(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (setq yas/wrap-around-region t)
 (setq yas/prompt-functions
       '(yas/x-prompt yas/ido-prompt))
@@ -220,7 +240,7 @@
 
 
 ;; Paredit () for lisps
-(add-to-list 'load-path "~/.emacs.d/elpa/paredit-22")
+(add-to-list 'load-path "~/.emacs.d/el-get/paredit")
 (require 'paredit)
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
@@ -287,7 +307,7 @@
 
 
 ;; Markdown
-(add-to-list 'load-path "~/.emacs.d/elpa/markdown-mode-1.8.1/")
+(add-to-list 'load-path "~/.emacs.d/el-get/markdown-mode")
 (require 'markdown-mode)
 (add-hook 'markdown-mode-hook
 	  (lambda ()
@@ -317,7 +337,7 @@
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 
 ;; Cua compatibility
-(add-to-list 'load-path "~/.emacs.d/elpa/org-cua-dwim-0.5")
+(add-to-list 'load-path "~/.emacs.d/el-get/org-cua-dwim")
 (require 'org-cua-dwim)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

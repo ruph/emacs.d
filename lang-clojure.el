@@ -1,5 +1,5 @@
 ;; Clojure
-(add-to-list 'load-path "~/.emacs.d/elpa/clojure-mode-1.11.5/")
+(add-to-list 'load-path "~/.emacs.d/el-get/clojure-require")
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
@@ -15,7 +15,7 @@
 
 
 ;; slime autocompletion module
-(add-to-list 'load-path "~/.emacs.d/elpa/ac-slime-0.2/")
+(add-to-list 'load-path "~/.emacs.d/el-get/ac-slime")
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 
