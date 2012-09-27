@@ -137,8 +137,8 @@
 
 
 ;; CUA
-(cua-mode t)
 (setq cua-rectangle-mark-key (kbd "S-C-<return>"))
+(cua-mode t)
 
 ;; especially for osx
 (if (eq system-type 'darwin)

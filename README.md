@@ -78,7 +78,6 @@ CHEAT SHEET
 
 ### EDITOR ###
 * **C+space**   - normal selection
-* **C+RET**     - rectangular selection
 * **M+up**      - move line up
 * **M+down**    - move line down
 * **S+C+right** - indent
@@ -90,6 +89,17 @@ CHEAT SHEET
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
+
+
+### EDITOR :: MULTIPLE-CURSORS ###
+* **S+C+RET**   - rectangular selection (cua)
+* **C+RET**     - rectangular selection
+* **C-c C-c**   - edit selections
+* **C-c C-e**   - edit ends of lines
+* **C-c C-a**   - edit-beginnings-of-lines 
+* **C+>**       - mark next like this
+* **C+<**       - mark previous like this
+* **C-c C+<**   - mark all like this
 
 
 ### EDITOR :: SEARCH ###
@@ -121,8 +131,6 @@ CHEAT SHEET
 
 
 ### EPROJECT ###
-* **C+>**       - next file
-* **C+<**       - previous file
 * **C+S+F5**    - project settings
 * **C+F5**      - project dired
 * **(S/C+)F8**  - not bind (for the use in eproject commands)

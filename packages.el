@@ -25,7 +25,6 @@
 	(:name flymake-cursor   :type elpa)
 	(:name sml-modeline     :type elpa)
 	(:name yasnippet        :type elpa)
-	(:name ace-jump-mode    :type elpa)
 	(:name anything         :type elpa)
 	(:name anything-config  :type elpa)
 	(:name markdown-mode    :type elpa)
@@ -34,19 +33,19 @@
 	(:name anything-find-project-resources
                :type git
                :url "git://github.com/ruph/emacs-anything-fpr.git"
-               :load "anything-find-project-resources.elc"
+               :load "anything-find-project-resources.el"
                :compile ("anything-find-project-resources.el")
                :features anything-find-project-resources)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
-               :load "js2-mode.elc"
+               :load "js2-mode.el"
                :compile ("js2-mode.el" "js2-imenu-extras.el")
                :features js2-mode)
 	(:name eproject
                :type git
                :url "git://github.com/gabrielelanaro/eproject.git"
-               :load "eproject.elc"
+               :load "eproject.el"
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
 	))
@@ -55,7 +54,8 @@
 (setq my-el-get-packages
       (append '(popup auto-complete auto-complete-etags autopair
 		      highlight-parentheses highlight-symbol
-		      mmm-mode psvn pymacs yaml-mode deft)
+		      ace-jump-mode mmm-mode psvn pymacs yaml-mode
+		      deft)
 	      (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
