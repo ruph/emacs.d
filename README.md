@@ -27,6 +27,7 @@ PACKAGES
  - anything-config
  - markdown-mode
  - org-cua-dwim
+ - multiple-cursors
 - el-get
  - popup
  - auto-complete
