@@ -34,15 +34,22 @@
 	(:name anything-find-project-resources
                :type git
                :url "git://github.com/ruph/emacs-anything-fpr.git"
-               :load "anything-find-project-resources.el"
+               :load "anything-find-project-resources.elc"
                :compile ("anything-find-project-resources.el")
                :features anything-find-project-resources)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
-               :load "js2-mode.el"
-               :compile ("js2-mode.el")
-               :features js2-mode)))
+               :load "js2-mode.elc"
+               :compile ("js2-mode.el" "js2-imenu-extras.el")
+               :features js2-mode)
+	(:name eproject
+               :type git
+               :url "git://github.com/gabrielelanaro/eproject.git"
+               :load "eproject.elc"
+               :compile ("eproject.el" "eproject-config.el")
+               :features eproject)
+	))
 
 ;; All packages for installation
 (setq my-el-get-packages
@@ -99,7 +106,7 @@
 
 
 ;; Eproject
-(load-file "~/.emacs.d/eproject/eproject.el")
+(require 'eproject)
 
 ;; remove pesky M-left/right
 (defun prj-setup-all ()
@@ -132,7 +139,7 @@
                     (call-interactively 'anything-do-grep))))
 
 ;; all files from current directory
-(load-file "~/.emacs.d/el-get/anything-find-project-resources/anything-find-project-resources.elc")
+(require 'anything-find-project-resources)
 (global-set-key (kbd "S-C-r") 'anything-find-resource)
 
 ;; eproject integration

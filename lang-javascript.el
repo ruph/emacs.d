@@ -1,7 +1,7 @@
-;; Javascript mode from
-;; https://github.com/mooz/js2-mode/
+;; Javascript mode from  https://github.com/mooz/js2-mode/
 ;; ~ mooz's community fork of js2-mode - actively maintained
 (add-to-list 'load-path "~/.emacs.d/el-get/js2-mode-mooz/")
+(require 'js2-mode)
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
