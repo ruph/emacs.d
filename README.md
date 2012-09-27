@@ -59,12 +59,12 @@ CHEAT SHEET
 
 
 ### WINDOW ###
-* **C+x 2** - split window horizontally
-* **C+x 3** - split window vertically
-* **M+h**   - move letf
-* **M+j**   - move down
-* **M+k**   - move up
-* **M+l**   - move left
+* **C+x 2**   - split window horizontally
+* **C+x 3**   - split window vertically
+* **M+h**     - move letf
+* **M+j**     - move down
+* **M+k**     - move up
+* **M+l**     - move left
 * **S+C+M+j** - swap down
 * **S+C+M+k** - swap up
 * **S+C+M+h** - swap left
@@ -73,7 +73,7 @@ CHEAT SHEET
 * **S+M+k**   - enlarge upper window
 * **S+M+h**   - enlarge left window
 * **S+M+l**   - enlarge right window
-* **S+F6**  - go full screen (osx only)
+* **S+F6**    - go full screen (osx only)
 
 
 ### EDITOR ###
@@ -103,16 +103,17 @@ CHEAT SHEET
 
 
 ### EDITOR :: SEARCH ###
-* **C+s**   - regex search in current buffer
-* **C+r**   - regex search backwards in current buffer
-* **M+C+s** - search in current buffer
-* **M+C+r** - search backwards in current buffer
-* **M+%**   - regex search & replace in current buffer
-* **C+M+%** - search & replace in current buffer
-* **F3**    - find next symbol in buffer
-* **S+F3**  - find previous symbol in buffer
-* **M+F3**  - highlight symbol in buffer
-* **C+0**   - ace jump
+* **C+s**     - regex search in current buffer
+* **C+r**     - regex search backwards in current buffer
+* **M+C+s**   - search in current buffer
+* **M+C+r**   - search backwards in current buffer
+* **M+%**     - regex search & replace in current buffer
+* **C+M+%**   - search & replace in current buffer
+* **F3**      - find next symbol in buffer
+* **S+F3**    - find previous symbol in buffer
+* **M+F3**    - highlight symbol in buffer
+* **C+0**     - ace jump
+* **C+c C+0** - ace jump back
 
 
 ### EDITOR :: DEV ###

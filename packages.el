@@ -290,7 +290,7 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/highlight-symbol")
 (require 'highlight-symbol)
 (global-set-key (kbd "M-<f3>") 'highlight-symbol-at-point)
-(global-set-key (kbd "<f3>") 'highlight-symbol-next)
+(global-set-key (kbd "<f3>")   'highlight-symbol-next)
 (global-set-key (kbd "S-<f3>") 'highlight-symbol-prev)
 (global-set-key (kbd "C-<f3>") 'highlight-symbol-prev)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -299,7 +299,11 @@
 ;; Fast/direct cursor location minor mode.
 (add-to-list 'load-path "~/.emacs.d/el-get/ace-jump-mode")
 (require 'ace-jump-mode)
+(autoload 'ace-jump-mode-pop-mark "ace-jump-mode" "Ace jump back:-)"t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
 (define-key global-map (kbd "C-0") 'ace-jump-mode)
+(define-key global-map (kbd "C-c C-0") 'ace-jump-mode-pop-mark)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
