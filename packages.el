@@ -3,8 +3,8 @@
 
 ;; sources for elpa
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")))
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ;; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -19,18 +19,18 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name php-mode         :type elpa)
-	(:name clojure-mode     :type elpa)
-	(:name ac-slime         :type elpa)
-	(:name paredit          :type elpa)
-	(:name flymake-cursor   :type elpa)
-	(:name sml-modeline     :type elpa)
-	(:name yasnippet        :type elpa)
-	(:name anything         :type elpa)
-	(:name anything-config  :type elpa)
-	(:name markdown-mode    :type elpa)
-	(:name org-cua-dwim     :type elpa)
-      	(:name multiple-cursors :type elpa)
-	(:name anything-find-project-resources
+        (:name clojure-mode     :type elpa)
+        (:name ac-slime         :type elpa)
+        (:name paredit          :type elpa)
+        (:name flymake-cursor   :type elpa)
+        (:name sml-modeline     :type elpa)
+        (:name yasnippet        :type elpa)
+        (:name anything         :type elpa)
+        (:name anything-config  :type elpa)
+        (:name markdown-mode    :type elpa)
+        (:name org-cua-dwim     :type elpa)
+        (:name multiple-cursors :type elpa)
+        (:name anything-find-project-resources
                :type git
                :url "git://github.com/ruph/emacs-anything-fpr.git"
                :load "anything-find-project-resources.el"
@@ -42,21 +42,21 @@
                :load "js2-mode.el"
                :compile ("js2-mode.el" "js2-imenu-extras.el")
                :features js2-mode)
-	(:name eproject
+        (:name eproject
                :type git
                :url "git://github.com/gabrielelanaro/eproject.git"
                :load "eproject.el"
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
-	))
+        ))
 
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(popup auto-complete auto-complete-etags autopair
-		      highlight-parentheses highlight-symbol
-		      ace-jump-mode mmm-mode psvn pymacs yaml-mode
-		      deft)
-	      (mapcar 'el-get-source-name el-get-sources)))
+                      highlight-parentheses highlight-symbol
+                      ace-jump-mode mmm-mode psvn pymacs yaml-mode
+                      deft)
+              (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
 (el-get 'sync my-el-get-packages)
@@ -83,10 +83,10 @@
 
 ;; CSS
 (add-hook 'css-mode-hook
-	  (lambda ()
-	    (setq tab-width 4)
-	    (local-set-key (kbd "RET") 'newline-and-indent)
-	    (add-hook 'before-save-hook 'delete-trailing-whitespace)))
+          (lambda ()
+            (setq tab-width 4)
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -99,9 +99,9 @@
 (if (require 'sml-modeline nil 'noerror) ;; use sml-modeline if available
     (progn
       (sml-modeline-mode 1)              ;; show buffer pos in the mode line
-      (scroll-bar-mode -1))		 ;; turn off the scrollbar
-  (scroll-bar-mode 1)			 ;; otherwise, show a scrollbar...
-  (set-scroll-bar-mode 'right))		 ;; ... on the right
+      (scroll-bar-mode -1))              ;; turn off the scrollbar
+  (scroll-bar-mode 1)                    ;; otherwise, show a scrollbar...
+  (set-scroll-bar-mode 'right))          ;; ... on the right
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -150,11 +150,11 @@
    '((
       (name . "Files in eproject:")
       (init . (lambda ()
-		(with-current-buffer (anything-candidate-buffer 'local)
-		  (mapcar
-		   (lambda (item)
-		     (insert (format "%s/%s\n" (cadr prj-current) (car item))))
-		   prj-files))))
+                (with-current-buffer (anything-candidate-buffer 'local)
+                  (mapcar
+                   (lambda (item)
+                     (insert (format "%s/%s\n" (cadr prj-current) (car item))))
+                   prj-files))))
       (candidates-in-buffer)
       (type . file)
       ))
@@ -220,14 +220,14 @@
 (autopair-global-mode)
 (setq autopair-blink nil)
 (set-default 'autopair-dont-activate #'(lambda ()
-					 (or
-					  (eq major-mode 'clojure-mode)
-					  (eq major-mode 'emacs-lisp-mode)
-					  (eq major-mode 'lisp-mode)
-					  (eq major-mode 'emacs-interaction-mode)
-					  (eq major-mode 'scheme-mode)
-					  (eq major-mode 'slime-repl-mode)
-					  (eq major-mode 'sldb-mode))))
+                                         (or
+                                          (eq major-mode 'clojure-mode)
+                                          (eq major-mode 'emacs-lisp-mode)
+                                          (eq major-mode 'lisp-mode)
+                                          (eq major-mode 'emacs-interaction-mode)
+                                          (eq major-mode 'scheme-mode)
+                                          (eq major-mode 'slime-repl-mode)
+                                          (eq major-mode 'sldb-mode))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -321,11 +321,11 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/markdown-mode")
 (require 'markdown-mode)
 (add-hook 'markdown-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "RET") 'newline-and-indent)
-	    (visual-line-mode t)
-	    (remove-hook 'before-save-hook 'delete-trailing-whitespace)
-	    ))
+          (lambda ()
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            (visual-line-mode t)
+            (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+            ))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

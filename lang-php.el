@@ -6,13 +6,13 @@
 
 ;; Hooks
 (add-hook 'php-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)
-	    (local-set-key (kbd "RET") 'newline-and-indent)
-	    (local-unset-key (kbd "M-j"))
-	    (add-hook 'before-save-hook 'delete-trailing-whitespace)
-	    (setq flymake-gui-warnings-enabled nil)))
+          (lambda ()
+            (setq indent-tabs-mode t)
+            (setq tab-width 4)
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            (local-unset-key (kbd "M-j"))
+            (add-hook 'before-save-hook 'delete-trailing-whitespace)
+            (setq flymake-gui-warnings-enabled nil)))
 (add-hook 'php-mode-hook 'esk-paredit-nonlisp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -24,19 +24,19 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
 (load-library "flymake-cursor")
 (add-hook 'php-mode-hook
-	  (lambda ()
-	    (local-set-key [S-f5] 'flymake-goto-prev-error)
-	    (local-set-key [f5] 'flymake-goto-next-error)))
+          (lambda ()
+            (local-set-key [S-f5] 'flymake-goto-prev-error)
+            (local-set-key [f5] 'flymake-goto-next-error)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; HTML
 (add-hook 'html-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)
-	    (local-set-key (kbd "RET") 'newline-and-indent)
-	    ))
+          (lambda ()
+            (setq indent-tabs-mode t)
+            (setq tab-width 4)
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            ))
 ;; some issues with flymake
 (delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -84,7 +84,7 @@ substituted for the corresponding REGEXP wherever it matches."
     :front "<script\[^>\]*\\(language=\"javascript\\([0-9.]*\\)\"\\|type=\"text/javascript\"\\)\[^>\]*>"
     :back"</script>"
     :insert ((?j js-tag nil @ "<script language=\"JavaScript\">"
-		 @ "\n" _ "\n" @ "</script>" @)))
+                 @ "\n" _ "\n" @ "</script>" @)))
    (js-inline
     :submode js-mode
     :delimiter-mode nil

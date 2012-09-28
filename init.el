@@ -152,11 +152,11 @@
     (progn
       (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
       (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
-	    cua-keep-region-after-copy t) ;; Standard Windows behaviour
+            cua-keep-region-after-copy t) ;; Standard Windows behaviour
       (transient-mark-mode 1)              ;; No region when it is not highlighted
       (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
       (setenv "PATH"
-	      (concat cygwin-bin ";" (getenv "PATH")))
+              (concat cygwin-bin ";" (getenv "PATH")))
       ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -186,10 +186,10 @@
 
 ;; increase minibuffer size when ido completion is active
 (add-hook 'ido-minibuffer-setup-hook
-	  (function
-	   (lambda ()
-	     (make-local-variable 'resize-minibuffer-window-max-height)
-	     (setq resize-minibuffer-window-max-height 1))))
+          (function
+           (lambda ()
+             (make-local-variable 'resize-minibuffer-window-max-height)
+             (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -254,8 +254,8 @@
 
 ;; EMACS-LISP indenting
 (add-hook 'emacs-lisp-mode-hook
-	  (lambda ()
-	    (local-set-key (kbd "RET") 'newline-and-indent)))
+          (lambda ()
+            (local-set-key (kbd "RET") 'newline-and-indent)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -263,9 +263,9 @@
 (defun indent-rigidly-n (n)
   "Indent the region, or otherwise the current line, by N spaces."
   (let* ((use-region (and transient-mark-mode mark-active))
-	 (rstart (if use-region (region-beginning) (point-at-bol)))
-	 (rend   (if use-region (region-end)       (point-at-eol)))
-	 (deactivate-mark "irrelevant")) ; avoid deactivating mark
+         (rstart (if use-region (region-beginning) (point-at-bol)))
+         (rend   (if use-region (region-end)       (point-at-eol)))
+         (deactivate-mark "irrelevant")) ; avoid deactivating mark
     (indent-rigidly rstart rend n)))
 (defun indent-rigidly-tab ()
   "Indent the region, or otherwise the current line, by 'tab' spaces."
@@ -360,10 +360,10 @@
 ;; INITIAL WINDOW SIZE
 (setq initial-frame-alist
       (append '((width . 117) (height . 57) (left . 59) (top . 27))
-	      initial-frame-alist))
+              initial-frame-alist))
 (setq default-frame-alist
       (append '((width . 117) (height . 57) (left . 59) (top . 27))
-	      default-frame-alist))
+              default-frame-alist))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -377,7 +377,7 @@
     KEY is a string or vector representing a sequence of keystrokes."
   (interactive
    (list (call-interactively #'get-key-combo)
-	 (completing-read "Which map: " minor-mode-map-alist nil t)))
+         (completing-read "Which map: " minor-mode-map-alist nil t)))
   (let ((map (rest (assoc (intern keymap) minor-mode-map-alist))))
     (when map
       (define-key map key nil)
@@ -391,10 +391,10 @@
   (interactive)
   (let ((active-modes))
     (mapc (lambda (mode) (condition-case nil
-			     (if (and (symbolp mode) (symbol-value mode))
-				 (add-to-list 'active-modes mode))
-			   (error nil) ))
-	  minor-mode-list)
+                             (if (and (symbolp mode) (symbol-value mode))
+                                 (add-to-list 'active-modes mode))
+                           (error nil) ))
+          minor-mode-list)
     (message "Active modes are %s" active-modes)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

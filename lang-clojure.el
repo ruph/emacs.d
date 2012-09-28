@@ -53,8 +53,8 @@
 
 ;; add paredit to slime and to all other relevant modes
 (mapc (lambda (mode)
-	(let ((hook (intern (concat (symbol-name mode) "-mode-hook"))))
-	  (add-hook hook (lambda () (paredit-mode +1)))))
+        (let ((hook (intern (concat (symbol-name mode) "-mode-hook"))))
+          (add-hook hook (lambda () (paredit-mode +1)))))
       '(emacs-lisp lisp inferior-lisp slime slime-repl))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

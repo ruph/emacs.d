@@ -1,18 +1,18 @@
 ;; Python Tab Hook
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (setq indent-tabs-mode t)
-	    (setq tab-width 4)
-	    (setq python-indent 4)
-	    (local-set-key (kbd "RET") 'newline-and-indent)
-	    (add-hook 'before-save-hook 'delete-trailing-whitespace)))
+          (lambda ()
+            (setq indent-tabs-mode t)
+            (setq tab-width 4)
+            (setq python-indent 4)
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; ''' autopairing
 (add-hook 'python-mode-hook
-	  #'(lambda ()
-	      (setq autopair-handle-action-fns
-		    (list #'autopair-default-handle-action
-			  #'autopair-python-triple-quote-action))))
+          #'(lambda ()
+              (setq autopair-handle-action-fns
+                    (list #'autopair-default-handle-action
+                          #'autopair-python-triple-quote-action))))
 
 ;; Pyflakes & PEP8 checks
 (add-hook 'python-mode-hook 'flymake-find-file-hook)
@@ -37,8 +37,8 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
 (load-library "flymake-cursor")
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (local-set-key [S-f5] 'flymake-goto-prev-error)
-	    (local-set-key [f5] 'flymake-goto-next-error)))
+          (lambda ()
+            (local-set-key [S-f5] 'flymake-goto-prev-error)
+            (local-set-key [f5] 'flymake-goto-next-error)))
 
 (provide 'lang-python)
