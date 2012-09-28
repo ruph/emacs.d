@@ -104,17 +104,19 @@ CHEAT SHEET
 
 
 ### EDITOR :: SEARCH ###
-* **C+s**     - regex search in current buffer
-* **C+r**     - regex search backwards in current buffer
-* **M+C+s**   - search in current buffer
-* **M+C+r**   - search backwards in current buffer
-* **M+%**     - regex search & replace in current buffer
-* **C+M+%**   - search & replace in current buffer
-* **F3**      - find next symbol in buffer
-* **S+F3**    - find previous symbol in buffer
-* **M+F3**    - highlight symbol in buffer
-* **C+0**     - ace jump
-* **C+c C+0** - ace jump back
+* **C+s**         - regex search in current buffer
+* **C+r**         - regex search backwards in current buffer
+* **M+C+s**       - search in current buffer
+* **M+C+r**       - search backwards in current buffer
+* **M+%**         - regex search & replace in current buffer
+* **C+M+%**       - search & replace in current buffer
+* **F3**          - find next symbol in buffer
+* **S+F3**        - find previous symbol in buffer
+* **M+F3**        - highlight symbol in buffer
+* **C+0**         - ace jump word
+* **C+u C+0**     - ace jump char
+* **C+u C+u C+0** - ace jump line
+* **C+c C+0**     - ace jump back
 
 
 ### EDITOR :: DEV ###
