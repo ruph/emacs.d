@@ -1,6 +1,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Additional PACKAGES
 
+;; making sure installation doesn't break
+(setq url-http-attempt-keepalives nil)
+
 ;; sources for elpa
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
@@ -24,18 +27,24 @@
         (:name paredit          :type elpa)
         (:name flymake-cursor   :type elpa)
         (:name sml-modeline     :type elpa)
-        (:name yasnippet        :type elpa)
         (:name anything         :type elpa)
         (:name anything-config  :type elpa)
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
-        (:name anything-find-project-resources
-               :type git
-               :url "git://github.com/ruph/emacs-anything-fpr.git"
-               :load "anything-find-project-resources.el"
-               :compile ("anything-find-project-resources.el")
-               :features anything-find-project-resources)
+	(:name yasnippet
+	       :website "https://github.com/capitaomorte/yasnippet.git"
+	       :description "YASnippet is a template system for Emacs."
+	       :type github
+	       :pkgname "capitaomorte/yasnippet"
+	       :features "yasnippet"
+	       :compile "yasnippet.el")
+        (:name yasnippets/clojure-mode
+	       :website "https://github.com/swannodette/clojure-snippets.git"
+	       :description "Clojure-mode yasnippets"
+               :type github
+               :pkgname "swannodette/clojure-snippets"
+	       :features nil)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -48,7 +57,13 @@
                :load "eproject.el"
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
-        ))
+        (:name anything-find-project-resources
+               :type git
+               :url "git://github.com/ruph/emacs-anything-fpr.git"
+               :load "anything-find-project-resources.el"
+               :compile ("anything-find-project-resources.el")
+               :features anything-find-project-resources)
+	))
 
 ;; All packages for installation
 (setq my-el-get-packages
@@ -171,10 +186,11 @@
 
 
 ;; Yasnippet
-(add-to-list 'load-path "~/.emacs.d/el-get/yasnippet")
-(require 'yasnippet) ;; not yasnippet-bundle
+(setq yas-snippet-dirs
+      '("~/.emacs.d/el-get/yasnippet/snippets"
+        "~/.emacs.d/el-get/yasnippets"
+        ))
 (yas/global-mode 1)
-(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 (setq yas/wrap-around-region t)
 (setq yas/prompt-functions
       '(yas/x-prompt yas/ido-prompt))

@@ -14,37 +14,36 @@ Should work well in windows and osx, but was never tested on linux. COPY/PASTE f
 
 PACKAGES
 --------
-- elpa
- - php-mode
- - clojure-mode
  - ac-slime
- - paredit
- - flymake-cursor
- - sml-modeline
- - yasnippet
  - ace-jump-mode
- - anything
- - anything-config
- - markdown-mode
- - org-cua-dwim
- - multiple-cursors
-- el-get
- - popup
  - auto-complete
  - auto-complete-etags
  - autopair
+ - anything
+ - anything-config
+ - clojure-mode
+ - clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
+ - deft
+ - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
+ - eproject ~ https://github.com/gabrielelanaro/eproject
+ - flymake-cursor
  - highlight-parentheses
  - highlight-symbol
+ - js2-mode ~ https://github.com/mooz/js2-mode
+ - markdown-mode
  - mmm-mode
+ - multiple-cursors
+ - org-cua-dwim
+ - paredit
+ - php-mode
+ - popup
  - psvn
  - pymacs
+ - sml-modeline
  - yaml-mode
- - deft
-- other:
- - eproject ~ https://github.com/gabrielelanaro/eproject
- - js2-mode ~ https://github.com/mooz/js2-mode
- - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
-- windows note: http://stackoverflow.com/questions/3777075/https-github-access/4454754#4454754
+ - yasnippet ~ https://github.com/capitaomorte/yasnippet
+ 
+Windows install note: http://stackoverflow.com/questions/3777075/https-github-access/4454754#4454754
 
 
 CHEAT SHEET
