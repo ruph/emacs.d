@@ -193,35 +193,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; CEDET mode
-;; (require 'semantic)
-;; (require 'semantic/sb)
-;; (require 'srecode)
-;; ;(global-ede-mode 1)
-;; (semantic-mode 1)
-;; (global-semanticdb-minor-mode 1)
-;; (global-semantic-idle-scheduler-mode 1)
-;; ;(global-semantic-idle-completions-mode 1)
-;; ;(global-semantic-decoration-mode 1)
-;; (global-semantic-highlight-func-mode 1)
-;; (global-semantic-stickyfunc-mode -1)
-;; ;(global-semantic-idle-summary-mode 1)
-;; (global-semantic-mru-bookmark-mode 1)
-;; ;; gnu global support
-;; ;(require 'semanticdb-global)
-;; ;(semanticdb-enable-gnu-global-databases 'c-mode)
-;; ;(semanticdb-enable-gnu-global-databases 'c++-mode)
-;; (set-default 'semantic-case-fold t)
-
-;; (if (eq system-type 'darwin)
-;;   (setq semantic-python-dependency-system-include-path
-;;       '("/usr/lib/python2.7/")))
-;; (if (eq system-type 'windows-nt)
-;;   (setq semantic-python-dependency-system-include-path
-;;       '("C:/Python26/")))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ;; SPEEDBAR
 (setq speedbar-default-position 'right)
 (setq speedbar-load-hook nil)
@@ -370,7 +341,7 @@
 ;; UNSETTING KEYS
 (defun get-key-combo (key)
   "Just return the key combo entered by the user"
-  (interactive "kKey combo: ")
+  (interactive "Key combo: ")
   key)
 (defun keymap-unset-key (key keymap)
   "Remove binding of KEY in a keymap

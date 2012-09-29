@@ -78,10 +78,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Main load path
-(add-to-list 'load-path "~/.emacs.d/")
-
-
 ;; SVN
 (add-to-list 'load-path "~/.emacs.d/el-get/psvn")
 (require 'psvn)
