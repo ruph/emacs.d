@@ -49,12 +49,12 @@
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
 
-;; theme
+;; Theme
 (load-theme 'wombat)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; keyboard / input method settings
+;; Keyboard / input method settings
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -67,7 +67,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; backup
+;; Backup
 (setq-default make-backup-files         nil) ; Don't want any backup files
 (setq-default auto-save-list-file-name  nil) ; Don't want any .saves files
 (setq-default auto-save-default         nil) ; Don't want any auto saving
@@ -184,7 +184,7 @@
 ;; when using ido, the confirmation is rather annoying...
 (setq confirm-nonexistent-file-or-buffer nil)
 
-;; increase minibuffer size when ido completion is active
+;; Increase minibuffer size when ido completion is active
 (add-hook 'ido-minibuffer-setup-hook
           (function
            (lambda ()
@@ -223,14 +223,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EMACS-LISP indenting
+;; EMACS-LISP mode
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
-            (local-set-key (kbd "RET") 'newline-and-indent)))
+            (progn
+              (local-set-key (kbd "RET") 'newline-and-indent)
+              (add-hook 'before-save-hook
+                        (lambda ()
+                          (untabify (point-min) (point-max)))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Indenting - It's kind of sad this doesn't exist normally...
+;; INDENTING
 (defun indent-rigidly-n (n)
   "Indent the region, or otherwise the current line, by N spaces."
   (let* ((use-region (and transient-mark-mode mark-active))
