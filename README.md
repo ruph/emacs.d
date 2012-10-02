@@ -43,7 +43,10 @@ PACKAGES
  - yaml-mode
  - yasnippet ~ https://github.com/capitaomorte/yasnippet
  
-Windows install note: http://stackoverflow.com/questions/3777075/https-github-access/4454754#4454754
+Windows install notes:
+ - http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
+ - install-info.exe el-get/el-get/el-get.info el-get/el-get/./el-get.info
+ - manual link creation (e.g ~\.emacs.d\el-get>mklink /D yasnippet package\elpa\yasnippet-0.8.0) 
 
 
 CHEAT SHEET

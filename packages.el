@@ -16,35 +16,31 @@
    "http://raw.github.com/dimitri/el-get/master/el-get-install.el"
    (lambda (s)
      (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
+       (emacs-lisp-mode)
+       (goto-char (point-min))
+       (down-list)
+       (eval-defun nil)))))
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name php-mode         :type elpa)
+      '((:name anything-config  :type elpa)
+        (:name anything         :type elpa)
+        (:name php-mode         :type elpa)
         (:name clojure-mode     :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name flymake-cursor   :type elpa)
         (:name sml-modeline     :type elpa)
-        (:name anything         :type elpa)
-        (:name anything-config  :type elpa)
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
-	(:name yasnippet
-	       :website "https://github.com/capitaomorte/yasnippet.git"
-	       :description "YASnippet is a template system for Emacs."
-	       :type github
-	       :pkgname "capitaomorte/yasnippet"
-	       :features "yasnippet"
-	       :compile "yasnippet.el")
+        (:name yasnippet        :type elpa)
         (:name yasnippets/clojure-mode
-	       :website "https://github.com/swannodette/clojure-snippets.git"
-	       :description "Clojure-mode yasnippets"
+               :website "https://github.com/swannodette/clojure-snippets.git"
+               :description "Clojure-mode yasnippets"
                :type github
                :pkgname "swannodette/clojure-snippets"
-	       :features nil)
+               :features nil)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -54,7 +50,7 @@
         (:name eproject
                :type git
                :url "git://github.com/gabrielelanaro/eproject.git"
-               :load "eproject.el"
+               :load nil
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
         (:name anything-find-project-resources
@@ -63,7 +59,7 @@
                :load "anything-find-project-resources.el"
                :compile ("anything-find-project-resources.el")
                :features anything-find-project-resources)
-	))
+        ))
 
 ;; All packages for installation
 (setq my-el-get-packages
@@ -182,6 +178,8 @@
 
 
 ;; Yasnippet
+(add-to-list 'load-path "~/.emacs.d/el-get/yasnippet")
+(require 'yasnippet)
 (setq yas-snippet-dirs
       '("~/.emacs.d/el-get/yasnippet/snippets"
         "~/.emacs.d/el-get/yasnippets"
