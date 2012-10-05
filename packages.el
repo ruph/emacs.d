@@ -23,9 +23,8 @@
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name anything-config  :type elpa)
-        (:name anything         :type elpa)
-        (:name php-mode         :type elpa)
+      '((:name anything         :type elpa)
+        (:name anything-config  :type elpa)
         (:name clojure-mode     :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
@@ -66,7 +65,7 @@
       (append '(popup auto-complete auto-complete-etags autopair
                       highlight-parentheses highlight-symbol
                       ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                      deft)
+                      php-mode deft)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages

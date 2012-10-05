@@ -35,7 +35,7 @@ PACKAGES
  - multiple-cursors
  - org-cua-dwim
  - paredit
- - php-mode
+ - php-mode ~ https://github.com/ejmr/php-mode
  - popup
  - psvn
  - pymacs
