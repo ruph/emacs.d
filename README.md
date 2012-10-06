@@ -22,7 +22,6 @@ PACKAGES
  - clojure-mode
  - clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
  - deft
- - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
  - eproject ~ https://github.com/gabrielelanaro/eproject
  - flymake-cursor
  - helm ~ https://github.com/emacs-helm/helm
@@ -54,8 +53,8 @@ CHEAT SHEET
 
 ### FILES ###
 * **C+x f** - list recent open files
-* **S+C+r** - find file in project directory tree (doesn't work on win)
-* **S+C+t** - find file in current eproject
+* **S+C+r** - find file in project directory tree
+* **S+C+t** - find file in eproject list
 * **F7**    - search for files
 * **S+F7**  - search in files (GNU Grep >= 2.5.2)
 

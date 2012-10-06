@@ -148,8 +148,26 @@
       (candidates-in-buffer)
       (type . file)
       ))
-   nil "resource file: " nil nil))
+   nil "Switch to file: " nil nil))
 (global-set-key (kbd "S-C-t") 'helm-eproject-resource)
+
+;; find files recursively from project dir
+(defun helm-eproject-recursive-resources ()
+  "Enumerate files belonging to the eproject"
+  (interactive)
+  (helm
+   '(((name . "All files under eproject root dir:")
+      (init . (lambda ()
+                (with-current-buffer (helm-candidate-buffer 'local)
+                  (insert
+                   (shell-command-to-string
+                    (format "find %s -type d \\( -name .svn -o -name .git -o -name .hg \\) -prune -o -type f -print" (cadr prj-current))))
+                  )))
+      (candidates-in-buffer)
+      (type . file)
+      ))
+   nil "Switch to file: " nil nil))
+(global-set-key (kbd "S-C-r") 'helm-eproject-recursive-resources)
 
 ;; a little different buffer finder
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
