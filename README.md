@@ -19,14 +19,13 @@ PACKAGES
  - auto-complete
  - auto-complete-etags
  - autopair
- - anything
- - anything-config
  - clojure-mode
  - clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
  - deft
  - emacs-anything-fpr ~ https://github.com/ruph/emacs-anything-fpr
  - eproject ~ https://github.com/gabrielelanaro/eproject
  - flymake-cursor
+ - helm ~ https://github.com/emacs-helm/helm
  - highlight-parentheses
  - highlight-symbol
  - js2-mode ~ https://github.com/mooz/js2-mode
