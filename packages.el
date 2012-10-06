@@ -126,6 +126,17 @@
 (require 'helm-config)
 (helm-mode 1)
 
+;; set helm for find files
+(global-unset-key (kbd "C-x f"))
+(global-set-key (kbd "C-x f") 'helm-find-files)
+
+;; a little different buffer finder
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+
+;; search kill-ring
+(global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
+(global-set-key (kbd "s-V") 'helm-show-kill-ring)
+
 ;; recursive helm-do-grep
 (global-set-key (kbd "S-<f7>")
                 (lambda () (interactive)
@@ -168,13 +179,6 @@
       ))
    nil "Switch to file: " nil nil))
 (global-set-key (kbd "S-C-r") 'helm-eproject-recursive-resources)
-
-;; a little different buffer finder
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-
-;; search kill-ring
-(global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
-(global-set-key (kbd "s-V") 'helm-show-kill-ring)
 
 ;; for eshell: complete and history
 (add-hook 'eshell-mode-hook
