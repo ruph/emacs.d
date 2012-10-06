@@ -23,9 +23,7 @@
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name anything         :type elpa)
-        (:name anything-config  :type elpa)
-        (:name clojure-mode     :type elpa)
+      '((:name clojure-mode     :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name flymake-cursor   :type elpa)
@@ -52,12 +50,6 @@
                :load nil
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
-        (:name anything-find-project-resources
-               :type git
-               :url "git://github.com/ruph/emacs-anything-fpr.git"
-               :load "anything-find-project-resources.el"
-               :compile ("anything-find-project-resources.el")
-               :features anything-find-project-resources)
         ))
 
 ;; All packages for installation
@@ -65,7 +57,7 @@
       (append '(popup auto-complete auto-complete-etags autopair
                       highlight-parentheses highlight-symbol
                       ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                      php-mode deft)
+                      helm php-mode deft)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -126,37 +118,29 @@
     (keymap-unset-key [M-right] "eproject-mode")
     (keymap-unset-key [f5] "eproject-mode")
     ))
-;; (global-set-key (kbd "C->") 'eproject-nextfile)
-;; (global-set-key (kbd "C-<") 'eproject-prevfile)
 (global-set-key (kbd "C-S-<f5>") 'eproject-setup-toggle)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; ANYTHING
-(add-to-list 'load-path "~/.emacs.d/el-get/anything")
-(require 'anything)
-(add-to-list 'load-path "~/.emacs.d/el-get/anything-config")
-(require 'anything-config)
+;; HELM
+(require 'helm-config)
+(helm-mode 1)
 
-;; recursive anything-do-grep
+;; recursive helm-do-grep
 (global-set-key (kbd "S-<f7>")
                 (lambda () (interactive)
                   (let ((current-prefix-arg '(4))) ; C-u
-                    (call-interactively 'anything-do-grep))))
-
-;; all files from current directory
-(require 'anything-find-project-resources)
-(global-set-key (kbd "S-C-r") 'anything-find-resource)
+                    (call-interactively 'helm-do-grep))))
 
 ;; eproject integration
-(defun anything-eproject-resource ()
+(defun helm-eproject-resource ()
   "Enumerate files belonging to the eproject"
   (interactive)
-  (anything
+  (helm
    '((
       (name . "Files in eproject:")
       (init . (lambda ()
-                (with-current-buffer (anything-candidate-buffer 'local)
+                (with-current-buffer (helm-candidate-buffer 'local)
                   (mapcar
                    (lambda (item)
                      (insert (format "%s/%s\n" (cadr prj-current) (car item))))
@@ -164,15 +148,25 @@
       (candidates-in-buffer)
       (type . file)
       ))
-   nil "resource files: " nil nil))
-(global-set-key (kbd "S-C-t") 'anything-eproject-resource)
+   nil "resource file: " nil nil))
+(global-set-key (kbd "S-C-t") 'helm-eproject-resource)
 
-;; Better buffer finder
-(global-set-key (kbd "C-x C-b") 'anything-buffers+)
+;; a little different buffer finder
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 
-;; Search kill-ring
-(global-set-key (kbd "S-C-v") 'anything-show-kill-ring)
-(global-set-key (kbd "s-V") 'anything-show-kill-ring)
+;; search kill-ring
+(global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
+(global-set-key (kbd "s-V") 'helm-show-kill-ring)
+
+;; for eshell: complete and history
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (define-key eshell-mode-map
+                [remap pcomplete]
+                'helm-esh-pcomplete)
+              (define-key eshell-mode-map
+                (kbd "M-p")
+                'helm-eshell-history)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
