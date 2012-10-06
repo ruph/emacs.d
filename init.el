@@ -87,9 +87,11 @@
 ;; Goto-line short-cut key
 (global-set-key (kbd "C-l") 'goto-line)
 
-;; File search & in-file search
+;; File search
 (global-set-key (kbd "<f7>") 'find-name-dired)
-;;(global-set-key (kbd "S-<f7>") 'rgrep) ; moved to anything
+
+;; Whitespaces
+(global-set-key (kbd "C-c w") 'whitespace-mode)
 
 ;; Delete to start of the line
 (defun kill-start-of-line ()

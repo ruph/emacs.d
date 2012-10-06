@@ -92,6 +92,7 @@ CHEAT SHEET
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
+* **C-c w**     - show whitespace
 
 
 ### EDITOR :: MULTIPLE-CURSORS ###
@@ -99,7 +100,7 @@ CHEAT SHEET
 * **C+RET**     - rectangular selection
 * **C-c C-c**   - edit selections
 * **C-c C-e**   - edit ends of lines
-* **C-c C-a**   - edit-beginnings-of-lines 
+* **C-c C-a**   - edit-beginnings-of-lines
 * **C+>**       - mark next like this
 * **C+<**       - mark previous like this
 * **C-c C+<**   - mark all like this
