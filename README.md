@@ -30,7 +30,7 @@ PACKAGES
  - js2-mode ~ https://github.com/mooz/js2-mode
  - markdown-mode
  - mmm-mode
- - multiple-cursors
+ - multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
  - org-cua-dwim
  - paredit
  - php-mode ~ https://github.com/ejmr/php-mode
@@ -96,12 +96,12 @@ CHEAT SHEET
 ### EDITOR :: MULTIPLE-CURSORS ###
 * **S+C+RET**   - rectangular selection (cua)
 * **C+RET**     - rectangular selection
-* **C-c C-c**   - edit selections
-* **C-c C-e**   - edit ends of lines
-* **C-c C-a**   - edit-beginnings-of-lines
+* **C-c c**     - edit selections
+* **C-c e**     - edit ends of lines
+* **C-c a**     - edit-beginnings-of-lines
 * **C+>**       - mark next like this
 * **C+<**       - mark previous like this
-* **C-c C+<**   - mark all like this
+* **C-c <**     - mark all like this
 
 
 ### EDITOR :: SEARCH ###

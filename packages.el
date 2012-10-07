@@ -259,15 +259,15 @@
 ;; Multiple-cursors
 (add-to-list 'load-path "~/.emacs.d/el-get/multiple-cursors")
 (require 'multiple-cursors)
-(global-set-key (kbd "C-c C-c") 'mc/edit-lines)
-(global-set-key (kbd "C-c C-e") 'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-c C-a") 'mc/edit-beginnings-of-lines)
+(global-set-key (kbd "C-c c") 'mc/edit-lines)
+(global-set-key (kbd "C-c e") 'mc/edit-ends-of-lines)
+(global-set-key (kbd "C-c a") 'mc/edit-beginnings-of-lines)
 ;; Rectangular region mode
 (global-set-key (kbd "C-<return>") 'set-rectangular-region-anchor)
 ;; Mark more like this
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c <") 'mc/mark-all-like-this)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
