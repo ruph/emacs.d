@@ -133,8 +133,8 @@
 (helm-mode 1)
 
 ;; set helm for find files
-(global-unset-key (kbd "C-x f"))
-(global-set-key (kbd "C-x f") 'helm-find-files)
+(global-unset-key (kbd "C-x C-f"))
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; a little different buffer finder
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
