@@ -7,7 +7,8 @@
 ;; sources for elpa
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ;; el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -31,12 +32,17 @@
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
-        (:name yasnippet        :type elpa)
         (:name yasnippets/clojure-mode
-               :website "https://github.com/swannodette/clojure-snippets.git"
+               :website "https://github.com/swannodette/clojure-snippets"
                :description "Clojure-mode yasnippets"
                :type github
                :pkgname "swannodette/clojure-snippets"
+               :features nil)
+        (:name yasnippets/minimal-yasnippet-php-mode
+               :website "https://github.com/nishimura/minimal-yasnippet-php-mode"
+               :description ""
+               :type github
+               :pkgname "nishimura/minimal-yasnippet-php-mode"
                :features nil)
         (:name js2-mode-mooz
                :type git
@@ -57,7 +63,7 @@
       (append '(popup auto-complete auto-complete-etags autopair
                       highlight-parentheses highlight-symbol
                       ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                      helm php-mode deft)
+                      yasnippet helm php-mode deft)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -198,6 +204,7 @@
 (setq yas-snippet-dirs
       '("~/.emacs.d/el-get/yasnippet/snippets"
         "~/.emacs.d/el-get/yasnippets"
+        "~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
         ))
 (yas/global-mode 1)
 (setq yas/wrap-around-region t)
