@@ -1,16 +1,15 @@
 WHAT IS THIS?
 -------------
-My emacs v24 settings, supporting:
+My emacs v24 settings, including:
 
 - project management with eproject
 - python with flymake
 - php & html with mmm-mode
-- javascript
+- javascript through brilliant js2-mode
 - clojure & clojurescript with paredit
 - autocomplete, snippets & etags
 
-Should work well in windows and osx, but was never tested on linux. COPY/PASTE freely :)
-
+Should work well on osx. Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
 
 PACKAGES
 --------
@@ -74,7 +73,7 @@ CHEAT SHEET
 * **S+M+k**   - enlarge upper window
 * **S+M+h**   - enlarge left window
 * **S+M+l**   - enlarge right window
-* **S+F6**    - go full screen (osx only)
+* **S+F6**    - go full screen (osx specific)
 
 
 ### EDITOR ###
