@@ -34,6 +34,9 @@
 (if (eq nil (file-exists-p temporary-file-directory))
   (make-directory temporary-file-directory))
 
+;; I want to see all errors for the line.
+(setq flymake-number-of-errors-to-display nil)
+
 (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
