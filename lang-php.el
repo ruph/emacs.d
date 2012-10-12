@@ -19,7 +19,6 @@
 
 ;; Flymake for php
 (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
-(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 
 (add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
 (load-library "flymake-cursor")
@@ -27,6 +26,15 @@
           (lambda ()
             (local-set-key [S-f5] 'flymake-goto-prev-error)
             (local-set-key [f5] 'flymake-goto-next-error)))
+
+;; Nope, I want my copies in the system temp dir.
+(setq flymake-run-in-place nil)
+;; This lets me say where my temp dir is.
+(setq temporary-file-directory "~/.emacs.d/tmp/")
+(if (eq nil (file-exists-p temporary-file-directory))
+  (make-directory temporary-file-directory))
+
+(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

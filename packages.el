@@ -32,6 +32,14 @@
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
+        (:name flymake
+              :website "https://github.com/illusori/emacs-flymake"
+               :description "This project is a fork of Pavel Kobyakov's excellent flymake.el."
+               :type github
+               :pkgname "illusori/emacs-flymake"
+               :load "flymake.el"
+               :compile ("flymake.el")
+               :features flymake)
         (:name yasnippets/clojure-mode
                :website "https://github.com/swannodette/clojure-snippets"
                :description "Clojure-mode yasnippets"
