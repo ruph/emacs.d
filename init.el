@@ -330,12 +330,24 @@
 
 
 ;; INITIAL WINDOW SIZE
-(setq initial-frame-alist
-      (append '((width . 117) (height . 57) (left . 59) (top . 27))
-              initial-frame-alist))
-(setq default-frame-alist
-      (append '((width . 117) (height . 57) (left . 59) (top . 27))
-              default-frame-alist))
+(defun set-frame-size-according-to-resolution ()
+  (interactive)
+  (if window-system
+  (progn
+    ;; use 120 char wide window for largeish displays
+    ;; and smaller 80 column windows for smaller displays
+    ;; pick whatever numbers make sense for you
+    (if (> (x-display-pixel-width) 1280)
+           (add-to-list 'default-frame-alist (cons 'width 100))
+           (add-to-list 'default-frame-alist (cons 'width 80)))
+    ;; for the height, subtract a couple hundred pixels
+    ;; from the screen height (for panels, menubars and
+    ;; whatnot), then divide by the height of a char to
+    ;; get the height we want
+    (add-to-list 'default-frame-alist 
+         (cons 'height (/ (- (x-display-pixel-height) 200)
+                             (frame-char-height)))))))
+(set-frame-size-according-to-resolution)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
