@@ -3,6 +3,7 @@
 (or (server-running-p)
     (server-start))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
 ;;
@@ -48,10 +49,14 @@
 
 (put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Theme
 (load-theme 'wombat)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Spellchecker
+(setq-default ispell-program-name "aspell")
 
 
 ;; Keyboard / input method settings
