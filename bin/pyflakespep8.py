@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+''' 
+- for python's flymake
+- sudo pip install pyflakes pep8
+'''
 
 import commands
 import re
