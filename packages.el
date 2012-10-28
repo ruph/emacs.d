@@ -24,8 +24,9 @@
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name clojure-mode     :type elpa)
-      	(:name php-mode         :type elpa)
+      '((:name auto-complete    :type elpa)
+        (:name clojure-mode     :type elpa)
+        (:name php-mode         :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name flymake-cursor   :type elpa)
@@ -34,7 +35,7 @@
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
         (:name flymake
-              :website "https://github.com/illusori/emacs-flymake"
+               :website "https://github.com/illusori/emacs-flymake"
                :description "This project is a fork of Pavel Kobyakov's excellent flymake.el."
                :type github
                :pkgname "illusori/emacs-flymake"
@@ -69,10 +70,9 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(popup auto-complete auto-complete-etags autopair
-                      highlight-parentheses highlight-symbol
-                      ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                      yasnippet helm deft)
+      (append '(autopair highlight-parentheses highlight-symbol
+                         ace-jump-mode mmm-mode psvn pymacs yaml-mode
+                         auto-complete-etags yasnippet helm deft)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -242,9 +242,9 @@
 (setq ac-show-menu-immediately-on-auto-complete t)
 
 ;; TAB completes the word, ENTER exists
-(define-key ac-complete-mode-map "\t" 'ac-complete)
-(define-key ac-complete-mode-map "\r" nil)
-(define-key ac-complete-mode-map "ESC" nil)
+(define-key ac-completing-map [tab] 'ac-complete)
+(define-key ac-completing-map [return] nil)
+
 ;; Just M-n, M-p for ac-next/previous
 (define-key ac-completing-map (kbd "<down>") nil)
 (define-key ac-completing-map (kbd "<up>") nil)
