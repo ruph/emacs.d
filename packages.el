@@ -24,9 +24,7 @@
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name auto-complete    :type elpa)
-        (:name clojure-mode     :type elpa)
-        (:name php-mode         :type elpa)
+      '((:name clojure-mode     :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name flymake-cursor   :type elpa)
@@ -72,7 +70,8 @@
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                         auto-complete-etags yasnippet helm deft)
+                         php-mode yasnippet helm deft
+                         popup auto-complete auto-complete-etags)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
