@@ -201,7 +201,7 @@
                 [remap pcomplete]
                 'helm-esh-pcomplete)
               (define-key eshell-mode-map
-                (kbd "M-p")
+                (kbd "C-r")
                 'helm-eshell-history)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
