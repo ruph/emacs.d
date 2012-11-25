@@ -23,9 +23,10 @@ Ignoring:
 E501 line too long
 E128 continuation line under-indented
 E121 continuation line indentation is not a multiple of four
+E122 continuation line missing indentation
 W191 indentation contains tabs
 '''
-pep8_ignore = ['E501', 'E128', 'E121', 'W191']
+pep8_ignore = ['E501', 'E128', 'E121', 'E122', 'W191']
 pep8_warning = make_re('.')
 
 
