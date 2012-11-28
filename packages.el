@@ -70,7 +70,7 @@
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                         php-mode yasnippet helm deft
+                         php-mode yasnippet helm deft android-mode
                          popup auto-complete auto-complete-etags)
               (mapcar 'el-get-source-name el-get-sources)))
 
@@ -252,6 +252,13 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
 (require 'auto-complete-etags)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Android mode
+(add-to-list 'load-path "~/.emacs.d/el-get/android-mode")
+(require 'android-mode)
+(setq android-mode-sdk-dir "/usr/local/opt/android-sdk")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Automatic "" ()
