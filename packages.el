@@ -257,7 +257,16 @@
 ;; Android mode
 (add-to-list 'load-path "~/.emacs.d/el-get/android-mode")
 (require 'android-mode)
-(setq android-mode-sdk-dir "/usr/local/opt/android-sdk")
+;; .bashrc << export ANDROID_HOME=/usr/local/opt/android-sdk
+(defun set-android-path-from-shell-PATH ()
+  (let ((android-path
+         (replace-regexp-in-string
+          "[ \t\n]*$" ""
+          (shell-command-to-string "$SHELL --login -i -c 'echo $ANDROID_HOME'"))))
+    (setenv "ANDROID_HOME" android-path)))
+(when (and window-system (eq system-type 'darwin))
+  (set-android-path-from-shell-PATH))
+(setq android-mode-sdk-dir (getenv "ANDROID_HOME"))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
