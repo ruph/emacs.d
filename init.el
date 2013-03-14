@@ -149,12 +149,21 @@
 (setq cua-rectangle-mark-key (kbd "S-C-<return>"))
 (cua-mode t)
 
+;; fullscreen in osx (emacs 24.3+)
+(defun toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
 ;; especially for osx
 (if (eq system-type 'darwin)
     (progn
-      (setq ns-right-alternate-modifier nil)   ;; unbind right alt
-      (global-set-key (kbd "S-<f6>") 'ns-toggle-fullscreen) ;; Full screen mode
-      (setq cua-enable-cua-keys nil)))           ;; only for rectangles
+      (setq ns-right-alternate-modifier nil)             ;; unbind right alt
+      (global-set-key (kbd "S-<f6>") 'toggle-fullscreen) ;; Full screen mode
+      (setq cua-enable-cua-keys nil)))                   ;; only for rectangles
+
 
 ;; especially for windows
 (if (eq system-type 'windows-nt)
