@@ -3,6 +3,10 @@
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (local-set-key (kbd "RET") 'newline-and-indent)))
+
 
 ;; Clojurescript
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
