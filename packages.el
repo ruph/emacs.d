@@ -27,7 +27,6 @@
       '((:name clojure-mode     :type elpa)
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
-        (:name flymake-cursor   :type elpa)
         (:name sml-modeline     :type elpa)
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
@@ -71,7 +70,8 @@
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
                          php-mode yasnippet helm deft android-mode
-                         popup auto-complete auto-complete-etags)
+                         popup auto-complete auto-complete-etags
+                         flymake-cursor)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
