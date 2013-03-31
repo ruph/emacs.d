@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-My emacs v24 settings, including:
+My emacs v24.3 settings, including:
 
 - project management with eproject
 - python with flymake
@@ -9,7 +9,7 @@ My emacs v24 settings, including:
 - clojure & clojurescript with paredit
 - autocomplete, snippets & etags
 
-Should work well on osx. Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
+Should work well on osx (http://emacsformacosx.com/). Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
 
 PACKAGES
 --------
