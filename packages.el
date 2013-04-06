@@ -380,9 +380,18 @@
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)
             (visual-line-mode t)
+            (flyspell-mode)
             (remove-hook 'before-save-hook 'delete-trailing-whitespace)
             ))
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Flyspell (auto-spelling)
+(eval-after-load "flyspell"
+    '(progn
+       (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+       (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
