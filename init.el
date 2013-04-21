@@ -154,8 +154,8 @@
   "Toggle full screen"
   (interactive)
   (set-frame-parameter
-     nil 'fullscreen
-     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+   nil 'fullscreen
+   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
 ;; especially for osx
 (if (eq system-type 'darwin)
@@ -330,6 +330,7 @@
 (global-set-key (kbd "C-M-J") (lambda () (interactive) (swap-with 'down)))
 (global-set-key (kbd "C-M-K") (lambda () (interactive) (swap-with 'up)))
 (global-set-key (kbd "C-M-H") (lambda () (interactive) (swap-with 'left)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (local-unset-key (kbd "C-M-L"))))
 (global-set-key (kbd "C-M-L") (lambda () (interactive) (swap-with 'right)))
 
 (global-set-key (kbd "M-J") (lambda () (interactive) (enlarge-window 1)))
