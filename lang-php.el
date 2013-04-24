@@ -134,6 +134,22 @@ substituted for the corresponding REGEXP wherever it matches."
    )
  )
 (mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
+;; sql
+(mmm-add-group
+ 'sql-php
+ '(
+   (mysql-heredoc
+    :submode sql-mode
+    :delimiter-mode nil
+    :front "<<<MYSQL"
+    :back "MYSQL;")
+   (sql-heredoc
+    :submode sql-mode
+    :delimiter-mode nil
+    :front "<<<SQL"
+    :back "SQL;")
+   ))
+(mmm-add-mode-ext-class nil "\\.php\\'" 'sql-php)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
