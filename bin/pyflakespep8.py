@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 '''
-- for python's flymake
-- sudo pip install pyflakes pep8
+For python's flymake:
+- $ cp pyflakespep8.py /usr/local/bin/
+- $ chmod a+x /usr/local/bin/pyflakespep8.py
+- $ sudo pip install pyflakes pep8
 '''
 
 import commands
