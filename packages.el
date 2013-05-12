@@ -31,6 +31,13 @@
         (:name markdown-mode    :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name multiple-cursors :type elpa)
+        (:name csv-mode
+               :website "http://www.emacswiki.org/emacs/CsvMode"
+               :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
+               :type github
+               :pkgname "emacsmirror/csv-mode"
+               :compile ("csv-mode.el")
+               :features csv-mode)
         (:name flymake
                :website "https://github.com/illusori/emacs-flymake"
                :description "This project is a fork of Pavel Kobyakov's excellent flymake.el."
@@ -99,6 +106,12 @@
             (setq tab-width 4)
             (local-set-key (kbd "RET") 'newline-and-indent)
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
+
+;; CSV
+(add-to-list 'load-path "~/.emacs.d/el-get/csv-mode/")
+(add-to-list 'auto-mode-alist '("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
+(autoload 'csv-mode "csv-mode"
+  "Major mode for editing comma-separated value files." t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -389,9 +402,9 @@
 
 ;; Flyspell (auto-spelling)
 (eval-after-load "flyspell"
-    '(progn
-       (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-       (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
