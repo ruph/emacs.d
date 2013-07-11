@@ -54,7 +54,7 @@
 
 ;; Theme
 (load-theme 'wombat)
-(set-cursor-color 'red)
+(set-cursor-color "red")
 
 
 ;; Spellchecker
