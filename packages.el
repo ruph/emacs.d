@@ -121,7 +121,9 @@
 (setq multi-term-switch-after-close nil)
 (multi-term-keystroke-setup)
 (add-hook 'term-mode-hook
-          (lambda () (autopair-mode 0)))
+          (lambda ()
+            (autopair-mode 0)
+            (yas-minor-mode 0)))
 
 ;; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
 (defun term-setup-tramp ()
