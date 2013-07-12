@@ -78,7 +78,7 @@
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
                          php-mode yasnippet helm deft android-mode
                          popup auto-complete auto-complete-etags
-                         multi-term flymake-cursor)
+                         multi-term flymake-cursor volatile-highlights)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -119,9 +119,11 @@
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")
 (setq multi-term-switch-after-close nil)
+(multi-term-keystroke-setup)
 (add-hook 'term-mode-hook
           (lambda () (autopair-mode 0)))
-; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
+
+;; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
 (defun term-setup-tramp ()
   "Setup ansi-term/tramp remote directory tracking
    NOTE:  this appears to have some sort of timing bug in it and doesn't always work"
@@ -479,6 +481,12 @@ echo \"tramp initialized\"
 ;; Cua compatibility
 (add-to-list 'load-path "~/.emacs.d/el-get/org-cua-dwim")
 (require 'org-cua-dwim)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Highlighting copy/paste actions
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
