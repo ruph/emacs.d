@@ -78,7 +78,7 @@
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
                          php-mode yasnippet helm deft android-mode
                          popup auto-complete auto-complete-etags
-                         flymake-cursor)
+                         multi-term flymake-cursor)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -113,6 +113,57 @@
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; multi-term
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+(setq multi-term-switch-after-close nil)
+(add-hook 'term-mode-hook
+          (lambda () (autopair-mode 0)))
+; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
+(defun term-setup-tramp ()
+  "Setup ansi-term/tramp remote directory tracking
+   NOTE:  this appears to have some sort of timing bug in it and doesn't always work"
+  (interactive)
+  (term-send-raw-string
+   (concat "
+function eterm_set_variables {
+    local emacs_host=\"" (car (split-string (system-name) "\\.")) "\"
+    local tramp_hostname=${TRAMP_HOSTNAME-$(hostname)}
+    if [[ $TERM == \"eterm-color\" ]]; then
+        if [[ $tramp_hostname != \"$emacs_host\" ]]; then
+            echo -e \"\\033AnSiTu\" ${TRAMP_USERNAME-$(whoami)}
+            echo -e \"\\033AnSiTh\" $tramp_hostname
+        fi
+        echo -e \"\\033AnSiTc\" $(pwd)
+    elif [[ $TERM == \"screen\" || $TERM  == \"screen-256color\" ]]; then
+        if [[ $tramp_hostname != \"$emacs_host\" ]]; then
+            echo -e \"\\033P\\033AnSiTu\\033\\\\\" ${TRAMP_USERNAME-$(whoami)}
+            echo -e \"\\033P\\033AnSiTh\\033\\\\\" $tramp_hostname
+        fi
+        echo -e \"\\033P\\033AnSiTc\\033\\\\\" $(pwd)
+    fi
+}
+function eterm_tramp_init {
+    for temp in cd pushd popd; do
+        alias $temp=\"eterm_set_cwd $temp\"
+    done
+
+    # set hostname, user, and cwd now
+    eterm_set_variables
+}
+function eterm_set_cwd {
+    $@
+    eterm_set_variables
+}
+eterm_tramp_init
+export -f eterm_tramp_init
+export -f eterm_set_variables
+export -f eterm_set_cwd
+clear
+echo \"tramp initialized\"
+")))
 
 
 ;; the modeline
