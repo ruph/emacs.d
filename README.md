@@ -2,51 +2,54 @@ WHAT IS THIS?
 -------------
 My emacs v24.3 settings, including:
 
-- project management with eproject
-- python with flymake
-- php & html with mmm-mode
-- javascript through brilliant js2-mode
-- clojure & clojurescript with paredit
-- autocomplete, snippets & etags
+* project management with eproject
+* python with flymake
+* php & html with mmm-mode
+* javascript through brilliant js2-mode
+* clojure & clojurescript with paredit
+* autocomplete, snippets & etags
 
 Should work well on osx (http://emacsformacosx.com/). Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
 
 PACKAGES
 --------
- - ac-slime
- - ace-jump-mode
- - auto-complete
- - auto-complete-etags
- - autopair
- - clojure-mode
- - clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
- - deft
- - eproject ~ https://github.com/gabrielelanaro/eproject
- - flymake-cursor
- - helm ~ https://github.com/emacs-helm/helm
- - highlight-parentheses
- - highlight-symbol
- - js2-mode ~ https://github.com/mooz/js2-mode
- - markdown-mode
- - mmm-mode
- - multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
- - org-cua-dwim
- - paredit
- - php-mode ~ https://github.com/ejmr/php-mode
- - popup
- - psvn
- - pymacs
- - sml-modeline
- - yaml-mode
- - yasnippet ~ https://github.com/capitaomorte/yasnippet
+* ac-slime
+* ace-jump-mode
+* auto-complete
+* auto-complete-etags
+* autopair
+* clojure-mode
+* clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
+* deft
+* eproject ~ https://github.com/gabrielelanaro/eproject
+* flymake-cursor
+* helm ~ https://github.com/emacs-helm/helm
+* highlight-parentheses
+* highlight-symbol
+* js2-mode ~ https://github.com/mooz/js2-mode
+* markdown-mode
+* mmm-mode
+* multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
+* multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
+* org-cua-dwim
+* paredit
+* php-mode ~ https://github.com/ejmr/php-mode
+* popup
+* psvn
+* pymacs
+* sml-modeline
+* undo-tree ~ http://www.dr-qubit.org/emacs.php#undo-tree
+* volatile-highlights ~ http://www.emacswiki.org/emacs/VolatileHighlights
+* yaml-mode
+* yasnippet ~ https://github.com/capitaomorte/yasnippet
 
 OSX installation notes:
- - brew install aspell
+* brew install aspell
 
 Windows installation notes:
- - http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
- - install-info.exe el-get/el-get/el-get.info el-get/el-get/./el-get.info
- - manual link creation (e.g ~\.emacs.d\el-get>mklink /D yasnippet package\elpa\yasnippet-0.8.0) 
+* http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
+* install-info.exe el-get/el-get/el-get.info el-get/el-get/./el-get.info
+* manual link creation (e.g ~\.emacs.d\el-get>mklink /D yasnippet package\elpa\yasnippet-0.8.0) 
 
 
 CHEAT SHEET
