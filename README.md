@@ -19,7 +19,8 @@ PACKAGES
 * auto-complete-etags
 * autopair
 * clojure-mode
-* clojure-snippets ~ https://github.com/swannodette/clojure-snippets 
+* clojure-snippets ~ https://github.com/swannodette/clojure-snippets
+* csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
 * deft
 * eproject ~ https://github.com/gabrielelanaro/eproject
 * flymake-cursor
