@@ -77,7 +77,7 @@
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
                          php-mode yasnippet helm deft android-mode
-                         popup auto-complete auto-complete-etags
+                         popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights)
               (mapcar 'el-get-source-name el-get-sources)))
 
@@ -168,6 +168,12 @@ export -f eterm_set_cwd
 clear
 echo \"tramp initialized\"
 ")))
+
+
+;; better undo
+(require 'undo-tree)
+(global-undo-tree-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; the modeline
