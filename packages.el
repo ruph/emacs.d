@@ -70,13 +70,19 @@
                :load nil
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
+        (:name deft-multidir
+               :type git
+               :url "git://github.com/dsevilla/deft-multidir.git"
+               :load "deft.el"
+               :compile ("deft.el")
+               :features deft)
         ))
 
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                         php-mode yasnippet helm deft android-mode
+                         php-mode yasnippet helm android-mode
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights)
               (mapcar 'el-get-source-name el-get-sources)))
@@ -470,11 +476,11 @@ echo \"tramp initialized\"
 
 
 ;; Deft NOTES (markdown)
-(add-to-list 'load-path "~/.emacs.d/el-get/deft/")
+(add-to-list 'load-path "~/.emacs.d/el-get/deft-multidir/")
 (require 'deft)
 (if (eq system-type 'windows-nt)
-    (setq deft-directory "d:\\My Dropbox\\Notes")
-  (setq deft-directory "~/Dropbox/Notes"))
+    (setq deft-directories '("d:\\My Dropbox\\Notes" "~/Dropbox/Notes/AdPlatform"))
+  (setq deft-directories '("~/Dropbox/Notes" "~/Dropbox/Notes/AdPlatform")))
 (setq deft-extension "txt")
 (setq deft-use-filename-as-title t)
 (setq deft-text-mode 'markdown-mode)

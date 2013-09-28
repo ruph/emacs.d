@@ -21,7 +21,7 @@ PACKAGES
 * clojure-mode
 * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
 * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
-* deft
+* deft-multidir ~ https://github.com/dsevilla/deft-multidir
 * eproject ~ https://github.com/gabrielelanaro/eproject
 * flymake-cursor
 * helm ~ https://github.com/emacs-helm/helm
