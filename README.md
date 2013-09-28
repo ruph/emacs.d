@@ -92,7 +92,7 @@ CHEAT SHEET
 * **S+TAB**     - outdent
 * **C+k**       - delete to the end of the line
 * **S-C+k**     - delete to the beginning of the line
-* **C+l**       - go to line
+* **M+g M+g**       - go to line
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste

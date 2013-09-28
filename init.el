@@ -91,9 +91,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Goto-line short-cut key
-(global-set-key (kbd "C-l") 'goto-line)
-
 ;; File search
 (global-set-key (kbd "<f7>") 'find-name-dired)
 
