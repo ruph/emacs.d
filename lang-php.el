@@ -15,7 +15,6 @@
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
             (setq flymake-gui-warnings-enabled nil)))
-(add-hook 'php-mode-hook 'esk-paredit-nonlisp)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

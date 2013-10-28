@@ -15,7 +15,6 @@
             (local-set-key (kbd "RET") 'newline-and-indent)
             (setq js2-missing-semi-one-line-override t)
             ))
-(add-hook 'js2-mode-hook 'esk-paredit-nonlisp)
 
 ;; default js-mode
 (add-hook 'js-mode-hook
