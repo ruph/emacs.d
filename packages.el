@@ -226,6 +226,7 @@ echo \"tramp initialized\"
 
 ;; a little different buffer finder
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(setq helm-buffer-max-length 42)
 
 ;; search kill-ring
 (global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
