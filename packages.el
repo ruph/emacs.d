@@ -25,7 +25,7 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name clojure-mode     :type elpa)
-        (:name ac-slime         :type elpa)     
+        (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
         (:name markdown-mode    :type elpa)

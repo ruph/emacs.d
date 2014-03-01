@@ -12,11 +12,7 @@
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 
 
-;; Cider
-(require 'cider)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-
-
+;; Paredit
 ;; Curly & square brackets in paredit
 (defun setup-mode-paredit (mode-map)
   (define-key mode-map
@@ -34,19 +30,27 @@
   (modify-syntax-entry ?^ "'")
   (modify-syntax-entry ?= "'"))
 
-(defun setup-slime-repl-paredit ()
-  (setup-mode-paredit slime-repl-mode-map))
-(add-hook 'slime-repl-mode-hook 'setup-slime-repl-paredit)
-
+;; add paredit to inferior-lisp
 (defun setup-inferior-lisp-paredit ()
   (setup-mode-paredit inferior-lisp-mode-map))
 (add-hook 'inferior-lisp-mode-hook 'setup-inferior-lisp-paredit)
 
-;; add paredit to slime and to all other relevant modes
+;; and other lisp modes
 (mapc (lambda (mode)
         (let ((hook (intern (concat (symbol-name mode) "-mode-hook"))))
           (add-hook hook (lambda () (paredit-mode +1)))))
       '(emacs-lisp lisp inferior-lisp slime slime-repl))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Cider
+(require 'cider)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(add-hook 'cider-repl-mode-hook
+          (lambda ()
+            (paredit-mode +1)
+            (setq cider-repl-use-pretty-printing t)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
