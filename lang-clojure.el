@@ -12,16 +12,9 @@
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 
 
-;; Swank-clojure
-;; https://github.com/technomancy/swank-clojure
-;; lein plugin install swank-clojure 1.4.0
-;; M-x clojure-jack-in
-
-
-;; Slime autocompletion module
-(add-to-list 'load-path "~/.emacs.d/el-get/ac-slime")
-(require 'ac-slime)
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
+;; Cider
+(require 'cider)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
 
 ;; Curly & square brackets in paredit

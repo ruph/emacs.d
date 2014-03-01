@@ -80,7 +80,7 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(autopair highlight-parentheses highlight-symbol
+      (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
                          php-mode yasnippet helm android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
