@@ -76,6 +76,12 @@
                :load "deft.el"
                :compile ("deft.el")
                :features deft)
+        (:name clojure-cheatsheet
+               :type git
+               :url "git://github.com/clojure-emacs/clojure-cheatsheet.git"
+               :load "clojure-cheatsheet.el"
+               :compile ("clojure-cheatsheet.el")
+               :features clojure-cheatsheet)
         ))
 
 ;; All packages for installation

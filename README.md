@@ -20,6 +20,8 @@ PACKAGES
 * autopair
 * clojure-mode
 * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
+* clojure-cheatsheet ~ https://github.com/clojure-emacs/clojure-cheatsheet
+* cider ~ https://github.com/clojure-emacs/cider
 * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
 * deft-multidir ~ https://github.com/dsevilla/deft-multidir
 * eproject ~ https://github.com/gabrielelanaro/eproject
@@ -92,7 +94,7 @@ CHEAT SHEET
 * **S+TAB**     - outdent
 * **C+k**       - delete to the end of the line
 * **S-C+k**     - delete to the beginning of the line
-* **M+g M+g**       - go to line
+* **M+g M+g**   - go to line
 * **M+space**   - delete excessive spaces
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
