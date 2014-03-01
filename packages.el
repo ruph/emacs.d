@@ -25,7 +25,7 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name clojure-mode     :type elpa)
-        (:name ac-slime         :type elpa)
+        (:name ac-slime         :type elpa)     
         (:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
         (:name markdown-mode    :type elpa)
@@ -82,7 +82,7 @@
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                         php-mode yasnippet helm android-mode
+                         php-mode yasnippet helm android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights)
               (mapcar 'el-get-source-name el-get-sources)))
@@ -502,6 +502,14 @@ echo \"tramp initialized\"
 ;; Highlighting copy/paste actions
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; SmartTabs
+(add-to-list 'load-path "~/.emacs.d/el-get/psvn")
+(require 'smart-tabs-mode)
+(smart-tabs-insinuate 'python 'javascript)
+(smart-tabs-advice js2-indent-line js2-basic-offset)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
