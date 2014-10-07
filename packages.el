@@ -28,9 +28,9 @@
         (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
-        (:name markdown-mode    :type elpa)
+        (:name cl-lib           :type elpa)
+        (:name helm             :type elpa)
         (:name org-cua-dwim     :type elpa)
-        (:name multiple-cursors :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -88,9 +88,10 @@
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode mmm-mode psvn pymacs yaml-mode
-                         php-mode yasnippet helm android-mode smarttabs
+                         php-mode yasnippet android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
-                         multi-term flymake-cursor volatile-highlights)
+                         multi-term flymake-cursor volatile-highlights
+                         markdown-mode multiple-cursors)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
