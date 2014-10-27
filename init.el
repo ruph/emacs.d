@@ -12,10 +12,10 @@
 (tool-bar-mode -1)                       ;; turn-off toolbar
 
 (setq ;; scrolling
- scroll-margin 0                        ;; do smooth scrolling, ...
+ scroll-margin 3                        ;; do smooth scrolling, ...
  scroll-conservatively 100000           ;; ... the defaults ...
- scroll-up-aggressively 0               ;; ... are very ...
- scroll-down-aggressively 0             ;; ... annoying
+ scroll-up-aggressively nil             ;; ... are very ... 
+ scroll-down-aggressively nil           ;; ... annoying
  scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
 
 (setq fringe-mode '(1 . 0))              ;; emacs 22+
@@ -398,7 +398,7 @@
 
 
 ;; IMPORTS
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'packages)
 (require 'lang-python)
 (require 'lang-clojure)
