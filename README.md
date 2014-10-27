@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-My emacs v24.3 settings, including:
+My emacs v24.4 settings, including:
 
 * project management with eproject
 * python with flymake
@@ -13,7 +13,6 @@ Should work well on osx (http://emacsformacosx.com/). Fresh installation include
 
 PACKAGES
 --------
-* ac-slime
 * ace-jump-mode
 * auto-complete
 * auto-complete-etags
