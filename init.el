@@ -14,7 +14,7 @@
 (setq ;; scrolling
  scroll-margin 3                        ;; do smooth scrolling, ...
  scroll-conservatively 100000           ;; ... the defaults ...
- scroll-up-aggressively nil             ;; ... are very ... 
+ scroll-up-aggressively nil             ;; ... are very ...
  scroll-down-aggressively nil           ;; ... annoying
  scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
 
@@ -139,6 +139,16 @@
   ;; When started from Emacs.app or similar, ensure $PATH
   ;; is the same the user would see in Terminal.app
   (set-exec-path-from-shell-PATH))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Uniquify buffers
+(when (require 'uniquify nil 'noerror)  ;; make buffer names more unique
+  (setq
+   uniquify-buffer-name-style 'post-forward
+   uniquify-separator ":"
+   uniquify-after-kill-buffer-p t       ;; rename after killing uniquified
+   uniquify-ignore-buffers-re "^\\*"))  ;; don't muck with special buffers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
