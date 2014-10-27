@@ -25,10 +25,10 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name clojure-mode     :type elpa)
-        (:name ac-slime         :type elpa)
         (:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
-        (:name cl-lib           :type elpa)
+        (:name cl-lib           :type elpa) ; helm dependency
+        (:name async            :type elpa) ; helm dependency
         (:name helm             :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name csv-mode
