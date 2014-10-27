@@ -152,6 +152,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Remove ^M
+(defun strip-^m ()
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil nil)
+    (replace-match "")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; CUA
 (setq cua-rectangle-mark-key (kbd "S-C-<return>"))
 (cua-mode t)
