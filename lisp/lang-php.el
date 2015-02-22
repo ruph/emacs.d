@@ -18,6 +18,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Snippets for standard PHP functions
+(require 'php-auto-yasnippets)
+(setq php-auto-yasnippet-php-program
+      "~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
+(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Flymake for php
 (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
 
@@ -54,101 +62,46 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; MMM Mode
-(add-to-list 'load-path "~/.emacs.d/el-get/mmm-mode")
-(require 'mmm-mode)
-(setq mmm-global-mode 'maybe)
-(set-face-background 'mmm-default-submode-face "gray16")
-(setq mmm-submode-decoration-level 2)
+;; EMMET-MODE ~ write something like "a.x>span" and press C-<RET>
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'html-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook  'emmet-mode)
 
-;; http://sourceforge.net/tracker/index.php?func=detail&aid=2901780&group_id=8658&atid=108658
-(defun mmm-format-string (string arg-pairs)
-  "Format STRING by replacing arguments as specified by ARG-PAIRS.
-Each element of ARG-PAIRS is \(REGEXP . STR) where each STR is to be
-substituted for the corresponding REGEXP wherever it matches."
-  (let ((case-fold-search nil))
-    (save-match-data
-      (dolist (pair arg-pairs)
-        (while (string-match (car pair) string)
-          (setq string (replace-match (format-mode-line (cdr pair)) t t string))))))
-  string)
+;; auto-complete
+(require 'ac-emmet)
+(add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+(add-hook 'css-mode-hook 'ac-emmet-css-setup)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
-(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
-(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
-;; Normal mmm-mode strategy is having have html-mode as a major mode and setting
-;; php-mode as a submode. Regexes are definitely easier that way, but I couldn't
-;; convince autocomplete to work and some other core php-mode functions stopped
-;; working as well. So I'm going the other way around here. Php-mode is major
-;; mode and everything else is html.
+;; WEB-MODE
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-;; css
-(mmm-add-group
- 'html-css
- '((embedded-css
-    :submode css-mode
-    :front "<style[^>]*>"
-    :back "</style>[^('\")]" ; ends with ' " -> probably in string in php
-    )))
-(mmm-add-mode-ext-class nil "\\.html?\\'" 'html-css)
-(mmm-add-mode-ext-class nil "\\.php\\'" 'html-css)
-;; javascript
-(mmm-add-group
- 'html-js
- '((js-tag
-    :submode js-mode
-    :delimiter-mode nil
-    :front "<script\[^>\]*\\(language=\"javascript\\([0-9.]*\\)\"\\|type=\"text/javascript\"\\)\[^>\]*>"
-    :back "</script>[^('\")]" ; ends with ' " -> probably in string in php
-    :insert ((?j js-tag nil @ "<script language=\"JavaScript\">"
-                 @ "\n" _ "\n" @ "</script>" @)))
-   (js-inline
-    :submode js-mode
-    :delimiter-mode nil
-    :front "on\\w+=\""
-    :back "\"")
-   (js-heredoc
-    :submode js-mode
-    :delimiter-mode nil
-    :front "<<<JS"
-    :back "JS;")))
-(mmm-add-mode-ext-class nil "\\.html?\\'" 'html-js)
-(mmm-add-mode-ext-class nil "\\.php\\'" 'html-js)
-;; html
-(mmm-add-group
- 'html-php
- '(
-   (html-default
-    :submode html-mode
-    :front "\\(\\`.\\|?>\\|</script[^>]*>\\|</style[^>]*>\\)[^('\")]" ; flymake kills emacs if only \` is set for start
-    :back "\\(\\'\\|<?php\\|<script[^>]*>\\|<style[^>]*>\\)"
-    :delimiter-mode nil
-    )
-   (html-heredoc
-    :submode html-mode
-    :delimiter-mode nil
-    :front "<<<HTML"
-    :back "HTML;")
-   )
- )
-(mmm-add-mode-ext-class nil "\\.php\\'" 'html-php)
-;; sql
-(mmm-add-group
- 'sql-php
- '(
-   (mysql-heredoc
-    :submode sql-mode
-    :delimiter-mode nil
-    :front "<<<MYSQL"
-    :back "MYSQL;")
-   (sql-heredoc
-    :submode sql-mode
-    :delimiter-mode nil
-    :front "<<<SQL"
-    :back "SQL;")
-   ))
-(mmm-add-mode-ext-class nil "\\.php\\'" 'sql-php)
+;; Auto-completion (-- ac-source-php-auto-yasnippets)
+(setq web-mode-ac-sources-alist
+      '(("php" . (ac-source-yasnippet))
+        ("html" . (ac-source-emmet-html-aliases ac-source-emmet-html-snippets))
+        ("css" . (ac-source-css-property ac-source-emmet-css-snippets))))
+
+(add-hook 'web-mode-before-auto-complete-hooks
+          '(lambda ()
+             (let ((web-mode-cur-language
+                    (web-mode-language-at-pos)))
+               (if (string= web-mode-cur-language "php")
+                   (yas-activate-extra-mode 'php-mode)
+                 (yas-deactivate-extra-mode 'php-mode))
+               (if (string= web-mode-cur-language "css")
+                   (setq emmet-use-css-transform t)
+                 (setq emmet-use-css-transform nil)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

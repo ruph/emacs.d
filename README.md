@@ -4,7 +4,7 @@ My emacs v24.4 settings, including:
 
 * project management with eproject
 * python with flymake
-* php & html with mmm-mode
+* php & html with web-mode
 * javascript through brilliant js2-mode
 * clojure & clojurescript with paredit
 * autocomplete, snippets & etags
@@ -16,6 +16,7 @@ PACKAGES
 * ace-jump-mode
 * auto-complete
 * auto-complete-etags
+* ac-emmet ~ https://github.com/yasuyk/ac-emmet
 * autopair
 * clojure-mode
 * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
@@ -30,12 +31,13 @@ PACKAGES
 * highlight-symbol
 * js2-mode ~ https://github.com/mooz/js2-mode
 * markdown-mode
-* mmm-mode
+* web-mode ~ http://web-mode.org
 * multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
 * multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
 * org-cua-dwim
 * paredit
 * php-mode ~ https://github.com/ejmr/php-mode
+* emmet-mode ~ https://github.com/smihica/emmet-mode
 * popup
 * psvn
 * pymacs
@@ -44,6 +46,7 @@ PACKAGES
 * volatile-highlights ~ http://www.emacswiki.org/emacs/VolatileHighlights
 * yaml-mode
 * yasnippet ~ https://github.com/capitaomorte/yasnippet
+* php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
 
 OSX installation notes:
 * brew install aspell
@@ -128,14 +131,14 @@ CHEAT SHEET
 
 
 ### EDITOR :: DEV ###
-* **TAB**   - autocomplete
-* **M+n**   - next autocomplete option
-* **M+p**   - previous autocomplete option
-* **F5**    - go to next error (flymake)
-* **S+F5**  - go to previous error (flymake)
-* **M+.**   - jump to definition
-* **C+.**   - show arguments (php-mode)
-
+* **TAB**     - autocomplete
+* **M+n**     - next autocomplete option
+* **M+p**     - previous autocomplete option
+* **F5**      - go to next error (flymake)
+* **S+F5**    - go to previous error (flymake)
+* **M+.**     - jump to definition
+* **C+.**     - show arguments (php-mode)
+* **C+c C+y** - expand standard PHP function (yasnippet)
 
 ### BUFFERS ###
 * **C+x right** - switch to right buffer

@@ -58,6 +58,18 @@
                :type github
                :pkgname "nishimura/minimal-yasnippet-php-mode"
                :features nil)
+        (:name yasnippets/php-auto-yasnippets
+               :website "https://github.com/ejmr/php-auto-yasnippets"
+               :description ""
+               :type github
+               :pkgname "ejmr/php-auto-yasnippets"
+               :features nil)
+        (:name ac-emmet
+               :website "https://github.com/yasuyk/ac-emmet"
+               :description ""
+               :type github
+               :pkgname "yasuyk/ac-emmet"
+               :features nil)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -87,11 +99,12 @@
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol cider
-                         ace-jump-mode mmm-mode psvn pymacs yaml-mode
+                         ace-jump-mode psvn pymacs yaml-mode
                          php-mode yasnippet android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
-                         markdown-mode multiple-cursors)
+                         markdown-mode multiple-cursors
+                         web-mode emmet-mode)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -335,6 +348,9 @@ echo \"tramp initialized\"
 ;; Just M-n, M-p for ac-next/previous
 (define-key ac-completing-map (kbd "<down>") nil)
 (define-key ac-completing-map (kbd "<up>") nil)
+
+;; Attach additional modes to it
+(add-to-list 'ac-modes 'web-mode)
 
 ;; + etags
 (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
