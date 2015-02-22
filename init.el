@@ -416,6 +416,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; ESHELL
+(add-hook 'eshell-first-time-mode-hook
+          (lambda ()
+            (progn
+              (add-to-list 'eshell-visual-commands "htop")
+              (add-to-list 'eshell-visual-commands "ssh")
+              (add-to-list 'eshell-visual-commands "tail")
+              (add-to-list 'eshell-visual-commands "foreman")
+              (add-to-list 'eshell-visual-commands "git")
+              (setq eshell-history-size 5000)
+              (setq eshell-save-history-on-exit t)
+              (setq eshell-where-to-jump 'begin)
+              (setq eshell-review-quick-commands nil)
+              (setq eshell-smart-space-goes-to-end t))))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'packages)
