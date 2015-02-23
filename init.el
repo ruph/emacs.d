@@ -440,4 +440,8 @@
 (require 'lang-clojure)
 (require 'lang-javascript)
 (require 'lang-php)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; PRIVATE SETTINGS
+(if (file-exists-p "~/.emacs.d/lisp/private.el")
+    (require 'private))
+
