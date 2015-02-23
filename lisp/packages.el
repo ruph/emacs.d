@@ -252,6 +252,10 @@ echo \"tramp initialized\"
 (global-unset-key (kbd "C-x C-f"))
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
+;; better command executor
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
 ;; a little different buffer finder
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (setq helm-buffer-max-length 42)
