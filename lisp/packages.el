@@ -138,6 +138,19 @@
 (add-to-list 'auto-mode-alist '("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
+
+;; Colors in diff
+(defadvice vc-diff-finish (after handle-color-in-diff-output)
+  "Run `ansi-color-apply-on-region'." 
+  (progn
+    (require 'ansi-color)
+    (toggle-read-only)
+    (ansi-color-apply-on-region (point-min) (point-max))
+    (toggle-read-only)))
+
+;; Better undo
+(require 'undo-tree)
+(global-undo-tree-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -194,11 +207,6 @@ export -f eterm_set_cwd
 clear
 echo \"tramp initialized\"
 ")))
-
-
-;; better undo
-(require 'undo-tree)
-(global-undo-tree-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
