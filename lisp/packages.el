@@ -141,7 +141,7 @@
 
 ;; Colors in diff
 (defadvice vc-diff-finish (after handle-color-in-diff-output)
-  "Run `ansi-color-apply-on-region'." 
+  "Run `ansi-color-apply-on-region'."
   (progn
     (require 'ansi-color)
     (toggle-read-only)
@@ -260,6 +260,9 @@ echo \"tramp initialized\"
 (global-set-key (kbd "C-x C-b") 'helm-buffers-list)
 (setq helm-buffer-max-length 42)
 
+;; display full file path toggle
+(define-key helm-map (kbd "C-M-g") 'helm-ff-run-toggle-basename)
+
 ;; search kill-ring
 (global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
 (global-set-key (kbd "s-V") 'helm-show-kill-ring)
@@ -274,37 +277,41 @@ echo \"tramp initialized\"
 (defun helm-eproject-resource ()
   "Enumerate files belonging to the eproject"
   (interactive)
-  (helm
-   '((
-      (name . "Files in eproject:")
-      (init . (lambda ()
-                (with-current-buffer (helm-candidate-buffer 'local)
-                  (mapcar
-                   (lambda (item)
-                     (insert (format "%s/%s\n" (cadr prj-current) (car item))))
-                   prj-files))))
-      (candidates-in-buffer)
-      (type . file)
-      ))
-   nil "Switch to file: " nil nil))
+  (let ((helm-ff-transformer-show-only-basename nil))
+    (helm
+     '((
+        (name . "Files in eproject:")
+        (init . (lambda ()
+                  (with-current-buffer (helm-candidate-buffer 'local)
+                    (mapcar
+                     (lambda (item)
+                       (insert (format "%s/%s\n" (cadr prj-current) (car item))))
+                     prj-files))))
+        (candidates-in-buffer)
+        (mode-line . helm-generic-file-mode-line-string)
+        (help-message . helm-generic-file-help-message)
+        (type . file)))
+     nil "Switch to file: " nil nil)))
 (global-set-key (kbd "S-C-t") 'helm-eproject-resource)
 
 ;; find files recursively from project dir
 (defun helm-eproject-recursive-resources ()
   "Enumerate files belonging to the eproject"
   (interactive)
-  (helm
-   '(((name . "All files under eproject root dir:")
-      (init . (lambda ()
-                (with-current-buffer (helm-candidate-buffer 'local)
-                  (insert
-                   (shell-command-to-string
-                    (format "find %s -type d \\( -name .svn -o -name .git -o -name .hg \\) -prune -o -type f -print" (cadr prj-current))))
-                  )))
-      (candidates-in-buffer)
-      (type . file)
-      ))
-   nil "Switch to file: " nil nil))
+  (let ((helm-ff-transformer-show-only-basename nil))
+    (helm
+     '(((name . "All files under eproject root dir:")
+        (init . (lambda ()
+                  (with-current-buffer (helm-candidate-buffer 'local)
+                    (insert
+                     (shell-command-to-string
+                      (format "find %s -type d \\( -name .svn -o -name .git -o -name .hg \\) -prune -o -type f -print" (cadr prj-current))))
+                    )))
+        (candidates-in-buffer)
+        (mode-line . helm-generic-file-mode-line-string)
+        (help-message . helm-generic-file-help-message) 
+        (type . file)))
+     nil "Switch to file: " nil nil)))
 (global-set-key (kbd "S-C-r") 'helm-eproject-recursive-resources)
 
 ;; for eshell: complete and history
