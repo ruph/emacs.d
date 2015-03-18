@@ -104,7 +104,7 @@
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors
-                         web-mode emmet-mode)
+                         web-mode emmet-mode helm-dash)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -151,6 +151,11 @@
 ;; Better undo
 (require 'undo-tree)
 (global-undo-tree-mode)
+
+;; Dash documentation
+(require 'helm-dash)
+(setq helm-dash-docsets-path "~/.docsets")
+(setq helm-dash-browser-func 'eww)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -309,7 +314,7 @@ echo \"tramp initialized\"
                     )))
         (candidates-in-buffer)
         (mode-line . helm-generic-file-mode-line-string)
-        (help-message . helm-generic-file-help-message) 
+        (help-message . helm-generic-file-help-message)
         (type . file)))
      nil "Switch to file: " nil nil)))
 (global-set-key (kbd "S-C-r") 'helm-eproject-recursive-resources)

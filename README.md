@@ -47,6 +47,7 @@ PACKAGES
 * yaml-mode
 * yasnippet ~ https://github.com/capitaomorte/yasnippet
 * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
+* helm-dash ~ https://github.com/areina/helm-dash
 
 OSX installation notes:
 * brew install aspell
