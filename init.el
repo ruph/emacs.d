@@ -124,6 +124,7 @@
 
 ;; Default tab width
 (setq tab-width 4)
+(setq-default tab-width 4)
 
 ;; OSX has problems with PATH when running Emacs.app
 ;; = flymake doesn't work :-/
@@ -444,4 +445,3 @@
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
-
