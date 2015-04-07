@@ -53,10 +53,10 @@
                :pkgname "swannodette/clojure-snippets"
                :features nil)
         (:name yasnippets/minimal-yasnippet-php-mode
-               :website "https://github.com/nishimura/minimal-yasnippet-php-mode"
+               :website "https://github.com/ruph/minimal-yasnippet-php-mode"
                :description ""
                :type github
-               :pkgname "nishimura/minimal-yasnippet-php-mode"
+               :pkgname "ruph/minimal-yasnippet-php-mode"
                :features nil)
         (:name yasnippets/php-auto-yasnippets
                :website "https://github.com/ejmr/php-auto-yasnippets"
