@@ -140,6 +140,10 @@
   ;; When started from Emacs.app or similar, ensure $PATH
   ;; is the same the user would see in Terminal.app
   (set-exec-path-from-shell-PATH))
+
+;; If switch to buffer that's already open in another frame,
+;; don't switch to that window, just open it again in current window
+(setq switch-to-buffer-preserve-window-point t)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

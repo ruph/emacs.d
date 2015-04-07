@@ -103,12 +103,18 @@
                          php-mode yasnippet android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
-                         markdown-mode multiple-cursors
+                         markdown-mode multiple-cursors quickrun
                          web-mode emmet-mode helm-dash)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
 (el-get 'sync my-el-get-packages)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; quickrun
+(require 'quickrun)
+(global-set-key (kbd "C-c q") 'quickrun)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
