@@ -32,6 +32,7 @@
         (:name helm             :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
+        (:name css-eldoc        :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -105,7 +106,8 @@
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun
-                         web-mode emmet-mode helm-dash)
+                         web-mode emmet-mode rainbow-mode sass-mode 
+                         less-css-mode skewer-less scss-mode helm-dash)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages

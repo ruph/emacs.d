@@ -448,6 +448,7 @@
 (require 'init-web-mode)
 (require 'init-emmet-mode)
 (require 'init-flycheck)
+(require 'init-css)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
