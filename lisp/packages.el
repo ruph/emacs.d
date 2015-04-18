@@ -105,7 +105,7 @@
                          php-mode yasnippet android-mode smarttabs
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
-                         markdown-mode multiple-cursors quickrun
+                         markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode 
                          less-css-mode skewer-less scss-mode helm-dash)
               (mapcar 'el-get-source-name el-get-sources)))
@@ -120,15 +120,6 @@
 (global-set-key (kbd "C-c q") 'quickrun)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;; SVN
-(add-to-list 'load-path "~/.emacs.d/el-get/psvn")
-(require 'psvn)
-
-;; GIT ~ http://files.taesoo.org/git-emacs/git-emacs.html
-;; ~ slows down emacs
-;;(add-to-list 'load-path "~/.emacs.d/el-get/git-emacs")
-;;(require 'git-emacs)
 
 ;; YML
 (add-to-list 'load-path "~/.emacs.d/el-get/yaml-mode")
@@ -147,15 +138,6 @@
 (add-to-list 'auto-mode-alist '("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
-
-;; Colors in diff
-(defadvice vc-diff-finish (after handle-color-in-diff-output)
-  "Run `ansi-color-apply-on-region'."
-  (progn
-    (require 'ansi-color)
-    (toggle-read-only)
-    (ansi-color-apply-on-region (point-min) (point-max))
-    (toggle-read-only)))
 
 ;; Better undo
 (require 'undo-tree)
@@ -562,7 +544,6 @@ echo \"tramp initialized\"
 
 
 ;; SmartTabs
-(add-to-list 'load-path "~/.emacs.d/el-get/psvn")
 (require 'smart-tabs-mode)
 (smart-tabs-insinuate 'python 'javascript)
 (smart-tabs-advice js2-indent-line js2-basic-offset)
