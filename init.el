@@ -445,7 +445,14 @@
 (require 'lang-clojure)
 (require 'lang-javascript)
 (require 'lang-php)
+(require 'init-web-mode)
+(require 'init-emmet-mode)
+(require 'init-flycheck)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(provide 'init)
