@@ -8,6 +8,7 @@ My emacs v24.4 settings, including:
 * javascript through brilliant js2-mode
 * clojure & clojurescript with paredit
 * autocomplete, snippets & etags
+* ... and everything else.
 
 Should work well on osx (http://emacsformacosx.com/). Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
 
@@ -25,21 +26,31 @@ PACKAGES
 * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
 * deft-multidir ~ https://github.com/dsevilla/deft-multidir
 * eproject ~ https://github.com/gabrielelanaro/eproject
+* flymake ~ https://github.com/illusori/emacs-flymake
 * flymake-cursor
+* flycheck
 * helm ~ https://github.com/emacs-helm/helm
 * highlight-parentheses
 * highlight-symbol
 * js2-mode ~ https://github.com/mooz/js2-mode
 * markdown-mode
 * web-mode ~ http://web-mode.org
+* rainbow-mode
+* css-eldoc
+* sass-mode
+* scss-mode
+* less-css-mode
+* skewer-less
 * multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
 * multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
 * org-cua-dwim
 * paredit
 * php-mode ~ https://github.com/ejmr/php-mode
 * emmet-mode ~ https://github.com/smihica/emmet-mode
+* ac-emmet ~ https://github.com/yasuyk/ac-emmet
 * popup
 * psvn
+* diff-hl
 * pymacs
 * sml-modeline
 * undo-tree ~ http://www.dr-qubit.org/emacs.php#undo-tree
@@ -48,6 +59,7 @@ PACKAGES
 * yasnippet ~ https://github.com/capitaomorte/yasnippet
 * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
 * helm-dash ~ https://github.com/areina/helm-dash
+* quickrun
 
 OSX installation notes:
 * brew install aspell
@@ -140,6 +152,8 @@ CHEAT SHEET
 * **M+.**     - jump to definition
 * **C+.**     - show arguments (php-mode)
 * **C+c C+y** - expand standard PHP function (yasnippet)
+* **C+c C+q** - quickrun
+
 
 ### BUFFERS ###
 * **C+x right** - switch to right buffer
