@@ -126,13 +126,6 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-;; CSS
-(add-hook 'css-mode-hook
-          (lambda ()
-            (setq tab-width 4)
-            (local-set-key (kbd "RET") 'newline-and-indent)
-            (add-hook 'before-save-hook 'delete-trailing-whitespace)))
-
 ;; CSV
 (add-to-list 'load-path "~/.emacs.d/el-get/csv-mode/")
 (add-to-list 'auto-mode-alist '("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
