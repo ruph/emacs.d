@@ -22,8 +22,7 @@
 ;; Auto-completion (-- ac-source-php-auto-yasnippets)
 (setq web-mode-ac-sources-alist
       '(("php" . (ac-source-yasnippet))
-        ("html" . (ac-source-emmet-html-aliases ac-source-emmet-html-snippets))
-        ("css" . (ac-source-css-property ac-source-emmet-css-snippets))))
+        ("html" . (ac-source-emmet-html-aliases ac-source-emmet-html-snippets))))
 
 (add-hook 'web-mode-before-auto-complete-hooks
           '(lambda ()
