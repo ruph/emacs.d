@@ -49,15 +49,7 @@
 (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-;; HTML
-(add-hook 'html-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode t)
-            (setq tab-width 4)
-            (local-set-key (kbd "RET") 'newline-and-indent)
-            ))
-;; some issues with flymake
+;; No flymake for html
 (delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
