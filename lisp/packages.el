@@ -106,7 +106,7 @@
                          popup auto-complete auto-complete-etags undo-tree
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
-                         web-mode emmet-mode rainbow-mode sass-mode 
+                         web-mode emmet-mode rainbow-mode sass-mode
                          less-css-mode skewer-less scss-mode helm-dash)
               (mapcar 'el-get-source-name el-get-sources)))
 
