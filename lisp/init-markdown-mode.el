@@ -9,6 +9,10 @@
     (visual-line-mode t)
     (flyspell-mode)
     (remove-hook 'before-save-hook 'delete-trailing-whitespace)
+    (define-key markdown-mode-map (kbd "M-<left>")  nil)
+    (define-key markdown-mode-map (kbd "C-<left>")  'markdown-promote)
+    (define-key markdown-mode-map (kbd "M-<right>") nil)
+    (define-key markdown-mode-map (kbd "C-<right>") 'markdown-demote)
     ))
 
 (add-hook 'markdown-mode-hook 'init-markdown)
