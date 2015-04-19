@@ -485,20 +485,6 @@ echo \"tramp initialized\"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Markdown
-(add-to-list 'load-path "~/.emacs.d/el-get/markdown-mode")
-(require 'markdown-mode)
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (local-set-key (kbd "RET") 'newline-and-indent)
-            (visual-line-mode t)
-            (flyspell-mode)
-            (remove-hook 'before-save-hook 'delete-trailing-whitespace)
-            ))
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 ;; Flyspell (auto-spelling)
 (eval-after-load "flyspell"
   '(progn
@@ -515,7 +501,7 @@ echo \"tramp initialized\"
   (setq deft-directories '("~/Dropbox/Notes" "~/Dropbox/Notes/AdPlatform")))
 (setq deft-extension "txt")
 (setq deft-use-filename-as-title t)
-(setq deft-text-mode 'markdown-mode)
+(setq deft-text-mode 'gfm-mode)
 (global-set-key (kbd "C-c n") 'deft)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -28,8 +28,8 @@
 (setq completion-ignore-case t           ;; ignore case when completing...
       read-file-name-completion-ignore-case t) ;; ...filenames too
 
-(setq initial-scratch-message ";; scratch pad\n\n")
-(setq initial-major-mode 'html-mode)      ;;  scratch pad in html mode
+(setq initial-scratch-message "# scratch pad #\n\n")
+(setq initial-major-mode 'gfm-mode)     ;;  scratch pad in github markdown mode
 
 (setq-default
  frame-title-format
@@ -450,6 +450,7 @@
 (require 'init-flycheck)
 (require 'init-css)
 (require 'init-vc)
+(require 'init-markdown-mode)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
