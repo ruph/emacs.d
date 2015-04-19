@@ -476,12 +476,13 @@ echo \"tramp initialized\"
 
 
 ;; Colors in *compilation*
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(defun colorize-buffer ()
+  (progn
+    (require 'ansi-color)
+    (read-only-mode)
+    (ansi-color-apply-on-region (point-min) (point-max))
+    (read-only-mode)))
+(add-hook 'compilation-filter-hook 'colorize-buffer)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
