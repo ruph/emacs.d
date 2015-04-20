@@ -26,27 +26,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Trying out flycheck instead of flymake
 ;; Flymake for php
-(add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
+;; (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
 
-(add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
-(load-library "flymake-cursor")
-(add-hook 'php-mode-hook
-          (lambda ()
-            (local-set-key [S-f5] 'flymake-goto-prev-error)
-            (local-set-key [f5] 'flymake-goto-next-error)))
+;; (add-to-list 'load-path "~/.emacs.d/el-get/flymake-cursor")
+;; (load-library "flymake-cursor")
+;; (add-hook 'php-mode-hook
+;;           (lambda ()
+;;             (local-set-key [S-f5] 'flymake-goto-prev-error)
+;;             (local-set-key [f5] 'flymake-goto-next-error)))
 
-;; Nope, I want my copies in the system temp dir.
-(setq flymake-run-in-place nil)
-;; This lets me say where my temp dir is.
-(setq temporary-file-directory "~/.emacs.d/tmp/")
-(if (eq nil (file-exists-p temporary-file-directory))
-    (make-directory temporary-file-directory))
+;; ;; Nope, I want my copies in the system temp dir.
+;; (setq flymake-run-in-place nil)
+;; ;; This lets me say where my temp dir is.
+;; (setq temporary-file-directory "~/.emacs.d/tmp/")
+;; (if (eq nil (file-exists-p temporary-file-directory))
+;;     (make-directory temporary-file-directory))
 
-;; I want to see all errors for the line.
-(setq flymake-number-of-errors-to-display nil)
+;; ;; I want to see all errors for the line.
+;; (setq flymake-number-of-errors-to-display nil)
 
-(add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
+;; (add-hook 'php-mode-hook (lambda () (flymake-mode 1)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; No flymake for html
