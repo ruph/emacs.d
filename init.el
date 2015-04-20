@@ -451,6 +451,7 @@
 (require 'init-css)
 (require 'init-vc)
 (require 'init-markdown-mode)
+(require 'init-project)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
