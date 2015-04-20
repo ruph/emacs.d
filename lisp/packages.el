@@ -33,6 +33,8 @@
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
         (:name css-eldoc        :type elpa)
+        (:name projectile       :type elpa)
+        (:name helm-projectile  :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -81,7 +83,7 @@
         (:name eproject
                :type git
                :url "git://github.com/gabrielelanaro/eproject.git"
-               :load nil
+               :autoloads nil  ;; autoload problem with eproject
                :compile ("eproject.el" "eproject-config.el")
                :features eproject)
         (:name deft-multidir
@@ -104,7 +106,7 @@
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode
                          php-mode yasnippet android-mode smarttabs
-                         popup undo-tree company-mode projectile
+                         popup undo-tree company-mode
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode
