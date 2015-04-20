@@ -66,12 +66,12 @@
                :type github
                :pkgname "ejmr/php-auto-yasnippets"
                :features nil)
-        (:name ac-emmet
-               :website "https://github.com/yasuyk/ac-emmet"
-               :description ""
-               :type github
-               :pkgname "yasuyk/ac-emmet"
-               :features nil)
+        ;; (:name ac-emmet
+        ;;        :website "https://github.com/yasuyk/ac-emmet"
+        ;;        :description ""
+        ;;        :type github
+        ;;        :pkgname "yasuyk/ac-emmet"
+        ;;        :features nil)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -99,11 +99,12 @@
         ))
 
 ;; All packages for installation
+;; auto-complete auto-complete-etags
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode
                          php-mode yasnippet android-mode smarttabs
-                         popup auto-complete auto-complete-etags undo-tree
+                         popup undo-tree company-mode projectile
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode
@@ -331,39 +332,42 @@ echo \"tramp initialized\"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; AUTO-COMPLETE
-;; http://cx4a.org/software/auto-complete/manual.html
-(add-to-list 'load-path "~/.emacs.d/el-get/popup/")
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete/")
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict/")
-(ac-config-default)
+;; Testing company-mode istead of ...
+(add-hook 'after-init-hook 'global-company-mode)
 
-;; Invoke auto-completion with TAB
-(setq ac-auto-start t)
-(ac-set-trigger-key "TAB")
-;; case sensitivity is important when finding matches
-(setq ac-ignore-case nil)
+;; ;; AUTO-COMPLETE
+;; ;; http://cx4a.org/software/auto-complete/manual.html
+;; (add-to-list 'load-path "~/.emacs.d/el-get/popup/")
+;; (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete/")
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict/")
+;; (ac-config-default)
 
-;; showing the menu
-(setq ac-auto-show-menu nil)
-(setq ac-show-menu-immediately-on-auto-complete t)
+;; ;; Invoke auto-completion with TAB
+;; (setq ac-auto-start t)
+;; (ac-set-trigger-key "TAB")
+;; ;; case sensitivity is important when finding matches
+;; (setq ac-ignore-case nil)
 
-;; TAB completes the word, ENTER exists
-(define-key ac-completing-map [tab] 'ac-complete)
-(define-key ac-completing-map [return] nil)
+;; ;; showing the menu
+;; (setq ac-auto-show-menu nil)
+;; (setq ac-show-menu-immediately-on-auto-complete t)
 
-;; Just M-n, M-p for ac-next/previous
-(define-key ac-completing-map (kbd "<down>") nil)
-(define-key ac-completing-map (kbd "<up>") nil)
+;; ;; TAB completes the word, ENTER exists
+;; (define-key ac-completing-map [tab] 'ac-complete)
+;; (define-key ac-completing-map [return] nil)
 
-;; Attach additional modes to it
-(add-to-list 'ac-modes 'web-mode)
+;; ;; Just M-n, M-p for ac-next/previous
+;; (define-key ac-completing-map (kbd "<down>") nil)
+;; (define-key ac-completing-map (kbd "<up>") nil)
 
-;; + etags
-(add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
-(require 'auto-complete-etags)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; Attach additional modes to it
+;; (add-to-list 'ac-modes 'web-mode)
+
+;; ;; + etags
+;; (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
+;; (require 'auto-complete-etags)
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Android mode

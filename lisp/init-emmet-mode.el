@@ -4,10 +4,10 @@
 (add-hook 'html-mode-hook 'emmet-mode)
 (add-hook 'web-mode-hook  'emmet-mode)
 
-;; auto-complete
-(require 'ac-emmet)
-(add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
-(add-hook 'css-mode-hook 'ac-emmet-css-setup)
+;; ;; auto-complete
+;; (require 'ac-emmet)
+;; (add-hook 'sgml-mode-hook 'ac-emmet-html-setup)
+;; (add-hook 'css-mode-hook 'ac-emmet-css-setup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
