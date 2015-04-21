@@ -30,6 +30,7 @@ PACKAGES
 * flymake-cursor
 * flycheck
 * helm ~ https://github.com/emacs-helm/helm
+* helm-ag ~ https://github.com/syohex/emacs-helm-ag
 * highlight-parentheses
 * highlight-symbol
 * js2-mode ~ https://github.com/mooz/js2-mode
@@ -79,7 +80,7 @@ CHEAT SHEET
 * **S+C+r** - find file in project directory tree
 * **S+C+t** - find file in eproject list
 * **F7**    - search for files
-* **S+F7**  - search in files (GNU Grep >= 2.5.2)
+* **S+F7**  - search in files (ag)
 
 
 ### WINDOW ###

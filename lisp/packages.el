@@ -103,7 +103,7 @@
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode
                          php-mode yasnippet android-mode smarttabs
-                         popup undo-tree company-mode helm
+                         popup undo-tree company-mode helm helm-ag
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode
@@ -237,11 +237,11 @@ echo \"tramp initialized\"
 (global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
 (global-set-key (kbd "s-V") 'helm-show-kill-ring)
 
-;; recursive helm-do-grep
+;; recursive helm-do-ag
 (global-set-key (kbd "S-<f7>")
                 (lambda () (interactive)
                   (let ((current-prefix-arg '(4))) ; C-u
-                    (call-interactively 'helm-do-grep))))
+                    (call-interactively 'helm-do-ag))))
 
 ;; for eshell: complete and history
 (add-hook 'eshell-mode-hook

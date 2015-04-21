@@ -6,6 +6,9 @@
 ;; PROJECTILE doing HELM
 (require 'helm-projectile)
 (helm-projectile-on)
+
+;; PROJECTILE doing AG
+(global-set-key (kbd "S-C-<f7>") 'helm-projectile-ag)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
