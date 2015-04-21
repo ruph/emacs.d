@@ -27,9 +27,6 @@
       '((:name clojure-mode     :type elpa)
         (:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
-        (:name cl-lib           :type elpa) ; helm dependency
-        (:name async            :type elpa) ; helm dependency
-        (:name helm             :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
         (:name css-eldoc        :type elpa)
@@ -106,7 +103,7 @@
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode
                          php-mode yasnippet android-mode smarttabs
-                         popup undo-tree company-mode
+                         popup undo-tree company-mode helm
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode

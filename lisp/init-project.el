@@ -2,6 +2,10 @@
 (require 'projectile)
 (add-hook 'emacs-lisp-mode-hook 'projectile-mode)
 (add-hook 'php-mode-hook 'projectile-mode)
+
+;; PROJECTILE doing HELM
+(require 'helm-projectile)
+(helm-projectile-on)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
