@@ -2,7 +2,7 @@ WHAT IS THIS?
 -------------
 My emacs v24.4 settings, including:
 
-* project management with eproject
+* project management with eproject & projectile
 * python with flymake
 * php & html with web-mode
 * javascript through brilliant js2-mode
@@ -10,15 +10,13 @@ My emacs v24.4 settings, including:
 * autocomplete, snippets & etags
 * ... and everything else.
 
-Should work well on osx (http://emacsformacosx.com/). Fresh installation includes painful restarting failling emacs tho. COPY/PASTE freely :) 
+Should work well on osx (http://emacsformacosx.com/). COPY/PASTE freely :) 
 
 PACKAGES
 --------
 * ace-jump-mode
-* auto-complete
-* auto-complete-etags
-* ac-emmet ~ https://github.com/yasuyk/ac-emmet
 * autopair
+* company-mode
 * clojure-mode
 * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
 * clojure-cheatsheet ~ https://github.com/clojure-emacs/clojure-cheatsheet
@@ -26,6 +24,8 @@ PACKAGES
 * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
 * deft-multidir ~ https://github.com/dsevilla/deft-multidir
 * eproject ~ https://github.com/gabrielelanaro/eproject
+* projectile
+* helm-projectile
 * flymake ~ https://github.com/illusori/emacs-flymake
 * flymake-cursor
 * flycheck
@@ -47,7 +47,6 @@ PACKAGES
 * paredit
 * php-mode ~ https://github.com/ejmr/php-mode
 * emmet-mode ~ https://github.com/smihica/emmet-mode
-* ac-emmet ~ https://github.com/yasuyk/ac-emmet
 * popup
 * psvn
 * diff-hl
@@ -63,6 +62,7 @@ PACKAGES
 
 OSX installation notes:
 * brew install aspell
+* brew install the_silver_searcher
 
 Windows installation notes:
 * http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
@@ -147,8 +147,8 @@ CHEAT SHEET
 * **TAB**     - autocomplete
 * **M+n**     - next autocomplete option
 * **M+p**     - previous autocomplete option
-* **F5**      - go to next error (flymake)
-* **S+F5**    - go to previous error (flymake)
+* **F5**      - go to next error (flymake & flycheck)
+* **S+F5**    - go to previous error (flymake & flycheck)
 * **M+.**     - jump to definition
 * **C+.**     - show arguments (php-mode)
 * **C+c C+y** - expand standard PHP function (yasnippet)
