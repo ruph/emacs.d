@@ -15,6 +15,7 @@
             (setq js2-indent-level 4)
             (local-set-key (kbd "RET") 'newline-and-indent)
             (setq js2-missing-semi-one-line-override t)
+            (local-unset-key (kbd "M-j")) ;; jump to window below conflict
             ))
 
 ;; default js-mode
