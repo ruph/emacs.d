@@ -107,7 +107,8 @@
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode sass-mode
-                         less-css-mode skewer-less scss-mode helm-dash)
+                         less-css-mode skewer-less scss-mode helm-dash
+                         clean-aindent)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -118,6 +119,12 @@
 ;; quickrun
 (require 'quickrun)
 (global-set-key (kbd "C-c q") 'quickrun)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; clean-aindent
+(set 'clean-aindent-is-simple-indent t)
+(define-key global-map (kbd "RET") 'newline-and-indent)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

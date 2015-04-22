@@ -20,6 +20,7 @@ PACKAGES
 * clojure-mode
 * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
 * clojure-cheatsheet ~ https://github.com/clojure-emacs/clojure-cheatsheet
+* clean-aident ~ http://www.emacswiki.org/emacs/CleanAutoIndent
 * cider ~ https://github.com/clojure-emacs/cider
 * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
 * deft-multidir ~ https://github.com/dsevilla/deft-multidir
