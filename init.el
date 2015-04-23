@@ -441,6 +441,7 @@
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'packages)
+(require 'init-helm)
 (require 'lang-python)
 (require 'lang-clojure)
 (require 'lang-javascript)
