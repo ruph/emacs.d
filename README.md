@@ -61,10 +61,13 @@ PACKAGES
 * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
 * helm-dash ~ https://github.com/areina/helm-dash
 * quickrun
+* ggtags ~ https://github.com/leoliu/ggtags
+* helm-gtags ~ https://github.com/syohex/emacs-helm-gtags
 
 OSX installation notes:
 * brew install aspell
 * brew install the_silver_searcher
+* brew install global
 
 Windows installation notes:
 * http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html

@@ -452,6 +452,8 @@
 (require 'init-vc)
 (require 'init-markdown-mode)
 (require 'init-project)
+(require 'init-gtags)
+
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
