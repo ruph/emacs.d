@@ -67,7 +67,8 @@ PACKAGES
 OSX installation notes:
 * brew install aspell
 * brew install the_silver_searcher
-* brew install global
+* brew install --HEAD ctags
+* brew install global --with-exuberant-ctags
 
 Windows installation notes:
 * http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
