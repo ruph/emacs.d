@@ -10,10 +10,7 @@
 (dolist (hook '(css-mode-hook html-mode-hook sass-mode-hook))
   (add-hook hook 'rainbow-mode))
 
-;; SASS and SCSS
-;; (require 'sass-mode)
-;; (require 'scss-mode)
-;; (setq-default scss-compile-at-save nil)
+;; CSS and SCSS
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
 
@@ -21,11 +18,6 @@
 (require 'less-css-mode)
 (when (featurep 'js2-mode)
   (require 'skewer-less))
-
-;; ;; Auto-complete CSS keywords
-;; (with-eval-after-load 'auto-complete
-;;   (dolist (hook '(css-mode-hook sass-mode-hook scss-mode-hook))
-;;     (add-hook hook 'ac-css-mode-setup)))
 
 ;; Use eldoc for syntax hints
 (require 'css-eldoc)

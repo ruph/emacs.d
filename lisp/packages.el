@@ -65,12 +65,6 @@
                :type github
                :pkgname "ejmr/php-auto-yasnippets"
                :features nil)
-        ;; (:name ac-emmet
-        ;;        :website "https://github.com/yasuyk/ac-emmet"
-        ;;        :description ""
-        ;;        :type github
-        ;;        :pkgname "yasuyk/ac-emmet"
-        ;;        :features nil)
         (:name js2-mode-mooz
                :type git
                :url "git://github.com/mooz/js2-mode.git"
@@ -98,7 +92,6 @@
         ))
 
 ;; All packages for installation
-;; auto-complete auto-complete-etags
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode
@@ -243,40 +236,7 @@ echo \"tramp initialized\"
 (add-hook 'company-mode-hook
           (lambda ()
             (define-key company-mode-map (kbd "C-c SPC") 'company-complete)))
-
-;; ;; AUTO-COMPLETE
-;; ;; http://cx4a.org/software/auto-complete/manual.html
-;; (add-to-list 'load-path "~/.emacs.d/el-get/popup/")
-;; (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete/")
-;; (require 'auto-complete-config)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/el-get/auto-complete/dict/")
-;; (ac-config-default)
-
-;; ;; Invoke auto-completion with TAB
-;; (setq ac-auto-start t)
-;; (ac-set-trigger-key "TAB")
-;; ;; case sensitivity is important when finding matches
-;; (setq ac-ignore-case nil)
-
-;; ;; showing the menu
-;; (setq ac-auto-show-menu nil)
-;; (setq ac-show-menu-immediately-on-auto-complete t)
-
-;; ;; TAB completes the word, ENTER exists
-;; (define-key ac-completing-map [tab] 'ac-complete)
-;; (define-key ac-completing-map [return] nil)
-
-;; ;; Just M-n, M-p for ac-next/previous
-;; (define-key ac-completing-map (kbd "<down>") nil)
-;; (define-key ac-completing-map (kbd "<up>") nil)
-
-;; ;; Attach additional modes to it
-;; (add-to-list 'ac-modes 'web-mode)
-
-;; ;; + etags
-;; (add-to-list 'load-path "~/.emacs.d/el-get/auto-complete-etags/")
-;; (require 'auto-complete-etags)
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Android mode
@@ -442,6 +402,7 @@ echo \"tramp initialized\"
 (smart-tabs-advice js2-indent-line js2-basic-offset)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
 ;; ARFF WEKA
 (require 'generic)
 (define-generic-mode 'arff-file-mode
@@ -473,5 +434,6 @@ echo \"tramp initialized\"
       (turn-on-font-lock))))
   "Mode for arff-files.")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (provide 'packages)

@@ -44,5 +44,7 @@
           (lambda ()
             (local-set-key [S-f5] 'flymake-goto-prev-error)
             (local-set-key [f5] 'flymake-goto-next-error)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (provide 'lang-python)

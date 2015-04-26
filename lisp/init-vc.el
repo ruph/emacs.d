@@ -1,10 +1,6 @@
 ;; SVN
 (require 'psvn)
 
-;; GIT ~ http://files.taesoo.org/git-emacs/git-emacs.html
-;; ~ slows down emacs
-;;(require 'git-emacs)
-
 ;; Colors in diff
 (defadvice vc-diff-finish (after handle-color-in-diff-output)
   "Run `ansi-color-apply-on-region'."

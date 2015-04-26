@@ -6,7 +6,6 @@
               (ggtags-mode 1))))
 (define-key ggtags-mode-map (kbd "C-.") 'ggtags-show-definition)
 
-
 ;; Helm GTAGS
 (require 'helm-gtags)
 

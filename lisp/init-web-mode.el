@@ -17,14 +17,6 @@
         ad-do-it)
     ad-do-it))
 
-;; (add-hook 'jsx-mode-hook
-;;           (lambda () (auto-complete-mode 1)))
-
-;; ;; Auto-completion (-- ac-source-php-auto-yasnippets)
-;; (setq web-mode-ac-sources-alist
-;;       '(("php" . (ac-source-yasnippet))
-;;         ("html" . (ac-source-emmet-html-aliases ac-source-emmet-html-snippets))))
-
 (add-hook 'web-mode-before-auto-complete-hooks
           '(lambda ()
              (let ((web-mode-cur-language
