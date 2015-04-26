@@ -4,10 +4,10 @@ My emacs v24.4 settings, including:
 
 * project management with eproject & projectile
 * python with flymake
-* php & html with web-mode
-* javascript through brilliant js2-mode
+* php, html, css with web-mode, css-mode
+* javascript and jsx through js2-mode, eslint and ternjs
 * clojure & clojurescript with paredit
-* autocomplete, snippets & etags
+* autocomplete, snippets, tags, suggestions
 * ... and everything else.
 
 Should work well on osx (http://emacsformacosx.com/). COPY/PASTE freely :) 
@@ -39,8 +39,6 @@ PACKAGES
 * web-mode ~ http://web-mode.org
 * rainbow-mode
 * css-eldoc
-* sass-mode
-* scss-mode
 * less-css-mode
 * skewer-less
 * multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
@@ -60,15 +58,20 @@ PACKAGES
 * yasnippet ~ https://github.com/capitaomorte/yasnippet
 * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
 * helm-dash ~ https://github.com/areina/helm-dash
-* quickrun
+* quickrun ~ https://github.com/syohex/emacs-quickrun
 * ggtags ~ https://github.com/leoliu/ggtags
 * helm-gtags ~ https://github.com/syohex/emacs-helm-gtags
+* editorconfig ~ https://github.com/editorconfig/editorconfig-emacs
+* tern ~ http://ternjs.net
+* company-tern ~ https://github.com/proofit404/company-tern
 
 OSX installation notes:
 * brew install aspell
 * brew install the_silver_searcher
 * brew install --HEAD ctags
 * brew install global --with-exuberant-ctags
+* brew install editorconfig
+* npm install -g eslint babel-eslint
 
 Windows installation notes:
 * http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
@@ -144,13 +147,13 @@ CHEAT SHEET
 * **S+F3**        - find previous symbol in buffer
 * **M+F3**        - highlight symbol in buffer
 * **C+0**         - ace jump word
+* **C+c C+0**     - ace jump back
 * **C+u C+0**     - ace jump char
 * **C+u C+u C+0** - ace jump line
-* **C+c C+0**     - ace jump back
 
 
 ### EDITOR :: DEV ###
-* **TAB**     - autocomplete
+* **C-c SPC** - autocomplete
 * **M+n**     - next autocomplete option
 * **M+p**     - previous autocomplete option
 * **F5**      - go to next error (flymake & flycheck)

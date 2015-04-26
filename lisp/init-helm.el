@@ -36,6 +36,11 @@
               (define-key eshell-mode-map
                 (kbd "C-r")
                 'helm-eshell-history)))
+
+;; Helm dash documentation
+(require 'helm-dash)
+(setq helm-dash-docsets-path "~/.docsets")
+(setq helm-dash-browser-func 'eww)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

@@ -106,13 +106,19 @@
                          popup undo-tree company-mode helm helm-ag
                          multi-term flymake-cursor volatile-highlights
                          markdown-mode multiple-cursors quickrun diff-hl
-                         web-mode emmet-mode rainbow-mode sass-mode
-                         less-css-mode skewer-less scss-mode helm-dash
-                         clean-aindent ggtags helm-gtags)
+                         web-mode emmet-mode rainbow-mode less-css-mode
+                         skewer-less helm-dash clean-aindent ggtags helm-gtags
+                         editorconfig tern company-tern)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
 (el-get 'sync my-el-get-packages)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; editorconfig
+(require 'editorconfig)
+(load "editorconfig")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -142,11 +148,6 @@
 ;; Better undo
 (require 'undo-tree)
 (global-undo-tree-mode)
-
-;; Dash documentation
-(require 'helm-dash)
-(setq helm-dash-docsets-path "~/.docsets")
-(setq helm-dash-browser-func 'eww)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -237,8 +238,11 @@ echo \"tramp initialized\"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Testing company-mode istead of ...
+;; Company-mode for autocompletion
 (add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'company-mode-hook
+          (lambda ()
+            (define-key company-mode-map (kbd "C-c SPC") 'company-complete)))
 
 ;; ;; AUTO-COMPLETE
 ;; ;; http://cx4a.org/software/auto-complete/manual.html

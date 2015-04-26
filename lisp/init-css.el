@@ -11,9 +11,11 @@
   (add-hook hook 'rainbow-mode))
 
 ;; SASS and SCSS
-(require 'sass-mode)
-(require 'scss-mode)
-(setq-default scss-compile-at-save nil)
+;; (require 'sass-mode)
+;; (require 'scss-mode)
+;; (setq-default scss-compile-at-save nil)
+(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
 
 ;; LESS
 (require 'less-css-mode)

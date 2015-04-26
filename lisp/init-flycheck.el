@@ -17,16 +17,21 @@
 (with-eval-after-load 'flycheck
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
-;; JSX check -> npm install -g jsxhint
-(flycheck-define-checker jsxhint-checker
-  "A JSX syntax and style checker based on JSXHint."
-  :command ("jsxhint" source)
-  :error-patterns
-  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-  :modes (jsx-mode))
-(add-hook 'jsx-mode-hook (lambda ()
-                           (flycheck-select-checker 'jsxhint-checker)
-                           (flycheck-mode)))
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+(setq flycheck-checkers '(javascript-eslint))
+
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+(flycheck-add-mode 'javascript-eslint 'js-mode)
+(flycheck-add-mode 'javascript-eslint 'js2-mode)
+
+;; disable json-jsonlist checking for json files
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(json-jsonlist)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
