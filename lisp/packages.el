@@ -32,6 +32,7 @@
         (:name css-eldoc        :type elpa)
         (:name projectile       :type elpa)
         (:name helm-projectile  :type elpa)
+        (:name dired+           :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -101,7 +102,7 @@
                          markdown-mode multiple-cursors quickrun diff-hl
                          web-mode emmet-mode rainbow-mode less-css-mode
                          skewer-less helm-dash clean-aindent ggtags helm-gtags
-                         editorconfig tern company-tern)
+                         editorconfig tern company-tern emacs-neotree)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages

@@ -64,6 +64,9 @@ PACKAGES
 * editorconfig ~ https://github.com/editorconfig/editorconfig-emacs
 * tern ~ http://ternjs.net
 * company-tern ~ https://github.com/proofit404/company-tern
+* dired+ ~ http://www.emacswiki.org/emacs/dired+.el
+* emacs-neotree ~ https://github.com/jaypei/emacs-neotree
+
 
 OSX installation notes:
 * brew install aspell
