@@ -74,6 +74,7 @@ OSX installation notes:
 * brew install --HEAD ctags
 * brew install global --with-exuberant-ctags
 * brew install editorconfig
+* npm install -g tern
 * npm install -g eslint babel-eslint
 
 Windows installation notes:
