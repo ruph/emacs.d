@@ -14,6 +14,7 @@
             (local-set-key (kbd "RET") 'newline-and-indent)
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
+            (flycheck-select-checker 'php)
             (setq flymake-gui-warnings-enabled nil)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
