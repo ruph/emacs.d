@@ -9,6 +9,7 @@
             (setq tab-width 4)
             (setq python-indent 4)
             (local-set-key (kbd "RET") 'newline-and-indent)
+            (flycheck-mode -1) ;; flymake currently
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; ''' autopairing
