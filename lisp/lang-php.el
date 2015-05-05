@@ -6,6 +6,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Autocompletion
+(defun php-completion ()
+  (ggtags-mode 1)
+  (helm-gtags-mode 1)
+  (set (make-local-variable 'company-backends)
+       '((company-gtags company-dabbrev-code company-files company-yasnippet)))
+  )
+
 ;; Hooks
 (add-hook 'php-mode-hook
           (lambda ()
@@ -15,7 +23,8 @@
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
             (flycheck-select-checker 'php)
-            (setq flymake-gui-warnings-enabled nil)))
+            (setq flymake-gui-warnings-enabled nil)
+            (php-completion)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
