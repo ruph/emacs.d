@@ -1,16 +1,9 @@
 ;; GTAGS
 (require 'ggtags)
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'php-mode)
-              (ggtags-mode 1))))
 (define-key ggtags-mode-map (kbd "C-.") 'ggtags-show-definition)
 
 ;; Helm GTAGS
 (require 'helm-gtags)
-
-;; Enable helm-gtags-mode
-(add-hook 'php-mode-hook 'helm-gtags-mode)
 
 ;; customize
 (custom-set-variables
