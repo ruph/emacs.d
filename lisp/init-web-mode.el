@@ -17,16 +17,24 @@
         ad-do-it)
     ad-do-it))
 
-(add-hook 'web-mode-before-auto-complete-hooks
+(add-hook 'web-mode-hook
           '(lambda ()
-             (let ((web-mode-cur-language
-                    (web-mode-language-at-pos)))
-               (if (string= web-mode-cur-language "php")
-                   (yas-activate-extra-mode 'php-mode)
-                 (yas-deactivate-extra-mode 'php-mode))
-               (if (string= web-mode-cur-language "css")
-                   (setq emmet-use-css-transform t)
-                 (setq emmet-use-css-transform nil)))))
+             (company-mode 1)
+             (when (equal web-mode-content-type "html")
+               (yas-activate-extra-mode 'html-mode))
+             (when (equal web-mode-content-type "php")
+               (yas-activate-extra-mode 'php-mode))
+             (when (equal web-mode-content-type "jsx")
+               (yas-activate-extra-mode 'html-mode)
+               (yas-activate-extra-mode 'js-mode)
+               (yas-activate-extra-mode 'js2-mode)
+               (yas-activate-extra-mode 'jsx-mode)
+               (require 'tern)
+               (tern-mode t)
+               (set (make-local-variable 'company-backends)
+                    '((company-dabbrev-code company-tern company-yasnippet)))
+               )
+             ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

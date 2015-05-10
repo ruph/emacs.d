@@ -3,6 +3,8 @@
           (lambda ()
             (setq tab-width 4)
             (local-set-key (kbd "RET") 'newline-and-indent)
+            (set (make-local-variable 'company-backends)
+            	 '((company-css company-dabbrev-code company-files company-yasnippet)))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; CSS colors

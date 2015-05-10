@@ -2,7 +2,10 @@
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx$" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jsx$" . js2-mode))
+
+;; tern
+(require 'tern)
 
 ;; Js2-mode
 (add-hook 'js2-mode-hook
@@ -13,6 +16,10 @@
             (local-set-key (kbd "RET") 'newline-and-indent)
             (setq js2-missing-semi-one-line-override t)
             (local-unset-key (kbd "M-j")) ;; jump to window below conflict
+            (yas-activate-extra-mode 'js-mode)
+            (tern-mode t)
+            (set (make-local-variable 'company-backends)
+                 '((company-dabbrev-code company-tern company-keywords company-yasnippet)))
             ))
 
 ;; some jsx support
@@ -26,21 +33,12 @@
           (lambda ()
             (setq tab-width 4)
             (local-set-key (kbd "RET") 'newline-and-indent)
-            (add-hook 'before-save-hook 'delete-trailing-whitespace)))
-;; tern
-(require 'tern)
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (progn (tern-mode t)
-                   (set (make-local-variable 'company-backends) '(company-tern)))))
-(add-hook 'js-mode-hook
-          (lambda ()
-            (progn (tern-mode t)
-                   (set (make-local-variable 'company-backends) '(company-tern)))))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (progn (tern-mode t)
-                   (set (make-local-variable 'company-backends) '(company-tern)))))
+            (add-hook 'before-save-hook 'delete-trailing-whitespace)
+            (yas-activate-extra-mode 'js2-mode)
+            (tern-mode t)
+            (set (make-local-variable 'company-backends)
+                 '((company-dabbrev-code company-tern company-keywords company-yasnippet)))
+            ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

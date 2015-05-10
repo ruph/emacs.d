@@ -1,11 +1,13 @@
 ;; Clojure
-(add-to-list 'load-path "~/.emacs.d/el-get/clojure-require")
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (local-set-key (kbd "RET") 'newline-and-indent)))
+            (local-set-key (kbd "RET") 'newline-and-indent)
+            (set (make-local-variable 'company-backends)
+                 '((company-etags company-dabbrev-code company-yasnippet)))
+            ))
 
 
 ;; Clojurescript
@@ -51,6 +53,10 @@
           (lambda ()
             (paredit-mode +1)
             (setq cider-repl-use-pretty-printing t)))
+
+(add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-mode-hook #'company-mode)
+(add-hook 'cider-repl-mode-hook #'paredit-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

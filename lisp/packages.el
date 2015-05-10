@@ -236,7 +236,10 @@ echo \"tramp initialized\"
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'company-mode-hook
           (lambda ()
-            (define-key company-mode-map (kbd "C-c SPC") 'company-complete)))
+            (define-key company-mode-map (kbd "C-c SPC") 'company-complete)
+            (set (make-local-variable 'company-backends)
+                 '((company-dabbrev-code company-yasnippet company-keywords)))
+            ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
