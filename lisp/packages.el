@@ -66,12 +66,6 @@
                :type github
                :pkgname "ejmr/php-auto-yasnippets"
                :features nil)
-        (:name js2-mode-mooz
-               :type git
-               :url "git://github.com/mooz/js2-mode.git"
-               :load "js2-mode.el"
-               :compile ("js2-mode.el" "js2-imenu-extras.el")
-               :features js2-mode)
         (:name eproject
                :type git
                :url "git://github.com/gabrielelanaro/eproject.git"
@@ -84,18 +78,12 @@
                :load "deft.el"
                :compile ("deft.el")
                :features deft)
-        (:name clojure-cheatsheet
-               :type git
-               :url "git://github.com/clojure-emacs/clojure-cheatsheet.git"
-               :load "clojure-cheatsheet.el"
-               :compile ("clojure-cheatsheet.el")
-               :features clojure-cheatsheet)
         ))
 
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(autopair highlight-parentheses highlight-symbol cider
-                         ace-jump-mode psvn pymacs yaml-mode
+                         ace-jump-mode psvn pymacs yaml-mode js2-mode
                          php-mode yasnippet android-mode smarttabs
                          popup undo-tree company-mode helm helm-ag
                          multi-term flymake-cursor volatile-highlights
