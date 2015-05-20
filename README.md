@@ -77,11 +77,6 @@ OSX installation notes:
 * npm install -g tern
 * npm install -g eslint babel-eslint
 
-Windows installation notes:
-* http://gelvaos.blogspot.com/2011/03/emacs-el-get-on-windows.html
-* install-info.exe el-get/el-get/el-get.info el-get/el-get/./el-get.info
-* manual link creation (e.g ~\.emacs.d\el-get>mklink /D yasnippet package\elpa\yasnippet-0.8.0) 
-
 
 CHEAT SHEET
 ------------
