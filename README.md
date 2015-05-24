@@ -15,64 +15,64 @@ Should work well on osx (http://emacsformacosx.com/). COPY/PASTE freely :)
 PACKAGES
 --------
 * Editor
-  * ace-jump-mode
-  * autopair
-  * company-mode
-  * clean-aident ~ http://www.emacswiki.org/emacs/CleanAutoIndent
-  * dired+ ~ http://www.emacswiki.org/emacs/dired+.el
-  * editorconfig ~ https://github.com/editorconfig/editorconfig-emacs
-  * emacs-neotree ~ https://github.com/jaypei/emacs-neotree
-  * flymake ~ https://github.com/illusori/emacs-flymake
-  * flymake-cursor
-  * flycheck
-  * ggtags ~ https://github.com/leoliu/ggtags
-  * helm ~ https://github.com/emacs-helm/helm
-  * helm-ag ~ https://github.com/syohex/emacs-helm-ag
-  * helm-gtags ~ https://github.com/syohex/emacs-helm-gtags
-  * highlight-parentheses
-  * highlight-symbol
-  * multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
-  * org-cua-dwim
-  * paredit
-  * popup
-  * quickrun ~ https://github.com/syohex/emacs-quickrun
-  * diff-hl  
-  * undo-tree ~ http://www.dr-qubit.org/emacs.php#undo-tree
-  * volatile-highlights ~ http://www.emacswiki.org/emacs/VolatileHighlights
-  * sml-modeline
-  * swiper ~ https://github.com/abo-abo/swiper
-  * swiper-helm ~ https://github.com/abo-abo/swiper-helm
-  * yasnippet ~ https://github.com/capitaomorte/yasnippet  
+  * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
+  * [autopair](https://github.com/capitaomorte/autopair)
+  * [company-mode](http://company-mode.github.io)
+  * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
+  * [dired+](http://www.emacswiki.org/emacs/dired+.el)
+  * [editorconfig](https://github.com/editorconfig/editorconfig-emacs)
+  * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
+  * [flymake](https://github.com/illusori/emacs-flymake)
+  * [flymake-cursor](http://www.emacswiki.org/emacs/FlymakeCursor)
+  * [flycheck](http://www.flycheck.org)
+  * [ggtags](https://github.com/leoliu/ggtags)
+  * [helm](https://github.com/emacs-helm/helm)
+  * [helm-ag](https://github.com/syohex/emacs-helm-ag)
+  * [helm-gtags](https://github.com/syohex/emacs-helm-gtags)
+  * [highlight-parentheses](https://github.com/tsdh/highlight-parentheses.el)
+  * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
+  * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
+  * [org-cua-dwim](https://github.com/mlf176f2/org-cua-dwim.el)
+  * [paredit](http://emacswiki.org/emacs/ParEdit)
+  * [popup](https://github.com/auto-complete/popup-el)
+  * [quickrun](https://github.com/syohex/emacs-quickrun)
+  * [diff-hl](https://github.com/dgutov/diff-hl)
+  * [undo-tree](http://www.dr-qubit.org/emacs.php#undo-tree)
+  * [volatile-highlights](http://www.emacswiki.org/emacs/VolatileHighlights)
+  * [sml-modeline](http://www.emacswiki.org/emacs/SmlModeLine)
+  * [swiper](https://github.com/abo-abo/swiper)
+  * [swiper-helm](https://github.com/abo-abo/swiper-helm)
+  * [yasnippet](https://github.com/capitaomorte/yasnippet)
 * Languages
-  * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
-  * clojure-mode  
-  * cider ~ https://github.com/clojure-emacs/cider
-  * css-eldoc
-  * emmet-mode ~ https://github.com/smihica/emmet-mode
-  * go-mode ~ https://github.com/dominikh/go-mode.el
-  * js2-mode ~ https://github.com/mooz/js2-mode
-  * less-css-mode
-  * php-mode ~ https://github.com/ejmr/php-mode
-  * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets  
-  * pymacs
-  * rust-mode ~ https://github.com/rust-lang/rust-mode
-  * rainbow-mode
-  * skewer-less
-  * tern ~ http://ternjs.net
-  * company-tern ~ https://github.com/proofit404/company-tern
-  * web-mode ~ http://web-mode.org
+  * [clojure-snippets](https://github.com/swannodette/clojure-snippets)
+  * [clojure-mode](https://github.com/clojure-emacs/clojure-mode)
+  * [cider](https://github.com/clojure-emacs/cider)
+  * [css-eldoc](https://github.com/zenozeng/css-eldoc)
+  * [emmet-mode](https://github.com/smihica/emmet-mode)
+  * [go-mode](https://github.com/dominikh/go-mode.el)
+  * [js2-mode](https://github.com/mooz/js2-mode)
+  * [less-css-mode](https://github.com/purcell/less-css-mode)
+  * [php-mode](https://github.com/ejmr/php-mode)
+  * [php-auto-yasnippets](https://github.com/ejmr/php-auto-yasnippets)
+  * [pymacs](https://github.com/pinard/Pymacs)
+  * [rust-mode](https://github.com/rust-lang/rust-mode)
+  * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
+  * [skewer-less](https://github.com/purcell/skewer-less)
+  * [tern](http://ternjs.net)
+  * [company-tern](https://github.com/proofit404/company-tern)
+  * [web-mode](http://web-mode.org)
 * Projects
-  * eproject ~ https://github.com/gabrielelanaro/eproject
-  * helm-projectile
-  * projectile
+  * [eproject](https://github.com/gabrielelanaro/eproject)
+  * [helm-projectile](http://tuhdo.github.io/helm-projectile.html)
+  * [projectile](https://github.com/bbatsov/projectile)
 * Other
-  * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
-  * deft-multidir ~ https://github.com/dsevilla/deft-multidir
-  * helm-dash ~ https://github.com/areina/helm-dash  
-  * markdown-mode
-  * multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
-  * psvn
-  * yaml-mode
+  * [csv-mode](http://www.emacswiki.org/emacs/CsvMode)
+  * [deft-multidir](https://github.com/dsevilla/deft-multidir)
+  * [helm-dash](https://github.com/areina/helm-dash)
+  * [markdown-mode](http://jblevins.org/projects/markdown-mode/)
+  * [multi-term](http://www.emacswiki.org/emacs/MultiTerm)
+  * [psvn](http://www.xsteve.at/prg/emacs/psvn.el)
+  * [yaml-mode](https://github.com/yoshiki/yaml-mode)
 
 
 OSX installation notes:
