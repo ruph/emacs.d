@@ -41,6 +41,11 @@
 (require 'helm-dash)
 (setq helm-dash-docsets-path "~/.docsets")
 (setq helm-dash-browser-func 'eww)
+
+;; swiper helm
+(require 'swiper)
+(require 'swiper-helm)
+(global-set-key (kbd "C-:") 'swiper-helm)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

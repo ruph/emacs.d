@@ -14,58 +14,65 @@ Should work well on osx (http://emacsformacosx.com/). COPY/PASTE freely :)
 
 PACKAGES
 --------
-* ace-jump-mode
-* autopair
-* company-mode
-* clojure-mode
-* clojure-snippets ~ https://github.com/swannodette/clojure-snippets
-* clojure-cheatsheet ~ https://github.com/clojure-emacs/clojure-cheatsheet
-* clean-aident ~ http://www.emacswiki.org/emacs/CleanAutoIndent
-* cider ~ https://github.com/clojure-emacs/cider
-* csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
-* deft-multidir ~ https://github.com/dsevilla/deft-multidir
-* eproject ~ https://github.com/gabrielelanaro/eproject
-* projectile
-* helm-projectile
-* flymake ~ https://github.com/illusori/emacs-flymake
-* flymake-cursor
-* flycheck
-* helm ~ https://github.com/emacs-helm/helm
-* helm-ag ~ https://github.com/syohex/emacs-helm-ag
-* highlight-parentheses
-* highlight-symbol
-* js2-mode ~ https://github.com/mooz/js2-mode
-* markdown-mode
-* web-mode ~ http://web-mode.org
-* rainbow-mode
-* css-eldoc
-* less-css-mode
-* skewer-less
-* multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
-* multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
-* org-cua-dwim
-* paredit
-* php-mode ~ https://github.com/ejmr/php-mode
-* emmet-mode ~ https://github.com/smihica/emmet-mode
-* popup
-* psvn
-* diff-hl
-* pymacs
-* sml-modeline
-* undo-tree ~ http://www.dr-qubit.org/emacs.php#undo-tree
-* volatile-highlights ~ http://www.emacswiki.org/emacs/VolatileHighlights
-* yaml-mode
-* yasnippet ~ https://github.com/capitaomorte/yasnippet
-* php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets
-* helm-dash ~ https://github.com/areina/helm-dash
-* quickrun ~ https://github.com/syohex/emacs-quickrun
-* ggtags ~ https://github.com/leoliu/ggtags
-* helm-gtags ~ https://github.com/syohex/emacs-helm-gtags
-* editorconfig ~ https://github.com/editorconfig/editorconfig-emacs
-* tern ~ http://ternjs.net
-* company-tern ~ https://github.com/proofit404/company-tern
-* dired+ ~ http://www.emacswiki.org/emacs/dired+.el
-* emacs-neotree ~ https://github.com/jaypei/emacs-neotree
+* Editor
+  * ace-jump-mode
+  * autopair
+  * company-mode
+  * clean-aident ~ http://www.emacswiki.org/emacs/CleanAutoIndent
+  * dired+ ~ http://www.emacswiki.org/emacs/dired+.el
+  * editorconfig ~ https://github.com/editorconfig/editorconfig-emacs
+  * emacs-neotree ~ https://github.com/jaypei/emacs-neotree
+  * flymake ~ https://github.com/illusori/emacs-flymake
+  * flymake-cursor
+  * flycheck
+  * ggtags ~ https://github.com/leoliu/ggtags
+  * helm ~ https://github.com/emacs-helm/helm
+  * helm-ag ~ https://github.com/syohex/emacs-helm-ag
+  * helm-gtags ~ https://github.com/syohex/emacs-helm-gtags
+  * highlight-parentheses
+  * highlight-symbol
+  * multiple-cursors ~ https://github.com/magnars/multiple-cursors.el
+  * org-cua-dwim
+  * paredit
+  * popup
+  * quickrun ~ https://github.com/syohex/emacs-quickrun
+  * diff-hl  
+  * undo-tree ~ http://www.dr-qubit.org/emacs.php#undo-tree
+  * volatile-highlights ~ http://www.emacswiki.org/emacs/VolatileHighlights
+  * sml-modeline
+  * swiper ~ https://github.com/abo-abo/swiper
+  * swiper-helm ~ https://github.com/abo-abo/swiper-helm
+  * yasnippet ~ https://github.com/capitaomorte/yasnippet  
+* Languages
+  * clojure-snippets ~ https://github.com/swannodette/clojure-snippets
+  * clojure-mode  
+  * cider ~ https://github.com/clojure-emacs/cider
+  * css-eldoc
+  * emmet-mode ~ https://github.com/smihica/emmet-mode
+  * go-mode ~ https://github.com/dominikh/go-mode.el
+  * js2-mode ~ https://github.com/mooz/js2-mode
+  * less-css-mode
+  * php-mode ~ https://github.com/ejmr/php-mode
+  * php-auto-yasnippets ~ https://github.com/ejmr/php-auto-yasnippets  
+  * pymacs
+  * rust-mode ~ https://github.com/rust-lang/rust-mode
+  * rainbow-mode
+  * skewer-less
+  * tern ~ http://ternjs.net
+  * company-tern ~ https://github.com/proofit404/company-tern
+  * web-mode ~ http://web-mode.org
+* Projects
+  * eproject ~ https://github.com/gabrielelanaro/eproject
+  * helm-projectile
+  * projectile
+* Other
+  * csv-mode ~ http://www.emacswiki.org/emacs/CsvMode
+  * deft-multidir ~ https://github.com/dsevilla/deft-multidir
+  * helm-dash ~ https://github.com/areina/helm-dash  
+  * markdown-mode
+  * multi-term ~ http://www.emacswiki.org/emacs/MultiTerm
+  * psvn
+  * yaml-mode
 
 
 OSX installation notes:
