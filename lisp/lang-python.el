@@ -12,13 +12,6 @@
             (flycheck-mode -1) ;; flymake currently
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
-;; ''' autopairing
-(add-hook 'python-mode-hook
-          #'(lambda ()
-              (setq autopair-handle-action-fns
-                    (list #'autopair-default-handle-action
-                          #'autopair-python-triple-quote-action))))
-
 ;; Pyflakes & PEP8 checks
 (add-hook 'python-mode-hook 'flymake-find-file-hook)
 

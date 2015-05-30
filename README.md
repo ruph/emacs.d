@@ -16,7 +16,6 @@ PACKAGES
 --------
 * Editor
   * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
-  * [autopair](https://github.com/capitaomorte/autopair)
   * [company-mode](http://company-mode.github.io)
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [dired+](http://www.emacswiki.org/emacs/dired+.el)

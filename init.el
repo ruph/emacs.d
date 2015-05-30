@@ -7,9 +7,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
 ;;
-(menu-bar-mode  t)                       ;; show the menu...
-(mouse-avoidance-mode 'jump)             ;; mouse ptr when cursor is too close
-(tool-bar-mode -1)                       ;; turn-off toolbar
+(menu-bar-mode  t)                      ;; show the menu...
+(mouse-avoidance-mode 'jump)            ;; mouse ptr when cursor is too close
+(tool-bar-mode -1)                      ;; turn-off toolbar
 
 (setq ;; scrolling
  scroll-margin 3                        ;; do smooth scrolling, ...
@@ -18,14 +18,14 @@
  scroll-down-aggressively nil           ;; ... annoying
  scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
 
-(setq fringe-mode '(1 . 0))              ;; emacs 22+
-(delete-selection-mode 1)                ;; delete the sel with a keyp
+(setq fringe-mode '(1 . 0))             ;; emacs 22+
+(delete-selection-mode 1)               ;; delete the sel with a keyp
 
-(setq search-highlight t                 ;; highlight when searching...
+(setq search-highlight t                ;; highlight when searching...
       query-replace-highlight t)             ;; ...and replacing
-(fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
+(fset 'yes-or-no-p 'y-or-n-p)           ;; enable y/n answers to yes/no
 
-(setq completion-ignore-case t           ;; ignore case when completing...
+(setq completion-ignore-case t          ;; ignore case when completing...
       read-file-name-completion-ignore-case t) ;; ...filenames too
 
 (setq initial-scratch-message "# scratch pad #\n\n")
@@ -39,16 +39,18 @@
            (or (file-remote-p default-directory 'host) system-name)
            (file-name-nondirectory (or (buffer-file-name) default-directory)))))
 
-(put 'narrow-to-region 'disabled nil)    ;; enable...
-(put 'erase-buffer 'disabled nil)        ;; ... useful things
-(file-name-shadow-mode t)                ;; be smart about filenames in mbuf
+(put 'narrow-to-region 'disabled nil)   ;; enable...
+(put 'erase-buffer 'disabled nil)       ;; ... useful things
+(file-name-shadow-mode t)               ;; be smart about filenames in mbuf
 
-(setq inhibit-startup-message t          ;; don't show ...
+(setq inhibit-startup-message t         ;; don't show ...
       inhibit-startup-echo-area-message t)   ;; ... startup messages
-(setq require-final-newline t)           ;; end files with a newline
+(setq require-final-newline t)          ;; end files with a newline
 
-(put 'downcase-region 'disabled nil)     ;; Enable C-x C-l and C-x C-u
-(put 'upcase-region 'disabled nil)       ;; for down/up-case conversions
+(put 'downcase-region 'disabled nil)    ;; Enable C-x C-l and C-x C-u
+(put 'upcase-region 'disabled nil)      ;; for down/up-case conversions
+
+(electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

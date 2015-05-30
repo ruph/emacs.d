@@ -84,7 +84,7 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(autopair highlight-parentheses highlight-symbol cider
+      (append '(highlight-parentheses highlight-symbol cider
                          ace-jump-mode psvn pymacs yaml-mode js2-mode
                          php-mode yasnippet android-mode smarttabs
                          popup undo-tree company-mode helm helm-ag
@@ -143,7 +143,6 @@
 (multi-term-keystroke-setup)
 (add-hook 'term-mode-hook
           (lambda ()
-            (autopair-mode 0)
             (yas-minor-mode 0)))
 
 ;; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
@@ -247,23 +246,6 @@ echo \"tramp initialized\"
 (when (and window-system (eq system-type 'darwin))
   (set-android-path-from-shell-PATH))
 (setq android-mode-sdk-dir (getenv "ANDROID_HOME"))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; Automatic "" ()
-(add-to-list 'load-path "~/.emacs.d/el-get/autopair")
-(require 'autopair)
-(autopair-global-mode)
-(setq autopair-blink nil)
-(set-default 'autopair-dont-activate #'(lambda ()
-                                         (or
-                                          (eq major-mode 'clojure-mode)
-                                          (eq major-mode 'emacs-lisp-mode)
-                                          (eq major-mode 'lisp-mode)
-                                          (eq major-mode 'emacs-interaction-mode)
-                                          (eq major-mode 'scheme-mode)
-                                          (eq major-mode 'slime-repl-mode)
-                                          (eq major-mode 'sldb-mode))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
