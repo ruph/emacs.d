@@ -35,6 +35,9 @@
         (:name dired+           :type elpa)
         (:name swiper           :type elpa)
         (:name swiper-helm      :type elpa)
+        (:name undo-tree        :type elpa)
+        (:name evil             :type elpa)
+        (:name evil-paredit     :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -84,16 +87,15 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(highlight-parentheses highlight-symbol cider
-                         ace-jump-mode psvn pymacs yaml-mode js2-mode
-                         php-mode yasnippet android-mode smarttabs
-                         popup undo-tree company-mode helm helm-ag
-                         multi-term flymake-cursor volatile-highlights
-                         markdown-mode multiple-cursors quickrun diff-hl
-                         web-mode emmet-mode rainbow-mode less-css-mode
-                         skewer-less helm-dash clean-aindent ggtags helm-gtags
-                         editorconfig tern company-tern emacs-neotree
-                         go-mode rust-mode)
+      (append '(helm helm-ag highlight-parentheses highlight-symbol cider
+                     ace-jump-mode psvn pymacs yaml-mode js2-mode
+                     php-mode yasnippet android-mode smarttabs popup
+                     company-mode multi-term flymake-cursor volatile-highlights
+                     markdown-mode multiple-cursors quickrun diff-hl
+                     web-mode emmet-mode rainbow-mode less-css-mode
+                     skewer-less helm-dash clean-aindent ggtags helm-gtags
+                     editorconfig tern company-tern emacs-neotree
+                     go-mode rust-mode)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages

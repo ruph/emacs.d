@@ -456,6 +456,7 @@
 (require 'init-markdown-mode)
 (require 'init-project)
 (require 'init-gtags)
+(require 'init-evil)
 
 
 ;; PRIVATE SETTINGS

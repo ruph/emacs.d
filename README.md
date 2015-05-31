@@ -20,6 +20,8 @@ PACKAGES
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [dired+](http://www.emacswiki.org/emacs/dired+.el)
   * [editorconfig](https://github.com/editorconfig/editorconfig-emacs)
+  * [evil](http://www.emacswiki.org/emacs/Evil)
+  * [evil-paredit](https://github.com/roman/evil-paredit)
   * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
   * [flymake](https://github.com/illusori/emacs-flymake)
   * [flymake-cursor](http://www.emacswiki.org/emacs/FlymakeCursor)
