@@ -83,7 +83,7 @@ OSX installation notes:
 * brew install global --with-exuberant-ctags
 * brew install editorconfig
 * npm install -g tern
-* npm install -g eslint babel-eslint
+* npm install -g eslint babel-eslint eslint-plugin-react
 
 
 CHEAT SHEET
