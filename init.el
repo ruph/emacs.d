@@ -57,7 +57,7 @@
 ;; Theme
 (load-theme 'wombat)
 (set-cursor-color "red")
-
+(set-face-attribute 'region nil :background "#666")
 
 ;; Spellchecker
 (setq-default ispell-program-name "aspell")
