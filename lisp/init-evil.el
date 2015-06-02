@@ -48,9 +48,11 @@
 (define-key evil-normal-state-map (kbd "M-.") 'evil-undefine)
 (define-key evil-normal-state-map (kbd "M-:") 'evil-undefine)
 
-
 (loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
                               (compilation-mode . emacs)
+                              (cider-mode      . emacs)
+                              (cider-repl-mode . emacs)
+                              (cider-stacktrace-mode . emacs)
                               (neotree-mode    . emacs)
                               (pylookup-mode   . emacs)
                               (git-rebase-mode . emacs)
@@ -70,7 +72,40 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; paredit in evil
+;;; evil comint
+(defun kill-comint ()
+  (interactive)
+  (comint-interrupt-subjob)
+  (popwin:close-popup-window))
+(evil-define-key 'normal comint-mode-map (kbd "C-q") 'kill-comint)
+(evil-define-key 'normal comint-mode-map (kbd "q") 'popwin:close-popup-window)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;;; C-q as general purpose escape key sequence.
+(defun my-esc (prompt)
+"Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding. "
+  (cond
+   ((or (evil-insert-state-p)
+        (evil-normal-state-p)
+        (evil-replace-state-p)
+        (evil-visual-state-p)) [escape])
+   (t (kbd "C-q"))))
+(define-key key-translation-map (kbd "C-q") 'my-esc)
+(define-key evil-operator-state-map (kbd "<C-q>") 'keyboard-quit)
+(set-quit-char "C-q")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; evil ace jump
+(define-key evil-normal-state-map "  " 'ace-jump-mode)
+(define-key evil-normal-state-map " k" 'ace-jump-char-mode)
+(define-key evil-normal-state-map " l" 'ace-jump-line-mode)
+(define-key evil-normal-state-map " m" 'evil-jump-item)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; evil paredit in evil
 (require 'evil-paredit)
 (add-hook 'emacs-lisp-mode-hook       'evil-paredit-mode)
 (add-hook 'lisp-mode-hook             'evil-paredit-mode)
