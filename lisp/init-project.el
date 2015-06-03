@@ -15,20 +15,20 @@
 ;; EPROJECT
 (require 'eproject)
 
+(setq prj-set-compilation-frame t)
+
 ;; remove pesky M-left/right
-(defun prj-setup-all ()
+(setq prj-keybindings
+      '(([S-C-f5] eproject-setup-toggle  always)
+        ([C-f5]   eproject-dired)))
+
+;; advising eproject setup to have no evil
+(defun no-evil-in-eproject-setup (orig-fun &rest args)
   (progn
-    (prj-setkeys)
-    (prj-setmenu)
-    (prj-settitle)
-    (prj-config-print)
-    (message ">> EPROJECT setup" )
-    (keymap-unset-key [M-left] "eproject-mode")
-    (keymap-unset-key [M-right] "eproject-mode")
-    (keymap-unset-key [f5] "eproject-mode")
-    ))
-(global-set-key (kbd "C-S-<f5>") 'eproject-setup-toggle)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (apply orig-fun args)
+    (turn-off-evil-mode)))
+(advice-add 'eproject-setup :around #'no-evil-in-eproject-setup)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; EPROJECT doing HELM

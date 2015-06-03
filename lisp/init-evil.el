@@ -55,6 +55,7 @@
                               (cider-stacktrace-mode . emacs)
                               (neotree-mode    . emacs)
                               (pylookup-mode   . emacs)
+                              (read-only-mode  . emacs)
                               (git-rebase-mode . emacs)
                               (term-mode       . emacs)
                               (eshell-mode     . emacs)
@@ -99,9 +100,9 @@
 
 ;; evil ace jump
 (define-key evil-normal-state-map "  " 'ace-jump-mode)
-(define-key evil-normal-state-map " k" 'ace-jump-char-mode)
+(define-key evil-normal-state-map " c" 'ace-jump-char-mode)
 (define-key evil-normal-state-map " l" 'ace-jump-line-mode)
-(define-key evil-normal-state-map " m" 'evil-jump-item)
+(define-key evil-normal-state-map " j" 'evil-jump-item)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
