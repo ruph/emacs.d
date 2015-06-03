@@ -448,6 +448,7 @@
 (require 'lang-clojure)
 (require 'lang-javascript)
 (require 'lang-php)
+(require 'lang-go)
 (require 'init-web-mode)
 (require 'init-emmet-mode)
 (require 'init-flycheck)
