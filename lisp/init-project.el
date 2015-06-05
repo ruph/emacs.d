@@ -9,6 +9,13 @@
 
 ;; PROJECTILE doing AG
 (global-set-key (kbd "S-C-<f7>") 'helm-projectile-ag)
+
+;; PROJECTILE doing EPROJECT
+(setq projectile-project-root-files-bottom-up
+      (push "eproject.cfg" projectile-project-root-files-bottom-up))
+
+;; Find file in project
+(global-set-key (kbd "S-C-r") 'helm-projectile-find-file)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -31,7 +38,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EPROJECT doing HELM
+;; EPROJECT doing HELM for opened projects
 (defun helm-eproject-resource ()
   "Enumerate files belonging to the eproject"
   (interactive)
@@ -51,27 +58,7 @@
         (type . file)))
      nil "Switch to file: " nil nil)))
 (global-set-key (kbd "S-C-t") 'helm-eproject-resource)
-
-;; find files recursively from project dir
-(defun helm-eproject-recursive-resources ()
-  "Enumerate files belonging to the eproject"
-  (interactive)
-  (let ((helm-ff-transformer-show-only-basename nil))
-    (helm
-     '(((name . "All files under eproject root dir:")
-        (init . (lambda ()
-                  (with-current-buffer (helm-candidate-buffer 'local)
-                    (insert
-                     (shell-command-to-string
-                      (format "find %s -type d \\( -name .svn -o -name .git -o -name .hg \\) -prune -o -type f -print" (cadr prj-current))))
-                    )))
-        (candidates-in-buffer)
-        (mode-line . helm-generic-file-mode-line-string)
-        (help-message . helm-generic-file-help-message)
-        (type . file)))
-     nil "Switch to file: " nil nil)))
-(global-set-key (kbd "S-C-r") 'helm-eproject-recursive-resources)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (provide 'init-project)
