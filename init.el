@@ -51,6 +51,8 @@
 (put 'upcase-region 'disabled nil)      ;; for down/up-case conversions
 
 (electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
+
+(global-unset-key (kbd "C-z"))          ;; needed elsewhere
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

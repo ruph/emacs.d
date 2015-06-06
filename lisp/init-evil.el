@@ -1,6 +1,7 @@
 ;; EVIL
 (require 'evil)
-(evil-mode 1)
+(evil-mode 0)
+(global-set-key (kbd "C-z") 'turn-on-evil-mode)
 
 ;; last cha in selection
 (setq evil-want-visual-char-semi-exclusive t)
@@ -59,6 +60,7 @@
                               (git-rebase-mode . emacs)
                               (term-mode       . emacs)
                               (eshell-mode     . emacs)
+                              (eww-mode        . emacs)
                               (help-mode       . emacs)
                               (helm-grep-mode  . emacs)
                               (grep-mode       . emacs)
@@ -103,17 +105,6 @@
 (define-key evil-normal-state-map " c" 'ace-jump-char-mode)
 (define-key evil-normal-state-map " l" 'ace-jump-line-mode)
 (define-key evil-normal-state-map " j" 'evil-jump-item)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; evil paredit in evil
-(require 'evil-paredit)
-(add-hook 'emacs-lisp-mode-hook       'evil-paredit-mode)
-(add-hook 'lisp-mode-hook             'evil-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook 'evil-paredit-mode)
-(add-hook 'scheme-mode-hook           'evil-paredit-mode)
-(add-hook 'slime-repl-mode-hook       'evil-paredit-mode)
-(add-hook 'clojure-mode-hook          'evil-paredit-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

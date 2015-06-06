@@ -37,7 +37,6 @@
         (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
         (:name evil             :type elpa)
-        (:name evil-paredit     :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
