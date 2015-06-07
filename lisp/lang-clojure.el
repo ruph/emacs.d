@@ -2,20 +2,19 @@
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
+;; ... and clojurescript
+(add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
+
+;; ...
 (add-hook 'clojure-mode-hook
           (lambda ()
             (local-set-key (kbd "RET") 'newline-and-indent)
+            (local-unset-key (kbd "C-:")) ;; needed for swiper
             (set (make-local-variable 'company-backends)
                  '((company-etags company-dabbrev-code company-yasnippet)))
             ))
 
-
-;; Clojurescript
-(add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
-
-
-;; Paredit
-;; Curly & square brackets in paredit
+;; Paredit - curly & square brackets in paredit
 (defun setup-mode-paredit (mode-map)
   (define-key mode-map
     (kbd "DEL") 'paredit-backward-delete)
@@ -47,12 +46,33 @@
 
 ;; Cider
 (require 'cider)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(setq nrepl-hide-special-buffers t)
 (add-hook 'cider-repl-mode-hook
           (lambda ()
-            (paredit-mode +1)
-            (setq cider-repl-use-pretty-printing t)))
+            (paredit-mode +1)))
+
+;; REPL history file
+(setq cider-repl-history-file "~/.emacs.d/cider-history")
+
+;; nice pretty printing
+(setq cider-repl-use-pretty-printing t)
+
+;; nicer font lock in REPL
+(setq cider-repl-use-clojure-font-lock t)
+
+;; result prefix for the REPL
+(setq cider-repl-result-prefix ";; => ")
+
+;; never ending REPL history
+(setq cider-repl-wrap-history t)
+
+;; looong history
+(setq cider-repl-history-size 3000)
+
+;; eldoc for clojure
+(add-hook 'cider-mode-hook #'eldoc-mode)
+
+;; error buffer not popping up
+(setq cider-show-error-buffer nil)
 
 (add-hook 'cider-repl-mode-hook #'company-mode)
 (add-hook 'cider-mode-hook #'company-mode)

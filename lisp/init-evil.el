@@ -96,7 +96,7 @@
    (t (kbd "C-q"))))
 (define-key key-translation-map (kbd "C-q") 'my-esc)
 (define-key evil-operator-state-map (kbd "<C-q>") 'keyboard-quit)
-(set-quit-char "C-q")
+(set-quit-char ?q)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

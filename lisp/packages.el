@@ -193,7 +193,6 @@ echo \"tramp initialized\"
 
 
 ;; the modeline
-(add-to-list 'load-path "~/.emacs.d/el-get/sml-modeline")
 (line-number-mode t)                     ;; show line numbers
 (column-number-mode t)                   ;; show column numbers
 (size-indication-mode t)                 ;; show file size (emacs 22+)
