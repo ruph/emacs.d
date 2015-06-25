@@ -17,8 +17,6 @@
 ;; Paredit - curly & square brackets in paredit
 (defun setup-mode-paredit (mode-map)
   (define-key mode-map
-    (kbd "DEL") 'paredit-backward-delete)
-  (define-key mode-map
     (kbd "{") 'paredit-open-curly)
   (define-key mode-map
     (kbd "}") 'paredit-close-curly)
