@@ -115,7 +115,7 @@
 
 
 ;; clean-aindent
-(set 'clean-aindent-is-simple-indent t)
+(set 'clean-aindent-indent t)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
