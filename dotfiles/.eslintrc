@@ -4,8 +4,8 @@
     "browser": true,
     "es6": true,
     "node": true,
-	"amd", true,
-	"jquery", true
+    "amd": true,
+    "jquery": true
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
