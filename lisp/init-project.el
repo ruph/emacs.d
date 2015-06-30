@@ -9,6 +9,10 @@
 
 ;; PROJECTILE doing AG
 (global-set-key (kbd "S-C-<f7>") 'helm-projectile-ag)
+(custom-set-variables
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point 'symbol))
 
 ;; PROJECTILE doing EPROJECT
 (setq projectile-project-root-files-bottom-up
