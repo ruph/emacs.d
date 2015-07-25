@@ -115,7 +115,9 @@
 
 
 ;; clean-aindent
-(set 'clean-aindent-indent t)
+(electric-indent-mode nil)
+(clean-aindent-mode t)
+(setq clean-aindent-is-simple-indent t)
 (define-key global-map (kbd "RET") 'newline-and-indent)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -347,9 +349,7 @@ echo \"tramp initialized\"
 ;; Deft NOTES (markdown)
 (add-to-list 'load-path "~/.emacs.d/el-get/deft-multidir/")
 (require 'deft)
-(if (eq system-type 'windows-nt)
-    (setq deft-directories '("d:\\My Dropbox\\Notes" "~/Dropbox/Notes/AdPlatform"))
-  (setq deft-directories '("~/Dropbox/Notes" "~/Dropbox/Notes/AdPlatform")))
+(setq deft-directories '("~/Dropbox/Notes"))
 (setq deft-extension "txt")
 (setq deft-use-filename-as-title t)
 (setq deft-text-mode 'gfm-mode)
