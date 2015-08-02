@@ -37,6 +37,7 @@
         (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
         (:name evil             :type elpa)
+        (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -94,7 +95,7 @@
                      web-mode emmet-mode rainbow-mode less-css-mode
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
-                     go-mode rust-mode)
+                     go-mode rust-mode writeroom-mode)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -116,9 +117,7 @@
 
 ;; clean-aindent
 (electric-indent-mode nil)
-(clean-aindent-mode t)
 (setq clean-aindent-is-simple-indent t)
-(define-key global-map (kbd "RET") 'newline-and-indent)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -410,6 +409,19 @@ echo \"tramp initialized\"
                                      (list (cons ?* "w") (cons ?- "w"))))
       (turn-on-font-lock))))
   "Mode for arff-files.")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Writeroom
+(with-eval-after-load 'writeroom-mode
+  (setq writeroom-extra-line-spacing 0.4)
+  (setq writeroom-global-effects
+        '(writeroom-toggle-alpha writeroom-toggle-menu-bar-lines
+                                 writeroom-toggle-tool-bar-lines
+                                 writeroom-toggle-vertical-scroll-bars))
+  (setq writeroom-maximize-window t))
+(add-hook 'writeroom-mode-hook (lambda () (progn
+                                            (text-scale-increase 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
