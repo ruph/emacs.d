@@ -24,14 +24,11 @@
 
 ;; Extra recipes
 (setq el-get-sources
-      '((:name clojure-mode     :type elpa)
-        (:name paredit          :type elpa)
+      '((:name paredit          :type elpa)
         (:name sml-modeline     :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
         (:name css-eldoc        :type elpa)
-        (:name projectile       :type elpa)
-        (:name helm-projectile  :type elpa)
         (:name dired+           :type elpa)
         (:name swiper           :type elpa)
         (:name swiper-helm      :type elpa)
@@ -87,9 +84,9 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(helm helm-ag highlight-parentheses highlight-symbol cider
-                     ace-jump-mode psvn pymacs yaml-mode js2-mode
-                     php-mode yasnippet android-mode smarttabs popup
+      (append '(helm helm-ag highlight-parentheses highlight-symbol projectile
+                     ace-jump-mode psvn pymacs yaml-mode js2-mode clojure-mode
+                     php-mode yasnippet android-mode smarttabs popup cider
                      company-mode multi-term flymake-cursor volatile-highlights
                      markdown-mode multiple-cursors quickrun diff-hl
                      web-mode emmet-mode rainbow-mode less-css-mode
