@@ -8,7 +8,6 @@
 ;; ...
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (local-set-key (kbd "RET") 'newline-and-indent)
             (local-unset-key (kbd "C-:")) ;; needed for swiper
             (set (make-local-variable 'company-backends)
                  '((company-etags company-dabbrev-code company-yasnippet)))

@@ -19,7 +19,6 @@
           (lambda ()
             (setq indent-tabs-mode t)
             (setq tab-width 4)
-            (local-set-key (kbd "RET") 'newline-and-indent)
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
             (flycheck-select-checker 'php)

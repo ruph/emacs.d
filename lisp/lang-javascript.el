@@ -13,7 +13,6 @@
             ;; (setq indent-tabs-mode t) ;; .editorconfig
             (setq tab-width 4)
             (setq js2-indent-level 4)
-            (local-set-key (kbd "RET") 'newline-and-indent)
             (setq js2-missing-semi-one-line-override t)
             (local-unset-key (kbd "M-j")) ;; jump to window below conflict
             (yas-activate-extra-mode 'js-mode)
@@ -32,7 +31,6 @@
 (add-hook 'js-mode-hook
           (lambda ()
             (setq tab-width 4)
-            (local-set-key (kbd "RET") 'newline-and-indent)
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
             (yas-activate-extra-mode 'js2-mode)
             (tern-mode t)
