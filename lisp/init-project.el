@@ -57,7 +57,7 @@
                        (insert (format "%s/%s\n" (cadr prj-current) (car item))))
                      prj-files))))
         (candidates-in-buffer)
-        (mode-line . helm-generic-file-mode-line-string)
+        ;(mode-line . helm-generic-file-mode-line-string) ; helm-interpret-value error
         (help-message . helm-generic-file-help-message)
         (type . file)))
      nil "Switch to file: " nil nil)))
