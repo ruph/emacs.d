@@ -448,6 +448,7 @@
 (require 'init-project)
 (require 'init-gtags)
 (require 'init-evil)
+(require 'init-term)
 
 
 ;; PRIVATE SETTINGS

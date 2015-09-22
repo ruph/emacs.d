@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-My emacs v24.4 settings, including:
+My emacs v24.5 settings, including:
 
 * project management with eproject & projectile
 * python with flymake
