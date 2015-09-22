@@ -10,9 +10,12 @@
 ;; TERM shortcuts
 (defun term-toggle-mode ()
   (interactive)
-  (if (term-in-line-mode) 
+  (if (term-in-line-mode)
       (term-char-mode)
-      (term-line-mode)))
+	(term-line-mode)))
+
+(defun term-send-kill-line ()
+  (interactive) (call-interactively 'kill-line) (term-send-raw-string "\C-k"))
 (defun term-send-Cright () (interactive) (term-send-raw-string "\ef"))
 (defun term-send-Cleft  () (interactive) (term-send-raw-string "\eb"))
 (add-hook 'term-mode-hook
@@ -24,7 +27,7 @@
               (define-key term-raw-map (kbd "M-<left>") 'term-send-Cleft)
               (define-key term-raw-map (kbd "M-<backspace>") 'term-send-backward-kill-word)
               (define-key term-raw-map (kbd "M-d") 'term-send-forward-kill-word)
-              (define-key term-raw-map (kbd "C-k") 'kill-line)
+              (define-key term-raw-map (kbd "C-k") 'term-send-kill-line)
               (define-key term-raw-map (kbd "C-y") 'term-paste)
               (define-key term-raw-map (kbd "s-v") 'term-paste)
               (define-key term-raw-map (kbd "M-w") 'term-copy-old-input)
