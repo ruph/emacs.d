@@ -89,7 +89,7 @@
                      php-mode yasnippet android-mode smarttabs popup cider
                      company-mode multi-term flymake-cursor volatile-highlights
                      markdown-mode multiple-cursors quickrun diff-hl
-                     web-mode emmet-mode rainbow-mode less-css-mode
+                     web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
                      go-mode rust-mode writeroom-mode)
