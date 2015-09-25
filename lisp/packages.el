@@ -118,6 +118,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; SQL
+(defun sql-connect-bookmark (product connection)
+  ;; remember to set the sql-product, otherwise, it will fail for the first time
+  ;; you call the function -> http://lists.gnu.org/archive/html/bug-gnu-emacs/2014-12/msg00980.html
+  ;; bookmarks in private.el -> https://truongtx.me/2014/08/23/setup-emacs-as-an-sql-database-client/
+  (setq sql-product product)
+  (sql-connect connection))
+
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+            (toggle-truncate-lines t)))
+
 ;; YML
 (add-to-list 'load-path "~/.emacs.d/el-get/yaml-mode")
 (require 'yaml-mode)
