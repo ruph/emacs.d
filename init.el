@@ -174,6 +174,7 @@
 (setq cua-rectangle-mark-key (kbd "S-C-<return>"))
 (cua-mode t)
 
+
 ;; fullscreen in osx (emacs 24.3+)
 (defun toggle-fullscreen ()
   "Toggle full screen"
@@ -193,7 +194,6 @@
 ;; especially for windows
 (if (eq system-type 'windows-nt)
     (progn
-      (set-face-attribute 'default nil :font "ProggyCleanTT CE 12")
       (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
             cua-keep-region-after-copy t) ;; Standard Windows behaviour
       (transient-mark-mode 1)              ;; No region when it is not highlighted
