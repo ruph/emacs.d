@@ -84,7 +84,7 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(helm helm-ag highlight-parentheses highlight-symbol projectile
+      (append '(helm helm-ag rainbow-delimiters highlight-symbol projectile
                      ace-jump-mode psvn pymacs yaml-mode js2-mode clojure-mode
                      php-mode yasnippet android-mode smarttabs popup cider
                      company-mode multi-term flymake-cursor volatile-highlights
@@ -249,13 +249,28 @@
 
 
 ;; Highlight ()
-(add-to-list 'load-path "~/.emacs.d/el-get/highlight-parentheses")
-(require 'highlight-parentheses)
-(define-globalized-minor-mode global-highlight-parentheses-mode
-  highlight-parentheses-mode
-  (lambda ()
-    (highlight-parentheses-mode t)))
-(global-highlight-parentheses-mode t)
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; Show Paren Mode
+(require 'paren)
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#def")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+
+(defadvice show-paren-function
+	(after show-matching-paren-offscreen activate)
+  "If the matching paren is offscreen, show the matching line in the
+        echo area. Has no effect if the character before point is not of
+        the syntax class ')'"
+  (interactive)
+  (let* ((cb (char-before (point)))
+		 (matching-text (and cb
+							 (char-equal (char-syntax cb) ?\) )
+							 (blink-matching-open))))
+	(when matching-text (message matching-text))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

@@ -29,7 +29,7 @@ PACKAGES
   * [helm](https://github.com/emacs-helm/helm)
   * [helm-ag](https://github.com/syohex/emacs-helm-ag)
   * [helm-gtags](https://github.com/syohex/emacs-helm-gtags)
-  * [highlight-parentheses](https://github.com/tsdh/highlight-parentheses.el)
+  * [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
   * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
   * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
   * [org-cua-dwim](https://github.com/mlf176f2/org-cua-dwim.el)
