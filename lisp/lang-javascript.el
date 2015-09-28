@@ -21,11 +21,11 @@
                  '((company-dabbrev-code company-tern company-keywords company-yasnippet)))
             ))
 
-;; some jsx support
-(defun modify-syntax-table-for-jsx ()
-  (modify-syntax-entry ?< "(>")
-  (modify-syntax-entry ?> ")<"))
-(add-hook 'js2-mode-hook 'modify-syntax-table-for-jsx)
+;; some jsx support -- causes problems with `<` in `if` 
+;(defun modify-syntax-table-for-jsx ()
+;  (modify-syntax-entry ?< "(>")
+;  (modify-syntax-entry ?> ")<"))
+;(add-hook 'js2-mode-hook 'modify-syntax-table-for-jsx)
 
 ;; default js-mode
 (add-hook 'js-mode-hook
