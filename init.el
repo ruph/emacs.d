@@ -449,7 +449,7 @@
 (require 'init-gtags)
 (require 'init-evil)
 (require 'init-term)
-
+(require 'init-irc)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
