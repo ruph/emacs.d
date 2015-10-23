@@ -73,12 +73,14 @@ PACKAGES
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
 
 
-OS X installation notes:
+OS X installation notes
+------------------------
 1. Download Emacs from http://emacsformacosx.com
 2. Run it from shell $ `emacs -nw --debug-init`
 3. Close it with C-x C-c
 
-Setting up the environment:
+## Setting up the environment ##
+
 1. Fork and clone this repo somewhere (e.g. ~/Tools/emacs.d)
 2. $ `brew install hardlink-osx` (it's for creating directory hardlinks on osx; command `hln` on Linux this can be done with normal `ln`)
 3. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
@@ -90,19 +92,20 @@ Setting up the environment:
 9. wait for everything else to get installed
 10. _enjoy._
 
-Additional packages:
-* brew install aspell
-* brew install the_silver_searcher
-* brew install --HEAD ctags
-* brew install global --with-exuberant-ctags
-* brew install editorconfig
-* npm install -g tern
-* npm install -g eslint babel-eslint eslint-plugin-react
-* pip install flake8
+## Additional packages ##
+
+* `brew install aspell`
+* `brew install the_silver_searcher`
+* `brew install --HEAD ctags`
+* `brew install global --with-exuberant-ctags`
+* `brew install editorconfig`
+* `npm install -g tern`
+* `npm install -g eslint babel-eslint eslint-plugin-react`
+* `pip install flake8`
+
 
 CHEAT SHEET
 ------------
-
 
 ### FILES ###
 * **C+x f** - list recent open files
