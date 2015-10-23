@@ -79,10 +79,10 @@ OS X installation notes
 2. Run it from shell $ `emacs -nw --debug-init`
 3. Close it with C-x C-c
 
-### Setting up the environment ###
+#### Setting up the environment ####
 
 1. Fork and clone this repo somewhere (e.g. ~/Tools/emacs.d)
-2. $ `brew install hardlink-osx` (it's for creating directory hardlinks on osx; command `hln` on Linux this can be done with normal `ln`)
+2. $ `brew install hardlink-osx` (gives you `hln` and it's for creating directory hardlinks on osx; on Linux this can be done with normal `ln`)
 3. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
 4. $ `hln ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
 5. $ `hln ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`
@@ -92,7 +92,7 @@ OS X installation notes
 9. wait for everything else to get installed
 10. _enjoy._
 
-### Additional packages ###
+#### Additional packages ####
 
 * `brew install aspell`
 * `brew install the_silver_searcher`
