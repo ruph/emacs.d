@@ -42,14 +42,6 @@
                :pkgname "emacsmirror/csv-mode"
                :compile ("csv-mode.el")
                :features csv-mode)
-        (:name flymake
-               :website "https://github.com/illusori/emacs-flymake"
-               :description "This project is a fork of Pavel Kobyakov's excellent flymake.el."
-               :type github
-               :pkgname "illusori/emacs-flymake"
-               :load "flymake.el"
-               :compile ("flymake.el")
-               :features flymake)
         (:name yasnippets/clojure-mode
                :website "https://github.com/swannodette/clojure-snippets"
                :description "Clojure-mode yasnippets"
@@ -86,8 +78,8 @@
 (setq my-el-get-packages
       (append '(helm helm-ag rainbow-delimiters highlight-symbol projectile
                      ace-jump-mode psvn pymacs yaml-mode js2-mode clojure-mode
-                     php-mode yasnippet android-mode smarttabs popup cider
-                     company-mode multi-term flymake-cursor volatile-highlights
+                     php-mode yasnippet android-mode popup cider
+                     company-mode multi-term volatile-highlights
                      markdown-mode multiple-cursors quickrun diff-hl
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
@@ -342,9 +334,9 @@
 
 
 ;; SmartTabs
-(require 'smart-tabs-mode)
-(smart-tabs-insinuate 'python 'javascript)
-(smart-tabs-advice js2-indent-line js2-basic-offset)
+;(require 'smart-tabs-mode)
+;(smart-tabs-insinuate 'python 'javascript)
+;(smart-tabs-advice js2-indent-line js2-basic-offset)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

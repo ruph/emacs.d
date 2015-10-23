@@ -22,7 +22,6 @@
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
             (flycheck-select-checker 'php)
-            (setq flymake-gui-warnings-enabled nil)
             (php-completion)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -32,11 +31,6 @@
 (setq php-auto-yasnippet-php-program
       "~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; No flymake for html
-(delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

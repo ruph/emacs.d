@@ -3,14 +3,14 @@ WHAT IS THIS?
 My emacs v24.5 settings, including:
 
 * project management with eproject & projectile
-* python with flymake
+* python with flycheck
 * php, html, css with web-mode, css-mode
 * javascript and jsx through js2-mode, eslint and ternjs
 * clojure & clojurescript with paredit
 * autocomplete, snippets, tags, suggestions
 * ... and everything else.
 
-Should work well on osx (http://emacsformacosx.com/). COPY/PASTE freely :) 
+Should work well on OS X (http://emacsformacosx.com/). COPY/PASTE freely :)
 
 PACKAGES
 --------
@@ -22,8 +22,6 @@ PACKAGES
   * [editorconfig](https://github.com/editorconfig/editorconfig-emacs)
   * [evil](http://www.emacswiki.org/emacs/Evil)
   * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
-  * [flymake](https://github.com/illusori/emacs-flymake)
-  * [flymake-cursor](http://www.emacswiki.org/emacs/FlymakeCursor)
   * [flycheck](http://www.flycheck.org)
   * [ggtags](https://github.com/leoliu/ggtags)
   * [helm](https://github.com/emacs-helm/helm)
@@ -75,7 +73,24 @@ PACKAGES
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
 
 
-OSX installation notes:
+OS X installation notes:
+1. Download Emacs from http://emacsformacosx.com
+2. Run it from shell $ `emacs -nw --debug-init`
+3. Close it with C-x C-c
+
+Setting up the environment:
+1. Fork and clone this repo somewhere (e.g. ~/Tools/emacs.d)
+2. $ `brew install hardlink-osx` (it's for creating directory hardlinks on osx; command `hln` on Linux this can be done with normal `ln`)
+3. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
+4. $ `hln ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
+5. $ `hln ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`
+6. $ `emacs -nw --debug-init`
+7. wait for el-get to get installed than close Emacs (C-x C-c) and start it again
+8. $ `emacs -nw --debug-init`
+9. wait for everything else to get installed
+10. _enjoy._
+
+Additional packages:
 * brew install aspell
 * brew install the_silver_searcher
 * brew install --HEAD ctags
@@ -83,7 +98,7 @@ OSX installation notes:
 * brew install editorconfig
 * npm install -g tern
 * npm install -g eslint babel-eslint eslint-plugin-react
-
+* pip install flake8
 
 CHEAT SHEET
 ------------
@@ -162,8 +177,8 @@ CHEAT SHEET
 * **C-c SPC** - autocomplete
 * **M+n**     - next autocomplete option
 * **M+p**     - previous autocomplete option
-* **F5**      - go to next error (flymake & flycheck)
-* **S+F5**    - go to previous error (flymake & flycheck)
+* **F5**      - go to next error (flycheck)
+* **S+F5**    - go to previous error (flycheck)
 * **M+.**     - jump to definition
 * **C+.**     - show arguments (php-mode)
 * **C+c C+y** - expand standard PHP function (yasnippet)

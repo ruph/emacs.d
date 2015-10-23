@@ -131,7 +131,6 @@
 (setq-default tab-width 4)
 
 ;; OSX has problems with PATH when running Emacs.app
-;; = flymake doesn't work :-/
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -255,7 +254,7 @@
   (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
   (setq tab-width 4)
   (setq indent-tabs-mode t)  ; use spaces only if nil
-)
+  )
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -458,3 +457,42 @@
 
 
 (provide 'init)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point (quote symbol))
+ '(helm-gtags-auto-update t)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-path-style (quote root))
+ '(helm-gtags-prefix-key "g")
+ '(helm-gtags-pulse-at-cursor t)
+ '(helm-gtags-suggested-key-mapping t)
+ '(helm-gtags-use-input-at-cursor t)
+ '(safe-local-variable-values
+   (quote
+	((buffer-file-coding-system . utf-8)
+	 (eval setenv "GOPATH" "/Users/ruph/Workspace/golang")
+	 (helm-gtags-mode . 1)
+	 (ggtags-mode . 1)
+	 (eval progn
+		   (setq-default company-backends
+						 (quote
+						  ((company-capf company-gtags company-dabbrev-code company-files company-yasnippet))))
+		   (ggtags-mode 1)
+		   (helm-gtags-mode 1)
+		   (global-set-key
+			(kbd "C-c SPC")
+			(quote company-gtags)))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-button ((t (:underline "dark gray" :weight bold))))
+ '(erc-input-face ((t (:foreground "indian red"))))
+ '(erc-my-nick-face ((t (:foreground "indian red" :weight bold))))
+ '(erc-nick-default-face ((t (:foreground "dark gray" :weight bold)))))
