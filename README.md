@@ -3,8 +3,8 @@ WHAT IS THIS?
 My emacs v24.5 settings, including:
 
 * project management with eproject & projectile
-* python multi-version with pyenv, debugging with ipdb and flycheck
-* php, html, css with web-mode, css-mode
+* python with pyenv multi-version, debugging with ipdb and flycheck for syntax
+* php, html, css support with all relevant modes (web-mode helps a lot)
 * javascript and jsx through js2-mode, eslint and ternjs
 * clojure & clojurescript with paredit
 * autocomplete, snippets, tags, suggestions
@@ -12,8 +12,8 @@ My emacs v24.5 settings, including:
 
 Should work well on OS X (http://emacsformacosx.com/). COPY/PASTE freely :)
 
-PACKAGES
---------
+EMACS PACKAGES
+--------------
 * Editor
   * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
   * [company-mode](http://company-mode.github.io)
@@ -71,26 +71,26 @@ PACKAGES
   * [multi-term](http://www.emacswiki.org/emacs/MultiTerm)
   * [psvn](http://www.xsteve.at/prg/emacs/psvn.el)
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
+  * [writeroom-mode](https://github.com/joostkremers/writeroom-mode)
 
 
 OS X installation notes
 ------------------------
 1. Download Emacs from http://emacsformacosx.com
-2. Run it from shell $ `emacs -nw --debug-init`
+2. Run it from shell $ `emacs -nw`
 3. Close it with C-x C-c
 
 #### Setting up the environment ####
 
-1. Fork and clone this repo somewhere (e.g. ~/Tools/emacs.d)
-2. $ `brew install hardlink-osx` (gives you `hln` and it's for creating directory hardlinks on osx; on Linux normal `ln -s` works)
-3. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
-4. $ `hln ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
-5. $ `hln ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`
-6. $ `emacs -nw --debug-init`
-7. wait for el-get to get installed than close Emacs (C-x C-c) and start it again
-8. $ `emacs -nw --debug-init`
-9. wait for everything else to get installed
-10. _enjoy._
+1. Fork and clone this repository somewhere (e.g. ~/Tools/emacs.d)
+2. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
+3. $ `ln -s ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
+4. $ `ln -s ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`
+5. $ `emacs -nw --debug-init` # so you'll get the debug output in case of meltdown
+6. wait for el-get to get installed than close Emacs (C-x C-c) and start it again
+7. $ `emacs -nw --debug-init`
+8. wait for everything else to get installed than close it again
+9. now you can run it as `emacs` and _enjoy_.
 
 #### Additional packages ####
 
@@ -206,3 +206,6 @@ CHEAT SHEET
 * **C-c C-m** - new note (in deft)
 * **C-c C-r** - rename note (in deft)
 * **C-c C-d** - delete note (in deft)
+
+
+_peace._
