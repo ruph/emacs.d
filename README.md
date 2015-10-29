@@ -3,7 +3,7 @@ WHAT IS THIS?
 My emacs v24.5 settings, including:
 
 * project management with eproject & projectile
-* python with flycheck
+* python multi-version with pyenv, debugging with ipdb and flycheck
 * php, html, css with web-mode, css-mode
 * javascript and jsx through js2-mode, eslint and ternjs
 * clojure & clojurescript with paredit
@@ -82,7 +82,7 @@ OS X installation notes
 #### Setting up the environment ####
 
 1. Fork and clone this repo somewhere (e.g. ~/Tools/emacs.d)
-2. $ `brew install hardlink-osx` (gives you `hln` and it's for creating directory hardlinks on osx; on Linux this can be done with normal `ln`)
+2. $ `brew install hardlink-osx` (gives you `hln` and it's for creating directory hardlinks on osx; on Linux normal `ln -s` works)
 3. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
 4. $ `hln ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
 5. $ `hln ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`

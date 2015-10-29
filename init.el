@@ -9,7 +9,8 @@
 ;;
 (menu-bar-mode  t)                      ;; show the menu...
 (mouse-avoidance-mode 'jump)            ;; mouse ptr when cursor is too close
-(tool-bar-mode -1)                      ;; turn-off toolbar
+(if (fboundp 'tool-bar-mode)
+	(tool-bar-mode -1))                 ;; turn-off toolbar
 
 (setq ;; scrolling
  scroll-margin 3                        ;; do smooth scrolling, ...
