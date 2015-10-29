@@ -82,7 +82,7 @@ OS X installation notes
 
 #### Setting up the environment ####
 
-1. Fork and clone this repository somewhere (e.g. ~/Tools/emacs.d)
+1. Clone this repository somewhere (e.g. ~/Tools/emacs.d)
 2. $ `ln ~/Tools/emacs.d/init.el ~/.emacs.d/init.el`
 3. $ `ln -s ~/Tools/emacs.d/lisp ~/.emacs.d/lisp`
 4. $ `ln -s ~/Tools/emacs.d/dotfiles ~/.emacs.d/dotfiles`
