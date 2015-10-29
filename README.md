@@ -52,7 +52,7 @@ PACKAGES
   * [less-css-mode](https://github.com/purcell/less-css-mode)
   * [php-mode](https://github.com/ejmr/php-mode)
   * [php-auto-yasnippets](https://github.com/ejmr/php-auto-yasnippets)
-  * [pymacs](https://github.com/pinard/Pymacs)
+  * [pyenv](https://github.com/cyberved/pyenv.el)
   * [rust-mode](https://github.com/rust-lang/rust-mode)
   * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
   * [skewer-less](https://github.com/purcell/skewer-less)
@@ -102,7 +102,7 @@ OS X installation notes
 * `npm install -g tern`
 * `npm install -g eslint babel-eslint eslint-plugin-react`
 * `pip install flake8`
-
+* `brew install pyenv`
 
 CHEAT SHEET
 ------------

@@ -77,7 +77,7 @@
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(helm helm-ag rainbow-delimiters highlight-symbol projectile
-                     ace-jump-mode psvn pymacs yaml-mode js2-mode clojure-mode
+                     ace-jump-mode psvn pyenv yaml-mode js2-mode clojure-mode
                      php-mode yasnippet android-mode popup cider
                      company-mode multi-term volatile-highlights
                      markdown-mode multiple-cursors quickrun diff-hl
@@ -253,16 +253,16 @@
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
 (defadvice show-paren-function
-	(after show-matching-paren-offscreen activate)
+    (after show-matching-paren-offscreen activate)
   "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'"
   (interactive)
   (let* ((cb (char-before (point)))
-		 (matching-text (and cb
-							 (char-equal (char-syntax cb) ?\) )
-							 (blink-matching-open))))
-	(when matching-text (message matching-text))))
+         (matching-text (and cb
+                             (char-equal (char-syntax cb) ?\) )
+                             (blink-matching-open))))
+    (when matching-text (message matching-text))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -330,13 +330,6 @@
 ;; Highlighting copy/paste actions
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; SmartTabs
-;(require 'smart-tabs-mode)
-;(smart-tabs-insinuate 'python 'javascript)
-;(smart-tabs-advice js2-indent-line js2-basic-offset)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
