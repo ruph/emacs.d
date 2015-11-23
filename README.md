@@ -20,7 +20,6 @@ EMACS PACKAGES
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [dired+](http://www.emacswiki.org/emacs/dired+.el)
   * [editorconfig](https://github.com/editorconfig/editorconfig-emacs)
-  * [evil](http://www.emacswiki.org/emacs/Evil)
   * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
   * [flycheck](http://www.flycheck.org)
   * [ggtags](https://github.com/leoliu/ggtags)

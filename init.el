@@ -57,10 +57,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Theme
-(load-theme 'wombat)
+;; Theme Dark
+;; (load-theme 'wombat)
+;; (set-face-attribute 'region nil :background "#666")
+;; Theme Light
+(load-theme 'adwaita)
+;; Theme Common
 (set-cursor-color "red")
-(set-face-attribute 'region nil :background "#666")
 
 ;; Spellchecker
 (setq-default ispell-program-name "aspell")
@@ -167,6 +170,18 @@
   (goto-char (point-min))
   (while (search-forward "\r" nil nil)
     (replace-match "")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Reload all open files
+(defun revert-all-buffers ()
+  "Replaces text in all buffers with the text of the visited file on disk."
+  (interactive)
+  (dolist (buf (buffer-list))
+	(with-current-buffer buf
+	  (when (and (buffer-file-name) (file-exists-p (buffer-file-name)) (not (buffer-modified-p)))
+		(revert-buffer t t t) )))
+  (message "All open files / buffers reverted."))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -442,7 +457,6 @@
 (require 'init-markdown-mode)
 (require 'init-project)
 (require 'init-gtags)
-(require 'init-evil)
 (require 'init-term)
 (require 'init-irc)
 

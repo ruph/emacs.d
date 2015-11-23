@@ -18,6 +18,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; YAPF code formatting
+(defun yapf-buffer ()
+  (interactive)
+  (let ((yapf-result
+		 (with-output-to-string
+		   (shell-command-on-region
+			(point-min) (point-max)
+			"python -m yapf" standard-output))))
+	(delete-region (point-min) (point-max))
+	(insert yapf-result)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; DEBUGGING
 ;; prominent ipdb breakpoint
 (defun annotate-pdb ()
@@ -28,14 +41,13 @@
 
 ;; add ipdb breakpoint
 (defun python-add-breakpoint ()
-    (interactive)
-      (newline-and-indent)
-        (insert "import ipdb; ipdb.set_trace()")
-          (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
+  (interactive)
+  (newline-and-indent)
+  (insert "import ipdb; ipdb.set_trace()")
+  (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(define-key python-mode-map (kbd "C-c C-b") 'python-add-breakpoint)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

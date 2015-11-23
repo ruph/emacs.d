@@ -33,7 +33,6 @@
         (:name swiper           :type elpa)
         (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
-        (:name evil             :type elpa)
         (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
@@ -151,8 +150,8 @@
 		  (scroll-bar-mode -1)))         ;; turn off the scrollbar
   (if (fboundp 'scroll-bar-mode)
 	  (progn
-	   (scroll-bar-mode 1)		          ;; otherwise, show a scrollbar...
-	   (set-scroll-bar-mode 'right))))    ;; ... on the right
+		(scroll-bar-mode 1)		          ;; otherwise, show a scrollbar...
+		(set-scroll-bar-mode 'right))))    ;; ... on the right
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -252,7 +251,7 @@
 (setq show-paren-delay 0)
 (show-paren-mode 1)
 (set-face-background 'show-paren-match (face-background 'default))
-(set-face-foreground 'show-paren-match "#def")
+(set-face-foreground 'show-paren-match "red")
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
 (defadvice show-paren-function
