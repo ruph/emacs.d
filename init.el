@@ -58,12 +58,13 @@
 
 
 ;; Theme Dark
-;; (load-theme 'wombat)
-;; (set-face-attribute 'region nil :background "#666")
+(load-theme 'wombat)
+(set-face-attribute 'region nil :background "#666")
 ;; Theme Light
-(load-theme 'adwaita)
+;;(load-theme 'adwaita)
 ;; Theme Common
 (set-cursor-color "red")
+
 
 ;; Spellchecker
 (setq-default ispell-program-name "aspell")

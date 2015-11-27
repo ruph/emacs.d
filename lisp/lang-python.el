@@ -21,13 +21,10 @@
 ;; YAPF code formatting
 (defun yapf-buffer ()
   (interactive)
-  (let ((yapf-result
-		 (with-output-to-string
-		   (shell-command-on-region
-			(point-min) (point-max)
-			"python -m yapf" standard-output))))
-	(delete-region (point-min) (point-max))
-	(insert yapf-result)))
+  (let ((cursor-relative-pos (/ (point-max) (float (point)))))
+    (shell-command-on-region (point-min) (point-max)
+                             "python -m yapf --style=google" t t)
+    (goto-char (round (/ (point-max) cursor-relative-pos)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -46,8 +43,8 @@
   (insert "import ipdb; ipdb.set_trace()")
   (highlight-lines-matching-regexp "^[ ]*import ipdb; ipdb.set_trace()"))
 (add-hook 'python-mode-hook
-		  (lambda ()
-			(define-key python-mode-map (kbd "C-c C-b") 'python-add-breakpoint)))
+          (lambda ()
+            (define-key python-mode-map (kbd "C-c C-b") 'python-add-breakpoint)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
