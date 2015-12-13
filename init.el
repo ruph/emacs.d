@@ -1,7 +1,15 @@
+;; Faster start by disabling special processing temporarily,
+(setq bkp-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist '())
+
+;; Faster start by limiting GC
+(setq gc-cons-threshold (* 100 1024 1024))
+
 ;; Start a server
 (require 'server)
-(or (server-running-p)
-    (server-start))
+(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+(unless (server-running-p)
+  (server-start))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -12,7 +20,7 @@
 (if (fboundp 'tool-bar-mode)
 	(tool-bar-mode -1))                 ;; turn-off toolbar
 
-(setq ;; scrolling
+(setq                                   ;; scrolling
  scroll-margin 3                        ;; do smooth scrolling, ...
  scroll-conservatively 100000           ;; ... the defaults ...
  scroll-up-aggressively nil             ;; ... are very ...
@@ -54,6 +62,17 @@
 (electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
 
 (global-unset-key (kbd "C-z"))          ;; needed elsewhere
+
+(setq savehist-file "~/.emacs.d/savehist"  ;; save command history
+      history-length 150)
+
+(setq-default save-place t)             ;; remember place in file from last time
+(setq save-place-file "~/.emacs.d/saveplace")
+
+(with-eval-after-load 'dired            ;; single buffer for dired
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+(setq save-interprogram-paste-before-kill t)  ;; save clipboard data in ring
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -76,17 +95,17 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-(set-language-environment "UTF-8")       ; prefer utf-8 for language settings
-(set-input-method nil)                   ; no funky input for normal editing;
-(setq read-quoted-char-radix 10)         ; use decimal, not octal
-(setq-default buffer-file-coding-system 'utf-8-unix) ; utf-8 & unix EOL
+(set-language-environment "UTF-8")       ;; prefer utf-8 for language settings
+(set-input-method nil)                   ;; no funky input for normal editing;
+(setq read-quoted-char-radix 10)         ;; use decimal, not octal
+(setq-default buffer-file-coding-system 'utf-8-unix)  ;; utf-8 & unix EOL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Backup
-(setq-default make-backup-files         nil) ; Don't want any backup files
-(setq-default auto-save-list-file-name  nil) ; Don't want any .saves files
-(setq-default auto-save-default         nil) ; Don't want any auto saving
+(setq-default make-backup-files         nil)  ;; don't want any backup files
+(setq-default auto-save-list-file-name  nil)  ;; don't want any .saves files
+(setq-default auto-save-default         nil)  ;; don't want any auto saving
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -124,12 +143,6 @@
   )
 (global-set-key (kbd "S-C-f") 'indent-buffer)
 
-;; Recent files
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-saved-items 256)
-(setq recentf-max-menu-items 32)
-(global-set-key (kbd "C-x f") 'helm-recentf)
 
 ;; Default tab width
 (setq tab-width 4)
@@ -180,7 +193,8 @@
   (interactive)
   (dolist (buf (buffer-list))
 	(with-current-buffer buf
-	  (when (and (buffer-file-name) (file-exists-p (buffer-file-name)) (not (buffer-modified-p)))
+	  (when (and (buffer-file-name) (file-exists-p (buffer-file-name))
+				 (not (buffer-modified-p)))
 		(revert-buffer t t t) )))
   (message "All open files / buffers reverted."))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -203,17 +217,17 @@
 (if (eq system-type 'darwin)
     (progn
       (setq ns-right-alternate-modifier nil)             ;; unbind right alt
-      (global-set-key (kbd "S-<f6>") 'toggle-fullscreen) ;; Full screen mode
+      (global-set-key (kbd "S-<f6>") 'toggle-fullscreen) ;; full screen mode
       (setq cua-enable-cua-keys nil)))                   ;; only for rectangles
 
 
 ;; especially for windows
 (if (eq system-type 'windows-nt)
     (progn
-      (setq cua-auto-tabify-rectangles nil ;; Don't tabify after rectangle commands
-            cua-keep-region-after-copy t) ;; Standard Windows behaviour
-      (transient-mark-mode 1)              ;; No region when it is not highlighted
-      (setq cygwin-bin "c:\\cygwin\\bin")  ;; Find & Grep on windows
+      (setq cua-auto-tabify-rectangles nil ;; don't tabify after rectangle commands
+            cua-keep-region-after-copy t)  ;; standard Windows behaviour
+      (transient-mark-mode 1)              ;; no region when it is not highlighted
+      (setq cygwin-bin "c:\\cygwin\\bin")  ;; find & Grep on windows
       (setenv "PATH"
               (concat cygwin-bin ";" (getenv "PATH")))
       ))
@@ -221,29 +235,29 @@
 
 
 ;; IDO mode
-(require 'ido)
-(ido-mode 'both) ; for buffers and files
-(setq
- ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
- ido-case-fold  t                 ; be case-insensitive
- ido-enable-last-directory-history t ; remember last used dirs
- ido-max-work-directory-list 30   ; should be enough
- ido-max-work-file-list      50   ; remember many
- ido-use-filename-at-point nil    ; don't use filename at point (annoying)
- ido-use-url-at-point nil         ; don't use url at point (annoying)
- ido-enable-flex-matching t       ; be smart
- ido-max-prospects 16             ; don't spam my minibuffer
- ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+;; (require 'ido)
+;; (ido-mode 'both) ; for buffers and files
+;; (setq
+;;  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+;;  ido-case-fold  t                 ; be case-insensitive
+;;  ido-enable-last-directory-history t ; remember last used dirs
+;;  ido-max-work-directory-list 30   ; should be enough
+;;  ido-max-work-file-list      50   ; remember many
+;;  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+;;  ido-use-url-at-point nil         ; don't use url at point (annoying)
+;;  ido-enable-flex-matching t       ; be smart
+;;  ido-max-prospects 16             ; don't spam my minibuffer
+;;  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
-;; when using ido, the confirmation is rather annoying...
-(setq confirm-nonexistent-file-or-buffer nil)
+;; ;; when using ido, the confirmation is rather annoying...
+;; (setq confirm-nonexistent-file-or-buffer nil)
 
-;; Increase minibuffer size when ido completion is active
-(add-hook 'ido-minibuffer-setup-hook
-          (function
-           (lambda ()
-             (make-local-variable 'resize-minibuffer-window-max-height)
-             (setq resize-minibuffer-window-max-height 1))))
+;; ;; Increase minibuffer size when ido completion is active
+;; (add-hook 'ido-minibuffer-setup-hook
+;;           (function
+;;            (lambda ()
+;;              (make-local-variable 'resize-minibuffer-window-max-height)
+;;              (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -336,8 +350,8 @@
 
 (global-set-key (kbd "M-<up>") 'move-text-up)
 (global-set-key (kbd "M-<down>") 'move-text-down)
-(global-set-key [?\e up] 'move-text-up)              ; moving lines
-(global-set-key [?\e down] 'move-text-down)          ; in console
+(global-set-key [?\e up] 'move-text-up)              ;; moving lines
+(global-set-key [?\e down] 'move-text-down)          ;; in console
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -464,6 +478,16 @@
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Restore original values
+(setq file-name-handler-alist bkp-file-name-handler-alist)
+(setq bkp-file-name-handler-alist nil)
+(run-with-idle-timer
+ 5 nil (lambda ()
+		 (setq gc-cons-threshold (* 1024 1024))
+		 (message "gc-cons-threshold restored to %S" gc-cons-threshold)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

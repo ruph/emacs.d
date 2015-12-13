@@ -42,38 +42,30 @@
 
 
 ;; Cider
-(require 'cider)
-(add-hook 'cider-repl-mode-hook
-          (lambda ()
-            (paredit-mode +1)))
-
-;; REPL history file
-(setq cider-repl-history-file "~/.emacs.d/cider-history")
-
-;; nice pretty printing
-(setq cider-repl-use-pretty-printing t)
-
-;; nicer font lock in REPL
-(setq cider-repl-use-clojure-font-lock t)
-
-;; result prefix for the REPL
-(setq cider-repl-result-prefix ";; => ")
-
-;; never ending REPL history
-(setq cider-repl-wrap-history t)
-
-;; looong history
-(setq cider-repl-history-size 3000)
-
-;; eldoc for clojure
-(add-hook 'cider-mode-hook #'eldoc-mode)
-
-;; error buffer not popping up
-(setq cider-show-error-buffer nil)
-
-(add-hook 'cider-repl-mode-hook #'company-mode)
-(add-hook 'cider-mode-hook #'company-mode)
-(add-hook 'cider-repl-mode-hook #'paredit-mode)
+(use-package cider
+  :init
+  (add-hook 'cider-mode-hook #'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (add-hook 'cider-mode-hook #'company-mode)
+  (add-hook 'cider-repl-mode-hook #'paredit-mode)
+  (add-hook 'cider-repl-mode-hook (lambda () (paredit-mode +1)))
+  :config
+  (setq
+   ;; REPL history file
+   cider-repl-history-file "~/.emacs.d/cider-history"
+   ;; nice pretty printing
+   cider-repl-use-pretty-printing t
+   ;; nicer font lock in REPL
+   cider-repl-use-clojure-font-lock t
+   ;; result prefix for the REPL
+   cider-repl-result-prefix ";; => "
+   ;; never ending REPL history
+   cider-repl-wrap-history t
+   ;; looong history
+   cider-repl-history-size 3000
+   ;; error buffer not popping up
+   cider-show-error-buffer nil)
+  (cider-repl-toggle-pretty-printing))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

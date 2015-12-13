@@ -27,10 +27,12 @@
 
 
 ;; Snippets for standard PHP functions
-(require 'php-auto-yasnippets)
-(setq php-auto-yasnippet-php-program
-      "~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
-(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+(use-package php-auto-yasnippets
+  :defer t
+  :config
+  (setq php-auto-yasnippet-php-program
+		"~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
+  (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
