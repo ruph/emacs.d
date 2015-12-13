@@ -30,6 +30,7 @@
         (:name flycheck         :type elpa)
         (:name css-eldoc        :type elpa)
         (:name dired+           :type elpa)
+        (:name origami          :type elpa)
         (:name swiper           :type elpa)
         (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
@@ -77,8 +78,8 @@
 (setq my-el-get-packages
       (append '(helm helm-ag rainbow-delimiters highlight-symbol projectile
                      ace-jump-mode psvn pyenv yaml-mode js2-mode clojure-mode
-                     php-mode yasnippet android-mode popup cider
-                     company-mode multi-term volatile-highlights
+                     use-package php-mode yasnippet android-mode popup cider
+                     diminish company-mode multi-term volatile-highlights
                      markdown-mode multiple-cursors quickrun diff-hl
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
@@ -91,23 +92,51 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Use-package
+(add-to-list 'load-path "~/.emacs.d/el-get/use-package")
+(eval-when-compile (require 'use-package))
+(add-to-list 'load-path "~/.emacs.d/el-get/diminish")
+(require 'diminish)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; editorconfig
-(require 'editorconfig)
-(load "editorconfig")
+(use-package editorconfig
+  :if (executable-find "editorconfig")
+  :mode ("\\.editorconfig\\'" . conf-unix-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; quickrun
-(require 'quickrun)
-(global-set-key (kbd "C-c q") 'quickrun)
+(use-package quickrun
+  :commands quickrun
+  :bind ("C-c q" . quickrun))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; Recent files
+(use-package recentf
+  :init
+  (recentf-mode 1)
+  :config
+  (setq
+   recentf-max-saved-items 256
+   recentf-max-menu-items 32)
+  :bind ("C-x f" . helm-recentf))
 
 
 ;; clean-aindent
 (electric-indent-mode nil)
 (setq clean-aindent-is-simple-indent t)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+;; Code folding
+(use-package origami
+  :init
+  (global-origami-mode t)
+  :config
+  (define-key origami-mode-map (kbd "C-c RET") 'origami-recursively-toggle-node)
+  (define-key origami-mode-map (kbd "C-c o") 'origami-toggle-all-nodes))
 
 ;; SQL
 (defun sql-connect-bookmark (product connection)
@@ -133,8 +162,9 @@
   "Major mode for editing comma-separated value files." t)
 
 ;; Better undo
-(require 'undo-tree)
-(global-undo-tree-mode)
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -151,23 +181,27 @@
   (if (fboundp 'scroll-bar-mode)
 	  (progn
 		(scroll-bar-mode 1)		          ;; otherwise, show a scrollbar...
-		(set-scroll-bar-mode 'right))))    ;; ... on the right
+		(set-scroll-bar-mode 'right))))   ;; ... on the right
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Yasnippet
-(add-to-list 'load-path "~/.emacs.d/el-get/yasnippet")
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/el-get/yasnippet/snippets"
-        "~/.emacs.d/el-get/yasnippets"
-        "~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
-        ))
-(yas/global-mode 1)
-(setq yas/wrap-around-region t)
-(setq yas/prompt-functions
-      '(yas/x-prompt yas/ido-prompt))
-(setq yas/trigger-key "C-<tab>")
+(use-package yasnippet
+  :if (not noninteractive)
+  :diminish yas-minor-mode
+  :commands (yas-global-mode yas-minor-mode)
+  :config
+  (progn
+	(setq yas-snippet-dirs
+		  '("~/.emacs.d/el-get/yasnippet/snippets"
+			"~/.emacs.d/el-get/yasnippets"
+			"~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
+			))
+	(yas-global-mode 1)
+	(setq yas-wrap-around-region t)
+	(setq yas-prompt-functions
+		  '(yas/x-prompt yas/ido-prompt))
+	))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -199,17 +233,17 @@
 
 
 ;; Multiple-cursors
-(add-to-list 'load-path "~/.emacs.d/el-get/multiple-cursors")
-(require 'multiple-cursors)
-(global-set-key (kbd "C-c c") 'mc/edit-lines)
-(global-set-key (kbd "C-c e") 'mc/edit-ends-of-lines)
-(global-set-key (kbd "C-c a") 'mc/edit-beginnings-of-lines)
-;; Rectangular region mode
-(global-set-key (kbd "C-<return>") 'set-rectangular-region-anchor)
-;; Mark more like this
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c <") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :bind
+  (("C-c c" . mc/edit-lines)
+   ("C-c e" . mc/edit-ends-of-lines)
+   ("C-c a" . mc/edit-beginnings-of-lines)
+   ;; Rectangular region mode
+   ("C-<return>" . set-rectangular-region-anchor)
+   ;; Mark more like this
+   ("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-c <" . mc/mark-all-like-this)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -242,11 +276,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Highlight ()
+;; Colored ()
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-;; Show Paren Mode
+;; Show Paren Mode - Highlight ()
 (require 'paren)
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -309,13 +343,14 @@
 
 
 ;; Deft NOTES (markdown)
-(add-to-list 'load-path "~/.emacs.d/el-get/deft-multidir/")
-(require 'deft)
-(setq deft-directories '("~/Dropbox/Notes"))
-(setq deft-extension "txt")
-(setq deft-use-filename-as-title t)
-(setq deft-text-mode 'gfm-mode)
-(global-set-key (kbd "C-c n") 'deft)
+(use-package deft
+  :init
+  (setq deft-directories '("~/Dropbox/Notes")
+		deft-extension "txt"
+		deft-use-filename-as-title t
+		deft-text-mode 'gfm-mode)
+  :bind
+  ("C-c n" . deft))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -324,14 +359,14 @@
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 
 ;; Cua compatibility
-(add-to-list 'load-path "~/.emacs.d/el-get/org-cua-dwim")
-(require 'org-cua-dwim)
+(use-package org-cua-dwim)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Highlighting copy/paste actions
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
+(use-package volatile-highlights
+  :init
+  (volatile-highlights-mode t))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -369,15 +404,17 @@
 
 
 ;; Writeroom
-(with-eval-after-load 'writeroom-mode
-  (setq writeroom-extra-line-spacing 0.4)
-  (setq writeroom-global-effects
-        '(writeroom-toggle-alpha writeroom-toggle-menu-bar-lines
-                                 writeroom-toggle-tool-bar-lines
-                                 writeroom-toggle-vertical-scroll-bars))
-  (setq writeroom-maximize-window t))
-(add-hook 'writeroom-mode-hook (lambda () (progn
-                                            (text-scale-increase 1))))
+(use-package writeroom-mode
+  :init
+  (setq writeroom-extra-line-spacing 0.4
+		writeroom-global-effects
+		'(writeroom-toggle-alpha writeroom-toggle-menu-bar-lines
+								 writeroom-toggle-tool-bar-lines
+								 writeroom-toggle-vertical-scroll-bars)
+		writeroom-maximize-window t)
+  :config
+  (add-hook 'writeroom-mode-hook
+			(lambda () (progn (text-scale-increase 1)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

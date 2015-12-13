@@ -1,3 +1,4 @@
+*.elc
 lisp/private.el
 test
 eproject.cfg

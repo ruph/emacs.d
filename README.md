@@ -30,6 +30,7 @@ EMACS PACKAGES
   * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
   * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
   * [org-cua-dwim](https://github.com/mlf176f2/org-cua-dwim.el)
+  * [origami](https://github.com/gregsexton/origami.el)
   * [paredit](http://emacswiki.org/emacs/ParEdit)
   * [popup](https://github.com/auto-complete/popup-el)
   * [quickrun](https://github.com/syohex/emacs-quickrun)
@@ -63,6 +64,7 @@ EMACS PACKAGES
   * [helm-projectile](http://tuhdo.github.io/helm-projectile.html)
   * [projectile](https://github.com/bbatsov/projectile)
 * Other
+  * [use-package](https://github.com/jwiegley/use-package)
   * [csv-mode](http://www.emacswiki.org/emacs/CsvMode)
   * [deft-multidir](https://github.com/dsevilla/deft-multidir)
   * [helm-dash](https://github.com/areina/helm-dash)
@@ -76,7 +78,7 @@ EMACS PACKAGES
 OS X installation notes
 ------------------------
 1. Download Emacs from http://emacsformacosx.com
-2. Run it from shell $ `emacs -nw`
+2. Run it in shell $ `emacs -nw`
 3. Close it with C-x C-c
 
 #### Setting up the environment ####
@@ -182,9 +184,11 @@ CHEAT SHEET
 * **F5**      - go to next error (flycheck)
 * **S+F5**    - go to previous error (flycheck)
 * **M+.**     - jump to definition
-* **C+.**     - show arguments (php-mode)
+* **C+.**     - show arguments
+* **C+c o**   - toggle fold on all nodes
+* **C+c RET** - toggle fold on current node
 * **C+c C+y** - expand standard PHP function (yasnippet)
-* **C+c C+q** - quickrun
+* **C+c C+q** - execute current buffer (quickrun)
 
 
 ### BUFFERS ###
