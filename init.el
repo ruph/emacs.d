@@ -15,6 +15,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
 ;;
+(setq disabled-command-function nil)    ;; enable all disabled commands
 (menu-bar-mode  t)                      ;; show the menu...
 (mouse-avoidance-mode 'jump)            ;; mouse ptr when cursor is too close
 (if (fboundp 'tool-bar-mode)
@@ -235,29 +236,29 @@
 
 
 ;; IDO mode
-;; (require 'ido)
-;; (ido-mode 'both) ; for buffers and files
-;; (setq
-;;  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
-;;  ido-case-fold  t                 ; be case-insensitive
-;;  ido-enable-last-directory-history t ; remember last used dirs
-;;  ido-max-work-directory-list 30   ; should be enough
-;;  ido-max-work-file-list      50   ; remember many
-;;  ido-use-filename-at-point nil    ; don't use filename at point (annoying)
-;;  ido-use-url-at-point nil         ; don't use url at point (annoying)
-;;  ido-enable-flex-matching t       ; be smart
-;;  ido-max-prospects 16             ; don't spam my minibuffer
-;;  ido-confirm-unique-completion t) ; wait for RET, even with unique completion
+(require 'ido)
+(ido-mode 'both) ; for buffers and files
+(setq
+ ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
+ ido-case-fold  t                 ; be case-insensitive
+ ido-enable-last-directory-history t ; remember last used dirs
+ ido-max-work-directory-list 30   ; should be enough
+ ido-max-work-file-list      50   ; remember many
+ ido-use-filename-at-point nil    ; don't use filename at point (annoying)
+ ido-use-url-at-point nil         ; don't use url at point (annoying)
+ ido-enable-flex-matching t       ; be smart
+ ido-max-prospects 16             ; don't spam my minibuffer
+ ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
-;; ;; when using ido, the confirmation is rather annoying...
-;; (setq confirm-nonexistent-file-or-buffer nil)
+;; when using ido, the confirmation is rather annoying...
+(setq confirm-nonexistent-file-or-buffer nil)
 
-;; ;; Increase minibuffer size when ido completion is active
-;; (add-hook 'ido-minibuffer-setup-hook
-;;           (function
-;;            (lambda ()
-;;              (make-local-variable 'resize-minibuffer-window-max-height)
-;;              (setq resize-minibuffer-window-max-height 1))))
+;; Increase minibuffer size when ido completion is active
+(add-hook 'ido-minibuffer-setup-hook
+          (function
+           (lambda ()
+             (make-local-variable 'resize-minibuffer-window-max-height)
+             (setq resize-minibuffer-window-max-height 1))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
