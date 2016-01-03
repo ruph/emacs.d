@@ -1,6 +1,7 @@
 ;; Python Tab Hook
 (add-hook 'python-mode-hook
           (lambda ()
+            (setenv "LANG" "en_GB.UTF-8")
             (setq indent-tabs-mode t)
             (setq tab-width 4)
             (setq python-indent 4)
