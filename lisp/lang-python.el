@@ -6,6 +6,8 @@
             (setq tab-width 4)
             (setq python-indent 4)
             (flycheck-select-checker 'python-flake8)
+			(ggtags-mode 1)
+			(helm-gtags-mode 1)
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; Multi-version environment
