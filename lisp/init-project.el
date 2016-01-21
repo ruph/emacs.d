@@ -43,25 +43,21 @@
 
 
 ;; EPROJECT doing HELM for opened projects
-(defun helm-eproject-resource ()
-  "Enumerate files belonging to the eproject"
+(defclass helm-source-eproject-files (helm-type-file)
+  ((candidates :initform
+			   (lambda ()
+				 (mapcar (lambda (item)
+						   (format "%s/%s" (cadr prj-current) (car item)))
+						 prj-files)))))
+
+(defun helm-eproject-files (&optional candidate)
+  "List files add to the eproject."
   (interactive)
   (let ((helm-ff-transformer-show-only-basename nil))
-    (helm
-     '((
-        (name . "Files in eproject:")
-        (init . (lambda ()
-                  (with-current-buffer (helm-candidate-buffer 'local)
-                    (mapcar
-                     (lambda (item)
-                       (insert (format "%s/%s\n" (cadr prj-current) (car item))))
-                     prj-files))))
-        (candidates-in-buffer)
-        ;(mode-line . helm-generic-file-mode-line-string) ; helm-interpret-value error
-        (help-message . helm-generic-file-help-message)
-        (type . file)))
-     nil "Switch to file: " nil nil)))
-(global-set-key (kbd "S-C-t") 'helm-eproject-resource)
+	(helm :sources (helm-make-source "Files in eproject:" 'helm-source-eproject-files)
+		  :buffer "*eproject files*")))
+
+(global-set-key (kbd "S-C-t") 'helm-eproject-files)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
