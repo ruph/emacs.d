@@ -54,6 +54,7 @@ EMACS PACKAGES
   * [php-auto-yasnippets](https://github.com/ejmr/php-auto-yasnippets)
   * [pyenv](https://github.com/cyberved/pyenv.el)
   * [rust-mode](https://github.com/rust-lang/rust-mode)
+  * [racer](https://github.com/phildawes/racer)
   * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
   * [skewer-less](https://github.com/purcell/skewer-less)
   * [tern](http://ternjs.net)
@@ -104,6 +105,7 @@ OS X installation notes
 * `npm install -g eslint babel-eslint eslint-plugin-react`
 * `pip install flake8`
 * `brew install pyenv`
+* `cargo install racer`
 
 CHEAT SHEET
 ------------

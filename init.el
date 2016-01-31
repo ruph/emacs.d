@@ -465,6 +465,7 @@
 (require 'lang-javascript)
 (require 'lang-php)
 (require 'lang-go)
+(require 'lang-rust)
 (require 'init-web-mode)
 (require 'init-emmet-mode)
 (require 'init-flycheck)

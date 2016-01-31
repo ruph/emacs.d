@@ -35,6 +35,7 @@
         (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
         (:name visual-fill-column :type elpa)
+        (:name company-racer :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -84,7 +85,7 @@
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
-                     go-mode rust-mode writeroom-mode)
+                     go-mode rust-mode emacs-racer writeroom-mode)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
