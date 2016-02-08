@@ -3,6 +3,9 @@
 
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
+;; Tooltips
+(add-hook 'after-init-hook 'flycheck-pos-tip-mode)
+
 ;; Same keybindings as flymake
 (define-key flycheck-mode-map [S-f5] 'flycheck-previous-error)
 (define-key flycheck-mode-map [f5] 'flycheck-next-error)

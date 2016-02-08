@@ -8,7 +8,7 @@
 ;; ...
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (local-unset-key (kbd "C-:")) ;; needed for swiper
+            (local-unset-key (kbd "C-:")) ;; needed for helm-swoop
             (set (make-local-variable 'company-backends)
                  '((company-etags company-dabbrev-code company-yasnippet)))
             ))

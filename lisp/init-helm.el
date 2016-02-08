@@ -38,14 +38,14 @@
                 'helm-eshell-history)))
 
 ;; Helm dash documentation
-(require 'helm-dash)
-(setq helm-dash-docsets-path "~/.docsets")
-(setq helm-dash-browser-func 'eww)
+(use-package helm-dash
+  :init
+  (setq helm-dash-docsets-path "~/.docsets")
+  (setq helm-dash-browser-func 'eww))
 
-;; swiper helm
-(require 'swiper)
-(require 'swiper-helm)
-(global-set-key (kbd "C-:") 'swiper-helm)
+;; Swoop
+(use-package helm-swoop
+  :bind ("C-:" . helm-swoop))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

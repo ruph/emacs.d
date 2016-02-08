@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-My emacs v24.5 settings, including:
+Just my emacs v24.5 settings, including:
 
 * project management with eproject & projectile
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
@@ -10,7 +10,7 @@ My emacs v24.5 settings, including:
 * autocomplete, snippets, tags, suggestions
 * ... and everything else.
 
-Should work well on OS X (http://emacsformacosx.com/). COPY/PASTE freely :)
+Should work well on OS X (http://emacsformacosx.com/). Everything is under COPY/PASTE-OR-USE-HOWEVER-YOU-WANT license. ;)
 
 EMACS PACKAGES
 --------------
@@ -18,14 +18,18 @@ EMACS PACKAGES
   * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
   * [company-mode](http://company-mode.github.io)
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
+  * [comment-dwim-2](https://github.com/remyferre/comment-dwim-2)
   * [dired+](http://www.emacswiki.org/emacs/dired+.el)
   * [editorconfig](https://github.com/editorconfig/editorconfig-emacs)
   * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
   * [flycheck](http://www.flycheck.org)
+  * [flycheck-pos-tip-mode](https://github.com/flycheck/flycheck-pos-tip)
+  * [general-close](https://github.com/emacs-berlin/general-close)
   * [ggtags](https://github.com/leoliu/ggtags)
   * [helm](https://github.com/emacs-helm/helm)
   * [helm-ag](https://github.com/syohex/emacs-helm-ag)
   * [helm-gtags](https://github.com/syohex/emacs-helm-gtags)
+  * [helm-swoop](https://github.com/ShingoFukuyama/helm-swoop)
   * [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
   * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
   * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
@@ -36,10 +40,10 @@ EMACS PACKAGES
   * [quickrun](https://github.com/syohex/emacs-quickrun)
   * [diff-hl](https://github.com/dgutov/diff-hl)
   * [undo-tree](http://www.dr-qubit.org/emacs.php#undo-tree)
+  * [visual-regexp](https://github.com/benma/visual-regexp.el)
+  * [visual-regexp-steroids](https://github.com/benma/visual-regexp-steroids.el)
   * [volatile-highlights](http://www.emacswiki.org/emacs/VolatileHighlights)
   * [sml-modeline](http://www.emacswiki.org/emacs/SmlModeLine)
-  * [swiper](https://github.com/abo-abo/swiper)
-  * [swiper-helm](https://github.com/abo-abo/swiper-helm)
   * [yasnippet](https://github.com/capitaomorte/yasnippet)
 * Languages
   * [clojure-snippets](https://github.com/swannodette/clojure-snippets)
@@ -150,6 +154,8 @@ CHEAT SHEET
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
 * **C-c w**     - show whitespace
+* **C-<**       - closes line with whatever is appropriate (general-close)
+* **C-:**       - visually match lines (helm-swoop)
 
 
 ### EDITOR :: MULTIPLE-CURSORS ###
@@ -161,6 +167,7 @@ CHEAT SHEET
 * **C+>**       - mark next like this
 * **C+<**       - mark previous like this
 * **C-c <**     - mark all like this
+* **C-c m**     - mark all with regex match
 
 
 ### EDITOR :: SEARCH ###

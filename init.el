@@ -60,7 +60,7 @@
 (put 'downcase-region 'disabled nil)    ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)      ;; for down/up-case conversions
 
-(electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
+;; (electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
 
 (global-unset-key (kbd "C-z"))          ;; needed elsewhere
 
@@ -107,16 +107,6 @@
 (setq-default make-backup-files         nil)  ;; don't want any backup files
 (setq-default auto-save-list-file-name  nil)  ;; don't want any .saves files
 (setq-default auto-save-default         nil)  ;; don't want any auto saving
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; Use regex searches by default.
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "M-%") 'query-replace-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "C-M-%") 'query-replace)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

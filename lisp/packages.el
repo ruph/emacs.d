@@ -31,11 +31,9 @@
         (:name css-eldoc        :type elpa)
         (:name dired+           :type elpa)
         (:name origami          :type elpa)
-        (:name swiper           :type elpa)
-        (:name swiper-helm      :type elpa)
         (:name undo-tree        :type elpa)
+        (:name company-racer    :type elpa)
         (:name visual-fill-column :type elpa)
-        (:name company-racer :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -73,6 +71,12 @@
                :load "deft.el"
                :compile ("deft.el")
                :features deft)
+        (:name general-close
+               :type git
+               :url "git://github.com/emacs-berlin/general-close.git"
+               :load "general-close.el"
+               :compile ("general-close.el")
+               :features general-close)
         ))
 
 ;; All packages for installation
@@ -85,7 +89,9 @@
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
-                     go-mode rust-mode emacs-racer writeroom-mode)
+                     go-mode rust-mode emacs-racer writeroom-mode
+                     visual-regexp visual-regexp-steroids helm-swoop
+                     comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
@@ -101,14 +107,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; editorconfig
+;; Editorconfig
 (use-package editorconfig
   :if (executable-find "editorconfig")
   :mode ("\\.editorconfig\\'" . conf-unix-mode))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; quickrun
+;; Quickrun
 (use-package quickrun
   :commands quickrun
   :bind ("C-c q" . quickrun))
@@ -126,9 +132,31 @@
   :bind ("C-x f" . helm-recentf))
 
 
-;; clean-aindent
+;; Auto indent
 (electric-indent-mode nil)
 (setq clean-aindent-is-simple-indent t)
+
+
+;; Visual regex replace + python regex engine
+(use-package visual-regexp-steroids
+  :bind (("C-M-%" . vr/replace)
+		 ("M-%"   . vr/query-replace)
+		 ("C-r"   . vr/isearch-backward)
+		 ("C-s"   . vr/isearch-forward)
+		 ("C-M-s" . isearch-forward)  ; ordinary forward search
+		 ("C-M-r" . isearch-backward) ; ordinary backward search
+		 ("C-c m" . vr/mc-mark)  ; for multiple-cursors
+		 ))
+
+
+;; Commenting
+(use-package comment-dwim-2
+  :bind ("M-;" . comment-dwim-2))
+
+
+;; General close
+(use-package general-close
+  :bind ("C-<" . general-close))
 
 
 ;; Code folding
@@ -240,11 +268,7 @@
    ("C-c e" . mc/edit-ends-of-lines)
    ("C-c a" . mc/edit-beginnings-of-lines)
    ;; Rectangular region mode
-   ("C-<return>" . set-rectangular-region-anchor)
-   ;; Mark more like this
-   ("C->" . mc/mark-next-like-this)
-   ("C-<" . mc/mark-previous-like-this)
-   ("C-c <" . mc/mark-all-like-this)))
+   ("C-<return>" . set-rectangular-region-anchor)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
