@@ -32,7 +32,7 @@
 (delete-selection-mode 1)               ;; delete the sel with a keyp
 
 (setq search-highlight t                ;; highlight when searching...
-      query-replace-highlight t)             ;; ...and replacing
+      query-replace-highlight t)        ;; ...and replacing
 (fset 'yes-or-no-p 'y-or-n-p)           ;; enable y/n answers to yes/no
 
 (setq completion-ignore-case t          ;; ignore case when completing...
@@ -59,8 +59,6 @@
 
 (put 'downcase-region 'disabled nil)    ;; Enable C-x C-l and C-x C-u
 (put 'upcase-region 'disabled nil)      ;; for down/up-case conversions
-
-;; (electric-pair-mode 1)                  ;; automatic bracket insertion (emacs 24)
 
 (global-unset-key (kbd "C-z"))          ;; needed elsewhere
 
@@ -196,19 +194,10 @@
 (cua-mode t)
 
 
-;; fullscreen in osx (emacs 24.3+)
-(defun toggle-fullscreen ()
-  "Toggle full screen"
-  (interactive)
-  (set-frame-parameter
-   nil 'fullscreen
-   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
-
 ;; especially for osx
 (if (eq system-type 'darwin)
     (progn
       (setq ns-right-alternate-modifier nil)             ;; unbind right alt
-      (global-set-key (kbd "S-<f6>") 'toggle-fullscreen) ;; full screen mode
       (setq cua-enable-cua-keys nil)))                   ;; only for rectangles
 
 
@@ -391,12 +380,11 @@
         (if (> (x-display-pixel-width) 1280)
             (add-to-list 'default-frame-alist (cons 'width 100))
           (add-to-list 'default-frame-alist (cons 'width 80)))
-        ;; for the height, subtract a couple hundred pixels
-        ;; from the screen height (for panels, menubars and
-        ;; whatnot), then divide by the height of a char to
+        ;; for the height, take the 60% of the screen height (for panels,
+		;; menubars and  whatnot), then divide by the height of a char to
         ;; get the height we want
         (add-to-list 'default-frame-alist
-                     (cons 'height (/ (- (x-display-pixel-height) 200)
+                     (cons 'height (/ (floor (* (x-display-pixel-height) 0.6))
                                       (frame-char-height)))))))
 (set-frame-size-according-to-resolution)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

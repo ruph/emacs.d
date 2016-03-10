@@ -43,6 +43,7 @@ EMACS PACKAGES
   * [visual-regexp](https://github.com/benma/visual-regexp.el)
   * [visual-regexp-steroids](https://github.com/benma/visual-regexp-steroids.el)
   * [volatile-highlights](http://www.emacswiki.org/emacs/VolatileHighlights)
+  * [smartparens](https://github.com/Fuco1/smartparens)
   * [sml-modeline](http://www.emacswiki.org/emacs/SmlModeLine)
   * [yasnippet](https://github.com/capitaomorte/yasnippet)
 * Languages
@@ -61,6 +62,7 @@ EMACS PACKAGES
   * [racer](https://github.com/phildawes/racer)
   * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
   * [skewer-less](https://github.com/purcell/skewer-less)
+  * [swift-mode](https://github.com/chrisbarrett/swift-mode)
   * [tern](http://ternjs.net)
   * [company-tern](https://github.com/proofit404/company-tern)
   * [web-mode](http://web-mode.org)
@@ -137,7 +139,6 @@ CHEAT SHEET
 * **S+M+k**   - enlarge upper window
 * **S+M+h**   - enlarge left window
 * **S+M+l**   - enlarge right window
-* **S+F6**    - go full screen (osx specific)
 
 
 ### EDITOR ###

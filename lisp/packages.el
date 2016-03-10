@@ -33,6 +33,8 @@
         (:name origami          :type elpa)
         (:name undo-tree        :type elpa)
         (:name company-racer    :type elpa)
+        (:name smartparens      :type elpa)
+        (:name swift-mode       :type elpa)
         (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
@@ -272,17 +274,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; Smartparens
+(use-package smartparens-config
+  :config
+  (progn
+	(show-smartparens-global-mode t)
+	(add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
+	(add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Paredit () for lisps
 (add-to-list 'load-path "~/.emacs.d/el-get/paredit")
 (require 'paredit)
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
-(add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
+(add-hook 'emacs-lisp-mode-hook       (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(add-hook 'lisp-mode-hook             (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(add-hook 'scheme-mode-hook           (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(add-hook 'slime-repl-mode-hook       (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(add-hook 'clojure-mode-hook          (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
 
 ;; these are used for moving lines/regions
 (keymap-unset-key (kbd "M-<up>") "paredit-mode")
