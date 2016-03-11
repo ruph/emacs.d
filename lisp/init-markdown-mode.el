@@ -17,6 +17,8 @@
     (define-key markdown-mode-map (kbd "C-<left>")  'markdown-promote)
     (define-key markdown-mode-map (kbd "M-<right>") nil)
     (define-key markdown-mode-map (kbd "C-<right>") 'markdown-demote)
+	(define-key markdown-mode-map (kbd "M-S-<left>") nil)   ; markdown-promote-subtree
+	(define-key markdown-mode-map (kbd "M-S-<right>") nil)  ; markdown-demote-subtree
     ))
 
 (add-hook 'markdown-mode-hook 'init-markdown)
