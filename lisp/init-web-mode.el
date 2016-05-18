@@ -8,8 +8,9 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
   (if (equal web-mode-content-type "jsx")
