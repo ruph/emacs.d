@@ -283,6 +283,9 @@
   (show-smartparens-global-mode t)
   (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'nodejs-repl-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'php-boris-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'inferior-python-mode-hook 'turn-on-smartparens-mode)
 
   ;;; {}, comments in C-like-modes
   (sp-with-modes '(php-mode js2-mode rust-mode)
