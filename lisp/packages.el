@@ -35,6 +35,7 @@
         (:name company-racer    :type elpa)
         (:name smartparens      :type elpa)
         (:name swift-mode       :type elpa)
+        (:name php-boris        :type elpa)
         (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
@@ -275,12 +276,44 @@
 
 
 ;; Smartparens
-(use-package smartparens-config
+(use-package smartparens
+  :init
+  (use-package smartparens-config)
   :config
-  (progn
-	(show-smartparens-global-mode t)
-	(add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
-	(add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)))
+  (show-smartparens-global-mode t)
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)
+
+  ;;; {}, comments in C-like-modes
+  (sp-with-modes '(php-mode js2-mode rust-mode)
+	(sp-local-pair "/**" "*/" :post-handlers '(("| " "SPC")
+											   (my-php-handle-docstring "RET")))
+	(sp-local-pair "/*." ".*/" :post-handlers '(("| " "SPC")))
+	(sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+	(sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))
+
+  (defun my-php-handle-docstring (&rest _ignored)
+	(-when-let (line (save-excursion
+					   (forward-line)
+					   (thing-at-point 'line)))
+	  (cond
+	   ((string-match-p "function" line)
+		(save-excursion
+		  (insert "\n")
+		  (let ((args (save-excursion
+						(forward-line)
+						(my-php-get-function-args))))
+			(--each args
+			  (insert (format "* @param %s\n" it)))))
+		(insert "* "))
+	   ((string-match-p ".*class\\|interface" line)
+		(save-excursion (insert "\n*\n* @author\n"))
+		(insert "* ")))
+	  (let ((o (sp--get-active-overlay)))
+		(indent-region (overlay-start o) (overlay-end o)))))
+  :bind
+  (("C-<right>" . sp-slurp-hybrid-sexp)
+   ("C-<left>" . sp-forward-barf-sexp)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
