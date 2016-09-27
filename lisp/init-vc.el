@@ -6,9 +6,9 @@
   "Run `ansi-color-apply-on-region'." 
   (progn
     (require 'ansi-color)
-    (toggle-read-only)
+    (read-only-mode)
     (ansi-color-apply-on-region (point-min) (point-max))
-    (toggle-read-only)))
+    (read-only-mode)))
 
 ;; Removing current buffer & filename from VC
 (defun vc-delete-file-and-buffer ()

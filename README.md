@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-Just my emacs v24.5 settings, including:
+Just my emacs v25.1 settings, including:
 
 * project management with eproject & projectile
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax

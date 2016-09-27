@@ -432,6 +432,9 @@
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 
 ;; Cua compatibility
+(setq org-cua-dwim-shift-translated nil) ; suppressing free variable warning
+(setq cua--last-region-shifted nil)      ; suppressing free variable warning
+(setq cua--explicit-region-start nil)    ; suppressing free variable warning
 (use-package org-cua-dwim)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
