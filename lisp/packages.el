@@ -484,10 +484,6 @@
 (use-package writeroom-mode
   :init
   (setq writeroom-extra-line-spacing 0.4
-		writeroom-global-effects
-		'(writeroom-toggle-alpha writeroom-toggle-menu-bar-lines
-								 writeroom-toggle-tool-bar-lines
-								 writeroom-toggle-vertical-scroll-bars)
 		writeroom-maximize-window t)
   :config
   (add-hook 'writeroom-mode-hook
