@@ -32,6 +32,8 @@
         (:name dired+           :type elpa)
         (:name origami          :type elpa)
         (:name undo-tree        :type elpa)
+        (:name f                :type elpa)  ; racer dependency
+        (:name racer            :type elpa)
         (:name company-racer    :type elpa)
         (:name smartparens      :type elpa)
         (:name swift-mode       :type elpa)
@@ -74,12 +76,12 @@
                :load "deft.el"
                :compile ("deft.el")
                :features deft)
-        (:name general-close
+        (:name syntactic-close
                :type git
-               :url "git://github.com/emacs-berlin/general-close.git"
-               :load "general-close.el"
-               :compile ("general-close.el")
-               :features general-close)
+               :url "git://github.com/emacs-berlin/syntactic-close.git"
+               :load "syntactic-close.el"
+               :compile ("syntactic-close.el")
+               :features syntactic-close)
         ))
 
 ;; All packages for installation
@@ -92,7 +94,7 @@
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
-                     go-mode rust-mode emacs-racer writeroom-mode
+                     go-mode rust-mode writeroom-mode helm-projectile
                      visual-regexp visual-regexp-steroids helm-swoop
                      comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
@@ -157,9 +159,9 @@
   :bind ("M-;" . comment-dwim-2))
 
 
-;; General close
-(use-package general-close
-  :bind ("C-<" . general-close))
+;; Syntactic close
+(use-package syntactic-close
+  :bind ("C-<" . syntactic-close))
 
 
 ;; Code folding

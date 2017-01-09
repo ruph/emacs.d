@@ -24,7 +24,7 @@ EMACS PACKAGES
   * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
   * [flycheck](http://www.flycheck.org)
   * [flycheck-pos-tip-mode](https://github.com/flycheck/flycheck-pos-tip)
-  * [general-close](https://github.com/emacs-berlin/general-close)
+  * [syntactic-close](https://github.com/emacs-berlin/syntactic-close)
   * [ggtags](https://github.com/leoliu/ggtags)
   * [helm](https://github.com/emacs-helm/helm)
   * [helm-ag](https://github.com/syohex/emacs-helm-ag)
@@ -157,7 +157,7 @@ CHEAT SHEET
 * **S+C+f**     - indent whole buffer
 * **S-C-v**     - smart paste
 * **C-c w**     - show whitespace
-* **C-<**       - closes line with whatever is appropriate (general-close)
+* **C-<**       - closes line with whatever is appropriate (syntactic-close)
 * **C-:**       - visually match lines (helm-swoop)
 
 
