@@ -181,6 +181,10 @@
   (setq sql-product product)
   (sql-connect connection))
 
+;; Disable completion in mysql
+(setq sql-mysql-options (list "-A"))
+
+;; Don't break the lines
 (add-hook 'sql-interactive-mode-hook
           (lambda ()
             (toggle-truncate-lines t)))

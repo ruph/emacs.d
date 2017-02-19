@@ -2,30 +2,30 @@
 (require 'psvn)
 
 ;; Colors in diff
-(defadvice vc-diff-finish (after handle-color-in-diff-output)
-  "Run `ansi-color-apply-on-region'." 
-  (progn
-    (require 'ansi-color)
-    (read-only-mode)
-    (ansi-color-apply-on-region (point-min) (point-max))
-    (read-only-mode)))
+(use-package ansi-color:
+  :init
+  (add-hook 'diff-mode-hook
+			(lambda () (ansi-color-apply-on-region (point-min) (point-max))))
+  )
 
-;; Removing current buffer & filename from VC
-(defun vc-delete-file-and-buffer ()
-  "Kill the current buffer and deletes the file it is visiting."
-  (interactive)
-  (let ((filename (buffer-file-name)))
-    (when filename
-      (if (vc-backend filename)
-          (vc-delete-file filename)
-        (progn
-          (delete-file filename)
-          (message "Deleted file %s" filename)
-          (kill-buffer))))))
+;; Highlight uncommitted changes
+(use-package diff-hl
+  :init
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
+  ;; (add-hook 'prog-mode-hook
+  ;; 			(lambda () (diff-hl-mode) (diff-hl-flydiff-mode)))
+  ;; (add-hook 'vc-dir-mode-hook
+  ;; 			(lambda () (diff-hl-mode) (diff-hl-flydiff-mode)))
+  ;; (add-hook 'dired-mode-hook
+  ;; 			(lambda() (diff-hl-dired-mode)))
+  :config
+  (setq svn-status-hide-unmodified nil)  ; Hide unmodified by default
+  (setq svn-status-ediff-delete-temporary-files t)  ; Cleanup the ~BASE~ files on ediff
+  )
 
-(require 'diff-hl)
-(add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-(add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
+(defadvice svn-status-update-modeline
+	(after svn-update-diff-hl activate) (diff-hl-update))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

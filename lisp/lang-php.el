@@ -1,6 +1,12 @@
 ;; PHP mode
 (require 'php-mode)
 
+;; Code style
+(setq-default php-mode-coding-style 'psr2)
+(setq-default flycheck-phpcs-standard "PSR2")
+(setq-default flycheck-php-phpcs-executable
+			  (concat (getenv "HOME") "/bin/phpcs"))
+
 ;; # comments
 (modify-syntax-entry ?# "< b" php-mode-syntax-table)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
