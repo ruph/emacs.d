@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;(package-initialize)
+										;(package-initialize)
 
 ;; Faster start by disabling special processing temporarily,
 (setq bkp-file-name-handler-alist file-name-handler-alist)
@@ -143,12 +143,26 @@
 (setq tab-width 4)
 (setq-default tab-width 4)
 
+(message (getenv "LANG"))
+
+(defun get-env-from-shell (variable)
+  (substring
+   (format
+	"%s" (last
+		  (delete
+		   "" (split-string
+			   (shell-command-to-string (concat "$SHELL --login -i -c 'echo $" variable "'"))
+			   "\n"))))
+   1 -1))
+
+(setenv "LANG" (get-env-from-shell "LANG"))
+
 ;; OSX has problems with PATH when running Emacs.app
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
                           ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+                          (get-env-from-shell "PATH"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
