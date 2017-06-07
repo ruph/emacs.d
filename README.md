@@ -16,6 +16,7 @@ EMACS PACKAGES
 --------------
 * Editor
   * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
+  * [ace-window](https://github.com/abo-abo/ace-window)
   * [company-mode](http://company-mode.github.io)
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [comment-dwim-2](https://github.com/remyferre/comment-dwim-2)
@@ -129,6 +130,7 @@ CHEAT SHEET
 ### WINDOW ###
 * **C+x 2**   - split window horizontally
 * **C+x 3**   - split window vertically
+* **M+p**     - ace window
 * **M+h**     - move left
 * **M+j**     - move down
 * **M+k**     - move up

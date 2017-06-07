@@ -95,7 +95,7 @@
                      web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                      skewer-less helm-dash clean-aindent ggtags helm-gtags
                      editorconfig tern company-tern emacs-neotree
-                     go-mode writeroom-mode helm-projectile
+                     go-mode writeroom-mode helm-projectile ace-window
                      visual-regexp visual-regexp-steroids helm-swoop
                      comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
