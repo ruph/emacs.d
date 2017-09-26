@@ -309,6 +309,11 @@
 (global-set-key [C-S-right] 'indent-rigidly-tab)
 (global-set-key [C-S-left] 'outdent-rigidly-tab)
 (global-set-key [backtab] 'outdent-rigidly-tab)
+
+(defun toggle-indent-tabs-mode ()
+  "Toggle `indent-tabs-mode'."
+  (interactive)
+  (setq-local indent-tabs-mode (not indent-tabs-mode)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
