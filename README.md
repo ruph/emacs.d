@@ -40,7 +40,7 @@ EMACS PACKAGES
   * [popup](https://github.com/auto-complete/popup-el)
   * [quickrun](https://github.com/syohex/emacs-quickrun)
   * [diff-hl](https://github.com/dgutov/diff-hl)
-  * [undo-tree](http://www.dr-qubit.org/emacs.php#undo-tree)
+  * [undo-tree](http://www.dr-qubit.org/tags/computing-code-emacs.html)
   * [visual-regexp](https://github.com/benma/visual-regexp.el)
   * [visual-regexp-steroids](https://github.com/benma/visual-regexp-steroids.el)
   * [volatile-highlights](http://www.emacswiki.org/emacs/VolatileHighlights)
@@ -82,6 +82,7 @@ EMACS PACKAGES
   * [psvn](http://www.xsteve.at/prg/emacs/psvn.el)
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
   * [writeroom-mode](https://github.com/joostkremers/writeroom-mode)
+  * [shackle](https://github.com/wasamasa/shackle)
 
 
 OS X installation notes

@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-										;(package-initialize)
+;;(package-initialize)
 
 ;; Faster start by disabling special processing temporarily,
 (setq bkp-file-name-handler-alist file-name-handler-alist)
@@ -78,6 +78,9 @@
   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
 
 (setq save-interprogram-paste-before-kill t)  ;; save clipboard data in ring
+
+(setq visible-bell 1)                   ;; visual bell on
+(setq bell-volume 0)                    ;; no sound bell
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -134,8 +137,7 @@
   (save-excursion
     (delete-trailing-whitespace)
     (indent-region (point-min) (point-max) nil)
-    )
-  )
+    ))
 (global-set-key (kbd "S-C-f") 'indent-buffer)
 
 
@@ -482,6 +484,7 @@
 (require 'init-gtags)
 (require 'init-term)
 (require 'init-irc)
+(require 'init-shackle)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")

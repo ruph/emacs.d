@@ -2,7 +2,7 @@
 (require 'psvn)
 
 ;; Colors in diff
-(use-package ansi-color:
+(use-package ansi-color
   :init
   (add-hook 'diff-mode-hook
 			(lambda () (ansi-color-apply-on-region (point-min) (point-max))))

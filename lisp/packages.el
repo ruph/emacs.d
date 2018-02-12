@@ -29,7 +29,6 @@
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
         (:name css-eldoc        :type elpa)
-        (:name dired+           :type elpa)
         (:name origami          :type elpa)
         (:name undo-tree        :type elpa)
         (:name rust-mode        :type elpa)
@@ -39,6 +38,9 @@
         (:name smartparens      :type elpa)
         (:name swift-mode       :type elpa)
         (:name php-boris        :type elpa)
+        (:name helm             :type elpa)
+        (:name helm-swoop       :type elpa)
+        (:name shackle          :type elpa)
         (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
@@ -87,17 +89,17 @@
 
 ;; All packages for installation
 (setq my-el-get-packages
-      (append '(helm helm-ag rainbow-delimiters highlight-symbol projectile
-                     ace-jump-mode psvn pyenv yaml-mode js2-mode clojure-mode
-                     use-package php-mode yasnippet android-mode popup cider
-                     diminish company-mode multi-term volatile-highlights
-                     markdown-mode multiple-cursors quickrun diff-hl
-                     web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
-                     skewer-less helm-dash clean-aindent ggtags helm-gtags
-                     editorconfig tern company-tern emacs-neotree
-                     go-mode writeroom-mode helm-projectile ace-window
-                     visual-regexp visual-regexp-steroids helm-swoop
-                     comment-dwim-2 pos-tip flycheck-pos-tip)
+      (append '(helm-ag rainbow-delimiters highlight-symbol projectile
+						ace-jump-mode psvn pyenv yaml-mode js2-mode clojure-mode
+						use-package php-mode yasnippet android-mode popup cider
+						diminish company-mode multi-term volatile-highlights
+						markdown-mode multiple-cursors quickrun diff-hl
+						web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
+						skewer-less helm-dash clean-aindent ggtags helm-gtags
+						editorconfig tern company-tern emacs-neotree dired+
+						go-mode writeroom-mode helm-projectile ace-window
+						visual-regexp visual-regexp-steroids
+						comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages
