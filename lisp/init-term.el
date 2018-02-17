@@ -7,17 +7,25 @@
           (lambda ()
             (yas-minor-mode 0)))
 
-;; TERM shortcuts
+;; TEXT edit (line mode) vs SHELL mode (char mode) switch
 (defun term-toggle-mode ()
   (interactive)
-  (if (term-in-line-mode)
-      (term-char-mode)
-	(term-line-mode)))
+  (if (eq major-mode 'term-mode)
+	  (progn
+		(if (term-in-line-mode)
+			(progn (term-char-mode) (message "Shell mode ON."))
+		  (progn (term-line-mode) (message "Edit mode ON.")))
+		(redraw-frame))
+	(message "Toggle term mode works only in term mode")))
+(global-unset-key (kbd "<f2>"))
+(global-set-key (kbd "<f2>") 'term-toggle-mode)
 
+;; TERM shortcuts
 (defun term-send-kill-line ()
   (interactive) (call-interactively 'kill-line) (term-send-raw-string "\C-k"))
 (defun term-send-Cright () (interactive) (term-send-raw-string "\ef"))
 (defun term-send-Cleft  () (interactive) (term-send-raw-string "\eb"))
+
 (add-hook 'term-mode-hook
           (lambda ()
             (progn
@@ -35,7 +43,7 @@
               (define-key term-raw-map (kbd "C-w") 'term-kill-input)
               (define-key term-raw-map (kbd "s-x") 'term-kill-input)
               (define-key term-raw-map (kbd "C-r") 'term-send-raw)
-              (define-key term-raw-map (kbd "C-c C-k") 'term-toggle-mode)
+              (define-key term-raw-map (kbd "<f2>") 'term-toggle-mode)
               )))
 
 ;; from https://github.com/tavisrudd/emacs.d/blob/master/dss-term.el
