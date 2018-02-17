@@ -2,7 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-;;(package-initialize)
+;;(package-initialize) ; added on bottom
 
 ;; Faster start by disabling special processing temporarily,
 (setq bkp-file-name-handler-alist file-name-handler-alist)
@@ -467,6 +467,7 @@
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'packages)
+(package-initialize)
 (require 'init-helm)
 (require 'lang-python)
 (require 'lang-clojure)
