@@ -2,8 +2,13 @@
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
 
-;; ... and clojurescript
-(add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
+;; Clojurescript
+(setq inf-clojure-program "lumo")
+(setq inf-clojure-project-type "lumo")
+(setq inf-clojure-generic-cmd "lumo -d")
+(add-hook 'clojurescript-mode-hook #'inf-clojure-minor-mode)
+(add-hook 'inf-clojure-mode-hook #'paredit-mode)
+(add-hook 'inf-clojure-mode-hook #'eldoc-mode)
 
 ;; ...
 (add-hook 'clojure-mode-hook

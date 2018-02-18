@@ -42,6 +42,7 @@
         (:name helm-swoop       :type elpa)
         (:name shackle          :type elpa)
         (:name visual-fill-column :type elpa)
+        (:name inf-clojure-minor-mode :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
