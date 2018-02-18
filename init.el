@@ -91,7 +91,7 @@
 ;;(load-theme 'adwaita)
 ;; Theme Common
 (set-cursor-color "red")
-
+(setq cursor-type 'box)
 
 ;; Spellchecker
 (setq-default ispell-program-name "aspell")

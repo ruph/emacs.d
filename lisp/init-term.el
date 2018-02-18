@@ -15,10 +15,20 @@
 		(if (term-in-line-mode)
 			(progn (term-char-mode) (message "Shell mode ON."))
 		  (progn (term-line-mode) (message "Edit mode ON.")))
-		(redraw-frame))
+		(redraw-frame)
+		(multi-term-set-cursor-according-to-mode))
 	(message "Toggle term mode works only in term mode")))
 (global-unset-key (kbd "<f2>"))
 (global-set-key (kbd "<f2>") 'term-toggle-mode)
+
+;; different cursor for line and char mode
+(defun multi-term-set-cursor-according-to-mode ()
+  "Change cursor type according to multi-term mode."
+  (cond
+   ((term-in-char-mode)
+    (setq cursor-type 'box))
+   (t
+    (setq cursor-type 'bar))))
 
 ;; TERM shortcuts
 (defun term-send-kill-line ()
