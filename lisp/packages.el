@@ -99,7 +99,7 @@
 						skewer-less helm-dash clean-aindent ggtags helm-gtags
 						editorconfig tern company-tern emacs-neotree dired+
 						go-mode writeroom-mode helm-projectile ace-window
-						visual-regexp visual-regexp-steroids
+						visual-regexp visual-regexp-steroids yasnippet-snippets
 						comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
 
@@ -235,7 +235,7 @@
   :config
   (progn
 	(setq yas-snippet-dirs
-		  '("~/.emacs.d/el-get/yasnippet/snippets"
+		  '("~/.emacs.d/el-get/yasnippet-snippets/snippets"
 			"~/.emacs.d/el-get/yasnippets"
 			"~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
 			))
