@@ -51,10 +51,10 @@
                :compile ("csv-mode.el")
                :features csv-mode)
         (:name yasnippets/clojure-mode
-               :website "https://github.com/swannodette/clojure-snippets"
+               :website "https://github.com/mpenet/clojure-snippets"
                :description "Clojure-mode yasnippets"
                :type github
-               :pkgname "swannodette/clojure-snippets"
+               :pkgname "mpenet/clojure-snippets"
                :features nil)
         (:name yasnippets/minimal-yasnippet-php-mode
                :website "https://github.com/ruph/minimal-yasnippet-php-mode"
