@@ -128,8 +128,8 @@
 
 ;; Editorconfig
 (use-package editorconfig
-  :if (executable-find "editorconfig")
-  :mode ("\\.editorconfig\\'" . conf-unix-mode))
+  :init
+  (editorconfig-mode 1))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
