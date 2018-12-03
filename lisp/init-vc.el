@@ -24,8 +24,9 @@
   (setq svn-status-ediff-delete-temporary-files t)  ; Cleanup the ~BASE~ files on ediff
   )
 
-(defadvice svn-status-update-modeline
-	(after svn-update-diff-hl activate) (diff-hl-update))
+;; Blocking when not connected to svn server
+;; (defadvice svn-status-update-modeline
+;; 	(after svn-update-diff-hl activate) (diff-hl-update))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
