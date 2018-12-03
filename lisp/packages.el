@@ -116,6 +116,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; dired+
+(use-package dired+
+  :init
+  (setq diredp-hide-details-initially-flag nil)
+  :config
+  (setq diredp-hide-details-propagate-flag nil)
+  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Editorconfig
 (use-package editorconfig
   :init
