@@ -184,7 +184,7 @@
   :config
 		(setq aw-keys '(?g ?h ?j ?k ?l ?b ?n ?m)))
 
-;; code folding
+;; Code folding
 (use-package origami
   :init
   (global-origami-mode t)
