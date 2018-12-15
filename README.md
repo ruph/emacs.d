@@ -1,6 +1,6 @@
 WHAT IS THIS?
 -------------
-Just my emacs v25.1 settings, including:
+Just my emacs v26.1 settings, including:
 
 * project management with eproject & projectile
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
@@ -131,19 +131,8 @@ CHEAT SHEET
 ### WINDOW ###
 * **C+x 2**   - split window horizontally
 * **C+x 3**   - split window vertically
-* **M+p**     - ace window
-* **M+h**     - move left
-* **M+j**     - move down
-* **M+k**     - move up
-* **M+l**     - move left
-* **S+C+M+j** - swap down
-* **S+C+M+k** - swap up
-* **S+C+M+h** - swap left
-* **S+C+M+l** - swap right
-* **S+M+j**   - enlarge bottom window
-* **S+M+k**   - enlarge upper window
-* **S+M+h**   - enlarge left window
-* **S+M+l**   - enlarge right window
+* **M+h**     - ace window (& g, h, j, k, l)
+* **M+o**     - ace swap window
 
 
 ### EDITOR ###

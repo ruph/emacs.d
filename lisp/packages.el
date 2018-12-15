@@ -177,8 +177,14 @@
 (use-package syntactic-close
   :bind ("C-<" . syntactic-close))
 
+;; Window navigation
+(use-package ace-window
+  :bind (("M-h" . ace-window)
+		 ("M-o" . ace-swap-window))
+  :config
+		(setq aw-keys '(?g ?h ?j ?k ?l ?b ?n ?m)))
 
-;; Code folding
+;; code folding
 (use-package origami
   :init
   (global-origami-mode t)
