@@ -18,8 +18,15 @@
 (setq projectile-project-root-files-bottom-up
       (push "eproject.cfg" projectile-project-root-files-bottom-up))
 
+;; PROJECTILE doing MULTI-TERM root
+(defun multi-term-projectile-root ()
+  (interactive)
+  (multi-term)
+  (term-send-raw-string (format "cd %s\n" (projectile-project-root))))
+
 ;; Find file in project
 (global-set-key (kbd "S-C-r") 'helm-projectile-find-file)
+(global-set-key (kbd "M-<f5>") 'multi-term-projectile-root)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -42,19 +49,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EPROJECT doing HELM for opened projects
-(defclass helm-source-eproject-files (helm-type-file)
-  ((candidates :initform
-			   (lambda ()
-				 (mapcar (lambda (item)
-						   (format "%s/%s" (cadr prj-current) (car item)))
-						 prj-files)))))
-
-(defun helm-eproject-files (&optional candidate)
+;; EPROJECT doing HELM for opened project
+(defun helm-eproject-files ()
   "List files add to the eproject."
   (interactive)
-  (let ((helm-ff-transformer-show-only-basename nil))
-	(helm :sources (helm-make-source "Files in eproject:" 'helm-source-eproject-files)
+  (let ((helm-ff-transformer-show-only-basename nil)
+		(files (mapcar (lambda (item)
+						 (file-relative-name
+						  (expand-file-name (format "%s/%s" (cadr prj-current) (car item)))
+						  projectile-project-root))
+					   prj-files)))
+	(helm :sources (helm-build-sync-source "Files in eproject:"
+					 :candidates files
+					 :fuzzy-match t
+					 :action helm-projectile-file-actions)
 		  :buffer "*eproject files*")))
 
 (global-set-key (kbd "S-C-t") 'helm-eproject-files)
