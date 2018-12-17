@@ -182,7 +182,7 @@
   :bind (("M-h" . ace-window)
 		 ("M-o" . ace-swap-window))
   :config
-		(setq aw-keys '(?g ?h ?j ?k ?l ?b ?n ?m)))
+  (setq aw-keys '(?g ?h ?j ?k ?l ?b ?n ?m)))
 
 ;; Code folding
 (use-package origami

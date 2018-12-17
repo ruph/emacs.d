@@ -53,17 +53,16 @@
 (defun helm-eproject-files ()
   "List files add to the eproject."
   (interactive)
-  (let ((helm-ff-transformer-show-only-basename nil)
-		(files (mapcar (lambda (item)
+  (let ((files (mapcar (lambda (item)
 						 (file-relative-name
-						  (expand-file-name (format "%s/%s" (cadr prj-current) (car item)))
-						  projectile-project-root))
+						  (expand-file-name (car item) prj-directory)))
 					   prj-files)))
 	(helm :sources (helm-build-sync-source "Files in eproject:"
 					 :candidates files
 					 :fuzzy-match t
 					 :action helm-projectile-file-actions)
-		  :buffer "*eproject files*")))
+		  :buffer "*eproject files*"
+		  :helm-ff-transformer-show-only-basename nil)))
 
 (global-set-key (kbd "S-C-t") 'helm-eproject-files)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

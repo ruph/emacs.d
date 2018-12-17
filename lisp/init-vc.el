@@ -11,22 +11,16 @@
 ;; Highlight uncommitted changes
 (use-package diff-hl
   :init
-  (global-diff-hl-mode)
+  (global-diff-hl-mode)  ;; Blocking when not connected to svn server
   (diff-hl-flydiff-mode)
-  ;; (add-hook 'prog-mode-hook
-  ;; 			(lambda () (diff-hl-mode) (diff-hl-flydiff-mode)))
-  ;; (add-hook 'vc-dir-mode-hook
-  ;; 			(lambda () (diff-hl-mode) (diff-hl-flydiff-mode)))
-  ;; (add-hook 'dired-mode-hook
-  ;; 			(lambda() (diff-hl-dired-mode)))
   :config
   (setq svn-status-hide-unmodified nil)  ; Hide unmodified by default
   (setq svn-status-ediff-delete-temporary-files t)  ; Cleanup the ~BASE~ files on ediff
   )
 
-;; Blocking when not connected to svn server
-;; (defadvice svn-status-update-modeline
-;; 	(after svn-update-diff-hl activate) (diff-hl-update))
+
+(defadvice svn-status-update-modeline
+	(after svn-update-diff-hl activate) (diff-hl-update))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
