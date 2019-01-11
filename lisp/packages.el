@@ -42,6 +42,8 @@
         (:name helm-swoop       :type elpa)
         (:name shackle          :type elpa)
         (:name inf-clojure      :type elpa)
+		(:name clojure-mode     :type elpa)
+		(:name cider            :type elpa)
         (:name visual-fill-column :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
@@ -85,14 +87,13 @@
                :url "git://github.com/emacs-berlin/syntactic-close.git"
                :load "syntactic-close.el"
                :compile ("syntactic-close.el")
-               :features syntactic-close)
-        ))
+               :features syntactic-close)))
 
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(helm-ag rainbow-delimiters highlight-symbol projectile
-						ace-jump-mode psvn pyenv yaml-mode js2-mode clojure-mode
-						use-package php-mode yasnippet android-mode popup cider
+						ace-jump-mode psvn pyenv yaml-mode js2-mode
+						use-package php-mode yasnippet android-mode popup
 						diminish company-mode multi-term volatile-highlights
 						markdown-mode multiple-cursors quickrun diff-hl
 						web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
