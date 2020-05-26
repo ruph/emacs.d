@@ -37,12 +37,6 @@
                 (kbd "C-r")
                 'helm-eshell-history)))
 
-;; Helm dash documentation
-(use-package helm-dash
-  :init
-  (setq helm-dash-docsets-path "~/.docsets")
-  (setq helm-dash-browser-func 'eww))
-
 ;; Swoop
 (use-package helm-swoop
   :bind ("C-:" . helm-swoop))

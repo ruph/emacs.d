@@ -459,10 +459,11 @@
 ;; Restore original values
 (setq file-name-handler-alist bkp-file-name-handler-alist)
 (setq bkp-file-name-handler-alist nil)
-(run-with-idle-timer
- 5 nil (lambda ()
-		 (setq gc-cons-threshold (* 1024 1024))
-		 (message "gc-cons-threshold restored to %S" gc-cons-threshold)))
+;; Just keep that bigger memory limit.
+;; (run-with-idle-timer
+;;  5 nil (lambda ()
+;; 		 (setq gc-cons-threshold (* 1024 1024))
+;; 		 (message "gc-cons-threshold restored to %S" gc-cons-threshold)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

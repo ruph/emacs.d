@@ -42,9 +42,13 @@
         (:name helm-swoop       :type elpa)
         (:name shackle          :type elpa)
         (:name inf-clojure      :type elpa)
-		(:name clojure-mode     :type elpa)
-		(:name cider            :type elpa)
+        (:name clojure-mode     :type elpa)
+        (:name cider            :type elpa)
+        (:name ein              :type elpa)
         (:name visual-fill-column :type elpa)
+        (:name lsp-mode         :type elpa)
+        (:name lsp-ui           :type elpa)
+        (:name lsp-python-ms    :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -92,16 +96,16 @@
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(helm-ag rainbow-delimiters highlight-symbol projectile
-						ace-jump-mode psvn pyenv yaml-mode js2-mode
-						use-package php-mode yasnippet android-mode popup
-						diminish company-mode multi-term volatile-highlights
-						markdown-mode multiple-cursors quickrun diff-hl
-						web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
-						skewer-less helm-dash clean-aindent ggtags helm-gtags
-						editorconfig tern company-tern emacs-neotree dired+
-						go-mode writeroom-mode helm-projectile ace-window
-						visual-regexp visual-regexp-steroids yasnippet-snippets
-						comment-dwim-2 pos-tip flycheck-pos-tip)
+                        ace-jump-mode psvn pyenv yaml-mode js2-mode
+                        use-package php-mode yasnippet android-mode popup
+                        diminish company-mode multi-term volatile-highlights
+                        markdown-mode multiple-cursors quickrun diff-hl
+                        web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
+                        skewer-less clean-aindent ggtags helm-gtags
+                        editorconfig tern company-tern emacs-neotree dired+
+                        go-mode writeroom-mode helm-projectile ace-window
+                        visual-regexp visual-regexp-steroids yasnippet-snippets
+                        comment-dwim-2 pos-tip flycheck-pos-tip)
               (mapcar 'el-get-source-name el-get-sources)))
 
 ;; Install packages

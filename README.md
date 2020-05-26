@@ -76,13 +76,13 @@ EMACS PACKAGES
   * [use-package](https://github.com/jwiegley/use-package)
   * [csv-mode](http://www.emacswiki.org/emacs/CsvMode)
   * [deft-multidir](https://github.com/dsevilla/deft-multidir)
-  * [helm-dash](https://github.com/areina/helm-dash)
   * [markdown-mode](http://jblevins.org/projects/markdown-mode/)
   * [multi-term](http://www.emacswiki.org/emacs/MultiTerm)
   * [psvn](http://www.xsteve.at/prg/emacs/psvn.el)
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
   * [writeroom-mode](https://github.com/joostkremers/writeroom-mode)
-  * [shackle](https://github.com/wasamasa/shackle)
+  * [shackle](https://depp.brause.cc/shackle/)
+  * [ein](https://github.com/millejoh/emacs-ipython-notebook)
 
 
 OS X installation notes
