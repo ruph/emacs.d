@@ -25,7 +25,8 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name paredit          :type elpa)
-        (:name dash             :type elpa)  ; company-tern dependency
+        (:name dash             :type elpa)  ; dependency smartparens, origami, lsp, racer, ...
+        (:name dash-functional  :type elpa)  ; dependency lsp
         (:name popup            :type elpa)  ; dependency
         (:name s                :type elpa)  ; dependency racer, origami, f, ...
         (:name f                :type elpa)  ; dependency lsp-mode
@@ -42,7 +43,6 @@
         (:name company-racer    :type elpa)
         (:name smartparens      :type elpa)
         (:name swift-mode       :type elpa)
-        (:name php-boris        :type elpa)
         (:name helm             :type elpa)
         (:name helm-swoop       :type elpa)
         (:name shackle          :type elpa)
@@ -55,6 +55,7 @@
         (:name lsp-mode         :type elpa)
         (:name lsp-ui           :type elpa)
         (:name lsp-python-ms    :type elpa)
+        (:name tern             :type elpa)
         (:name csv-mode
                :website "http://www.emacswiki.org/emacs/CsvMode"
                :description "This package implements CSV mode, a major mode for editing records in a generalized CSV (character-separated values) format."
@@ -97,9 +98,16 @@
                :url "git://github.com/emacs-berlin/syntactic-close.git"
                :load "syntactic-close.el"
                :compile ("syntactic-close.el")
-               :features syntactic-close)))
+               :features syntactic-close)
+        (:name company-tern
+               :type git
+               :url "git://github.com/kevinushey/company-tern.git"
+               :load "company-tern.el"
+               :compile ("company-tern.el")
+               :features company-tern)
+        ))
 
-;; All packages for installation (- company-tern, sth wrong)
+;; All packages for installation
 (setq my-el-get-packages
       (append '(helm-ag rainbow-delimiters highlight-symbol projectile
                         ace-jump-mode psvn pyenv yaml-mode js2-mode
@@ -108,7 +116,7 @@
                         multiple-cursors quickrun diff-hl
                         web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                         skewer-less clean-aindent ggtags helm-gtags
-                        editorconfig tern emacs-neotree dired+
+                        editorconfig emacs-neotree dired+
                         go-mode writeroom-mode helm-projectile ace-window
                         visual-regexp visual-regexp-steroids yasnippet-snippets
                         comment-dwim-2 pos-tip flycheck-pos-tip)
@@ -321,7 +329,6 @@
   (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'nodejs-repl-mode-hook 'turn-on-smartparens-mode)
-  (add-hook 'php-boris-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'inferior-python-mode-hook 'turn-on-smartparens-mode)
 
   ;;; {}, comments in C-like-modes

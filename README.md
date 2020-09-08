@@ -58,7 +58,6 @@ EMACS PACKAGES
   * [less-css-mode](https://github.com/purcell/less-css-mode)
   * [php-mode](https://github.com/ejmr/php-mode)
   * [php-auto-yasnippets](https://github.com/ejmr/php-auto-yasnippets)
-  * [php-boris](https://github.com/tomterl/php-boris)
   * [pyenv](https://github.com/cyberved/pyenv.el)
   * [rust-mode](https://github.com/rust-lang/rust-mode)
   * [racer](https://github.com/phildawes/racer)
@@ -114,7 +113,6 @@ OS X installation notes
 * `npm install -g eslint babel-eslint eslint-plugin-react`
 * `pip install flake8`
 * `brew install pyenv`
-* `brew install boris`
 * `cargo install racer`
 
 CHEAT SHEET
