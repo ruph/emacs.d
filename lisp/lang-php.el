@@ -5,10 +5,17 @@
 (setq-default php-mode-coding-style 'psr2)
 (setq-default flycheck-phpcs-standard "PSR2")
 (setq-default flycheck-php-phpcs-executable
-			  (concat (getenv "HOME") "/bin/phpcs"))
+              (concat (getenv "HOME") "/bin/phpcs"))
 
 ;; # comments
-(modify-syntax-entry ?# "< b" php-mode-syntax-table)
+;; (modify-syntax-entry ?# "< b" php-mode-syntax-table)
+
+
+;; problem with syntax coloring \{ in use Package\{Class1, ClassB}
+(eval-after-load 'php-mode
+  '(modify-syntax-entry ?\{ "_" php-mode-syntax-table))
+(eval-after-load 'php-mode
+  '(modify-syntax-entry ?} "_" php-mode-syntax-table))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -37,7 +44,7 @@
   :defer t
   :config
   (setq php-auto-yasnippet-php-program
-		"~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
+        "~/.emacs.d/el-get/yasnippets/php-auto-yasnippets/Create-PHP-YASnippet.php")
   (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

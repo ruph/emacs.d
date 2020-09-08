@@ -25,6 +25,12 @@
 ;; Extra recipes
 (setq el-get-sources
       '((:name paredit          :type elpa)
+        (:name dash             :type elpa)  ; company-tern dependency
+        (:name popup            :type elpa)  ; dependency
+        (:name s                :type elpa)  ; dependency racer, origami, f, ...
+        (:name f                :type elpa)  ; dependency lsp-mode
+        (:name pkg-info         :type elpa)  ; dependency flycheck, cider
+        (:name pos-tip          :type elpa)  ; dependency racer
         (:name sml-modeline     :type elpa)
         (:name org-cua-dwim     :type elpa)
         (:name flycheck         :type elpa)
@@ -32,7 +38,6 @@
         (:name origami          :type elpa)
         (:name undo-tree        :type elpa)
         (:name rust-mode        :type elpa)
-        (:name f                :type elpa)  ; racer dependency
         (:name racer            :type elpa)
         (:name company-racer    :type elpa)
         (:name smartparens      :type elpa)
@@ -46,6 +51,7 @@
         (:name cider            :type elpa)
         (:name ein              :type elpa)
         (:name visual-fill-column :type elpa)
+        (:name markdown-mode    :type elpa)
         (:name lsp-mode         :type elpa)
         (:name lsp-ui           :type elpa)
         (:name lsp-python-ms    :type elpa)
@@ -93,16 +99,16 @@
                :compile ("syntactic-close.el")
                :features syntactic-close)))
 
-;; All packages for installation
+;; All packages for installation (- company-tern, sth wrong)
 (setq my-el-get-packages
       (append '(helm-ag rainbow-delimiters highlight-symbol projectile
                         ace-jump-mode psvn pyenv yaml-mode js2-mode
                         use-package php-mode yasnippet android-mode popup
                         diminish company-mode multi-term volatile-highlights
-                        markdown-mode multiple-cursors quickrun diff-hl
+                        multiple-cursors quickrun diff-hl
                         web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                         skewer-less clean-aindent ggtags helm-gtags
-                        editorconfig tern company-tern emacs-neotree dired+
+                        editorconfig tern emacs-neotree dired+
                         go-mode writeroom-mode helm-projectile ace-window
                         visual-regexp visual-regexp-steroids yasnippet-snippets
                         comment-dwim-2 pos-tip flycheck-pos-tip)
@@ -164,13 +170,13 @@
 ;; Visual regex replace + python regex engine
 (use-package visual-regexp-steroids
   :bind (("C-M-%" . vr/replace)
-		 ("M-%"   . vr/query-replace)
-		 ("C-r"   . vr/isearch-backward)
-		 ("C-s"   . vr/isearch-forward)
-		 ("C-M-s" . isearch-forward)  ; ordinary forward search
-		 ("C-M-r" . isearch-backward) ; ordinary backward search
-		 ("C-c m" . vr/mc-mark)  ; for multiple-cursors
-		 ))
+         ("M-%"   . vr/query-replace)
+         ("C-r"   . vr/isearch-backward)
+         ("C-s"   . vr/isearch-forward)
+         ("C-M-s" . isearch-forward)  ; ordinary forward search
+         ("C-M-r" . isearch-backward) ; ordinary backward search
+         ("C-c m" . vr/mc-mark)  ; for multiple-cursors
+         ))
 
 
 ;; Commenting
@@ -185,7 +191,7 @@
 ;; Window navigation
 (use-package ace-window
   :bind (("M-h" . ace-window)
-		 ("M-o" . ace-swap-window))
+         ("M-o" . ace-swap-window))
   :config
   (setq aw-keys '(?g ?h ?j ?k ?l ?b ?n ?m)))
 
@@ -240,11 +246,11 @@
     (progn
       (sml-modeline-mode 1)              ;; show buffer pos in the mode line
       (if (fboundp 'scroll-bar-mode)
-		  (scroll-bar-mode -1)))         ;; turn off the scrollbar
+          (scroll-bar-mode -1)))         ;; turn off the scrollbar
   (if (fboundp 'scroll-bar-mode)
-	  (progn
-		(scroll-bar-mode 1)		          ;; otherwise, show a scrollbar...
-		(set-scroll-bar-mode 'right))))   ;; ... on the right
+      (progn
+        (scroll-bar-mode 1)               ;; otherwise, show a scrollbar...
+        (set-scroll-bar-mode 'right))))   ;; ... on the right
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -255,16 +261,16 @@
   :commands (yas-global-mode yas-minor-mode)
   :config
   (progn
-	(setq yas-snippet-dirs
-		  '("~/.emacs.d/el-get/yasnippet-snippets/snippets"
-			"~/.emacs.d/el-get/yasnippets"
-			"~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
-			))
-	(yas-global-mode 1)
-	(setq yas-wrap-around-region t)
-	(setq yas-prompt-functions
-		  '(yas/x-prompt yas/ido-prompt))
-	))
+    (setq yas-snippet-dirs
+          '("~/.emacs.d/el-get/yasnippet-snippets/snippets"
+            "~/.emacs.d/el-get/yasnippets"
+            "~/.emacs.d/el-get/yasnippets/minimal-yasnippet-php-mode"
+            ))
+    (yas-global-mode 1)
+    (setq yas-wrap-around-region t)
+    (setq yas-prompt-functions
+          '(yas/x-prompt yas/ido-prompt))
+    ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -320,31 +326,31 @@
 
   ;;; {}, comments in C-like-modes
   (sp-with-modes '(php-mode js2-mode rust-mode)
-	(sp-local-pair "/**" "*/" :post-handlers '(("| " "SPC")
-											   (my-php-handle-docstring "RET")))
-	(sp-local-pair "/*." ".*/" :post-handlers '(("| " "SPC")))
-	(sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
-	(sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))
+    (sp-local-pair "/**" "*/" :post-handlers '(("| " "SPC")
+                                               (my-php-handle-docstring "RET")))
+    (sp-local-pair "/*." ".*/" :post-handlers '(("| " "SPC")))
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+    (sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))
 
   (defun my-php-handle-docstring (&rest _ignored)
-	(-when-let (line (save-excursion
-					   (forward-line)
-					   (thing-at-point 'line)))
-	  (cond
-	   ((string-match-p "function" line)
-		(save-excursion
-		  (insert "\n")
-		  (let ((args (save-excursion
-						(forward-line)
-						(my-php-get-function-args))))
-			(--each args
-			  (insert (format "* @param %s\n" it)))))
-		(insert "* "))
-	   ((string-match-p ".*class\\|interface" line)
-		(save-excursion (insert "\n*\n* @author\n"))
-		(insert "* ")))
-	  (let ((o (sp--get-active-overlay)))
-		(indent-region (overlay-start o) (overlay-end o)))))
+    (-when-let (line (save-excursion
+                       (forward-line)
+                       (thing-at-point 'line)))
+      (cond
+       ((string-match-p "function" line)
+        (save-excursion
+          (insert "\n")
+          (let ((args (save-excursion
+                        (forward-line)
+                        (my-php-get-function-args))))
+            (--each args
+              (insert (format "* @param %s\n" it)))))
+        (insert "* "))
+       ((string-match-p ".*class\\|interface" line)
+        (save-excursion (insert "\n*\n* @author\n"))
+        (insert "* ")))
+      (let ((o (sp--get-active-overlay)))
+        (indent-region (overlay-start o) (overlay-end o)))))
   :bind
   (("C-<right>" . sp-slurp-hybrid-sexp)
    ("C-<left>" . sp-forward-barf-sexp)))
@@ -393,17 +399,17 @@
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
 (defadvice show-paren-function
-	(after show-matching-paren-offscreen activate)
+    (after show-matching-paren-offscreen activate)
   "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'"
   (interactive)
   (if show-paren-mode
-	  (let* ((cb (char-before (point)))
-			 (matching-text (and cb
-								 (char-equal (char-syntax cb) ?\) )
-								 (blink-matching-open))))
-		(when matching-text (message matching-text)))))
+      (let* ((cb (char-before (point)))
+             (matching-text (and cb
+                                 (char-equal (char-syntax cb) ?\) )
+                                 (blink-matching-open))))
+        (when matching-text (message matching-text)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -451,9 +457,9 @@
 (use-package deft
   :init
   (setq deft-directories '("~/Dropbox/Notes")
-		deft-extension "txt"
-		deft-use-filename-as-title t
-		deft-text-mode 'gfm-mode)
+        deft-extension "txt"
+        deft-use-filename-as-title t
+        deft-text-mode 'gfm-mode)
   :bind
   ("C-c n" . deft))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -515,10 +521,10 @@
 (use-package writeroom-mode
   :init
   (setq writeroom-extra-line-spacing 0.4
-		writeroom-maximize-window t)
+        writeroom-maximize-window t)
   :config
   (add-hook 'writeroom-mode-hook
-			(lambda () (progn (text-scale-increase 1)))))
+            (lambda () (progn (text-scale-increase 1)))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

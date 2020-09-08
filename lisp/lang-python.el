@@ -46,8 +46,8 @@
   :ensure t
   :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
-						 (require 'lsp-python-ms)
-						 (lsp-deferred))))  ; or lsp
+                         (require 'lsp-python-ms)
+                         (lsp-deferred))))  ; or lsp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -80,22 +80,22 @@
   (setq ein:polymode t)
   :init
   (progn
-	;; fix smartparens not wanting to write closing parenthises when highlighting a region
-	(defun insert-open-parens-or-wrap (&optional arg)
-	  (interactive "P")
-	  (if (region-active-p)
-		  (insert-parentheses arg)
-		(insert "()")
-		(backward-char)))
-	(defun setup-key-hack ()
-	  (define-key ein:notebook-mode-map (kbd "(") #'insert-open-parens-or-wrap)
-	  (keymap-unset-key (kbd "M-<up>") "ein:notebook-mode")
-	  (keymap-unset-key (kbd "M-<down>") "ein:notebook-mode")
-	  (keymap-unset-key (kbd "C-<up>") "ein:notebook-mode")
-	  (keymap-unset-key (kbd "C-<down>") "ein:notebook-mode")
-	  )
-	(add-hook 'ein:notebooklist-mode-hook #'setup-key-hack)
-	)
+    ;; fix smartparens not wanting to write closing parenthises when highlighting a region
+    (defun insert-open-parens-or-wrap (&optional arg)
+      (interactive "P")
+      (if (region-active-p)
+          (insert-parentheses arg)
+        (insert "()")
+        (backward-char)))
+    (defun setup-key-hack ()
+      (define-key ein:notebook-mode-map (kbd "(") #'insert-open-parens-or-wrap)
+      (keymap-unset-key (kbd "M-<up>") "ein:notebook-mode")
+      (keymap-unset-key (kbd "M-<down>") "ein:notebook-mode")
+      (keymap-unset-key (kbd "C-<up>") "ein:notebook-mode")
+      (keymap-unset-key (kbd "C-<down>") "ein:notebook-mode")
+      )
+    (add-hook 'ein:notebooklist-mode-hook #'setup-key-hack)
+    )
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
