@@ -110,13 +110,13 @@
 ;; All packages for installation
 (setq my-el-get-packages
       (append '(helm-ag rainbow-delimiters highlight-symbol projectile
-                        ace-jump-mode psvn pyenv yaml-mode js2-mode
+                        ace-jump-mode pyenv yaml-mode js2-mode
                         use-package php-mode yasnippet android-mode popup
                         diminish company-mode multi-term volatile-highlights
                         multiple-cursors quickrun diff-hl
                         web-mode emmet-mode rainbow-mode less-css-mode nodejs-repl
                         skewer-less clean-aindent ggtags helm-gtags
-                        editorconfig emacs-neotree dired+
+                        emacs-neotree dired+
                         go-mode writeroom-mode helm-projectile ace-window
                         visual-regexp visual-regexp-steroids yasnippet-snippets
                         comment-dwim-2 pos-tip flycheck-pos-tip)
@@ -142,13 +142,6 @@
   :config
   (setq diredp-hide-details-propagate-flag nil)
   )
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; Editorconfig
-(use-package editorconfig
-  :init
-  (editorconfig-mode 1))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -233,10 +226,8 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;; CSV
-(add-to-list 'load-path "~/.emacs.d/el-get/csv-mode/")
-(add-to-list 'auto-mode-alist '("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode"
-  "Major mode for editing comma-separated value files." t)
+(use-package csv-mode
+  :mode ("\.[CcTt][Ss][Vv]\'' . csv-mode))
 
 ;; Better undo
 (use-package undo-tree
@@ -365,16 +356,13 @@
 
 
 ;; Paredit () for lisps
-(add-to-list 'load-path "~/.emacs.d/el-get/paredit")
-(require 'paredit)
-(autoload 'paredit-mode "paredit"
-  "Minor mode for pseudo-structurally editing Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-(add-hook 'scheme-mode-hook           (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-(add-hook 'slime-repl-mode-hook       (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-(add-hook 'clojure-mode-hook          (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+(use-package paredit
+  :hook ((emacs-lisp-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+         (lisp-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+         (lisp-interaction-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+         (scheme-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+         (slime-repl-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
+         (clojure-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))))
 
 ;; these are used for moving lines/regions
 (keymap-unset-key (kbd "M-<up>") "paredit-mode")
@@ -431,13 +419,12 @@
 
 
 ;; Fast/direct cursor location minor mode.
-(add-to-list 'load-path "~/.emacs.d/el-get/ace-jump-mode")
-(require 'ace-jump-mode)
-(autoload 'ace-jump-mode-pop-mark "ace-jump-mode" "Ace jump back:-)"t)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
-(define-key global-map (kbd "C-0") 'ace-jump-mode)
-(define-key global-map (kbd "C-c C-0") 'ace-jump-mode-pop-mark)
+(use-package ace-jump-mode
+  :bind (("C-0" . ace-jump-mode)
+         ("C-c C-0" . ace-jump-mode-pop-mark))
+  :config
+  (eval-after-load "ace-jump-mode"
+    '(ace-jump-mode-enable-mark-sync)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

@@ -2,3 +2,12 @@
 lisp/private.el
 test
 eproject.cfg
+GEMINI.md
+
+# .emacs.d 
+el-get/
+elpa/
+recentf
+tramp
+transient/
+network-security.data
