@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Clojure
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)

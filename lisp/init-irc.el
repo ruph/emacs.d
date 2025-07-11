@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; ERC
 (use-package erc
   :commands erc

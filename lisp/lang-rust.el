@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; RUST MODE
 (use-package rust-mode
   :config

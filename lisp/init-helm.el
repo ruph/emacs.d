@@ -1,5 +1,5 @@
+;;; -*- lexical-binding: t; -*-
 ;; HELM
-(require 'helm-config)
 (helm-mode 1)
 
 ;; set helm for find files

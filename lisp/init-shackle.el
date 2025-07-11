@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Shackle
 ;; https://github.com/wasamasa/shackle
 ;; https://github.com/kaushalmodi/.emacs.d/blob/master/setup-files/setup-shackle.el

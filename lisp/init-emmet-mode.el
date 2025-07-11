@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; EMMET-MODE ~ write something like "a.x>span" and press C-<RET>
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes

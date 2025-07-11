@@ -1,5 +1,5 @@
+;;; -*- lexical-binding: t; -*-
 ;; SVN
-(require 'psvn)
 
 ;; Colors in diff
 (use-package ansi-color

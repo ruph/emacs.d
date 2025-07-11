@@ -429,24 +429,6 @@
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'packages)
-(require 'init-helm)
-(require 'lang-python)
-(require 'lang-clojure)
-(require 'lang-javascript)
-(require 'lang-php)
-(require 'lang-go)
-(require 'lang-rust)
-(require 'init-web-mode)
-(require 'init-emmet-mode)
-(require 'init-flycheck)
-(require 'init-css)
-(require 'init-vc)
-(require 'init-markdown-mode)
-(require 'init-project)
-(require 'init-gtags)
-(require 'init-term)
-(require 'init-irc)
-(require 'init-shackle)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
@@ -466,3 +448,29 @@
 
 
 (provide 'init)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point 'symbol)
+ '(helm-gtags-auto-update t)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-path-style 'root)
+ '(helm-gtags-prefix-key "\3g")
+ '(helm-gtags-pulse-at-cursor t)
+ '(helm-gtags-suggested-key-mapping t)
+ '(helm-gtags-use-input-at-cursor t)
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-button ((t (:underline "dark gray" :weight bold))))
+ '(erc-input-face ((t (:foreground "indian red"))))
+ '(erc-my-nick-face ((t (:foreground "indian red" :weight bold))))
+ '(erc-nick-default-face ((t (:foreground "dark gray" :weight bold))))
+ '(erc-timestamp-face ((t (:foreground "dim gray" :weight normal)))))

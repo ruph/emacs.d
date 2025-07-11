@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; GTAGS
 (require 'ggtags)
 (define-key ggtags-mode-map (kbd "C-.") 'ggtags-show-definition)

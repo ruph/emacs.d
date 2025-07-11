@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; MULTI-TERM
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")

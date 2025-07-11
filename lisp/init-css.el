@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; CSS
 (add-hook 'css-mode-hook
           (lambda ()

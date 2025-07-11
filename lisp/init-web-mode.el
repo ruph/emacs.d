@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; WEB-MODE
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))

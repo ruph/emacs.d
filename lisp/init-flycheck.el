@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; FLYCHECKING
 (require 'flycheck)
 

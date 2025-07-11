@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; EVIL
 (require 'evil)
 (evil-mode 0)

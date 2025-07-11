@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; Python Tab Hook
 (add-hook 'python-mode-hook
           (lambda ()
@@ -9,11 +10,6 @@
             (ggtags-mode 0)
             (helm-gtags-mode 0)
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
-
-;; Multi-version environment
-(require 'pyenv)
-(setq pyenv-installation-dir "/usr/local/pyenv")
-(add-hook 'python-mode-hook 'pyenv-use-corresponding)
 
 ;; FLYCHECK
 (setq-default flycheck-flake8rc

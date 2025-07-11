@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; PROJECTILE
 (require 'projectile)
 (add-hook 'emacs-lisp-mode-hook 'projectile-mode)

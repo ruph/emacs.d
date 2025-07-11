@@ -1,0 +1,9 @@
+[submodule "snippets/clojure-snippets"]
+	path = snippets/clojure-snippets
+	url = https://github.com/mpenet/clojure-snippets
+[submodule "snippets/minimal-yasnippet-php-mode"]
+	path = snippets/minimal-yasnippet-php-mode
+	url = https://github.com/ruph/minimal-yasnippet-php-mode
+[submodule "snippets/php-auto-yasnippets"]
+	path = snippets/php-auto-yasnippets
+	url = https://github.com/ejmr/php-auto-yasnippets

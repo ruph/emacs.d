@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; GO
 (require 'go-mode)
 (add-hook 'go-mode-hook
