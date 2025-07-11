@@ -339,6 +339,7 @@
 
 (use-package pyenv-mode
   :ensure t
+  :commands (pyenv-use-corresponding)
   :config
   (setq pyenv-installation-dir "/usr/local/pyenv")
   (add-hook 'python-mode-hook 'pyenv-use-corresponding))
