@@ -90,7 +90,6 @@
   (progn
     (setq yas-snippet-dirs
           '(
-            "~/.emacs.d/snippets/yasnippet-snippets/snippets"
             "~/.emacs.d/snippets/clojure-snippets"
             "~/.emacs.d/snippets/minimal-yasnippet-php-mode"
             "~/.emacs.d/snippets/php-auto-yasnippets"
@@ -160,6 +159,11 @@
 
 (use-package visual-regexp-steroids
   :ensure t
+  :config
+  (setq vr/engine 'python)
+  (let ((vr-path (locate-library "visual-regexp-steroids")))
+    (when vr-path
+      (setq vr/command-python (concat "python3 " (file-name-directory vr-path) "regexp.py"))))
   :bind (("C-M-%" . vr/replace)
          ("M-%"   . vr/query-replace)
          ("C-r"   . vr/isearch-backward)
@@ -407,7 +411,7 @@
 
 ;; Dependencies (good to have them explicit)
 (use-package dash :ensure t)
-(use-package dash-functional :ensure t)
+
 (use-package s :ensure t)
 (use-package f :ensure t)
 (use-package pkg-info :ensure t)

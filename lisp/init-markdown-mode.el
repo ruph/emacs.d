@@ -12,7 +12,7 @@
     (flycheck-mode -1)
     (company-mode -1)
     (yas-minor-mode -1)
-    (clean-aindent-mode nil)
+    
     (remove-hook 'before-save-hook 'delete-trailing-whitespace)
     (define-key markdown-mode-map (kbd "M-<left>")  nil)
     (define-key markdown-mode-map (kbd "C-<left>")  'markdown-promote)
