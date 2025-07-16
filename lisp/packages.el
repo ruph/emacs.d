@@ -206,13 +206,7 @@
 
 
 
-(use-package ggtags
-  :ensure t
-  :config
-  (load-file "~/.emacs.d/lisp/init-gtags.el"))
 
-(use-package helm-gtags
-  :ensure t)
 
 (use-package flycheck
   :ensure t
@@ -530,4 +524,5 @@
       (turn-on-font-lock))))
   "Mode for arff-files.")
 
+(global-set-key (kbd "M-.") 'xref-find-definitions)
 (provide 'packages)

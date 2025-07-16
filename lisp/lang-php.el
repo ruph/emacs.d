@@ -22,11 +22,8 @@
 
 ;; Autocompletion
 (defun php-completion ()
-  (ggtags-mode 1)
-  (helm-gtags-mode 1)
   (set (make-local-variable 'company-backends)
-       '((company-gtags company-dabbrev-code company-files company-yasnippet)))
-  )
+       '((company-dabbrev-code company-files company-yasnippet))))
 
 ;; Hooks
 (add-hook 'php-mode-hook

@@ -3,6 +3,7 @@ WHAT IS THIS?
 These are my settings for Emacs v30+, including:
 
 * project management with eproject & projectile
+* code navigation with the built-in `xref` (`M-`.)
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
 * php, html, css support with all relevant modes (web-mode helps a lot)
 * javascript and jsx through js2-mode, eslint and ternjs
@@ -26,9 +27,7 @@ EMACS PACKAGES
   * [flycheck](http://www.flycheck.org)
   * [flycheck-pos-tip-mode](https://github.com/flycheck/flycheck-pos-tip)
   * [syntactic-close](https://github.com/emacs-berlin/syntactic-close)
-  * [ggtags](https://github.com/leoliu/ggtags)
   * [helm](https://github.com/emacs-helm/helm)
-  * [helm-gtags](https://github.com/syohex/emacs-helm-gtags)
   * [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
   * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
   * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)
@@ -101,8 +100,6 @@ For all features to work correctly, you may need to install some external tools 
 
 * `aspell` (for spell-checking)
 * `the_silver_searcher` (for `ag` search)
-* `ctags` (for tags generation, preferably exuberant-ctags)
-* `global` (for `gtags`)
 * `tern` (for JavaScript analysis)
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
@@ -178,7 +175,7 @@ CHEAT SHEET
 * **M-p**     - previous autocomplete option
 * **F5**      - go to next error (flycheck)
 * **S+F5**    - go to previous error (flycheck)
-* **M+.**     - jump to definition
+* **M-.**     - jump to definition (xref)
 * **C+.**     - show arguments
 * **C-c o**   - toggle fold on all nodes
 * **C-c RET** - toggle fold on current node
