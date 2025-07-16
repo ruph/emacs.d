@@ -37,9 +37,7 @@
                 (kbd "C-r")
                 'helm-eshell-history)))
 
-;; Swoop
-(use-package helm-swoop
-  :bind ("C-:" . helm-swoop))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

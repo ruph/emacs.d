@@ -3,6 +3,7 @@ lisp/private.el
 test
 eproject.cfg
 GEMINI.md
+.aider*
 
 # .emacs.d 
 el-get/
@@ -14,3 +15,4 @@ network-security.data
 projectile-bookmarks.eld
 quelpa/
 auto-save-list/
+*.~undo-tree~

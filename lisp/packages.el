@@ -196,6 +196,7 @@
 
 (use-package helm
   :ensure t
+  :bind (("C-:" . helm-occur))
   :config
   (load-file "~/.emacs.d/lisp/init-helm.el"))
 

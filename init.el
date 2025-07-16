@@ -80,6 +80,20 @@
 
 (setq visible-bell 1)                   ;; visual bell on
 (setq bell-volume 0)                    ;; no sound bell
+
+;; Disable the Ctrl+Mouse Wheel zoom 
+;; Common on Linux/Windows
+(global-unset-key [C-mouse-4])
+(global-unset-key [C-mouse-5])
+;; Common on macOS GUI builds
+(global-unset-key (kbd "C-<wheel-up>"))
+(global-unset-key (kbd "C-<wheel-down>"))
+;; In some builds, these are the actual events:
+(global-unset-key (kbd "<C-wheel-up>"))
+(global-unset-key (kbd "<C-wheel-down>"))
+;; Extra (defensive)
+(global-set-key (kbd "<C-wheel-up>") 'ignore)
+(global-set-key (kbd "<C-wheel-down>") 'ignore)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
