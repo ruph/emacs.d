@@ -4,16 +4,12 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 
-;; tern
-(require 'tern)
+
 
 ;; mode settings
 (defun js-mode-common ()
   (setq tab-width 4)
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (tern-mode t)
-  (set (make-local-variable 'company-backends)
-       '((company-dabbrev-code company-tern company-keywords company-yasnippet))))
+  (add-hook 'before-save-hook 'delete-trailing-whitespace))
 
 (add-hook 'js-mode-hook 'js-mode-common)
 

@@ -266,6 +266,11 @@
   :config
   (load-file "~/.emacs.d/lisp/lang-javascript.el"))
 
+(use-package typescript-mode
+  :ensure t
+  :config
+  (load-file "~/.emacs.d/lisp/lang-typescript.el"))
+
 (use-package web-mode
   :ensure t
   :config
@@ -369,13 +374,15 @@
     (set-android-path-from-shell-PATH)))
 
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :hook ((js2-mode . lsp)
+         (typescript-mode . lsp))
+  :commands lsp)
 
 (use-package lsp-ui
   :ensure t)
 
-(use-package tern
-  :ensure t)
+
 
 
 

@@ -6,7 +6,7 @@ These are my settings for Emacs v30+, including:
 * code navigation with the built-in `xref` (`M-`.)
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
 * php, html, css support with all relevant modes (web-mode helps a lot)
-* javascript and jsx through js2-mode, eslint and ternjs
+* javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode
 * clojure & clojurescript with paredit
 * autocomplete, snippets, tags, suggestions
 * ... and everything else.
@@ -60,9 +60,8 @@ EMACS PACKAGES
   * [rust-mode](https://github.com/rust-lang/rust-mode)
   * [racer](https://github.com/phildawes/racer)
   * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
-  * [skewer-less](https://github.com/purcell/skewer-less)
   * [swift-mode](https://github.com/chrisbarrett/swift-mode)
-  * [tern](http://ternjs.net)
+  * [typescript-mode](https://github.com/ananthakumaran/typescript-mode.el)
   * [web-mode](http://web-mode.org)
 * Projects
   * [eproject](https://github.com/gabrielelanaro/eproject)
@@ -100,7 +99,6 @@ For all features to work correctly, you may need to install some external tools 
 
 * `aspell` (for spell-checking)
 * `the_silver_searcher` (for `ag` search)
-* `tern` (for JavaScript analysis)
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)

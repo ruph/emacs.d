@@ -22,6 +22,7 @@
 ;;
 (setq disabled-command-function nil)    ;; enable all disabled commands
 (menu-bar-mode  t)                      ;; show the menu...
+(global-visual-line-mode 1)             ;; enable visual line mode
 (mouse-avoidance-mode 'jump)            ;; mouse ptr when cursor is too close
 (if (fboundp 'tool-bar-mode)
 	(tool-bar-mode -1))                 ;; turn-off toolbar
@@ -468,6 +469,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(cua-mode t nil (cua-base))
  '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
  '(helm-ag-command-option "--all-text")
  '(helm-ag-insert-at-point 'symbol)
@@ -478,7 +481,17 @@
  '(helm-gtags-pulse-at-cursor t)
  '(helm-gtags-suggested-key-mapping t)
  '(helm-gtags-use-input-at-cursor t)
- '(package-selected-packages nil))
+ '(package-selected-packages nil)
+ '(safe-local-variable-values
+   '((buffer-file-coding-system . utf-8)
+	 (eval setenv "GOPATH" "/Users/ruph/Workspace/go")
+	 (eval when (equal web-mode-content-type "javascript")
+		   (ggtags-mode 1) (helm-gtags-mode 1))
+	 (eval add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
+	 (helm-gtags-mode . 1) (ggtags-mode . 1)))
+ '(show-paren-mode t)
+ '(size-indication-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
