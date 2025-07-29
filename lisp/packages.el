@@ -24,9 +24,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UI & THEME
 
-(use-package sml-modeline
-  :ensure t
-  :init (sml-modeline-mode 1))
+
 
 (use-package rainbow-delimiters
   :ensure t
@@ -44,8 +42,7 @@
 
 
 
-(use-package neotree
-  :ensure t)
+
 
 (use-package writeroom-mode
   :ensure t
@@ -213,8 +210,7 @@
   :config
   (load-file "~/.emacs.d/lisp/init-flycheck.el"))
 
-(use-package flycheck-pos-tip
-  :ensure t)
+
 
 (use-package quickrun
   :ensure t
@@ -257,6 +253,11 @@
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/init-shackle.el"))
+
+(use-package tree-sitter
+  :ensure t
+  :config
+  (load-file "~/.emacs.d/lisp/init-treesitter.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LANGUAGES
@@ -316,11 +317,9 @@
   :config
   (load-file "~/.emacs.d/lisp/init-irc.el"))
 
-(use-package racer
-  :ensure t)
 
-(use-package company-racer
-  :ensure t)
+
+
 
 (use-package swift-mode
   :ensure t)
@@ -404,8 +403,7 @@
 (use-package visual-fill-column
   :ensure t)
 
-(use-package css-eldoc
-  :ensure t)
+
 
 (use-package lsp-python-ms
   :ensure t)

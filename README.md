@@ -22,10 +22,8 @@ EMACS PACKAGES
   * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [comment-dwim-2](https://github.com/remyferre/comment-dwim-2)
   * [dired+](https://github.com/emacsmirror/dired-plus)
-  * [emacs-neotree](https://github.com/jaypei/emacs-neotree)
   * [evil](https://github.com/emacs-evil/evil)
   * [flycheck](http://www.flycheck.org)
-  * [flycheck-pos-tip-mode](https://github.com/flycheck/flycheck-pos-tip)
   * [syntactic-close](https://github.com/emacs-berlin/syntactic-close)
   * [helm](https://github.com/emacs-helm/helm)
   * [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
@@ -42,14 +40,12 @@ EMACS PACKAGES
   * [visual-regexp-steroids](https://github.com/benma/visual-regexp-steroids.el)
   * [volatile-highlights](http://www.emacswiki.org/emacs/VolatileHighlights)
   * [smartparens](https://github.com/Fuco1/smartparens)
-  * [sml-modeline](http://www.emacswiki.org/emacs/SmlModeLine)
   * [yasnippet](https://github.com/capitaomorte/yasnippet)
 * Languages
   * [clojure-snippets](https://github.com/swannodette/clojure-snippets)
   * [clojure-mode](https://github.com/clojure-emacs/clojure-mode)
   * [cider](https://github.com/clojure-emacs/cider)
   * [circe](https://github.com/jorgenschaefer/circe)
-  * [css-eldoc](https://github.com/zenozeng/css-eldoc)
   * [emmet-mode](https://github.com/smihica/emmet-mode)
   * [go-mode](https://github.com/dominikh/go-mode.el)
   * [js2-mode](https://github.com/mooz/js2-mode)
@@ -58,7 +54,6 @@ EMACS PACKAGES
   * [php-auto-yasnippets](https://github.com/ejmr/php-auto-yasnippets)
   * [pyenv-mode](https://github.com/pyenv/pyenv-mode)
   * [rust-mode](https://github.com/rust-lang/rust-mode)
-  * [racer](https://github.com/phildawes/racer)
   * [rainbow-mode](https://julien.danjou.info/projects/emacs-packages#rainbow-mode)
   * [swift-mode](https://github.com/chrisbarrett/swift-mode)
   * [typescript-mode](https://github.com/ananthakumaran/typescript-mode.el)
@@ -99,10 +94,10 @@ For all features to work correctly, you may need to install some external tools 
 
 * `aspell` (for spell-checking)
 * `the_silver_searcher` (for `ag` search)
+* `tree-sitter` (for syntax highlighting and parsing). You will also need to install the grammars for the languages you use, e.g., `brew install tree-sitter-python tree-sitter-javascript`.
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)
-* `racer` (for Rust code completion)
 
 CHEAT SHEET
 ------------
