@@ -222,10 +222,16 @@
   :config
   (load-file "~/.emacs.d/lisp/init-vc.el"))
 
-(use-package multi-term
+
+
+(use-package vterm
   :ensure t
   :config
-  (load-file "~/.emacs.d/lisp/init-term.el"))
+  (load-file "~/.emacs.d/lisp/init-vterm.el"))
+
+
+
+
 
 (use-package deft
   :ensure t

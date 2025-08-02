@@ -69,7 +69,7 @@ EMACS PACKAGES
   * [csv-mode](http://www.emacswiki.org/emacs/CsvMode)
   * [deft](https://github.com/jrblevin/deft)
   * [markdown-mode](http://jblevins.org/projects/markdown-mode/)
-  * [multi-term](http://www.emacswiki.org/emacs/MultiTerm)
+  * [vterm](https://github.com/emacs-vterm/vterm)
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
   * [writeroom-mode](https://github.com/joostkremers/writeroom-mode)
   * [shackle](https://depp.brause.cc/shackle/)
