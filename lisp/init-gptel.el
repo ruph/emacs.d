@@ -17,4 +17,11 @@
 
 (require 'gptel-integrations)
 
+(defvar gptel-keymap (make-sparse-keymap))
+(define-key global-map (kbd "C-c g") gptel-keymap)
+(define-key gptel-keymap (kbd "g") 'gptel)
+(define-key gptel-keymap (kbd "s") 'gptel-send)
+(define-key gptel-keymap (kbd "a") 'gptel-abort)
+(define-key gptel-keymap (kbd "m") 'gptel-menu)
+
 (provide 'init-gptel)
