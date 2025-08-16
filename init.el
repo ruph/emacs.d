@@ -80,6 +80,7 @@
 (setq save-interprogram-paste-before-kill t)  ;; save clipboard data in ring
 
 (setq visible-bell 1)                   ;; visual bell on
+(setq confirm-kill-processes nil)        ;; don't ask to kill processes on exit
 (setq bell-volume 0)                    ;; no sound bell
 
 ;; Disable the Ctrl+Mouse Wheel zoom 
@@ -464,6 +465,11 @@
 
 
 (provide 'init)
+
+(defun my-stop-mcp-servers ()
+  (when (fboundp 'mcp-hub-stop-all-server)
+    (mcp-hub-stop-all-server)))
+(add-hook 'kill-emacs-hook 'my-stop-mcp-servers)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

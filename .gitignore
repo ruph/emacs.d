@@ -1,7 +1,11 @@
+.DS_Store
+.cache/
+.lsp-session-*
 *.elc
 lisp/private.el
 test
 eproject.cfg
+AGENT.md
 GEMINI.md
 .aider*
 

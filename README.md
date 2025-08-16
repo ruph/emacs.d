@@ -8,6 +8,7 @@ These are my settings for Emacs v30+, including:
 * php, html, css support with all relevant modes (web-mode helps a lot)
 * javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode
 * clojure & clojurescript with paredit
+* LLM integration with gptel and MCP
 * autocomplete, snippets, tags, suggestions
 * ... and everything else.
 
@@ -63,6 +64,8 @@ EMACS PACKAGES
   * [helm-projectile](http://tuhdo.github.io/helm-projectile.html)
   * [projectile](https://github.com/bbatsov/projectile)
 * Other
+  * [gptel](https://github.com/karthink/gptel)
+  * [mcp.el](https://github.com/lizqwerscott/mcp.el)
   * [use-package](https://github.com/jwiegley/use-package)
   * [quelpa](https://github.com/quelpa/quelpa)
   * [quelpa-use-package](https://github.com/quelpa/quelpa-use-package)
@@ -194,6 +197,16 @@ CHEAT SHEET
 * **C-c C-m** - new note (in deft)
 * **C-c C-r** - rename note (in deft)
 * **C-c C-d** - delete note (in deft)
+
+
+### GPTEL / MCP ###
+* **C-c g g** - Start a new gptel session
+* **C-c g s** - Send the current region or buffer to gptel
+* **C-c g a** - Abort the current gptel process
+* **C-c g m** - Open the gptel menu
+
+To use an MCP server, include `use <server_name>` in your prompt. For example:
+`How do I do X? use context7`
 
 
 _peace._

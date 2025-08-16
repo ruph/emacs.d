@@ -387,6 +387,23 @@
 (use-package lsp-ui
   :ensure t)
 
+(use-package gptel
+  :ensure t
+  :config
+  (load-file "~/.emacs.d/lisp/init-gptel.el"))
+
+(use-package mcp
+  :ensure t
+  :demand t
+  :config
+  (require 'mcp-hub)
+  (setq mcp-hub-servers
+        '(("context7" . (:url "https://mcp.context7.com/mcp"))))
+  (when (boundp 'cheapchina-mcp-server-config)
+    (add-to-list 'mcp-hub-servers cheapchina-mcp-server-config))
+  (add-hook 'after-init-hook 'mcp-hub-start-all-server))
+
+
 
 
 
