@@ -445,11 +445,12 @@
 
 ;; IMPORTS
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(require 'packages)
 
 ;; PRIVATE SETTINGS
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
+
+(require 'packages)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
