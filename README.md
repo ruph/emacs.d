@@ -6,7 +6,7 @@ These are my settings for Emacs v30+, including:
 * code navigation with the built-in `xref` (`M-`.)
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
 * php, html, css support with all relevant modes (web-mode helps a lot)
-* javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode
+* javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode (with .jsonc support)
 * clojure & clojurescript with paredit
 * LLM integration with gptel and MCP
 * autocomplete, snippets, tags, suggestions
