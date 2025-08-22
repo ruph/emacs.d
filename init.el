@@ -467,10 +467,7 @@
 
 (provide 'init)
 
-(defun my-stop-mcp-servers ()
-  (when (fboundp 'mcp-hub-stop-all-server)
-    (mcp-hub-stop-all-server)))
-(add-hook 'kill-emacs-hook 'my-stop-mcp-servers)
+;; MCP servers disabled: removing stop hook since MCP is not used
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

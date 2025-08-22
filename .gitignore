@@ -5,7 +5,6 @@
 lisp/private.el
 test
 eproject.cfg
-AGENT.md
 GEMINI.md
 .aider*
 
