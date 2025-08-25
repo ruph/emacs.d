@@ -5,7 +5,7 @@
 (defun init-markdown ()
   (progn
     (setq markdown-enable-math t)
-    (setq markdown-coding-system "UTF-8")
+    (setq markdown-coding-system 'utf-8)
     (setq markdown-indent-on-enter t)
     (visual-line-mode t)
     (flyspell-mode)
@@ -21,6 +21,9 @@
 	(define-key markdown-mode-map (kbd "M-S-<left>") nil)   ; markdown-promote-subtree
 	(define-key markdown-mode-map (kbd "M-S-<right>") nil)  ; markdown-demote-subtree
     ))
+
+(with-eval-after-load 'markdown-mode
+  (define-key markdown-mode-map (kbd "C-c C-c v") #'markdown-preview)) ; use temp file
 
 (add-hook 'markdown-mode-hook 'init-markdown)
 (add-hook 'gfm-mode-hook 'init-markdown)
