@@ -37,12 +37,11 @@
 
 (use-package lsp-ui :commands lsp-ui-mode)
 
-(use-package lsp-python-ms
+(use-package lsp-pyright
   :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
   :hook (python-mode . (lambda ()
-                         (require 'lsp-python-ms)
-                         (lsp-deferred))))  ; or lsp
+                         (require 'lsp-pyright)
+                         (lsp-deferred))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

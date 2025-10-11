@@ -8,45 +8,31 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 
-;; PROJECTILE doing AG
-(global-set-key (kbd "S-C-<f7>") 'helm-projectile-ag)
-(custom-set-variables
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
- '(helm-ag-command-option "--all-text")
- '(helm-ag-insert-at-point 'symbol))
+;; PROJECTILE + ripgrep
+(global-set-key (kbd "S-C-<f7>") 'helm-projectile-rg)
 
 ;; PROJECTILE doing EPROJECT
 (setq projectile-project-root-files-bottom-up
       (push "eproject.cfg" projectile-project-root-files-bottom-up))
 
-;; PROJECTILE doing MULTI-TERM root
-(defun multi-term-projectile-root ()
-  (interactive)
-  (multi-term)
-  (term-send-raw-string (format "cd %s\n" (projectile-project-root))))
-
 ;; Find file in project
 (global-set-key (kbd "S-C-r") 'helm-projectile-find-file)
-(global-set-key (kbd "M-<f5>") 'multi-term-projectile-root)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; EPROJECT
-(require 'eproject)
-
+;; EPROJECT (lazy)
 (setq prj-set-compilation-frame t)
-
-;; remove pesky M-left/right
 (setq prj-keybindings
       '(([S-C-f5] eproject-setup-toggle  always)
         ([C-f5]   eproject-dired)))
 
-;; advising eproject setup to have no evil
-(defun no-evil-in-eproject-setup (orig-fun &rest args)
-  (progn
-    (apply orig-fun args)
-    (turn-off-evil-mode)))
-(advice-add 'eproject-setup :around #'no-evil-in-eproject-setup)
+(with-eval-after-load 'eproject
+  ;; advising eproject setup to have no evil
+  (defun no-evil-in-eproject-setup (orig-fun &rest args)
+    (progn
+      (apply orig-fun args)
+      (turn-off-evil-mode)))
+  (advice-add 'eproject-setup :around #'no-evil-in-eproject-setup))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -54,6 +40,8 @@
 (defun helm-eproject-files ()
   "List files add to the eproject."
   (interactive)
+  (unless (featurep 'eproject)
+    (require 'eproject))
   (let ((files (mapcar (lambda (item)
 						 (file-relative-name
 						  (expand-file-name (car item) prj-directory)))

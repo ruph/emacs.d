@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t; -*-
+;; Use cl-lib features without deprecated `cl`
+(require 'cl-lib)
 ;; EVIL
 (require 'evil)
 (evil-mode 0)
@@ -50,29 +52,29 @@
 (define-key evil-normal-state-map (kbd "M-.") 'evil-undefine)
 (define-key evil-normal-state-map (kbd "M-:") 'evil-undefine)
 
-(loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
-                              (compilation-mode . emacs)
-                              (cider-mode      . emacs)
-                              (cider-repl-mode . emacs)
-                              (cider-stacktrace-mode . emacs)
-                              (neotree-mode    . emacs)
-                              (pylookup-mode   . emacs)
-                              (read-only-mode  . emacs)
-                              (git-rebase-mode . emacs)
-                              (term-mode       . emacs)
-                              (eshell-mode     . emacs)
-                              (eww-mode        . emacs)
-                              (help-mode       . emacs)
-                              (helm-grep-mode  . emacs)
-                              (grep-mode       . emacs)
-                              (bc-menu-mode    . emacs)
-                              (comint-mode     . emacs)
-                              (sql-interactive-mode . emacs)
-                              (magit-branch-manager-mode . emacs)
-                              (rdictcc-buffer-mode . emacs)
-                              (dired-mode . emacs)
-                              (deft-mode  . emacs))
-      do (evil-set-initial-state mode state))
+(cl-loop for (mode . state) in '((inferior-emacs-lisp-mode . emacs)
+                                 (compilation-mode . emacs)
+                                 (cider-mode      . emacs)
+                                 (cider-repl-mode . emacs)
+                                 (cider-stacktrace-mode . emacs)
+                                 (neotree-mode    . emacs)
+                                 (pylookup-mode   . emacs)
+                                 (read-only-mode  . emacs)
+                                 (git-rebase-mode . emacs)
+                                 (term-mode       . emacs)
+                                 (eshell-mode     . emacs)
+                                 (eww-mode        . emacs)
+                                 (help-mode       . emacs)
+                                 (helm-grep-mode  . emacs)
+                                 (grep-mode       . emacs)
+                                 (bc-menu-mode    . emacs)
+                                 (comint-mode     . emacs)
+                                 (sql-interactive-mode . emacs)
+                                 (magit-branch-manager-mode . emacs)
+                                 (rdictcc-buffer-mode . emacs)
+                                 (dired-mode . emacs)
+                                 (deft-mode  . emacs))
+         do (evil-set-initial-state mode state))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -80,9 +82,9 @@
 (defun kill-comint ()
   (interactive)
   (comint-interrupt-subjob)
-  (popwin:close-popup-window))
+  (quit-window))
 (evil-define-key 'normal comint-mode-map (kbd "C-q") 'kill-comint)
-(evil-define-key 'normal comint-mode-map (kbd "q") 'popwin:close-popup-window)
+(evil-define-key 'normal comint-mode-map (kbd "q") 'quit-window)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -101,10 +103,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; evil ace jump
-(define-key evil-normal-state-map "  " 'ace-jump-mode)
-(define-key evil-normal-state-map " c" 'ace-jump-char-mode)
-(define-key evil-normal-state-map " l" 'ace-jump-line-mode)
+(with-eval-after-load 'avy
+  (define-key evil-normal-state-map "  " 'avy-goto-word-1)
+  (define-key evil-normal-state-map " c" 'avy-goto-char)
+  (define-key evil-normal-state-map " l" 'avy-goto-line))
 (define-key evil-normal-state-map " j" 'evil-jump-item)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -21,11 +21,23 @@
 (global-set-key (kbd "S-C-v") 'helm-show-kill-ring)
 (global-set-key (kbd "s-V") 'helm-show-kill-ring)
 
-;; recursive helm-do-ag
+;; project-aware ripgrep via Helm (prefix C-u to set dir)
 (global-set-key (kbd "S-<f7>")
                 (lambda () (interactive)
-                  (let ((current-prefix-arg '(4))) ; C-u
-                    (call-interactively 'helm-do-ag))))
+                  (if (and (fboundp 'projectile-project-root)
+                           (projectile-project-root))
+                      (helm-rg nil (projectile-project-root))
+                    (helm-rg))))
+
+;; Search including ignored/hidden files (bypass .gitignore) using ripgrep
+(defun ruph/helm-rg-all ()
+  "Run helm-rg searching all files, including ignored/hidden ones."
+  (interactive)
+  (let ((helm-rg-default-extra-args '("-uu" "--hidden")))
+    (if (and (fboundp 'projectile-project-root)
+             (projectile-project-root))
+        (helm-rg nil (projectile-project-root))
+      (helm-rg))))
 
 ;; for eshell: complete and history
 (add-hook 'eshell-mode-hook

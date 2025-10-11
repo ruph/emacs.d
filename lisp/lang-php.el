@@ -20,11 +20,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-;; Autocompletion
-(defun php-completion ()
-  (set (make-local-variable 'company-backends)
-       '((company-dabbrev-code company-files company-yasnippet))))
-
 ;; Hooks
 (add-hook 'php-mode-hook
           (lambda ()
@@ -32,8 +27,7 @@
             (setq tab-width 4)
             (local-unset-key (kbd "M-j"))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)
-            (flycheck-select-checker 'php)
-            (php-completion)))
+            (flycheck-select-checker 'php)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

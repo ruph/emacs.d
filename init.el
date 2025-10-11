@@ -10,6 +10,7 @@
 ;; Faster start by limiting GC
 (setq gc-cons-threshold (* 100 1024 1024))
 
+
 ;; Start a server
 (require 'server)
 (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
@@ -409,7 +410,7 @@
   (interactive
    (list (call-interactively #'get-key-combo)
          (completing-read "Which map: " minor-mode-map-alist nil t)))
-  (let ((map (rest (assoc (intern keymap) minor-mode-map-alist))))
+  (let ((map (cdr (assoc (intern keymap) minor-mode-map-alist))))
     (when map
       (define-key map key nil)
       (message  "%s unbound for %s" key keymap))))
@@ -450,6 +451,8 @@
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
 
+;; (CL tracing helpers removed for cleanliness)
+
 (require 'packages)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -475,9 +478,6 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(cua-mode t nil (cua-base))
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
- '(helm-ag-command-option "--all-text")
- '(helm-ag-insert-at-point 'symbol)
  '(helm-gtags-auto-update t)
  '(helm-gtags-ignore-case t)
  '(helm-gtags-path-style 'root)

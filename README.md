@@ -17,10 +17,11 @@ This configuration now uses the built-in `package.el` with `use-package` for mod
 EMACS PACKAGES
 --------------
 * Editor
-  * [ace-jump-mode](https://github.com/winterTTr/ace-jump-mode)
+  * [avy](https://github.com/abo-abo/avy)
   * [ace-window](https://github.com/abo-abo/ace-window)
-  * [company-mode](http://company-mode.github.io)
-  * [clean-aident](http://www.emacswiki.org/emacs/CleanAutoIndent)
+  * [corfu](https://github.com/minad/corfu)
+  * [cape](https://github.com/minad/cape)
+  * [clean-aindent-mode](http://www.emacswiki.org/emacs/CleanAutoIndent)
   * [comment-dwim-2](https://github.com/remyferre/comment-dwim-2)
   * [dired+](https://github.com/emacsmirror/dired-plus)
   * [evil](https://github.com/emacs-evil/evil)
@@ -33,7 +34,6 @@ EMACS PACKAGES
   * [org-cua-dwim](https://github.com/mlf176f2/org-cua-dwim.el)
   * [origami](https://github.com/gregsexton/origami.el)
   * [paredit](http://emacswiki.org/emacs/ParEdit)
-  * [popup](https://github.com/auto-complete/popup-el)
   * [quickrun](https://github.com/syohex/emacs-quickrun)
   * [diff-hl](https://github.com/dgutov/diff-hl)
   * [undo-tree](http://www.dr-qubit.org/tags/computing-code-emacs.html)
@@ -65,6 +65,7 @@ EMACS PACKAGES
   * [projectile](https://github.com/bbatsov/projectile)
 * Other
   * [gptel](https://github.com/karthink/gptel)
+  * [which-key](https://github.com/justbur/emacs-which-key)
   * [use-package](https://github.com/jwiegley/use-package)
   * [quelpa](https://github.com/quelpa/quelpa)
   * [quelpa-use-package](https://github.com/quelpa/quelpa-use-package)
@@ -95,11 +96,29 @@ On the first launch, all packages will be downloaded and installed automatically
 For all features to work correctly, you may need to install some external tools using your system's package manager (like `brew` on OS X):
 
 * `aspell` (for spell-checking)
-* `the_silver_searcher` (for `ag` search)
+* `ripgrep` (for fast project search via `rg`)
 * `tree-sitter` (for syntax highlighting and parsing). You will also need to install the grammars for the languages you use, e.g., `brew install tree-sitter-python tree-sitter-javascript`.
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)
+
+#### macOS Font Smoothing (optional) ####
+
+On macOS, you can adjust font smoothing for Emacs via per-app defaults.
+
+- Disable smoothing (crisper text):
+  - `defaults write org.gnu.Emacs AppleFontSmoothing -int 0`
+  - Quit and relaunch Emacs to apply.
+- Enable/adjust smoothing (1=light, 2=medium, 3=strong):
+  - `defaults write org.gnu.Emacs AppleFontSmoothing -int 1`
+  - or `2` / `3` accordingly; relaunch Emacs.
+- Restore system default (remove override):
+  - `defaults delete org.gnu.Emacs AppleFontSmoothing`
+- Check current value:
+  - `defaults read org.gnu.Emacs AppleFontSmoothing`
+
+Note: If a change doesn’t seem to apply, restart Emacs. In rare cases, flushing the prefs cache helps: `killall cfprefsd` (then relaunch Emacs).
+
 
 CHEAT SHEET
 ------------
@@ -109,7 +128,7 @@ CHEAT SHEET
 * **S-C-r** - find file in project directory tree
 * **S-C-t** - find file in eproject list
 * **F7**    - search for files
-* **S-F7**  - search in files (ag)
+* **S-F7**  - search in files (ripgrep)
 
 
 ### WINDOW ###
@@ -129,7 +148,8 @@ CHEAT SHEET
 * **C-k**       - delete to the end of the line
 * **S-C-k**     - delete to the beginning of the line
 * **M-g M-g**   - go to line
-* **M-space**   - delete excessive spaces
+* **M-space**   - cycle spacing (single space / cleanup)
+* **ESC SPC**   - cycle spacing (Meta-Space alternative)
 * **S-C-f**     - indent whole buffer
 * **S-C-v**     - smart paste
 * **C-c w**     - show whitespace
@@ -158,14 +178,14 @@ CHEAT SHEET
 * **F3**          - find next symbol in buffer
 * **S-F3**        - find previous symbol in buffer
 * **M-F3**        - highlight symbol in buffer
-* **C-0**         - ace jump word
-* **C-c C-0**     - ace jump back
-* **C-u C+0**     - ace jump char
-* **C-u C+u C+0** - ace jump line
+* **C-0**         - jump to word (avy)
+* **C-c C-0**     - jump back (avy)
+* **C-u C+0**     - jump to char (avy)
+* **C-u C+u C+0** - jump to line (avy)
 
 
 ### EDITOR :: DEV ###
-* **C-c SPC** - autocomplete
+* **C-c SPC** - autocomplete (completion-at-point/corfu)
 * **M-n**     - next autocomplete option
 * **M-p**     - previous autocomplete option
 * **F5**      - go to next error (flycheck)

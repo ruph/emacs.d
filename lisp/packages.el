@@ -4,9 +4,14 @@
 
 ;; Initialize package management
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+(require 'cl-lib)
+(setq package-archives '((gnu    . "https://elpa.gnu.org/packages/")
+                         (nongnu . "https://elpa.nongnu.org/nongnu/")
+                         (melpa  . "https://melpa.org/packages/")))
+(setq package-archive-priorities '((gnu . 10) (nongnu . 8) (melpa . 5)))
 (package-initialize)
+;; Refresh archives when empty or stale for required packages
+(unless package-archive-contents (package-refresh-contents))
 
 ;; Bootstrap 'use-package'
 (unless (package-installed-p 'use-package)
@@ -15,11 +20,23 @@
 (eval-when-compile (require 'use-package))
 (use-package diminish :ensure t)
 
-(use-package quelpa
-  :ensure t)
+;; quelpa not needed after removing dired+; keep MELPA/ELPA only
 
-(use-package quelpa-use-package
-  :ensure t)
+;; Ensure archive list is current for key packages (handles 404s from stale indices)
+(defun ruph/ensure-archives-for (&rest _pkgs)
+  ;; Intentionally no-op by default to avoid network errors on startup.
+  ;; Use M-x ruph/refresh-package-archives to update archives manually.
+  nil)
+
+(defun ruph/refresh-package-archives ()
+  "Refresh package archives with basic error handling."
+  (interactive)
+  (condition-case err
+      (progn
+        (message "[Packages] INFO RefreshStart")
+        (package-refresh-contents)
+        (message "[Packages] INFO RefreshDone"))
+    (error (message "[Packages] ERROR RefreshFailed msg=\"%s\"" (error-message-string err)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UI & THEME
@@ -33,12 +50,9 @@
 (use-package rainbow-mode
   :ensure t)
 
-(use-package dired+
-  :quelpa (dired+ :fetcher github :repo "emacsmirror/dired-plus")
-  :init
-  (setq diredp-hide-details-initially-flag nil)
-  :config
-  (setq diredp-hide-details-propagate-flag nil))
+;; Built-in dired with hidden details
+(with-eval-after-load 'dired
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
 
 
@@ -69,15 +83,43 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EDITING & COMPLETION
 
-(use-package company
+;; Lightweight, fast completion UI based on CAPF
+(use-package corfu
   :ensure t
-  :hook (after-init . global-company-mode)
+  :init
+  (setq corfu-auto t
+        corfu-auto-prefix 1
+        corfu-auto-delay 0.02
+        corfu-quit-no-match t)
   :config
-  (add-hook 'company-mode-hook
-            (lambda ()
-              (define-key company-mode-map (kbd "C-c SPC") 'company-complete)
-              (set (make-local-variable 'company-backends)
-                   '((company-dabbrev-code company-yasnippet company-keywords))))))
+  (global-corfu-mode)
+  (global-set-key (kbd "C-c SPC") #'completion-at-point))
+
+;; Completion sources for CAPF
+(use-package cape
+  :ensure t
+  :init
+  ;; Order: keywords > file > dabbrev (tunable)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
+
+;; Better matching style for responsiveness
+(use-package orderless
+  :ensure t
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))))
+
+;; Keybinding hints for discoverability (lightweight)
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode)
+  :config
+  (setq which-key-idle-delay 0.4
+        which-key-max-description-length 40))
 
 (use-package yasnippet
   :ensure t
@@ -143,12 +185,11 @@
   (setq undo-tree-history-directory-alist
         '(("." . "~/.emacs.d/undo-tree-history/"))))
 
-(use-package ace-jump-mode
+;; Avy for fast navigation (replacement for ace-jump)
+(use-package avy
   :ensure t
-  :bind (("C-0" . ace-jump-mode)
-         ("C-c C-0" . ace-jump-mode-pop-mark))
-  :config
-  (ace-jump-mode-enable-mark-sync))
+  :bind (("C-0" . avy-goto-word-1)
+         ("C-c C-0" . avy-pop-mark)))
 
 (use-package ace-window
   :ensure t
@@ -182,7 +223,8 @@
 
 (use-package origami
   :ensure t
-  :init (global-origami-mode t)
+  :defer t
+  :hook (prog-mode . origami-mode)
   :config
   (define-key origami-mode-map (kbd "C-c RET") 'origami-recursively-toggle-node)
   (define-key origami-mode-map (kbd "C-c o") 'origami-toggle-all-nodes))
@@ -203,6 +245,10 @@
   :bind (("C-:" . helm-occur))
   :config
   (load-file "~/.emacs.d/lisp/init-helm.el"))
+
+;; Ripgrep integration for Helm
+(use-package helm-rg
+  :ensure t)
 
 
 
@@ -247,7 +293,8 @@
   ("C-c n" . deft))
 
 (use-package eproject
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package recentf
   :ensure t
@@ -411,18 +458,14 @@
 (use-package org-cua-dwim
   :ensure t)
 
-(use-package popup
-  :ensure t)
-
-(use-package pos-tip
-  :ensure t)
+;; Removed popup/pos-tip to avoid legacy deps; keep UI simple
 
 (use-package visual-fill-column
   :ensure t)
 
 
 
-(use-package lsp-python-ms
+(use-package lsp-pyright
   :ensure t)
 
 ;; Dependencies (good to have them explicit)

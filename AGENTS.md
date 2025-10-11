@@ -8,7 +8,7 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 
 * **RULE #1 — Focus:** Work **only** on the current task. If you notice other issues, add them under **OPINION** (non-blocking).
 * **RULE #2 — Journaling:** Use the **DEV JOURNAL** section in the bottom of this document to understand past decisions, pitfalls and findings. Add an entry after every major change, tricky decision or hard challenge.
-* **RULE #3 — Context:** Read `CONTEXT.md` when available; align with its architecture, constraints, and conventions.
+* **RULE #3 — Context:** Read `README.md` to get an overview of the project.
 * **RULE #4 — Conventions:** Match project tooling (linters, formatters, CI scripts, test framework). Do not remove tests or logs unless asked.
 * **RULE #5 — Questions:** Ask only if missing info would change the solution; otherwise proceed with explicit **ASSUMPTIONS**.
 
@@ -132,7 +132,13 @@ Risks: (what might break, monitoring hooks)
 Important: (add especially important remarks here; can be omitted if there aren't any)
 ```
 
-**Entries:**
+### Entries (latest on top)
+
+[2025-10-10 13:20 UTC]
+Context: KISS + responsive Emacs config; remove dead code, modernize search/completion/LSP, fix macOS key conflict, and clean warnings.
+Decisions: Migrated completion to corfu+cape+orderless; standardized project search to ripgrep with helm-rg/helm-projectile-rg and added ruph/helm-rg-all; swapped lsp-python-ms→lsp-pyright; removed tern, multi-term, css-eldoc, pos-tip/popup; replaced ace-jump-mode→avy and dired+→built-in dired; deferred eproject and origami; kept ESC SPC as M-SPC alternative; removed CL warning suppression and all tracing helpers; fixed rest→cdr in keymap-unset-key; updated README shortcuts/deps accordingly.
+Findings: Legacy packages (e.g., dired+, pos-tip/popup, ace-jump-mode) and helm-ag caused noise or drift. Ripgrep is fast and respects .gitignore, with opt-in override via -uu --hidden. Company removed cleanly; CAPF stack is snappy.
+Risks: Users accustomed to ag/helm-do-ag may miss it; ensure ripgrep installed. If external packages still require `cl`, Emacs may warn; left visible as requested. Minimal behavioral changes otherwise.
 
 [2025-08-22 20:48 UTC]
 Context: Disable MCP servers in Emacs config

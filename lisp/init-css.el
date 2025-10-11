@@ -3,8 +3,6 @@
 (add-hook 'css-mode-hook
           (lambda ()
             (setq tab-width 4)
-            (set (make-local-variable 'company-backends)
-                 '((company-css company-dabbrev-code company-files company-yasnippet)))
             (add-hook 'before-save-hook 'delete-trailing-whitespace)))
 
 ;; CSS colors
@@ -21,10 +19,6 @@
 (when (featurep 'js2-mode)
   (require 'skewer-less))
 
-;; Use eldoc for syntax hints
-(require 'css-eldoc)
-(autoload 'turn-on-css-eldoc "css-eldoc")
-(add-hook 'css-mode-hook 'turn-on-css-eldoc)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

@@ -5,7 +5,6 @@
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; Tooltips
-(add-hook 'after-init-hook 'flycheck-pos-tip-mode)
 
 ;; Same keybindings as flymake
 (define-key flycheck-mode-map [S-f5] 'flycheck-previous-error)
@@ -15,6 +14,7 @@
 (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled)
       flycheck-idle-change-delay 0.8)
 
+;; Use echo area for messages; keep UI light
 (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
 
 ;; Dont nag about elisp documentation

@@ -14,9 +14,6 @@
 ;; ...
 (add-hook 'clojure-mode-hook
           (lambda ()
-            
-            (set (make-local-variable 'company-backends)
-                 '((company-etags company-dabbrev-code company-yasnippet)))
             ))
 
 ;; Paredit - curly & square brackets in paredit
@@ -51,8 +48,6 @@
 (use-package cider
   :init
   (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-  (add-hook 'cider-mode-hook #'company-mode)
   (add-hook 'cider-repl-mode-hook #'paredit-mode)
   (add-hook 'cider-repl-mode-hook (lambda () (paredit-mode +1)))
   :config
