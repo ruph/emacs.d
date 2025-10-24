@@ -134,6 +134,12 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2025-10-23 21:15 UTC]
+Context: Emacs package archives failing to download on macOS after fresh install with TLS 1.3 handshake issues when ELPA directory deleted. Original auto-installation code caused race condition where network calls happened before TLS settings were applied. Required both TLS fix and proper timing for auto-installation.
+Decisions: Applied (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") to fix TLS 1.3 compatibility and replaced immediate bootstrap with (run-with-idle-timer 2.0 nil ...) to defer package installation until after Emacs initialization completes, avoiding timing conflicts between TLS setup and network operations. Removed automatic refresh during initialization that was triggering early network calls.
+Findings: Issue was specifically TLS 1.3 incompatibility combined with timing problems. Clean Emacs could connect via HTTPS, but configured Emacs failed due to race condition. Delayed execution with idle timer resolves the issue. Also discovered that use-package is readily available in newer Emacs versions (since v29), eliminating need for explicit installation in many cases.
+Risks: Timing-dependent solutions may behave differently on systems with varying startup times; 2.0 second delay is conservative but may be excessive on fast systems. The solution is stable once applied.
+
 [2025-10-10 13:20 UTC]
 Context: KISS + responsive Emacs config; remove dead code, modernize search/completion/LSP, fix macOS key conflict, and clean warnings.
 Decisions: Migrated completion to corfu+cape+orderless; standardized project search to ripgrep with helm-rg/helm-projectile-rg and added ruph/helm-rg-all; swapped lsp-python-ms→lsp-pyright; removed tern, multi-term, css-eldoc, pos-tip/popup; replaced ace-jump-mode→avy and dired+→built-in dired; deferred eproject and origami; kept ESC SPC as M-SPC alternative; removed CL warning suppression and all tracing helpers; fixed rest→cdr in keymap-unset-key; updated README shortcuts/deps accordingly.

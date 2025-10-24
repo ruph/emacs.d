@@ -1,26 +1,44 @@
-;;; -*- lexical-binding: t; -*-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; PACKAGE MANAGEMENT
-
 ;; Initialize package management
 (require 'package)
 (require 'cl-lib)
-(setq package-archives '((gnu    . "https://elpa.gnu.org/packages/")
-                         (nongnu . "https://elpa.nongnu.org/nongnu/")
-                         (melpa  . "https://melpa.org/packages/")))
+
+;; Set TLS settings for macOS compatibility
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (setq package-archive-priorities '((gnu . 10) (nongnu . 8) (melpa . 5)))
+
 (package-initialize)
-;; Refresh archives when empty or stale for required packages
-(unless package-archive-contents (package-refresh-contents))
 
-;; Bootstrap 'use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
-(use-package diminish :ensure t)
+;; Auto-install essential packages if not present, using a delayed approach to ensure TLS settings are applied
+(defun ruph/ensure-packages-installed ()
+  "Ensure essential packages are installed."
+  (let ((essential-packages '(diminish))) ; use-package is built-in now
+    (dolist (pkg essential-packages)
+      (unless (package-installed-p pkg)
+        (condition-case err
+            (progn
+              (message "[Packages] Auto-installing %s..." pkg)
+              (package-install pkg)
+              (message "[Packages] %s auto-installed successfully" pkg))
+          (error
+            (message "[Packages] ERROR: Failed to install %s: %s" pkg (error-message-string err))))))))
 
-;; quelpa not needed after removing dired+; keep MELPA/ELPA only
+;; Use idle timer to ensure Emacs is fully initialized before installing packages
+(run-with-idle-timer 2.0 nil 
+  (lambda ()
+    (condition-case err
+        (progn
+          (message "[Packages] Starting auto-installation process...")
+          (unless package-archive-contents
+            (message "[Packages] Refreshing package contents...")
+            (package-refresh-contents))
+          (ruph/ensure-packages-installed)
+          (message "[Packages] Auto-installation process completed"))
+      (error
+        (message "[Packages] ERROR in auto-install: %s" (error-message-string err))))))
 
 ;; Ensure archive list is current for key packages (handles 404s from stale indices)
 (defun ruph/ensure-archives-for (&rest _pkgs)
@@ -41,8 +59,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UI & THEME
 
-
-
 (use-package rainbow-delimiters
   :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -54,31 +70,11 @@
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
+(use-package markdown-mode
+  :ensure t)
 
-
-
-
-(use-package writeroom-mode
-  :ensure t
-  :init
-  (setq writeroom-extra-line-spacing 0.4
-        writeroom-maximize-window t)
-  :config
-  (add-hook 'writeroom-mode-hook
-            (lambda () (progn (text-scale-increase 1)))))
-
-(use-package volatile-highlights
-  :ensure t
-  :init
-  (volatile-highlights-mode t))
-
-(use-package highlight-symbol
-  :ensure t
-  :bind (("M-<f3>" . highlight-symbol-at-point)
-         ("<f3>"   . highlight-symbol-next)
-         ("S-<f3>" . highlight-symbol-prev)
-         ("C-<f3>" . highlight-symbol-prev)))
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Other packages can be added here as needed
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EDITING & COMPLETION
@@ -156,13 +152,13 @@
   :config
   (show-smartparens-global-mode t)
   (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
-  (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)  ; This will trigger when markdown-mode loads
   (add-hook 'nodejs-repl-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'inferior-python-mode-hook 'turn-on-smartparens-mode)
   (sp-with-modes '(php-mode js2-mode rust-mode)
     (sp-local-pair "/**" "*/" :post-handlers '(("| " "SPC") (my-php-handle-docstring "RET")))
     (sp-local-pair "/*." ".*/" :post-handlers '(("| " "SPC")))
-    (sp-local-pair "{" nil :post-handlers '(("|\|\n[i]" "RET")))
+    (sp-local-pair "{" nil :post-handlers '(("|\\|\n[i]" "RET")))
     (sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))
   :bind
   (("C-<right>" . sp-slurp-hybrid-sexp)
@@ -252,13 +248,10 @@
 
 
 
-
-
 (use-package flycheck
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/init-flycheck.el"))
-
 
 
 (use-package quickrun
@@ -272,13 +265,10 @@
   (load-file "~/.emacs.d/lisp/init-vc.el"))
 
 
-
 (use-package vterm
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/init-vterm.el"))
-
-
 
 
 
@@ -340,7 +330,7 @@
 
 (use-package less-css-mode
   :ensure t
-  :mode "\\.less\\'")
+  :mode "\\.less'")
 
 (use-package skewer-mode
   :ensure t)
@@ -375,8 +365,6 @@
 
 
 
-
-
 (use-package swift-mode
   :ensure t)
 
@@ -405,24 +393,21 @@
 
 (use-package yaml-mode
   :ensure t
-  :mode "\\.yml\\'")
+  :mode "\\.yml'")
 
 (use-package csv-mode
   :ensure t
-  :mode ("\\.[CcTt][Ss][Vv]\\\'" . csv-mode))
+  :mode ("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
 
-(use-package markdown-mode
-  :ensure t
-  :config
-  (load-file "~/.emacs.d/lisp/init-markdown-mode.el"))
-
+;; Note: markdown-mode already added in UI & THEME section
 (use-package android-mode
   :ensure t
   :config
   (defun set-android-path-from-shell-PATH ()
     (let ((android-path
            (replace-regexp-in-string
-            "[ \t\n]*$" ""
+            "[ \t\n]*$"
+            ""
             (shell-command-to-string "$SHELL --login -i -c 'echo $ANDROID_HOME'"))))
       (setenv "ANDROID_HOME" android-path)))
   (when (and window-system (eq system-type 'darwin))
@@ -446,9 +431,6 @@
 
 
 
-
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC
 
@@ -462,7 +444,6 @@
 
 (use-package visual-fill-column
   :ensure t)
-
 
 
 (use-package lsp-pyright

@@ -101,6 +101,7 @@ For all features to work correctly, you may need to install some external tools 
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)
+* `vterm` dependencies: `brew install automake libtool` (for building vterm on macOS)
 
 #### macOS Font Smoothing (optional) ####
 
