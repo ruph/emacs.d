@@ -462,3 +462,40 @@
 
 
 (provide 'init)
+
+
+;; Function to byte-compile init files automatically
+(defun ruph/byte-compile-init-files ()
+  "Byte-compile all Emacs init files after packages are installed."
+  (interactive)
+  (let ((files (directory-files-recursively "~/.emacs.d/lisp/" "\\.el$")))
+    (dolist (file files)
+      (when (or (not (file-exists-p (byte-compile-dest-file file)))
+                (file-newer-than-file-p file (byte-compile-dest-file file)))
+        (byte-compile-file file))))
+  (when (or (not (file-exists-p (byte-compile-dest-file "~/.emacs.d/init.el")))
+            (file-newer-than-file-p "~/.emacs.d/init.el" (byte-compile-dest-file "~/.emacs.d/init.el")))
+    (byte-compile-file "~/.emacs.d/init.el")))
+
+;; Auto-compile after packages are loaded
+(with-eval-after-load 'package
+  (run-with-idle-timer 5 nil 'ruph/byte-compile-init-files))
+
+
+;; Customisation 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(erc-button ((t (:underline "dark gray" :weight bold))))
+ '(erc-input-face ((t (:foreground "indian red"))))
+ '(erc-my-nick-face ((t (:foreground "indian red" :weight bold))))
+ '(erc-nick-default-face ((t (:foreground "dark gray" :weight bold))))
+ '(erc-timestamp-face ((t (:foreground "dim gray" :weight normal)))))
