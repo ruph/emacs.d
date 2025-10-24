@@ -1,8 +1,3 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-
 ;; Faster start by disabling special processing temporarily,
 (setq bkp-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist '())
@@ -451,8 +446,6 @@
 (if (file-exists-p "~/.emacs.d/lisp/private.el")
     (require 'private))
 
-;; (CL tracing helpers removed for cleanliness)
-
 (require 'packages)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -469,40 +462,3 @@
 
 
 (provide 'init)
-
-;; MCP servers disabled: removing stop hook since MCP is not used
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(cua-mode t nil (cua-base))
- '(helm-gtags-auto-update t)
- '(helm-gtags-ignore-case t)
- '(helm-gtags-path-style 'root)
- '(helm-gtags-prefix-key "\3g")
- '(helm-gtags-pulse-at-cursor t)
- '(helm-gtags-suggested-key-mapping t)
- '(helm-gtags-use-input-at-cursor t)
- '(package-selected-packages nil)
- '(safe-local-variable-values
-   '((buffer-file-coding-system . utf-8)
-	 (eval setenv "GOPATH" "/Users/ruph/Workspace/go")
-	 (eval when (equal web-mode-content-type "javascript")
-		   (ggtags-mode 1) (helm-gtags-mode 1))
-	 (eval add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
-	 (helm-gtags-mode . 1) (ggtags-mode . 1)))
- '(show-paren-mode t)
- '(size-indication-mode t)
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(erc-button ((t (:underline "dark gray" :weight bold))))
- '(erc-input-face ((t (:foreground "indian red"))))
- '(erc-my-nick-face ((t (:foreground "indian red" :weight bold))))
- '(erc-nick-default-face ((t (:foreground "dark gray" :weight bold))))
- '(erc-timestamp-face ((t (:foreground "dim gray" :weight normal)))))

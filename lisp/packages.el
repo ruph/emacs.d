@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ;; Initialize package management
 (require 'package)
 (require 'cl-lib)
@@ -56,6 +58,7 @@
         (message "[Packages] INFO RefreshDone"))
     (error (message "[Packages] ERROR RefreshFailed msg=\"%s\"" (error-message-string err)))))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UI & THEME
 
@@ -70,11 +73,32 @@
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
-(use-package markdown-mode
-  :ensure t)
+(use-package writeroom-mode
+  :ensure t
+  :init
+  (setq writeroom-extra-line-spacing 0.4
+        writeroom-maximize-window t)
+  :config
+  (add-hook 'writeroom-mode-hook
+            (lambda () (progn (text-scale-increase 1)))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Other packages can be added here as needed
+(use-package volatile-highlights
+  :ensure t
+  :init
+  (volatile-highlights-mode t))
+
+(use-package highlight-symbol
+  :ensure t
+  :bind (("M-<f3>" . highlight-symbol-at-point)
+         ("<f3>"   . highlight-symbol-next)
+         ("S-<f3>" . highlight-symbol-prev)
+         ("C-<f3>" . highlight-symbol-prev)))
+
+(use-package markdown-mode
+  :ensure t
+  :config
+  (load-file "~/.emacs.d/lisp/init-markdown-mode.el"))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EDITING & COMPLETION
@@ -225,6 +249,7 @@
   (define-key origami-mode-map (kbd "C-c RET") 'origami-recursively-toggle-node)
   (define-key origami-mode-map (kbd "C-c o") 'origami-toggle-all-nodes))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TOOLS & INTEGRATIONS
 
@@ -246,13 +271,10 @@
 (use-package helm-rg
   :ensure t)
 
-
-
 (use-package flycheck
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/init-flycheck.el"))
-
 
 (use-package quickrun
   :ensure t
@@ -264,13 +286,10 @@
   :config
   (load-file "~/.emacs.d/lisp/init-vc.el"))
 
-
 (use-package vterm
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/init-vterm.el"))
-
-
 
 (use-package deft
   :ensure t
@@ -305,6 +324,7 @@
   :config
   (load-file "~/.emacs.d/lisp/init-treesitter.el"))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LANGUAGES
 
@@ -330,7 +350,7 @@
 
 (use-package less-css-mode
   :ensure t
-  :mode "\\.less'")
+  :mode "\\.less\\'")
 
 (use-package skewer-mode
   :ensure t)
@@ -363,8 +383,6 @@
   :config
   (load-file "~/.emacs.d/lisp/init-irc.el"))
 
-
-
 (use-package swift-mode
   :ensure t)
 
@@ -393,13 +411,12 @@
 
 (use-package yaml-mode
   :ensure t
-  :mode "\\.yml'")
+  :mode "\\.yml\\'")
 
 (use-package csv-mode
   :ensure t
   :mode ("\\.[CcTt][Ss][Vv]\\'" . csv-mode))
 
-;; Note: markdown-mode already added in UI & THEME section
 (use-package android-mode
   :ensure t
   :config
@@ -427,9 +444,6 @@
   :config
   (load-file "~/.emacs.d/lisp/init-gptel.el"))
 
-;; MCP servers disabled: removed due to Emacs compatibility issues
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MISC
@@ -455,6 +469,7 @@
 (use-package s :ensure t)
 (use-package f :ensure t)
 (use-package pkg-info :ensure t)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LEGACY CONFIG (to be reviewed/migrated)

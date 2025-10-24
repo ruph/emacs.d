@@ -10,7 +10,6 @@
     (visual-line-mode t)
     (flyspell-mode)
     (flycheck-mode -1)
-    (company-mode -1)
     (yas-minor-mode -1)
     
     (remove-hook 'before-save-hook 'delete-trailing-whitespace)
