@@ -149,6 +149,7 @@ CHEAT SHEET
 * **C-space**   - normal selection
 * **M-up**      - move line up
 * **M-down**    - move line down
+* **M-;**       - comment/uncomment
 * **S-C-right** - indent
 * **S-C-left**  - outdent
 * **S-TAB**     - outdent
