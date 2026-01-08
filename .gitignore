@@ -1,5 +1,6 @@
 .DS_Store
 .cache/
+cache/
 .lsp-session-*
 *.elc
 lisp/private.el
