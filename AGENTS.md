@@ -134,6 +134,18 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-01-08 20:45 UTC]
+Context: Paragraph navigation keys `C-<up>`/`C-<down>` still executed Markdown-specific paragraph commands due to `markdown-mode` remapping `forward-paragraph`/`backward-paragraph`.
+Decisions: Updated the override keymap to call wrapper commands (`ruph/navigation-forward-paragraph` / `ruph/navigation-backward-paragraph`) that invoke the built-in paragraph movers directly, bypassing mode remaps. Removed `multiple-cursors` bindings for `C-c <`/`C-c >` since they conflict in common modes (e.g., Org) and were not reliable.
+Findings: Key remapping applies after key lookup; binding `C-<up/down>` to `forward-paragraph`/`backward-paragraph` is insufficient when a mode remaps those commands. Wrapping avoids remap while keeping the same movement semantics.
+Risks: Any mode that intentionally relies on remapped paragraph motion will be bypassed for `C-<up/down>`; disable `ruph/navigation-override-mode` if per-mode behavior is preferred.
+
+[2026-01-08 20:28 UTC]
+Context: Ctrl-Up/Down paragraph navigation behaved inconsistently across modes due to mode/emulation keymaps overriding defaults; the README listed multiple-cursors bindings that were not configured.
+Decisions: Added a small global key override mode registered in `emulation-mode-map-alists` to force `C-<up>`/`C-<down>` to `backward-paragraph`/`forward-paragraph` even under Evil. Bound `multiple-cursors` actions to `C->` (next), `C-c >` (previous), and `C-c <` (all) without conflicting with `C-<` used by `syntactic-close`. Guarded `server-start` behind `noninteractive` so `emacs --batch -l init.el` works in restricted environments.
+Findings: Global bindings alone are insufficient when major modes or emulation maps (e.g., Evil) bind the same keys; emulation map precedence makes the override reliable. `server-start` can fail under sandboxed/batch runs due to socket restrictions.
+Risks: Any mode that intentionally uses `C-<up>`/`C-<down>` will be overridden; disable `ruph/navigation-override-mode` if needed.
+
 [2026-01-08 18:42 UTC]
 Context: Origami fails to load on Emacs 30.2 due to an invalid face `:box` spec, which then cascades into clojure-mode load failures through hooks (e.g., during `lm-version` macro-expansion buffers entering `emacs-lisp-mode`/`prog-mode`).
 Decisions: Removed Origami from the configuration and README, and removed the fold keybinding references from the cheat sheet. This avoids the invalid face error and unblocks clojure-mode loading without adding brittle face overrides.

@@ -188,6 +188,7 @@ Example:
   (("C-c c" . mc/edit-lines)
    ("C-c e" . mc/edit-ends-of-lines)
    ("C-c a" . mc/edit-beginnings-of-lines)
+   ("C->" . mc/mark-next-like-this)
    ("C-<return>" . set-rectangular-region-anchor)))
 
 (use-package smartparens

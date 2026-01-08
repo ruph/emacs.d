@@ -169,10 +169,8 @@ CHEAT SHEET
 * **C-c c**     - edit selections
 * **C-c e**     - edit ends of lines
 * **C-c a**     - edit-beginnings-of-lines
-* **C->**       - mark next like this
-* **C-<**       - mark previous like this
-* **C-c <**     - mark all like this
 * **C-c m**     - mark all with regex match
+* **C->**       - mark next like this
 
 
 ### EDITOR :: SEARCH ###
@@ -187,8 +185,6 @@ CHEAT SHEET
 * **M-F3**        - highlight symbol in buffer
 * **C-0**         - jump to word (avy)
 * **C-c C-0**     - jump back (avy)
-* **C-u C+0**     - jump to char (avy)
-* **C-u C+u C+0** - jump to line (avy)
 
 
 ### EDITOR :: DEV ###
@@ -198,9 +194,8 @@ CHEAT SHEET
 * **F5**      - go to next error (flycheck)
 * **S+F5**    - go to previous error (flycheck)
 * **M-.**     - jump to definition (xref)
-* **C+.**     - show arguments
 * **C-c C-y** - expand standard PHP function (yasnippet)
-* **C-c C-q** - execute current buffer (quickrun)
+* **C-c q**   - execute current buffer (quickrun)
 
 
 ### BUFFERS ###

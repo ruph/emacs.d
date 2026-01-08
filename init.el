@@ -9,11 +9,12 @@
 (setq load-prefer-newer t)
 
 
-;; Start a server
-(require 'server)
-(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
-(unless (server-running-p)
-  (server-start))
+;; Start a server (skip in batch/noninteractive)
+(unless noninteractive
+  (require 'server)
+  (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+  (unless (server-running-p)
+    (server-start)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -133,6 +134,70 @@
 
 ;; File search
 (global-set-key (kbd "<f7>") 'find-name-dired)
+
+;; Paragraph navigation (force consistent C-<up/down> behavior)
+(defvar ruph/navigation-override-debug nil
+  "When non-nil, emit navigation key override debug logs.
+
+Example:
+  (setq ruph/navigation-override-debug t)")
+
+(defun ruph/navigation-forward-paragraph (arg)
+  "Move forward by ARG paragraphs, ignoring mode-specific remaps.
+
+Example:
+  (ruph/navigation-forward-paragraph 1)"
+  (interactive "p")
+  (when ruph/navigation-override-debug
+    (message "[Navigation] INFO ForwardParagraph arg={%s} mode={%s}" arg major-mode))
+  (forward-paragraph arg))
+
+(defun ruph/navigation-backward-paragraph (arg)
+  "Move backward by ARG paragraphs, ignoring mode-specific remaps.
+
+Example:
+  (ruph/navigation-backward-paragraph 1)"
+  (interactive "p")
+  (when ruph/navigation-override-debug
+    (message "[Navigation] INFO BackwardParagraph arg={%s} mode={%s}" arg major-mode))
+  (backward-paragraph arg))
+
+(defvar ruph/navigation-override-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-<up>") #'ruph/navigation-backward-paragraph)
+    (define-key map (kbd "C-<down>") #'ruph/navigation-forward-paragraph)
+    map)
+  "Keymap for `ruph/navigation-override-mode'.")
+
+(define-minor-mode ruph/navigation-override-mode
+  "Ensure consistent paragraph navigation keys across modes.
+
+Example:
+  (ruph/navigation-override-mode 1)"
+  :global t
+  :init-value t
+  :lighter ""
+  :keymap ruph/navigation-override-mode-map)
+
+(defvar ruph/navigation-override-mode-emulation-alist
+  `((ruph/navigation-override-mode . ,ruph/navigation-override-mode-map))
+  "Emulation-mode keymap alist for `ruph/navigation-override-mode'.")
+
+(defun ruph/ensure-navigation-override-precedence ()
+  "Ensure `ruph/navigation-override-mode' wins key lookup precedence.
+
+Example:
+  (ruph/ensure-navigation-override-precedence)"
+  (setq emulation-mode-map-alists
+        (cons 'ruph/navigation-override-mode-emulation-alist
+              (delq 'ruph/navigation-override-mode-emulation-alist emulation-mode-map-alists)))
+  (when ruph/navigation-override-debug
+    (message "[Keymap] INFO EnsureOverridePrecedence keys={C-<up>/C-<down>}")))
+
+(ruph/navigation-override-mode 1)
+(ruph/ensure-navigation-override-precedence)
+(with-eval-after-load 'evil
+  (ruph/ensure-navigation-override-precedence))
 
 ;; Whitespaces
 (global-set-key (kbd "C-c w") 'whitespace-mode)
