@@ -134,6 +134,24 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-01-08 18:42 UTC]
+Context: Origami fails to load on Emacs 30.2 due to an invalid face `:box` spec, which then cascades into clojure-mode load failures through hooks (e.g., during `lm-version` macro-expansion buffers entering `emacs-lisp-mode`/`prog-mode`).
+Decisions: Removed Origami from the configuration and README, and removed the fold keybinding references from the cheat sheet. This avoids the invalid face error and unblocks clojure-mode loading without adding brittle face overrides.
+Findings: The error originates in `origami-fold-header-face` (`:box (:line-width 1 :color unspecified)`), not in clojure-mode itself; clojure-mode was just the first place it surfaced due to eager macro expansion calling into Emacs Lisp mode hooks.
+Risks: Loss of folding UX previously provided by Origami; if folding is still desired, replace with a maintained alternative (e.g., built-in `hs-minor-mode` or `treesit-fold`/`outline-minor-mode`) and document the new keybindings.
+
+[2026-01-08 18:27 UTC]
+Context: Startup errors reported in `use-package smartparens` and missing `keymap-unset-key` caused config load failures.
+Decisions: Removed `sp-with-modes` usage in Smartparens config and replaced it with explicit `sp-local-pair` calls per mode list to make byte-compilation robust even when Smartparens macros aren't available at compile time. Added a small compatibility shim for `keymap-unset-key` (not present in Emacs 30.2) that defers unbinding until the target feature/keymap is loaded. Set `load-prefer-newer` to prefer `.el` when newer than `.elc` to reduce stale-bytecode surprises.
+Findings: Byte-compiled configs can misbehave when macro definitions aren’t available during compilation; using plain function calls and deferring work with `with-eval-after-load` is safer.
+Risks: If a mode’s providing feature name doesn’t match the `-mode` suffix heuristic, the shim may not trigger; it registers both stripped and full mode feature names to reduce this risk.
+
+[2026-01-08 18:09 UTC]
+Context: README package list drifted from the active `use-package` config, and Corfu auto-completion was intrusive in markdown/text buffers.
+Decisions: Updated `README.md` to reflect currently configured packages (including Corfu/Cape/Orderless, tree-sitter, LSP packages, etc.). Kept Corfu auto-completion enabled globally but disabled it in `text-mode` buffers via a hook, and set `tab-always-indent` to avoid TAB-triggered CAPF completion in prose.
+Findings: The annoyance in markdown/text is consistent with `corfu-auto` plus CAPF sources like `cape-dabbrev`, and with `tab-always-indent` behavior that can invoke completion on TAB.
+Risks: Users who prefer auto-completion in text buffers may want to override the `text-mode-hook` locally; a debug toggle exists to confirm per-buffer settings.
+
 [2025-10-23 21:15 UTC]
 Context: Emacs package archives failing to download on macOS after fresh install with TLS 1.3 handshake issues when ELPA directory deleted. Original auto-installation code caused race condition where network calls happened before TLS settings were applied. Required both TLS fix and proper timing for auto-installation.
 Decisions: Applied (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") to fix TLS 1.3 compatibility and replaced immediate bootstrap with (run-with-idle-timer 2.0 nil ...) to defer package installation until after Emacs initialization completes, avoiding timing conflicts between TLS setup and network operations. Removed automatic refresh during initialization that was triggering early network calls.

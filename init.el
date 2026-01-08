@@ -5,6 +5,9 @@
 ;; Faster start by limiting GC
 (setq gc-cons-threshold (* 100 1024 1024))
 
+;; Prefer loading .el when it's newer than .elc (avoids stale bytecode issues).
+(setq load-prefer-newer t)
+
 
 ;; Start a server
 (require 'server)
@@ -312,11 +315,11 @@
          (deactivate-mark "irrelevant")) ; avoid deactivating mark
     (indent-rigidly rstart rend n)))
 (defun indent-rigidly-tab ()
-  "Indent the region, or otherwise the current line, by 'tab' spaces."
+  "Indent the region, or otherwise the current line, by `tab-width' spaces."
   (interactive)
   (indent-rigidly-n tab-width))
 (defun outdent-rigidly-tab ()
-  "Indent the region, or otherwise the current line, by 'tab' spaces."
+  "Outdent the region, or otherwise the current line, by `tab-width' spaces."
   (interactive)
   (indent-rigidly-n (- tab-width)))
 (global-set-key [C-S-right] 'indent-rigidly-tab)
@@ -381,14 +384,14 @@
         ;; use 120 char wide window for largeish displays
         ;; and smaller 80 column windows for smaller displays
         ;; pick whatever numbers make sense for you
-        (if (> (x-display-pixel-width) 1280)
+        (if (> (display-pixel-width) 1280)
             (add-to-list 'default-frame-alist (cons 'width 100))
           (add-to-list 'default-frame-alist (cons 'width 80)))
         ;; for the height, take the 60% of the screen height (for panels,
-		;; menubars and  whatnot), then divide by the height of a char to
+			;; menubars and  whatnot), then divide by the height of a char to
         ;; get the height we want
         (add-to-list 'default-frame-alist
-                     (cons 'height (/ (floor (* (x-display-pixel-height) 0.6))
+                     (cons 'height (/ (floor (* (display-pixel-height) 0.6))
                                       (frame-char-height)))))))
 (set-frame-size-according-to-resolution)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -428,6 +431,11 @@
 
 
 ;; ESHELL
+(defvar eshell-history-size)
+(defvar eshell-save-history-on-exit)
+(defvar eshell-where-to-jump)
+(defvar eshell-review-quick-commands)
+(defvar eshell-smart-space-goes-to-end)
 (add-hook 'eshell-first-time-mode-hook
           (lambda ()
             (progn

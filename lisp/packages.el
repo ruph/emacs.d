@@ -111,6 +111,27 @@
         corfu-auto-prefix 1
         corfu-auto-delay 0.02
         corfu-quit-no-match t)
+
+  (defvar ruph/completion-debug nil
+    "When non-nil, emit completion-related debug logs.
+
+Example:
+  (setq ruph/completion-debug t)")
+
+  (defun ruph/text-mode-completion-setup ()
+    "Make completion less intrusive in text buffers.
+
+Example:
+  (add-hook (quote text-mode-hook) (function ruph/text-mode-completion-setup))"
+    (setq-local corfu-auto nil)
+    ;; Avoid TAB-triggered `completion-at-point' in prose buffers.
+    (setq-local tab-always-indent t)
+    (when ruph/completion-debug
+      (message
+       "[Completion] INFO TextModeSetup mode={%s} corfu_auto={%s} tab_always_indent={%s}"
+       major-mode corfu-auto tab-always-indent)))
+
+  (add-hook 'text-mode-hook #'ruph/text-mode-completion-setup)
   :config
   (global-corfu-mode)
   (global-set-key (kbd "C-c SPC") #'completion-at-point))
@@ -179,11 +200,21 @@
   (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)  ; This will trigger when markdown-mode loads
   (add-hook 'nodejs-repl-mode-hook 'turn-on-smartparens-mode)
   (add-hook 'inferior-python-mode-hook 'turn-on-smartparens-mode)
-  (sp-with-modes '(php-mode js2-mode rust-mode)
-    (sp-local-pair "/**" "*/" :post-handlers '(("| " "SPC") (my-php-handle-docstring "RET")))
-    (sp-local-pair "/*." ".*/" :post-handlers '(("| " "SPC")))
-    (sp-local-pair "{" nil :post-handlers '(("|\\|\n[i]" "RET")))
-    (sp-local-pair "(" nil :prefix "\\(\\sw\\|\\s_\\)*"))
+  ;; Avoid `sp-with-modes` here: when user config is byte-compiled without
+  ;; Smartparens loaded, macro expansion can be skipped and the resulting .elc
+  ;; may mis-evaluate these forms at startup.
+  (sp-local-pair '(php-mode js2-mode rust-mode)
+                 "/**" "*/"
+                 :post-handlers '(("| " "SPC") (my-php-handle-docstring "RET")))
+  (sp-local-pair '(php-mode js2-mode rust-mode)
+                 "/*." ".*/"
+                 :post-handlers '(("| " "SPC")))
+  (sp-local-pair '(php-mode js2-mode rust-mode)
+                 "{" nil
+                 :post-handlers '(("|\\|\n[i]" "RET")))
+  (sp-local-pair '(php-mode js2-mode rust-mode)
+                 "(" nil
+                 :prefix "\\(\\sw\\|\\s_\\)*")
   :bind
   (("C-<right>" . sp-slurp-hybrid-sexp)
    ("C-<left>" . sp-forward-barf-sexp)))
@@ -240,14 +271,6 @@
 (use-package syntactic-close
   :ensure t
   :bind ("C-<" . syntactic-close))
-
-(use-package origami
-  :ensure t
-  :defer t
-  :hook (prog-mode . origami-mode)
-  :config
-  (define-key origami-mode-map (kbd "C-c RET") 'origami-recursively-toggle-node)
-  (define-key origami-mode-map (kbd "C-c o") 'origami-toggle-all-nodes))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -499,6 +522,35 @@
       (progn
         (scroll-bar-mode 1)
         (set-scroll-bar-mode 'right))))
+
+;; Compatibility shim: this config historically used `keymap-unset-key`, but
+;; Emacs ships `keymap-unset` (and friends). Keep the existing call sites.
+(unless (fboundp 'keymap-unset-key)
+  (defvar ruph/keymap-debug nil
+    "When non-nil, emit keymap-related debug logs.
+
+Example:
+  (setq ruph/keymap-debug t)")
+
+  (defun keymap-unset-key (key mode)
+    "Unset KEY in MODE's keymap after the relevant feature is loaded.
+
+MODE is a string or symbol like `paredit-mode`.
+
+Example:
+  (keymap-unset-key (kbd \"M-<up>\") \"paredit-mode\")"
+    (let* ((mode-name (if (symbolp mode) (symbol-name mode) mode))
+           (mode-base (if (string-suffix-p "-mode" mode-name)
+                          (substring mode-name 0 (- (length mode-name) (length "-mode")))
+                        mode-name))
+           (feature-candidates (delq nil (list (intern mode-base) (intern mode-name))))
+           (map-sym (intern (format "%s-map" mode-name))))
+      (dolist (feature feature-candidates)
+        (with-eval-after-load feature
+          (when (boundp map-sym)
+            (define-key (symbol-value map-sym) key nil)
+            (when ruph/keymap-debug
+              (message "[Keymap] INFO UnsetKey mode={%s} key={%s}" mode-name key))))))))
 
 ;; these are used for moving lines/regions
 (keymap-unset-key (kbd "M-<up>") "paredit-mode")
