@@ -28,6 +28,7 @@ EMACS PACKAGES
   * [syntactic-close](https://github.com/emacs-berlin/syntactic-close)
   * [helm](https://github.com/emacs-helm/helm)
   * [helm-rg](https://github.com/cosmicexplorer/helm-rg)
+  * [neotree](https://github.com/jaypei/emacs-neotree)
   * [rainbow-delimiters](https://github.com/Fanael/rainbow-delimiters)
   * [highlight-symbol](https://github.com/nschum/highlight-symbol.el)
   * [multiple-cursors](https://github.com/magnars/multiple-cursors.el)

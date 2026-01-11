@@ -73,6 +73,11 @@
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-window-fixed-size nil))
+
 (use-package writeroom-mode
   :ensure t
   :init
