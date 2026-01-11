@@ -134,6 +134,12 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-01-11 10:26 UTC]
+Context: `F7` file search used `find-name-dired`, which is functional but prompts/opens a Dired buffer and feels cumbersome when you just want a fuzzy, recursive filename picker (especially within a subfolder).
+Decisions: Replaced the `F7` binding with `ruph/helm-find-file-recursive`, a Helm picker backed by `rg --files --hidden` scoped to `default-directory` (subfolder-friendly). Added optional `C-u`/`C-u C-u` behavior to choose the root directory and include ignored files, plus an opt-in debug toggle `ruph/file-search-debug`.
+Findings: `rg --files --hidden` is fast and includes dotfiles while still avoiding VCS directories by default; remote directories are better handled by falling back to `helm-find-files`.
+Risks: Very large directories can still be slow to enumerate; the command requires `rg` in PATH (errors clearly if missing). For per-mode/project behavior, adjust the binding or wrapper command.
+
 [2026-01-08 20:45 UTC]
 Context: Paragraph navigation keys `C-<up>`/`C-<down>` still executed Markdown-specific paragraph commands due to `markdown-mode` remapping `forward-paragraph`/`backward-paragraph`.
 Decisions: Updated the override keymap to call wrapper commands (`ruph/navigation-forward-paragraph` / `ruph/navigation-backward-paragraph`) that invoke the built-in paragraph movers directly, bypassing mode remaps. Removed `multiple-cursors` bindings for `C-c <`/`C-c >` since they conflict in common modes (e.g., Org) and were not reliable.

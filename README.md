@@ -135,7 +135,7 @@ CHEAT SHEET
 * **C-x f** - list recent open files
 * **S-C-r** - find file in project directory tree
 * **S-C-t** - find file in eproject list
-* **F7**    - search for files
+* **F7**    - find file recursively (Helm; includes dotfiles)
 * **S-F7**  - search in files (ripgrep)
 
 
