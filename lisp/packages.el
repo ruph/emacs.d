@@ -76,7 +76,8 @@
 (use-package neotree
   :ensure t
   :init
-  (setq neo-window-fixed-size nil))
+  (setq neo-window-fixed-size nil
+        neo-show-hidden-files t))
 
 (use-package writeroom-mode
   :ensure t
