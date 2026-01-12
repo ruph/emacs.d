@@ -91,11 +91,13 @@ Installation
     ```bash
     git clone <your-repo-url> ~/.emacs.d
     ```
-    (Note: If you place it elsewhere, you may need to create a symlink: `ln -s /path/to/your/emacs.d ~/.emacs.d`)
+    (__If you place it elsewhere, you may need to create a symlink: `ln -s /path/to/your/emacs.d ~/.emacs.d`__)
 
 2.  Start Emacs.
 
 On the first launch, all packages will be downloaded and installed automatically via `package.el`. This might take a few minutes.
+
+(__If a change doesn’t seem to apply, restart Emacs. In rare cases, flushing the prefs cache helps: `killall cfprefsd` (then relaunch Emacs).__)
 
 #### System Dependencies ####
 
@@ -123,8 +125,17 @@ On macOS, you can adjust font smoothing for Emacs via per-app defaults.
   - `defaults delete org.gnu.Emacs AppleFontSmoothing`
 - Check current value:
   - `defaults read org.gnu.Emacs AppleFontSmoothing`
+  
+#### .zshrc Emacs Client alias ###
 
-Note: If a change doesn’t seem to apply, restart Emacs. In rare cases, flushing the prefs cache helps: `killall cfprefsd` (then relaunch Emacs).
+```
+e() {
+  emacsclient -t "$@" 2>/dev/null && return 0
+  /opt/homebrew/bin/emacs --daemon >/dev/null 2>&1 || return 1
+  emacsclient -t "$@"
+}
+```
+ie. % e README.md  
 
 
 CHEAT SHEET

@@ -34,10 +34,29 @@
 (setq load-prefer-newer t)
 
 
-;; Start a server (skip in batch/noninteractive)
-(unless noninteractive
+;; Emacs server / daemon
+;; Make the socket location match `emacsclient`'s default lookup rules.
+;; Per the Emacs manual, the default socket resolves roughly as:
+;;   ${XDG_RUNTIME_DIR}/emacs/server
+;;   or ${TMPDIR}/emacs$UID/server
+;;   or /tmp/emacs$UID/server
+;; (So `emacsclient -t` works without any flags when the daemon is running.)
+(let* ((xdg (getenv "XDG_RUNTIME_DIR"))
+       (tmp (or (getenv "TMPDIR") "/tmp/"))
+       (sockdir (if (and xdg (not (string-empty-p xdg)))
+                    (expand-file-name "emacs" xdg)
+                  (expand-file-name (format "emacs%d" (user-uid)) tmp))))
+  (setq server-socket-dir sockdir)
+  (make-directory sockdir t)
+  (set-file-modes sockdir #o700))
+
+;; Start a server everywhere except pure batch (`emacs --batch`).
+;; If you launch a separate GUI Emacs (not the daemon), give it a different
+;; server-name so it does not share buffers with the daemon session.
+(unless (and noninteractive (not (daemonp)))
   (require 'server)
-  (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+  (when (and (display-graphic-p) (not (daemonp)))
+    (setq server-name "gui"))
   (unless (server-running-p)
     (server-start)))
 
