@@ -28,14 +28,54 @@
 	(tool-bar-mode -1))                 ;; turn-off toolbar
 
 (setq                                   ;; scrolling
- scroll-margin 3                        ;; do smooth scrolling, ...
- scroll-conservatively 100000           ;; ... the defaults ...
- scroll-up-aggressively nil             ;; ... are very ...
- scroll-down-aggressively nil           ;; ... annoying
+ scroll-margin 0                        ;; no forced margin; cursor stays put when scrolling
+ scroll-conservatively 100000           ;; scroll minimum to bring point into view
+ scroll-up-aggressively nil             ;; don't aggressively recenter...
+ scroll-down-aggressively nil           ;; ...when scrolling
  scroll-preserve-screen-position t)     ;; preserve screen pos with C-v/M-v
+
+;; Mouse wheel scrolling that doesn't move cursor (like VS Code/Sublime)
+(defun ruph/scroll-down-keep-cursor (lines)
+  "Scroll viewport down by LINES without moving cursor."
+  (interactive "p")
+  (let ((target (save-excursion
+                  (goto-char (window-start))
+                  (forward-line lines)
+                  (point))))
+    (set-window-start (selected-window) target)))
+
+(defun ruph/scroll-up-keep-cursor (lines)
+  "Scroll viewport up by LINES without moving cursor."
+  (interactive "p")
+  (let ((target (save-excursion
+                  (goto-char (window-start))
+                  (forward-line (- lines))
+                  (point))))
+    (set-window-start (selected-window) target)))
+
+(defun ruph/mouse-scroll-down (event)
+  "Mouse wheel scroll down without moving cursor."
+  (interactive "e")
+  (ruph/scroll-down-keep-cursor 3))
+
+(defun ruph/mouse-scroll-up (event)
+  "Mouse wheel scroll up without moving cursor."
+  (interactive "e")
+  (ruph/scroll-up-keep-cursor 3))
+
+;; Bind mouse wheel to cursor-preserving scroll (after mwheel loads)
+(with-eval-after-load 'mwheel
+  (global-set-key [wheel-down] #'ruph/mouse-scroll-down)
+  (global-set-key [wheel-up] #'ruph/mouse-scroll-up)
+  (global-set-key [mouse-4] #'ruph/mouse-scroll-up)    ; Linux/X11
+  (global-set-key [mouse-5] #'ruph/mouse-scroll-down)) ; Linux/X11
+;; Also set immediately in case mwheel is already loaded
+(global-set-key [wheel-down] #'ruph/mouse-scroll-down)
+(global-set-key [wheel-up] #'ruph/mouse-scroll-up)
 
 (setq fringe-mode '(1 . 0))             ;; emacs 22+
 (delete-selection-mode 1)               ;; delete the sel with a keyp
+(transient-mark-mode 1)                 ;; highlight region; required for shift-click selection
 
 (setq search-highlight t                ;; highlight when searching...
       query-replace-highlight t)        ;; ...and replacing
@@ -142,30 +182,67 @@
 Example:
   (setq ruph/navigation-override-debug t)")
 
+(defvar ruph/navigation-default-paragraph-start
+  "[ \t]*$\\|^#+ \\|^[-*_]\\{3,\\}[ \t]*$\\|^```"
+  "Paragraph-start regex: blank lines, markdown headers, horizontal rules, code fences.")
+
+(defvar ruph/navigation-default-paragraph-separate
+  "[ \t]*$\\|^[-*_]\\{3,\\}[ \t]*$"
+  "Paragraph-separate regex: blank lines, horizontal rules.")
+
+(defun ruph/navigation--shift-pressed-p ()
+  "Return non-nil if shift was held during the current key sequence.
+Works reliably in both GUI and terminal Emacs."
+  (let ((keys (this-command-keys-vector)))
+    (and (> (length keys) 0)
+         (let ((last-key (aref keys (1- (length keys)))))
+           (and (display-graphic-p)  ; only trust modifiers in GUI
+                (memq 'shift (event-modifiers last-key)))))))
+
 (defun ruph/navigation-forward-paragraph (arg)
-  "Move forward by ARG paragraphs, ignoring mode-specific remaps.
+  "Move forward by ARG paragraphs, using default paragraph definitions.
+Ignores mode-specific paragraph overrides (e.g., markdown list items).
+With shift held (GUI only), extends selection.
 
 Example:
   (ruph/navigation-forward-paragraph 1)"
   (interactive "p")
   (when ruph/navigation-override-debug
     (message "[Navigation] INFO ForwardParagraph arg={%s} mode={%s}" arg major-mode))
-  (forward-paragraph arg))
+  ;; Handle shift-selection for S-C-up/down in GUI (terminal can't reliably detect shift)
+  (when (and shift-select-mode
+             (ruph/navigation--shift-pressed-p)
+             (not mark-active))
+    (push-mark nil nil t))
+  (let ((paragraph-start ruph/navigation-default-paragraph-start)
+        (paragraph-separate ruph/navigation-default-paragraph-separate))
+    (forward-paragraph arg)))
 
 (defun ruph/navigation-backward-paragraph (arg)
-  "Move backward by ARG paragraphs, ignoring mode-specific remaps.
+  "Move backward by ARG paragraphs, using default paragraph definitions.
+Ignores mode-specific paragraph overrides (e.g., markdown list items).
+With shift held (GUI only), extends selection.
 
 Example:
   (ruph/navigation-backward-paragraph 1)"
   (interactive "p")
   (when ruph/navigation-override-debug
     (message "[Navigation] INFO BackwardParagraph arg={%s} mode={%s}" arg major-mode))
-  (backward-paragraph arg))
+  ;; Handle shift-selection for S-C-up/down in GUI (terminal can't reliably detect shift)
+  (when (and shift-select-mode
+             (ruph/navigation--shift-pressed-p)
+             (not mark-active))
+    (push-mark nil nil t))
+  (let ((paragraph-start ruph/navigation-default-paragraph-start)
+        (paragraph-separate ruph/navigation-default-paragraph-separate))
+    (backward-paragraph arg)))
 
 (defvar ruph/navigation-override-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-<up>") #'ruph/navigation-backward-paragraph)
     (define-key map (kbd "C-<down>") #'ruph/navigation-forward-paragraph)
+    (define-key map (kbd "S-C-<up>") #'ruph/navigation-backward-paragraph)
+    (define-key map (kbd "S-C-<down>") #'ruph/navigation-forward-paragraph)
     map)
   "Keymap for `ruph/navigation-override-mode'.")
 

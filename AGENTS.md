@@ -134,6 +134,21 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-01-12 13:00 UTC]
+Context: Selection and navigation fixes—shift-click broken on macOS, `S-C-up/down` paragraph selection not working, `C-up/down` stopping at markdown list items, mouse scroll moving cursor with viewport.
+Decisions:
+- Enabled `transient-mark-mode` globally (was Windows-only), fixing shift-click selection on macOS/Linux.
+- Added `S-C-<up>`/`S-C-<down>` bindings for paragraph selection; implemented manual shift detection via `ruph/navigation--shift-pressed-p` since explicit bindings bypass `^` interactive spec.
+- Paragraph wrappers now let-bind custom `paragraph-start`/`paragraph-separate` regexes that match blank lines, headers, horizontal rules, and code fences—but NOT list items.
+- Replaced `mwheel-scroll` with `ruph/mouse-scroll-*` using `set-window-start` so viewport scrolls without moving cursor.
+- Shift detection limited to GUI frames (`display-graphic-p`) because terminal escape sequences can't reliably convey shift+ctrl+arrow.
+Findings:
+- `transient-mark-mode` was conditionally enabled only for `windows-nt`.
+- Markdown-mode sets `paragraph-start` to include list markers, causing per-item stops.
+- Standard Emacs keeps point visible; custom scroll via `set-window-start` bypasses this.
+- Terminal emulators send arrows as escape sequences; modifier detection unreliable.
+Risks: `S-C-up/down` selection only works in GUI; cursor can scroll off-screen with mouse wheel.
+
 [2026-01-08 20:45 UTC]
 Context: Paragraph navigation keys `C-<up>`/`C-<down>` still executed Markdown-specific paragraph commands due to `markdown-mode` remapping `forward-paragraph`/`backward-paragraph`.
 Decisions: Updated the override keymap to call wrapper commands (`ruph/navigation-forward-paragraph` / `ruph/navigation-backward-paragraph`) that invoke the built-in paragraph movers directly, bypassing mode remaps. Removed `multiple-cursors` bindings for `C-c <`/`C-c >` since they conflict in common modes (e.g., Org) and were not reliable.

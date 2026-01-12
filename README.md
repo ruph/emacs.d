@@ -130,7 +130,9 @@ Note: If a change doesn’t seem to apply, restart Emacs. In rare cases, flushin
 CHEAT SHEET
 ------------
 
-### FILES ###
+* **ESC** - prefix for work in terminal (ie. M-:, M-x -> ESC :, ESC x)
+
+### Files ###
 * **C-x f** - list recent open files
 * **S-C-r** - find file in project directory tree
 * **S-C-t** - find file in eproject list
@@ -147,6 +149,8 @@ CHEAT SHEET
 
 ### EDITOR ###
 * **C-space**   - normal selection
+* **C-up/down** - paragraph navigation
+* **S-C-up/down** - paragraph selection (extends selection)
 * **M-up**      - move line up
 * **M-down**    - move line down
 * **M-;**       - comment/uncomment
