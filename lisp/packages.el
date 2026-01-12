@@ -73,6 +73,12 @@
 (with-eval-after-load 'dired
   (add-hook 'dired-mode-hook #'dired-hide-details-mode))
 
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-window-fixed-size nil
+        neo-show-hidden-files t))
+
 (use-package writeroom-mode
   :ensure t
   :init
@@ -222,12 +228,12 @@ Example:
 
 (use-package paredit
   :ensure t
-  :hook ((emacs-lisp-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-         (lisp-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-         (lisp-interaction-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-         (scheme-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-         (slime-repl-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))
-         (clojure-mode . (lambda () (turn-off-smartparens-mode) (paredit-mode +1)))))
+  :hook ((emacs-lisp-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))
+         (lisp-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))
+         (lisp-interaction-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))
+         (scheme-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))
+         (slime-repl-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))
+         (clojure-mode . (lambda () (smartparens-mode -1) (paredit-mode +1)))))
 
 (use-package undo-tree
   :ensure t
@@ -319,7 +325,7 @@ Example:
   :ensure t
   :init
   (setq deft-directories '("~/Dropbox/Notes")
-        deft-extension "txt"
+        deft-extensions '("txt")
         deft-use-filename-as-title t
         deft-text-mode 'gfm-mode)
   :bind
@@ -327,7 +333,8 @@ Example:
 
 (use-package eproject
   :ensure t
-  :defer t)
+  :defer t
+  :no-require t)
 
 (use-package recentf
   :ensure t
@@ -503,7 +510,13 @@ Example:
 (setq clean-aindent-is-simple-indent t)
 
 ;; SQL
+(defvar sql-product nil)
 (defun sql-connect-bookmark (product connection)
+  "Connect to CONNECTION with PRODUCT via `sql-connect'.
+
+Example:
+  (sql-connect-bookmark (quote mysql) \"local\")"
+  (require 'sql)
   (setq sql-product product)
   (sql-connect connection))
 (setq sql-mysql-options (list "-A"))
@@ -576,18 +589,15 @@ Example:
 (set-face-foreground 'show-paren-match "red")
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 
-(defadvice show-paren-function
-    (after show-matching-paren-offscreen activate)
-  "If the matching paren is offscreen, show the matching line in the
-        echo area. Has no effect if the character before point is not of
-        the syntax class ')'"
-  (interactive)
-  (if show-paren-mode
-      (let* ((cb (char-before (point)))
-             (matching-text (and cb
-                                 (char-equal (char-syntax cb) ?\) )
-                                 (blink-matching-open))))
-        (when matching-text (message matching-text)))))
+(define-advice show-paren-function (:after (&rest _) show-matching-paren-offscreen)
+  "If the matching paren is offscreen, show the matching line in the echo area."
+  (when show-paren-mode
+    (let* ((cb (char-before (point)))
+           (matching-text (and cb
+                               (char-equal (char-syntax cb) ?\))
+                               (blink-matching-open))))
+      (when matching-text
+        (message matching-text)))))
 
 ;; Colors in *compilation*
 (defun colorize-buffer ()
@@ -630,12 +640,12 @@ Example:
     )
   (list "\\.arff?")
   (list
-   (function
-    (lambda ()
-      (setq font-lock-defaults (list 'generic-font-lock-defaults nil t ; case
-                                     insensitive
-                                     (list (cons ?* "w") (cons ?- "w"))))
-      (turn-on-font-lock))))
+	 (function
+	  (lambda ()
+	    (setq font-lock-defaults
+		  (list 'generic-font-lock-defaults nil t ; case-fold
+			(list (cons ?* "w") (cons ?- "w"))))
+	    (turn-on-font-lock))))
   "Mode for arff-files.")
 
 (global-set-key (kbd "M-.") 'xref-find-definitions)

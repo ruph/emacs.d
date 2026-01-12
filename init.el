@@ -217,7 +217,7 @@
 
 
 ;; File search
-(global-set-key (kbd "<f7>") 'find-name-dired)
+(global-set-key (kbd "<f7>") 'ruph/helm-find-file-recursive)
 
 ;; Paragraph navigation (force consistent C-<up/down> behavior)
 (defvar ruph/navigation-override-debug nil

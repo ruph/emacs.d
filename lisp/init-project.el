@@ -21,17 +21,26 @@
 
 
 ;; EPROJECT (lazy)
+(defvar prj-set-compilation-frame nil)
+(defvar prj-keybindings nil)
+(defvar prj-directory nil)
+(defvar prj-files nil)
+
 (setq prj-set-compilation-frame t)
 (setq prj-keybindings
       '(([S-C-f5] eproject-setup-toggle  always)
         ([C-f5]   eproject-dired)))
 
+(defun no-evil-in-eproject-setup (orig-fun &rest args)
+  "Run ORIG-FUN with ARGS, then disable Evil.
+
+Example:
+  (advice-add (quote eproject-setup)
+              :around (function no-evil-in-eproject-setup))"
+  (apply orig-fun args)
+  (turn-off-evil-mode))
+
 (with-eval-after-load 'eproject
-  ;; advising eproject setup to have no evil
-  (defun no-evil-in-eproject-setup (orig-fun &rest args)
-    (progn
-      (apply orig-fun args)
-      (turn-off-evil-mode)))
   (advice-add 'eproject-setup :around #'no-evil-in-eproject-setup))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -41,7 +50,8 @@
   "List files add to the eproject."
   (interactive)
   (unless (featurep 'eproject)
-    (require 'eproject))
+    (let ((inhibit-message t))
+      (require 'eproject)))
   (let ((files (mapcar (lambda (item)
 						 (file-relative-name
 						  (expand-file-name (car item) prj-directory)))

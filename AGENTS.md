@@ -149,6 +149,18 @@ Findings:
 - Terminal emulators send arrows as escape sequences; modifier detection unreliable.
 Risks: `S-C-up/down` selection only works in GUI; cursor can scroll off-screen with mouse wheel.
 
+[2026-01-11 14:31 UTC]
+Context: Startup auto-byte-compilation emitted warnings from `lisp/packages.el` (obsolete Smartparens disable helper, obsolete Deft variable, legacy `defadvice`, free vars, and a deprecated `cl` load via Eproject).
+Decisions: Replaced `turn-off-smartparens-mode` with `(smartparens-mode -1)` in Paredit hooks; migrated `deft-extension` → `deft-extensions`; replaced `defadvice` with `define-advice`; fixed SQL and ARFF free-variable warnings. Added `:no-require t` to the `use-package eproject` block so `use-package` doesn’t pre-load Eproject during byte-compilation (which pulled in deprecated `cl`).
+Findings: `use-package` prepends an `eval-when-compile (load ...)` for packages during byte compilation unless `:no-require` is set; Eproject’s `(require 'cl)` was the source of the deprecation warning.
+Risks: Eproject is no longer preloaded during compilation, so any future direct references to its symbols in compiled init files may need `:defines`/`:functions` or explicit `declare-function`. Loading Eproject at runtime may still print the `cl` deprecation message.
+
+[2026-01-11 10:26 UTC]
+Context: `F7` file search used `find-name-dired`, which is functional but prompts/opens a Dired buffer and feels cumbersome when you just want a fuzzy, recursive filename picker (especially within a subfolder).
+Decisions: Replaced the `F7` binding with `ruph/helm-find-file-recursive`, a Helm picker backed by `rg --files --hidden` scoped to `default-directory` (subfolder-friendly). Added optional `C-u`/`C-u C-u` behavior to choose the root directory and include ignored files, plus an opt-in debug toggle `ruph/file-search-debug`.
+Findings: `rg --files --hidden` is fast and includes dotfiles while still avoiding VCS directories by default; remote directories are better handled by falling back to `helm-find-files`.
+Risks: Very large directories can still be slow to enumerate; the command requires `rg` in PATH (errors clearly if missing). For per-mode/project behavior, adjust the binding or wrapper command.
+
 [2026-01-08 20:45 UTC]
 Context: Paragraph navigation keys `C-<up>`/`C-<down>` still executed Markdown-specific paragraph commands due to `markdown-mode` remapping `forward-paragraph`/`backward-paragraph`.
 Decisions: Updated the override keymap to call wrapper commands (`ruph/navigation-forward-paragraph` / `ruph/navigation-backward-paragraph`) that invoke the built-in paragraph movers directly, bypassing mode remaps. Removed `multiple-cursors` bindings for `C-c <`/`C-c >` since they conflict in common modes (e.g., Org) and were not reliable.
