@@ -1,3 +1,28 @@
+;;; init.el --- Emacs configuration -*- lexical-binding: t; -*-
+
+;; Silence byte-compiler warnings for dynamically-scoped Emacs variables
+(defvar bkp-file-name-handler-alist)
+(declare-function server-running-p "server")
+(declare-function cua--select-keymaps "cua-base")
+(defvar server-socket-dir)
+(defvar fringe-mode)
+(defvar savehist-file)
+(defvar save-place-file)
+(defvar dired-mode-map)
+(defvar bell-volume)
+(defvar cua-rectangle-mark-key)
+(defvar ns-right-alternate-modifier)
+(defvar cua-enable-cua-keys)
+(defvar cua-auto-tabify-rectangles)
+(defvar cua-keep-region-after-copy)
+(defvar speedbar-default-position)
+(defvar speedbar-show-unknown-files)
+(defvar speedbar-use-images)
+(defvar speedbar-update-flag-disable)
+(defvar speedbar-update-flag)
+(defvar c-default-style)
+(defvar c-basic-offset)
+
 ;; Faster start by disabling special processing temporarily,
 (setq bkp-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist '())
@@ -53,12 +78,12 @@
                   (point))))
     (set-window-start (selected-window) target)))
 
-(defun ruph/mouse-scroll-down (event)
+(defun ruph/mouse-scroll-down (_event)
   "Mouse wheel scroll down without moving cursor."
   (interactive "e")
   (ruph/scroll-down-keep-cursor 3))
 
-(defun ruph/mouse-scroll-up (event)
+(defun ruph/mouse-scroll-up (_event)
   "Mouse wheel scroll up without moving cursor."
   (interactive "e")
   (ruph/scroll-up-keep-cursor 3))
@@ -184,7 +209,8 @@ Example:
 
 (defvar ruph/navigation-default-paragraph-start
   "[ \t]*$\\|^#+ \\|^[-*_]\\{3,\\}[ \t]*$\\|^```"
-  "Paragraph-start regex: blank lines, markdown headers, horizontal rules, code fences.")
+  "Paragraph-start regex for navigation.
+Matches blank lines, markdown headers, horizontal rules, code fences.")
 
 (defvar ruph/navigation-default-paragraph-separate
   "[ \t]*$\\|^[-*_]\\{3,\\}[ \t]*$"
@@ -254,6 +280,7 @@ Example:
   :global t
   :init-value t
   :lighter ""
+  :group 'convenience
   :keymap ruph/navigation-override-mode-map)
 
 (defvar ruph/navigation-override-mode-emulation-alist
@@ -380,6 +407,7 @@ Example:
 
 
 ;; especially for windows
+(defvar cygwin-bin nil "Path to Cygwin bin directory on Windows.")
 (if (eq system-type 'windows-nt)
     (progn
       (setq cua-auto-tabify-rectangles nil ;; don't tabify after rectangle commands
@@ -421,7 +449,7 @@ Example:
 
 ;; SPEEDBAR
 (setq speedbar-default-position 'right)
-(setq speedbar-load-hook nil)
+(with-eval-after-load 'speedbar nil)       ;; replaces obsolete speedbar-load-hook
 (setq speedbar-show-unknown-files t)
 (setq speedbar-use-images t)
 (setq speedbar-update-flag-disable t)
@@ -430,6 +458,8 @@ Example:
 
 
 ;; C/C++ mode
+(defvar c++-tab-always-indent nil "Non-nil means TAB always reindents in C++.")
+(defvar c-indent-level 4 "Indentation level for C code.")
 (defun my-c-mode-common-hook ()
   ;; customizations for all of c-mode, c++-mode, objc-mode, java-mode
   (c-set-offset 'substatement-open 0)
@@ -452,8 +482,8 @@ Example:
 (defun indent-rigidly-n (n)
   "Indent the region, or otherwise the current line, by N spaces."
   (let* ((use-region (and transient-mark-mode mark-active))
-         (rstart (if use-region (region-beginning) (point-at-bol)))
-         (rend   (if use-region (region-end)       (point-at-eol)))
+         (rstart (if use-region (region-beginning) (line-beginning-position)))
+         (rend   (if use-region (region-end)       (line-end-position)))
          (deactivate-mark "irrelevant")) ; avoid deactivating mark
     (indent-rigidly rstart rend n)))
 (defun indent-rigidly-tab ()
