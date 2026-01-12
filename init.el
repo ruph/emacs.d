@@ -422,7 +422,10 @@ Example:
 (if (eq system-type 'darwin)
     (progn
       (setq ns-right-alternate-modifier nil)             ;; unbind right alt
-      (setq cua-enable-cua-keys nil)))                   ;; only for rectangles
+      (setq cua-enable-cua-keys t)))                     ;; C-x/c/v = cut/copy/paste
+
+;; Revert buffer (terminal-friendly alternative to Cmd+U)
+(global-set-key (kbd "C-c u") 'revert-buffer)
 
 
 ;; especially for windows

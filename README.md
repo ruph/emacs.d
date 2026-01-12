@@ -218,6 +218,7 @@ CHEAT SHEET
 ### BUFFERS ###
 * **C-x right** - switch to right buffer
 * **C-x left**  - switch to left buffer
+* **C-c u**     - revert buffer (reload from disk)
 
 
 ### EPROJECT ###
