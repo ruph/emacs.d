@@ -55,6 +55,7 @@
 ;; server-name so it does not share buffers with the daemon session.
 (unless (and noninteractive (not (daemonp)))
   (require 'server)
+  (setq server-force-delete t)
   (when (and (display-graphic-p) (not (daemonp)))
     (setq server-name "gui"))
   (unless (server-running-p)
