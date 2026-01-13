@@ -293,7 +293,8 @@ Example:
 
 (use-package helm
   :ensure t
-  :bind (("C-:" . helm-occur))
+  :bind (("C-:" . helm-occur)
+         ("M-y" . helm-show-kill-ring))
   :config
   (load-file "~/.emacs.d/lisp/init-helm.el"))
 
