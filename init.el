@@ -35,6 +35,10 @@
 
 
 ;; Emacs server / daemon
+;; Force-delete stale sockets on startup (must be set before daemon init).
+(require 'server)
+(setq server-force-delete t)
+
 ;; Make the socket location match `emacsclient`'s default lookup rules.
 ;; Per the Emacs manual, the default socket resolves roughly as:
 ;;   ${XDG_RUNTIME_DIR}/emacs/server
@@ -48,14 +52,17 @@
                   (expand-file-name (format "emacs%d" (user-uid)) tmp))))
   (setq server-socket-dir sockdir)
   (make-directory sockdir t)
-  (set-file-modes sockdir #o700))
+  (set-file-modes sockdir #o700)
+  ;; Clean up stale sockets in this directory on startup
+  (dolist (sock (directory-files sockdir t "^[^.]"))
+    (when (and (not (file-directory-p sock))
+               (not (server-running-p (file-name-nondirectory sock))))
+      (delete-file sock))))
 
 ;; Start a server everywhere except pure batch (`emacs --batch`).
 ;; If you launch a separate GUI Emacs (not the daemon), give it a different
 ;; server-name so it does not share buffers with the daemon session.
 (unless (and noninteractive (not (daemonp)))
-  (require 'server)
-  (setq server-force-delete t)
   (when (and (display-graphic-p) (not (daemonp)))
     (setq server-name "gui"))
   (unless (server-running-p)

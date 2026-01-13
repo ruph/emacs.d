@@ -131,12 +131,14 @@ On macOS, you can adjust font smoothing for Emacs via per-app defaults.
 
 ```
 e() {
-  emacsclient -t "$@" 2>/dev/null && return 0
-  /opt/homebrew/bin/emacs --daemon >/dev/null 2>&1 || return 1
-  emacsclient -t "$@"
+  emacsclient -t -s terminal "$@" 2>/dev/null && return 0
+  /opt/homebrew/bin/emacs --daemon=terminal >/dev/null 2>&1 || return 1
+  emacsclient -t -s terminal "$@"
 }
 ```
-ie. % e README.md  
+Uses a named socket (`terminal`) so terminal sessions don't conflict with GUI Emacs.app.
+
+ie. % e README.md
 
 
 CHEAT SHEET
