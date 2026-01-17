@@ -22,3 +22,4 @@ auto-save-list/
 *.~undo-tree~
 undo-tree-history
 projects
+.mc-lists.el
