@@ -131,9 +131,33 @@ On macOS, you can adjust font smoothing for Emacs via per-app defaults.
 
 ```
 e() {
-  emacsclient -t -s terminal "$@" 2>/dev/null && return 0
-  /opt/homebrew/bin/emacs --daemon=terminal >/dev/null 2>&1 || return 1
-  emacsclient -t -s terminal "$@"
+  local socket="${EMACS_TTY_SOCKET:-terminal}"
+  local timeout_s="${EMACS_START_TIMEOUT_S:-180}"
+  local log_dir="${TMPDIR:-/tmp}"
+  log_dir="${log_dir%/}"
+  local log_file="${log_dir}/emacs-daemon-${socket}.log"
+
+  if ! emacsclient -s "$socket" -e t -q --timeout=1 >/dev/null 2>&1; then
+    print -u2 -- "[EmacsClient] INFO StartingDaemon socket={${socket}} log_file={${log_file}}"
+    : >| "$log_file" 2>/dev/null || true
+    /opt/homebrew/bin/emacs --daemon="$socket" >>"$log_file" 2>&1 || true
+
+    print -u2 -n -- "[EmacsClient] INFO WaitingForDaemon socket={${socket}} timeout_s={${timeout_s}}"
+    local start_s=$EPOCHSECONDS
+    until emacsclient -s "$socket" -e t -q --timeout=1 >/dev/null 2>&1; do
+      if (( EPOCHSECONDS - start_s >= timeout_s )); then
+        print -u2 -- ""
+        print -u2 -- "[EmacsClient] ERROR DaemonStartTimeout socket={${socket}} waited_s={${timeout_s}} log_file={${log_file}}"
+        command tail -n 80 "$log_file" >&2 2>/dev/null || true
+        return 1
+      fi
+      print -u2 -n -- "."
+      sleep 1
+    done
+    print -u2 -- " ready"
+  fi
+
+  emacsclient -t -s "$socket" "$@"
 }
 ```
 Uses a named socket (`terminal`) so terminal sessions don't conflict with GUI Emacs.app.
