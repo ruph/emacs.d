@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 ;; MARKDOWN
+(declare-function ruph/backtab-dwim nil)
+
 (require 'markdown-mode)
 
 (defun init-markdown ()
@@ -22,7 +24,12 @@
     ))
 
 (with-eval-after-load 'markdown-mode
-  (define-key markdown-mode-map (kbd "C-c C-c v") #'markdown-preview)) ; use temp file
+  (define-key markdown-mode-map (kbd "C-c C-c v") #'markdown-preview)
+  (dolist (map (list markdown-mode-map gfm-mode-map))
+    (define-key map [backtab] #'ruph/backtab-dwim)
+    (define-key map (kbd "<backtab>") #'ruph/backtab-dwim)
+    (define-key map (kbd "<S-tab>") #'ruph/backtab-dwim)
+    (define-key map (kbd "<S-iso-lefttab>") #'ruph/backtab-dwim))) ; keep S-TAB outdent in Markdown/GFM
 
 (add-hook 'markdown-mode-hook 'init-markdown)
 (add-hook 'gfm-mode-hook 'init-markdown)

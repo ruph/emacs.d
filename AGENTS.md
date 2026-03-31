@@ -134,6 +134,39 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-03-31 12:45 UTC]
+Context: `S-TAB` still triggered `markdown-shifttab` in live GFM sessions after the previous fix, indicating the mode map itself was still resolving the key in practice.
+Decisions:
+- Re-applied the override-map `S-TAB` bindings outside `defvar` so reloading `init.el` updates an already-existing keymap in the current Emacs session.
+- Bound `S-TAB` explicitly in both `markdown-mode-map` and `gfm-mode-map` to `ruph/backtab-dwim`, and re-applied those bindings from `init.el` after `markdown-mode` loads so `load-file init.el` fixes an already-running session.
+- Added bindings for `<backtab>`, `<S-tab>`, and `<S-iso-lefttab>` variants to reduce terminal/GUI event-name ambiguity.
+Findings:
+- `defvar`-initialized keymaps are a trap for reload-driven config work: re-evaluating the file does not rebuild the existing map.
+- The user-facing symptom was consistent with `gfm-mode-map` still owning `S-TAB`, even though the new handler itself was correct.
+Risks: If another package later installs a higher-precedence overriding keymap for Shift-Tab, this may still need a targeted rebind in that package's map.
+
+[2026-03-31 11:53 UTC]
+Context: Follow-up on the `S-TAB` fix: plain text in `gfm-mode` still triggered Markdown's global heading collapse when no region was active, which is not desired for this config.
+Decisions:
+- Changed `ruph/backtab-dwim` so Markdown/GFM no longer falls back to `markdown-shifttab` outside tables.
+- Kept Markdown table support by calling `markdown-table-backward-cell` only when point is inside a table.
+- Made the non-table default path outdent the current line/region, so `S-TAB` behaves like an editor outdent key instead of a document folding key.
+Findings:
+- The problematic behavior was specifically the non-table branch of `markdown-shifttab`, which calls `markdown-cycle` globally.
+- Preserving only the table branch matches the user-facing expectation more closely than delegating to the full Markdown command.
+Risks: Users who relied on `S-TAB` for Markdown heading visibility cycling will need to invoke `markdown-cycle` explicitly or rebind it elsewhere.
+
+[2026-03-31 11:24 UTC]
+Context: `S-TAB` outdent stopped working for selected Markdown/GFM regions because those modes bind `<backtab>` to `markdown-shifttab`, which overrides the config's global outdent binding.
+Decisions:
+- Added `ruph/backtab-dwim` in the emulation-level override map so `S-TAB` wins key precedence consistently across modes.
+- The new command outdents when a region is active, but defers to the buffer's normal `<backtab>` binding when no region is selected so Markdown tables and visibility cycling still work.
+- Added an opt-in `ruph/indent-debug` toggle with stable `[Indent]` log messages for region-outdent and fallback resolution branches.
+Findings:
+- The existing global `[backtab]` binding was correct but insufficient because major-mode maps beat global bindings.
+- Reusing the existing emulation override mechanism is smaller and safer than stripping Markdown's `<backtab>` binding entirely.
+Risks: Plain `S-TAB` behavior now depends on fallback key resolution without the override map; if another package later shadows `<backtab>`, the debug toggle should make that visible quickly.
+
 [2026-01-12 13:00 UTC]
 Context: Selection and navigation fixes—shift-click broken on macOS, `S-C-up/down` paragraph selection not working, `C-up/down` stopping at markdown list items, mouse scroll moving cursor with viewport.
 Decisions:

@@ -228,6 +228,42 @@
 (global-set-key (kbd "<f7>") 'ruph/helm-find-file-recursive)
 
 ;; Paragraph navigation (force consistent C-<up/down> behavior)
+(defvar ruph/indent-debug nil
+  "When non-nil, emit indent-related debug logs.
+
+Example:
+  (setq ruph/indent-debug t)")
+
+(defun ruph/backtab-dwim ()
+  "Outdent the active region or current line, with Markdown table support.
+
+When the region is active, outdent by `tab-width' spaces.
+When point is in a Markdown table, move backward one cell.
+Otherwise, outdent the current line instead of invoking Markdown's
+global visibility cycling.
+
+Example:
+  (ruph/backtab-dwim)"
+  (interactive)
+  (cond
+   ((use-region-p)
+    (when ruph/indent-debug
+      (message "[Indent] INFO BacktabOutdentRegion mode={%s} lines={%s}"
+               major-mode
+               (count-lines (region-beginning) (region-end))))
+    (outdent-rigidly-tab))
+   ((and (derived-mode-p 'markdown-mode)
+         (fboundp 'markdown-table-at-point-p)
+         (markdown-table-at-point-p)
+         (fboundp 'markdown-table-backward-cell))
+    (when ruph/indent-debug
+      (message "[Indent] INFO BacktabMarkdownTable mode={%s}" major-mode))
+    (call-interactively #'markdown-table-backward-cell))
+   (t
+    (when ruph/indent-debug
+      (message "[Indent] INFO BacktabOutdentLine mode={%s}" major-mode))
+    (outdent-rigidly-tab))))
+
 (defvar ruph/navigation-override-debug nil
   "When non-nil, emit navigation key override debug logs.
 
@@ -298,6 +334,22 @@ Example:
     (define-key map (kbd "S-C-<down>") #'ruph/navigation-forward-paragraph)
     map)
   "Keymap for `ruph/navigation-override-mode'.")
+
+;; Re-apply bindings outside `defvar' so reloading `init.el' updates the
+;; existing keymap in a running Emacs session.
+(define-key ruph/navigation-override-mode-map [backtab] #'ruph/backtab-dwim)
+(define-key ruph/navigation-override-mode-map (kbd "<backtab>") #'ruph/backtab-dwim)
+(define-key ruph/navigation-override-mode-map (kbd "<S-tab>") #'ruph/backtab-dwim)
+(define-key ruph/navigation-override-mode-map (kbd "<S-iso-lefttab>") #'ruph/backtab-dwim)
+
+(with-eval-after-load 'markdown-mode
+  (dolist (map-sym '(markdown-mode-map gfm-mode-map))
+    (when (boundp map-sym)
+      (let ((map (symbol-value map-sym)))
+        (define-key map [backtab] #'ruph/backtab-dwim)
+        (define-key map (kbd "<backtab>") #'ruph/backtab-dwim)
+        (define-key map (kbd "<S-tab>") #'ruph/backtab-dwim)
+        (define-key map (kbd "<S-iso-lefttab>") #'ruph/backtab-dwim)))))
 
 (define-minor-mode ruph/navigation-override-mode
   "Ensure consistent paragraph navigation keys across modes.
