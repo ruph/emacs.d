@@ -7,6 +7,7 @@ These are my settings for Emacs v30+, including:
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
 * php, html, css support with all relevant modes (web-mode helps a lot)
 * javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode (with .jsonc support)
+* erlang and elixir editing with mode support and optional LSP
 * clojure & clojurescript with paredit
 * LLM integration with gptel
 * autocomplete, snippets, tags, suggestions
@@ -73,6 +74,8 @@ EMACS PACKAGES
   * [use-package](https://github.com/jwiegley/use-package)
   * [csv-mode](http://www.emacswiki.org/emacs/CsvMode)
   * [deft](https://github.com/jrblevin/deft)
+  * [elixir-mode](https://github.com/elixir-editors/emacs-elixir)
+  * [erlang](https://www.erlang.org/downloads)
   * [markdown-mode](http://jblevins.org/projects/markdown-mode/)
   * [vterm](https://github.com/emacs-vterm/vterm)
   * [yaml-mode](https://github.com/yoshiki/yaml-mode)
@@ -110,6 +113,7 @@ For all features to work correctly, you may need to install some external tools 
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)
+* `erlang` / OTP and `elixir` (for running BEAM tools); optionally install `erlang_ls` and an Elixir language server for `lsp-mode`
 * `vterm` dependencies: `brew install automake libtool` (for building vterm on macOS)
 
 #### macOS Font Smoothing (optional) ####

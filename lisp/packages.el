@@ -42,11 +42,50 @@
       (error
         (message "[Packages] ERROR in auto-install: %s" (error-message-string err))))))
 
-;; Ensure archive list is current for key packages (handles 404s from stale indices)
-(defun ruph/ensure-archives-for (&rest _pkgs)
-  ;; Intentionally no-op by default to avoid network errors on startup.
-  ;; Use M-x ruph/refresh-package-archives to update archives manually.
-  nil)
+;; Ensure archive list is current for key packages when local metadata is stale.
+(defvar ruph/package-archive-max-age-days 30
+  "Refresh package archives when cached metadata is older than this many days.
+
+Example:
+  (setq ruph/package-archive-max-age-days 7)")
+
+(defun ruph/package-archives-stale-p ()
+  "Return non-nil when package archive metadata should be refreshed.
+
+Example:
+  (ruph/package-archives-stale-p)"
+  (let* ((archive-dir (expand-file-name "elpa/archives" user-emacs-directory))
+         (archive-files (when (file-directory-p archive-dir)
+                          (directory-files-recursively archive-dir "\\`archive-contents\\'")))
+         (max-age-s (* ruph/package-archive-max-age-days 86400))
+         (now (float-time)))
+    (or (null package-archive-contents)
+        (null archive-files)
+        (cl-some
+         (lambda (file)
+           (> (- now
+                 (float-time
+                  (file-attribute-modification-time (file-attributes file))))
+              max-age-s))
+         archive-files))))
+
+(defun ruph/ensure-archives-for (&rest pkgs)
+  "Refresh package archives when PKGS are missing and local metadata is stale.
+
+Example:
+  (ruph/ensure-archives-for 'erlang 'elixir-mode)"
+  (let ((missing-pkgs (cl-remove-if #'package-installed-p pkgs)))
+    (when (and missing-pkgs
+               (ruph/package-archives-stale-p))
+      (condition-case err
+          (let ((pkg-list (mapconcat #'symbol-name missing-pkgs ",")))
+            (message "[Packages] INFO RefreshForPackages packages={%s}" pkg-list)
+            (package-refresh-contents)
+            (message "[Packages] INFO RefreshForPackagesDone packages={%s}" pkg-list))
+        (error
+         (message "[Packages] ERROR RefreshForPackagesFailed packages={%s} msg=\"%s\""
+                  (mapconcat #'symbol-name missing-pkgs ",")
+                  (error-message-string err)))))))
 
 (defun ruph/refresh-package-archives ()
   "Refresh package archives with basic error handling."
@@ -360,6 +399,9 @@ Example:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LANGUAGES
 
+;; Keep language package installs from using long-stale MELPA metadata.
+(ruph/ensure-archives-for 'erlang 'elixir-mode)
+
 (use-package js2-mode
   :ensure t
   :config
@@ -404,6 +446,21 @@ Example:
   :ensure t
   :config
   (load-file "~/.emacs.d/lisp/lang-rust.el"))
+
+(use-package erlang
+  :ensure t
+  :mode (("\\.erl\\'" . erlang-mode)
+         ("\\.hrl\\'" . erlang-mode)
+         ("\\.xrl\\'" . erlang-mode)
+         ("\\.yrl\\'" . erlang-mode)
+         ("\\.app\\.src\\'" . erlang-mode)))
+
+(use-package elixir-mode
+  :ensure t
+  :mode (("\\.ex\\'" . elixir-mode)
+         ("\\.exs\\'" . elixir-mode))
+  :config
+  (load-file "~/.emacs.d/lisp/lang-beam.el"))
 
 (use-package evil
   :ensure t

@@ -134,6 +134,19 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-05-06 20:51 UTC]
+Context: Add first-class Erlang and Elixir editing support to the Emacs config without disrupting the existing package-loading pattern or forcing BEAM users into a different setup path than the other language modules.
+Decisions:
+- Added `erlang` and `elixir-mode` to `lisp/packages.el` with explicit file associations so BEAM files resolve correctly even if package autoload metadata changes.
+- Introduced a shared `lisp/lang-beam.el` module for Erlang and Elixir hooks instead of two tiny per-language files, keeping related BEAM setup together and avoiding one-method micro-files.
+- Enabled optional `lsp-mode` startup through a small helper plus stable `[Beam]` debug messages, and kept the behavior toggleable with `ruph/beam-enable-lsp`.
+- Replaced the no-op package archive guard with a stale-metadata check so missing language packages can refresh old archive indices before `use-package` tries to install them.
+Findings:
+- The repo’s language setup convention is `lisp/packages.el` for package registration plus `lisp/lang-*.el` files for hooks and local behavior, so BEAM support needed to follow that seam rather than extending `init.el`.
+- README package/docs drift is easy in this repo because capabilities are declared manually; adding the packages without updating README would immediately make the docs stale again.
+- `use-package` attempted `:ensure` before the per-package `:preface` hook was useful, so the archive refresh had to happen once ahead of the language package declarations.
+Risks: `lsp-deferred` will rely on the user having `erlang_ls` and an Elixir language server installed; without them, syntax modes still work but LSP features will not attach.
+
 [2026-03-31 12:45 UTC]
 Context: `S-TAB` still triggered `markdown-shifttab` in live GFM sessions after the previous fix, indicating the mode map itself was still resolving the key in practice.
 Decisions:
