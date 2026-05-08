@@ -134,6 +134,25 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-05-08 06:06 UTC]
+Context: User wanted only basic Erlang and Elixir modes, with no repo-owned LSP integration.
+Decisions:
+- Removed BEAM LSP helpers from `lisp/lang-beam.el`, leaving only basic mode setup.
+- Updated README so BEAM support no longer implies `elp` or `elixir-ls`.
+Findings: `elp` and `elixir-ls` were only exposed through the shared BEAM hook module and docs.
+Risks: Restoring BEAM LSP later will require re-adding explicit config.
+
+[2026-05-08 06:01 UTC]
+Context: BEAM support auto-started `lsp-mode` from `elixir-mode-hook`, and opening an Elixir buffer could fall into the ElixirLS install/start path strongly enough that Emacs became unresponsive after the user attempted the install flow.
+Decisions:
+- Changed `ruph/beam-enable-lsp` to opt-in by default so BEAM editing support stays on while LSP startup becomes an explicit choice.
+- Added server-availability checks in `lisp/lang-beam.el` so automatic startup only calls `lsp-deferred` when `language_server.sh` or `elp` is already present, instead of entering `lsp-mode`'s install/download path from a plain file open.
+- Added `ruph/beam-start-lsp` for explicit per-buffer startup plus stable `[Beam]` skip/start logs to show whether LSP was disabled, unavailable, or launched.
+Findings:
+- In the current repo state, `~/.emacs.d/.cache/lsp/elixir-ls/` existed but was empty, and `lsp-mode` reported `elixir-ls` as not installed, so the risky path was the auto-install prompt/restart flow rather than a confirmed working local server binary.
+- The BEAM module was the only repo-owned code that unconditionally pushed Elixir buffers into that path; the rest of the LSP behavior lives in upstream `lsp-mode`.
+Risks: Users who want automatic BEAM LSP now need to opt in with `(setq ruph/beam-enable-lsp t)`, and manual startup still depends on a healthy `language_server.sh` or `elp` installation. If those binaries themselves hang, the remaining issue is upstream server startup rather than config auto-start.
+
 [2026-05-06 20:51 UTC]
 Context: Add first-class Erlang and Elixir editing support to the Emacs config without disrupting the existing package-loading pattern or forcing BEAM users into a different setup path than the other language modules.
 Decisions:

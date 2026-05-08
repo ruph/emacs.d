@@ -7,7 +7,7 @@ These are my settings for Emacs v30+, including:
 * python with pyenv multi-version, debugging with ipdb and flycheck for syntax
 * php, html, css support with all relevant modes (web-mode helps a lot)
 * javascript, jsx, and typescript through js2-mode, typescript-mode, and lsp-mode (with .jsonc support)
-* erlang and elixir editing with mode support and optional LSP
+* erlang and elixir editing with mode support
 * clojure & clojurescript with paredit
 * LLM integration with gptel
 * autocomplete, snippets, tags, suggestions
@@ -113,7 +113,7 @@ For all features to work correctly, you may need to install some external tools 
 * `eslint`, `babel-eslint`, `eslint-plugin-react` (for JavaScript linting)
 * `flake8` (for Python linting)
 * `pyenv` (for Python version management)
-* `erlang` / OTP and `elixir` (for running BEAM tools); optionally install `erlang_ls` and an Elixir language server for `lsp-mode`
+* `erlang` / OTP and `elixir` (for running BEAM tools)
 * `vterm` dependencies: `brew install automake libtool` (for building vterm on macOS)
 
 #### macOS Font Smoothing (optional) ####
