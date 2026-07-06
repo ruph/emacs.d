@@ -134,6 +134,32 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-07-06 17:26 UTC]
+Context: The user wanted the repo's `gptel` setup simplified to a direct ChatGPT/Codex subscription backend declaration and specifically requested a high thinking level instead of the earlier subscription/OpenRouter selector logic.
+Decisions:
+- Replaced the backend-selection helper block in `lisp/init-gptel.el` with a direct `gptel-openai-oauth` setup that always uses the ChatGPT/Codex subscription backend.
+- Set the default model to `gpt-5.5` and passed `:request-params '(:reasoning (:effort "high"))` through `gptel-make-openai-oauth` so requests use high reasoning effort.
+- Kept the explicit `ruph/gptel-login-openai-subscription` helper and existing keybinding so OAuth login stays easy to discover in this config.
+Findings:
+- In the installed `gptel` code, backend-specific request tuning is merged through `:request-params`, which is the correct seam for OpenAI reasoning effort.
+- The local `gptel-openai-oauth` backend does not need the older OpenRouter fallback to satisfy the subscription-backed workflow the user asked for.
+Risks:
+- This repo now assumes the ChatGPT/Codex subscription path is the intended default; users without that entitlement will need to reintroduce another backend locally.
+- High reasoning effort may increase latency or usage compared with lower effort settings.
+
+[2026-07-06 17:23 UTC]
+Context: The user wanted `gptel` to work against their ChatGPT/Codex subscription, but after upgrading packages the expected `gptel-openai-oauth-login` command still did not appear in `M-x`. The repo's `gptel` config was still OpenRouter-only, and discoverability depended on upstream autoload behavior.
+Decisions:
+- Updated `lisp/init-gptel.el` to eagerly load `gptel-openai-oauth` when available so `gptel-openai-oauth-login` is defined in regular Emacs sessions.
+- Added a small backend selector that prefers the ChatGPT/Codex subscription backend by default, falls back to OpenRouter when OAuth support is unavailable, and emits stable `[GPTel]` backend-selection logs.
+- Added `ruph/gptel-login-openai-subscription` plus a `C-c g l` binding so subscription login remains discoverable even if upstream keeps the login command non-autoloaded.
+Findings:
+- The upgraded MELPA package `gptel-20260705.2207` includes `gptel-openai-oauth.el`, but its generated autoloads only expose `gptel-make-openai-oauth`, not `gptel-openai-oauth-login`.
+- `package-upgrade-all` can place the correct package on disk while a new non-autoloaded interactive command still stays absent from `M-x` until the defining file is loaded.
+Risks:
+- Users who still prefer the OpenRouter path now need to set `(setq ruph/gptel-prefer-openai-subscription nil)` locally.
+- Subscription login still depends on the upstream OAuth flow and browser/device authorization support.
+
 [2026-05-08 06:06 UTC]
 Context: User wanted only basic Erlang and Elixir modes, with no repo-owned LSP integration.
 Decisions:

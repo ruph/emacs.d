@@ -268,6 +268,7 @@ CHEAT SHEET
 
 ### GPTEL ###
 * **C-c g g** - Start a new gptel session
+* **C-c g l** - Log in to the OpenAI ChatGPT/Codex subscription backend
 * **C-c g s** - Send the current region or buffer to gptel
 * **C-c g a** - Abort the current gptel process
 * **C-c g m** - Open the gptel menu
