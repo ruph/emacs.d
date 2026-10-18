@@ -2,12 +2,10 @@
 
 (require 'vterm)
 
+(declare-function projectile-project-root "projectile" (&optional dir))
+
 ;; Set the shell to zsh, the modern default on macOS
 (setq vterm-shell "/bin/zsh")
-
-;; Pass arguments to the shell for a clean startup.
-;; This sets a prompt, enables colors, clears the screen, and starts a clean shell session.
-(setq vterm-shell-args '("-c" "PROMPT='%n@%m:%~%# ' exec /bin/zsh"))
 
 ;; Disable yasnippet in vterm to avoid conflicts
 (add-hook 'vterm-mode-hook (lambda () (yas-minor-mode -1)))
@@ -18,20 +16,27 @@
   (let ((project-root (projectile-project-root)))
     (vterm (concat project-root "/"))))
 
-;; Global keybinding to open a new terminal
-(define-key global-map (kbd "C-c t") #'ruph/vterm-project)
+(defun ruph/vterm-copy-mark-line ()
+  "Select the current line for copying.
+
+Example:
+  (ruph/vterm-copy-mark-line)"
+  (interactive)
+  (beginning-of-line)
+  (push-mark (point) nil t)
+  (forward-line 1))
 
 ;; --- Keybindings ---
 (define-key vterm-mode-map (kbd "C-c c") #'vterm-copy-mode)
 
-(define-key vterm-copy-mode-map (kbd "j") #'vterm-copy-mode-down)
-(define-key vterm-copy-mode-map (kbd "k") #'vterm-copy-mode-up)
-(define-key vterm-copy-mode-map (kbd "l") #'vterm-copy-mode-forward-char)
-(define-key vterm-copy-mode-map (kbd "h") #'vterm-copy-mode-backward-char)
-(define-key vterm-copy-mode-map (kbd "w") #'vterm-copy-mode-forward-word)
-(define-key vterm-copy-mode-map (kbd "b") #'vterm-copy-mode-backward-word)
-(define-key vterm-copy-mode-map (kbd "C-v") #'vterm-copy-mode-visual-line)
-(define-key vterm-copy-mode-map (kbd "v") #'vterm-copy-mode-visual-char)
-(define-key vterm-copy-mode-map (kbd "y") #'vterm-copy-mode-copy)
+(define-key vterm-copy-mode-map (kbd "j") #'next-line)
+(define-key vterm-copy-mode-map (kbd "k") #'previous-line)
+(define-key vterm-copy-mode-map (kbd "l") #'forward-char)
+(define-key vterm-copy-mode-map (kbd "h") #'backward-char)
+(define-key vterm-copy-mode-map (kbd "w") #'forward-word)
+(define-key vterm-copy-mode-map (kbd "b") #'backward-word)
+(define-key vterm-copy-mode-map (kbd "C-v") #'ruph/vterm-copy-mark-line)
+(define-key vterm-copy-mode-map (kbd "v") #'set-mark-command)
+(define-key vterm-copy-mode-map (kbd "y") #'vterm-copy-mode-done)
 
 (provide 'init-vterm)

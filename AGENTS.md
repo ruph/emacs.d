@@ -7,10 +7,13 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 ## Core Rules
 
 * **RULE #1 — Focus:** Work **only** on the current task. If you notice other issues, add them under **OPINION** (non-blocking).
-* **RULE #2 — Journaling:** Use the **DEV JOURNAL** section in the bottom of this document to understand past decisions, pitfalls and findings. Add an entry after every major change, tricky decision or hard challenge.
+* **RULE #2 — Journaling:** Consult **DEV JOURNAL** for past context. Record concise, reusable knowledge from non-trivial work; follow the scope and exclusions below.
 * **RULE #3 — Context:** Read `README.md` to get an overview of the project.
 * **RULE #4 — Conventions:** Match project tooling (linters, formatters, CI scripts, test framework). Do not remove tests or logs unless asked.
 * **RULE #5 — Questions:** Ask only if missing info would change the solution; otherwise proceed with explicit **ASSUMPTIONS**.
+* **RULE #6 — Commits:** Use a compact one-line commit message, past tense, lowercase, no prefix. Omit the body unless the user explicitly requests one.
+* **RULE #7 — Worktrees:** If a task starts in a dedicated worktree, stay in that checkout for the entire task unless the user explicitly directs otherwise.
+* **RULE #8 — Residue:** Before ending a task, clean its agent-created temporary files, stashes, throwaway branches, and worktrees. Preserve user-owned state; explain anything that must remain.
 
 ---
 
@@ -48,6 +51,7 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 
 * Use **conversational checkpoints**: after each major step, give a ≤50-word summary to reset context cheaply.
 * If the conversation derails, propose a fresh summary and next actions.
+* Before push, merge, or PR work, give one compact status: branch, dirty/pushed state, relevant checks, and exact next command. Do not repeat implementation review unless a new diff appears.
 
 ### 6) Output Format Per Turn
 
@@ -87,6 +91,8 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 
 ## Testing & Validation
 
+* Default to affected compile, format, and static checks plus targeted tests. Reserve broader validation for final integration or a concrete failure that requires it.
+* A passing check remains valid while its relevant inputs are unchanged. After rebase or conflict resolution, rerun only affected checks; do not rerun unchanged checks just to commit, push, or merge.
 * When adding functionality, include tests (unit/integration as appropriate) and update fixtures.
 * Provide a **runbook**: exact commands to run tests, linters, type checks, and benchmarks.
 * Capture **p95 latency / memory** when performance is relevant; note any regressions and mitigations.
@@ -99,7 +105,7 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 * New/changed public APIs have docstrings and a minimal usage example.
 * Logs added at critical branches and I/O; no noisy debug left on by default.
 * Migration notes (if schema/config changes) and rollback plan provided.
-* **DEV JOURNAL** updated with distilled insights.
+* **DEV JOURNAL** updated when non-trivial work yields reusable knowledge.
 
 ---
 
@@ -112,14 +118,17 @@ You are an experienced senior software engineer. Your job is to ship correct, mi
 
 ## Output Language & Units
 
-* Use **US English**.
+* Use **US English** and LF line endings.
 * Use the **metric system**; temperatures in **°C**.
+* Do not manually hard-wrap prose in documentation; keep one paragraph per physical line.
 
 ---
 
 ## DEV JOURNAL
 
-After each major implementation, add an entry in reverse time order (latest on top) in `Format` under `Entries`. Skip if only minor bug fixes or refactoring, documentation or test-only changes or random configuration tweaks without architectural impact.
+For non-trivial work, record only concise, reusable decisions, findings, risks, or recovery facts, newest first using the format below. Exclude routine status, validation inventories, and handoff evidence; never duplicate an entry.
+
+Skip entries for minor fixes or refactoring, documentation or test-only changes, and routine configuration tweaks without architectural impact.
 
 **Format:**
 
@@ -133,6 +142,59 @@ Important: (add especially important remarks here; can be omitted if there aren'
 ```
 
 ### Entries (latest on top)
+
+[2026-10-18 21:58 UTC]
+Context: Further improve GUI boot time and investigate editing latency after the first deferred-loading pass.
+Decisions:
+- Added `early-init.el` to apply the existing 100 MiB GC budget before package activation and create the first frame without its subsequently disabled toolbar. Kept the existing init.el GC assignment for batch/manual loading.
+- Corrected the package guard to check `package--activated`. Normal GUI startup activates packages without setting `package--initialized`; the previous guard reread package descriptors and archive metadata unnecessarily.
+- Changed the regression fixture to model `package-activate-all` rather than `package-initialize`, and added an early-init check. Declared the delayed Android environment helper through `use-package :functions` so strict compilation also succeeds in a fresh GUI session.
+Findings:
+- Three alternating, isolated GUI startup pairs measured median init time 3.114 s before and 2.155 s after; ready-frame time decreased from 3.264 s to 2.306 s. These runs include actual NS frames, redisplay, and the login-shell lookup; they exclude Finder's launcher overhead and opening user files.
+- Startup GC decreased from 14 collections/about 299 ms to one/about 19 ms. Median ready-frame RSS decreased from 267.6 MiB to 256.3 MiB; these are end-of-startup readings, not peak memory measurements.
+- Ten ERT checks pass. Run: `emacs -Q --batch -l tests/startup-tests.el -f ert-run-tests-batch-and-exit`. Strict byte-compilation passed for early-init.el and packages.el. GUI comparison command: `python3 /tmp/run-emacs-gui-profiles.py`; reports are `/tmp/emacs-gui-final-{before,after}-{0,1,2}.json`.
+- Trialed built-in package quickstart, but its generated cache emitted many upstream autoload/compiler warnings. Removed that trial's configuration and generated cache files; the shipped optimization uses normal package activation.
+- An initial 200-insert redraw probe measured p95 4.99 ms in Emacs Lisp and 40.23 ms in Markdown with a synthetic 1000-line paragraph. This stress fixture does not establish ordinary typing latency; no general typing speedup is claimed from the startup changes.
+- The installed Emacs 30.2 build reports no native compilation support. A separate native-compilation build is the next candidate for Lisp-heavy editing; preserve the GUI server distinction from the terminal daemon when testing clients.
+Risks: Early GC suppression can increase transient memory, although the measured ready-frame RSS decreased. Startup changes take effect after restart. Rollback should revert only this task's hunks and remove early-init.el and its generated .elc, preserving the earlier terminal and manual-completion changes.
+
+[2026-10-18 21:38 UTC]
+Context: Improve startup and editing responsiveness. The user explicitly requested key-initiated completion everywhere, replacing the earlier suggestion to slow down Corfu's automatic popup.
+Decisions:
+- Disabled `corfu-auto` globally while keeping `C-c SPC` and the existing CAPF sources; applied the setting and removed its automatic hooks in the running GUI session.
+- Consolidated LANG, PATH, and ANDROID_HOME into one cached login-shell lookup in `lisp/init-shell-env.el`. Parse NUL-delimited fields between markers so shell banners, spaces, and empty values are safe; retain inherited values on failure. Log names and timings rather than values.
+- Deferred optional language modes, REPLs, terminal fallback, and LSP UI to their file, command, or hook entry points. Registered JavaScript, TypeScript, web, and Emmet triggers before loading their setup files. Kept core project navigation eager.
+- Skipped duplicate package initialization and the idle package bootstrap when its essential package is installed. Made init byte-compilation an explicit `M-x ruph/byte-compile-init-files` operation.
+- Limited ANSI coloring to `compilation-filter-start` onward, retaining parser context across output chunks and preserving read-only state.
+Findings:
+- Nine ERT checks cover shell caching/fallback, manual completion, deferred commands, file associations, maintenance scheduling, incremental ANSI parsing, and the vterm fallback. Run: `emacs -Q --batch -l tests/startup-tests.el -f ert-run-tests-batch-and-exit`.
+- Deferring CIDER exposed a compile-time free reference to `inferior-lisp-mode-map`; declared it without loading inferior Lisp. CIDER's own autoloads legitimately load CIDER when Clojure mode is first used.
+- Three-run isolated startup profiles (package activation, GUI config branch, real login shell) measured median config time 8.05 s before and 2.00 s after; baseline varied from 7.46 to 14.61 s. Median end-of-profile RSS decreased from 156.2 MiB to 98.3 MiB; these are batch profile measurements, not a GUI restart or peak memory measurements.
+- A 200-chunk, 318000-character synthetic compilation benchmark measured p95 coloring time 7.56 ms for whole-buffer processing and 0.47 ms for new-output processing. GC still produced occasional approximately 25 ms outliers.
+- Session benchmark commands: `python3 /tmp/run-emacs-startup-profile.py` and `emacs -Q --batch -l /tmp/emacs-output-color-profile.el`. Baseline JSON is retained under `/tmp/emacs-perf-before/`.
+Risks: Deferred tools pay their load cost on first use. Shell values remain cached until `(setq ruph/shell-environment-cache nil)` or restart. Startup gains require a new Emacs session; disabling automatic completion and incremental coloring were applied live. Rollback should revert only this task's hunks and preserve the earlier Ghostel/vterm fixes.
+
+[2026-10-18 20:18 UTC]
+Context: Make Ghostel the project terminal shortcut and prevent editor keymaps and snippets from interfering with Codex, Claude Code, and Myelin chat TUIs.
+Decisions:
+- Bound `C-c t` to `ghostel-project` and removed vterm's competing shortcut assignment while keeping its fallback commands.
+- Filtered navigation override bindings at key lookup: Ghostel's semi-char and char modes receive terminal keys, while copy, Emacs, and line modes retain editor navigation. This avoids state hooks that could miss mode transitions.
+- Disabled Yasnippet in Ghostel and set buffer-local `yas-dont-activate-functions` to `t` so global activation cannot turn it back on. Preserved the native PTY, `xterm-ghostty`, and adaptive redraw defaults.
+Findings:
+- Six ERT regression checks passed in batch and GUI Emacs; a native alternate-screen probe verified Shift-Tab, Ctrl-Up, Shift-Enter, bracketed multiline paste, and real mode transitions.
+- `yas-dont-activate` is an obsolete alias; `yas-dont-activate-functions` is the supported variable. Existing Ghostel buffers also need the snippet helper applied when updating a running session.
+Risks: The key filter reads Ghostel's internal input-mode variable, so upstream input-mode changes need retesting. Terminal protocols were verified; application-specific Codex, Claude, and Myelin sessions were not exercised.
+
+[2026-10-18 20:02 UTC]
+Context: Install and test Ghostel alongside the existing vterm setup; an earlier interactive install had failed and left Ghostel in Custom's selected-package list.
+Decisions:
+- Added a deferred MELPA declaration for `ghostel` and `ghostel-project` in `lisp/packages.el`, reusing the archive freshness helper before installation.
+- Installed the MELPA package `ghostel-20261015.1933` and its official Apple Silicon native module `0.58.0`; no Zig toolchain was needed.
+- Documented first-use module installation and an interactive smoke test in README, preserving the pre-existing `init.el` Custom changes.
+Findings:
+- Stale MELPA metadata referenced the removed `ghostel-20260706.1310.tar`; refreshing package archives resolved the installation failure.
+- A live GUI smoke test passed native shell output, ANSI color, UTF-8, terminal environment, OSC directory tracking, copy mode, and interrupts. Keybinding checks must select the terminal window, not only change the current buffer.
+Risks: Ghostel requires its separately downloaded native module; package upgrades may require a matching module download and an Emacs restart if the old module is already loaded.
 
 [2026-07-06 17:26 UTC]
 Context: The user wanted the repo's `gptel` setup simplified to a direct ChatGPT/Codex subscription backend declaration and specifically requested a high thinking level instead of the earlier subscription/OpenRouter selector logic.

@@ -2,6 +2,7 @@
 ;; Clojure
 (require 'clojure-mode)
 (setq clojure-enable-paredit t)
+(defvar inferior-lisp-mode-map)
 
 ;; Clojurescript
 (setq inf-clojure-program "lumo")
@@ -46,6 +47,7 @@
 
 ;; Cider
 (use-package cider
+  :defer t
   :init
   (add-hook 'cider-mode-hook #'eldoc-mode)
   (add-hook 'cider-repl-mode-hook #'paredit-mode)

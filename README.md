@@ -10,7 +10,7 @@ These are my settings for Emacs v30+, including:
 * erlang and elixir editing with mode support
 * clojure & clojurescript with paredit
 * LLM integration with gptel
-* autocomplete, snippets, tags, suggestions
+* manual completion, snippets, tags, suggestions
 * ... and everything else.
 
 This configuration now uses the built-in `package.el` with `use-package` for modern, reliable package management. Everything is under a COPY/PASTE-OR-USE-HOWEVER-YOU-WANT license. ;)
@@ -69,6 +69,7 @@ EMACS PACKAGES
   * [helm-projectile](http://tuhdo.github.io/helm-projectile.html)
   * [projectile](https://github.com/bbatsov/projectile)
 * Other
+  * [ghostel](https://dakra.github.io/ghostel/)
   * [gptel](https://github.com/karthink/gptel)
   * [which-key](https://github.com/justbur/emacs-which-key)
   * [use-package](https://github.com/jwiegley/use-package)
@@ -235,9 +236,9 @@ CHEAT SHEET
 
 
 ### EDITOR :: DEV ###
-* **C-c SPC** - autocomplete (completion-at-point/corfu)
-* **M-n**     - next autocomplete option
-* **M-p**     - previous autocomplete option
+* **C-c SPC** - manual completion (completion-at-point/corfu)
+* **M-n**     - next completion option
+* **M-p**     - previous completion option
 * **F5**      - go to next error (flycheck)
 * **S+F5**    - go to previous error (flycheck)
 * **M-.**     - jump to definition (xref)
@@ -256,6 +257,13 @@ CHEAT SHEET
 * **C+F5**      - project dired
 * **(S/C+)F8**  - not bind (for the use in eproject commands)
 * **(S/C+)F9**  - not bind (for the use in eproject commands)
+
+
+### TERMINAL (ghostel) ###
+* **C-c t**     - project terminal
+* **C-u C-c t** - new project terminal
+* **C-c C-t**   - toggle copy mode
+* **C-c C-c**   - interrupt command
 
 
 ### NOTES (deft) ###

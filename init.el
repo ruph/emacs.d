@@ -326,21 +326,38 @@ Example:
         (paragraph-separate ruph/navigation-default-paragraph-separate))
     (backward-paragraph arg)))
 
-(defvar ruph/navigation-override-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-<up>") #'ruph/navigation-backward-paragraph)
-    (define-key map (kbd "C-<down>") #'ruph/navigation-forward-paragraph)
-    (define-key map (kbd "S-C-<up>") #'ruph/navigation-backward-paragraph)
-    (define-key map (kbd "S-C-<down>") #'ruph/navigation-forward-paragraph)
-    map)
+(defun ruph/navigation-filter-binding (command)
+  "Return COMMAND unless Ghostel needs direct terminal input.
+
+Example:
+  (ruph/navigation-filter-binding (quote ruph/backtab-dwim))"
+  (let ((input-mode (and (derived-mode-p 'ghostel-mode)
+                         (boundp 'ghostel--input-mode)
+                         (symbol-value 'ghostel--input-mode))))
+    (if (memq input-mode '(semi-char char))
+        (progn
+          (when ruph/navigation-override-debug
+            (message "[Navigation] DEBUG TerminalKeyPassthrough input_mode=%s command=%s"
+                     input-mode command))
+          nil)
+      command)))
+
+(defvar ruph/navigation-override-mode-map (make-sparse-keymap)
   "Keymap for `ruph/navigation-override-mode'.")
 
 ;; Re-apply bindings outside `defvar' so reloading `init.el' updates the
-;; existing keymap in a running Emacs session.
-(define-key ruph/navigation-override-mode-map [backtab] #'ruph/backtab-dwim)
-(define-key ruph/navigation-override-mode-map (kbd "<backtab>") #'ruph/backtab-dwim)
-(define-key ruph/navigation-override-mode-map (kbd "<S-tab>") #'ruph/backtab-dwim)
-(define-key ruph/navigation-override-mode-map (kbd "<S-iso-lefttab>") #'ruph/backtab-dwim)
+;; existing keymap.  Filtering at lookup follows Ghostel input-mode changes
+;; immediately, preserving editor navigation in copy, Emacs, and line modes.
+(dolist (binding '(("C-<up>" . ruph/navigation-backward-paragraph)
+                   ("C-<down>" . ruph/navigation-forward-paragraph)
+                   ("S-C-<up>" . ruph/navigation-backward-paragraph)
+                   ("S-C-<down>" . ruph/navigation-forward-paragraph)
+                   ("<backtab>" . ruph/backtab-dwim)
+                   ("<S-tab>" . ruph/backtab-dwim)
+                   ("<S-iso-lefttab>" . ruph/backtab-dwim)))
+  (define-key ruph/navigation-override-mode-map (kbd (car binding))
+              (list 'menu-item "" (cdr binding)
+                    :filter #'ruph/navigation-filter-binding)))
 
 (with-eval-after-load 'markdown-mode
   (dolist (map-sym '(markdown-mode-map gfm-mode-map))
@@ -409,26 +426,9 @@ Example:
 
 (message (getenv "LANG"))
 
-(defun get-env-from-shell (variable)
-  (substring
-   (format
-	"%s" (last
-		  (delete
-		   "" (split-string
-			   (shell-command-to-string (concat "$SHELL --login -i -c 'echo $" variable "'"))
-			   "\n"))))
-   1 -1))
+(load "~/.emacs.d/lisp/init-shell-env" nil t)
 
 (setenv "LANG" (get-env-from-shell "LANG"))
-
-;; OSX has problems with PATH when running Emacs.app
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (get-env-from-shell "PATH"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
 
 (when (and window-system (eq system-type 'darwin))
   ;; When started from Emacs.app or similar, ensure $PATH
@@ -726,10 +726,14 @@ Example:
 (provide 'init)
 
 
-;; Function to byte-compile init files automatically
+;; Compile changed init files explicitly, outside startup and editing.
 (defun ruph/byte-compile-init-files ()
-  "Byte-compile all Emacs init files after packages are installed."
+  "Byte-compile changed init files on demand.
+
+Example:
+  (ruph/byte-compile-init-files)"
   (interactive)
+  (message "[Startup] INFO InitCompilationStart")
   (let ((files (directory-files-recursively "~/.emacs.d/lisp/" "\\.el$")))
     (dolist (file files)
       (when (or (not (file-exists-p (byte-compile-dest-file file)))
@@ -737,11 +741,8 @@ Example:
         (byte-compile-file file))))
   (when (or (not (file-exists-p (byte-compile-dest-file "~/.emacs.d/init.el")))
             (file-newer-than-file-p "~/.emacs.d/init.el" (byte-compile-dest-file "~/.emacs.d/init.el")))
-    (byte-compile-file "~/.emacs.d/init.el")))
-
-;; Auto-compile after packages are loaded
-(with-eval-after-load 'package
-  (run-with-idle-timer 5 nil 'ruph/byte-compile-init-files))
+    (byte-compile-file "~/.emacs.d/init.el"))
+  (message "[Startup] INFO InitCompilationDone"))
 
 
 ;; Customisation 

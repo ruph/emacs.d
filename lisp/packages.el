@@ -3,6 +3,7 @@
 ;; Initialize package management
 (require 'package)
 (require 'cl-lib)
+(declare-function get-env-from-shell "init-shell-env" (variable))
 
 ;; Set TLS settings for macOS compatibility
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -12,7 +13,9 @@
                          ("melpa" . "https://melpa.org/packages/")))
 (setq package-archive-priorities '((gnu . 10) (nongnu . 8) (melpa . 5)))
 
-(package-initialize)
+;; GUI startup calls package-activate-all without setting package--initialized.
+(unless package--activated
+  (package-initialize))
 
 ;; Auto-install essential packages if not present, using a delayed approach to ensure TLS settings are applied
 (defun ruph/ensure-packages-installed ()
@@ -28,19 +31,20 @@
           (error
             (message "[Packages] ERROR: Failed to install %s: %s" pkg (error-message-string err))))))))
 
-;; Use idle timer to ensure Emacs is fully initialized before installing packages
-(run-with-idle-timer 2.0 nil 
-  (lambda ()
-    (condition-case err
-        (progn
-          (message "[Packages] Starting auto-installation process...")
-          (unless package-archive-contents
-            (message "[Packages] Refreshing package contents...")
-            (package-refresh-contents))
-          (ruph/ensure-packages-installed)
-          (message "[Packages] Auto-installation process completed"))
-      (error
-        (message "[Packages] ERROR in auto-install: %s" (error-message-string err))))))
+;; First-install bootstrap only; normal startup does not schedule network I/O.
+(unless (package-installed-p 'diminish)
+  (run-with-idle-timer 2.0 nil
+    (lambda ()
+      (condition-case err
+          (progn
+            (message "[Packages] Starting auto-installation process...")
+            (unless package-archive-contents
+              (message "[Packages] Refreshing package contents...")
+              (package-refresh-contents))
+            (ruph/ensure-packages-installed)
+            (message "[Packages] Auto-installation process completed"))
+        (error
+         (message "[Packages] ERROR in auto-install: %s" (error-message-string err)))))))
 
 ;; Ensure archive list is current for key packages when local metadata is stale.
 (defvar ruph/package-archive-max-age-days 30
@@ -73,7 +77,7 @@ Example:
   "Refresh package archives when PKGS are missing and local metadata is stale.
 
 Example:
-  (ruph/ensure-archives-for 'erlang 'elixir-mode)"
+  (ruph/ensure-archives-for (quote erlang) (quote elixir-mode))"
   (let ((missing-pkgs (cl-remove-if #'package-installed-p pkgs)))
     (when (and missing-pkgs
                (ruph/package-archives-stale-p))
@@ -106,7 +110,8 @@ Example:
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package rainbow-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Built-in dired with hidden details
 (with-eval-after-load 'dired
@@ -114,12 +119,14 @@ Example:
 
 (use-package neotree
   :ensure t
+  :commands (neotree neotree-toggle)
   :init
   (setq neo-window-fixed-size nil
         neo-show-hidden-files t))
 
 (use-package writeroom-mode
   :ensure t
+  :commands writeroom-mode
   :init
   (setq writeroom-extra-line-spacing 0.4
         writeroom-maximize-window t)
@@ -148,13 +155,11 @@ Example:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; EDITING & COMPLETION
 
-;; Lightweight, fast completion UI based on CAPF
+;; Completion UI invoked explicitly with C-c SPC.
 (use-package corfu
   :ensure t
   :init
-  (setq corfu-auto t
-        corfu-auto-prefix 1
-        corfu-auto-delay 0.02
+  (setq corfu-auto nil
         corfu-quit-no-match t)
 
   (defvar ruph/completion-debug nil
@@ -184,6 +189,7 @@ Example:
 ;; Completion sources for CAPF
 (use-package cape
   :ensure t
+  :defer t
   :init
   ;; Order: keywords > file > dabbrev (tunable)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
@@ -193,6 +199,7 @@ Example:
 ;; Better matching style for responsiveness
 (use-package orderless
   :ensure t
+  :defer t
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
@@ -339,7 +346,8 @@ Example:
 
 ;; Ripgrep integration for Helm
 (use-package helm-rg
-  :ensure t)
+  :ensure t
+  :commands helm-rg)
 
 (use-package flycheck
   :ensure t
@@ -358,8 +366,26 @@ Example:
 
 (use-package vterm
   :ensure t
+  :commands (vterm vterm-other-window ruph/vterm-project)
   :config
   (load-file "~/.emacs.d/lisp/init-vterm.el"))
+
+;; MELPA removes old tarballs, so refresh stale metadata before installing.
+(ruph/ensure-archives-for 'ghostel)
+(use-package ghostel
+  :ensure t
+  :commands (ghostel ghostel-project)
+  :bind ("C-c t" . ghostel-project)
+  :preface
+  (defun ruph/ghostel-disable-snippets ()
+    "Disable snippets and their automatic activation in a Ghostel buffer.
+
+Example:
+  (ruph/ghostel-disable-snippets)"
+    (setq-local yas-dont-activate-functions t)
+    (yas-minor-mode -1)
+    (message "[Ghostel] INFO SnippetsDisabled buffer=%s" (buffer-name)))
+  :hook (ghostel-mode . ruph/ghostel-disable-snippets))
 
 (use-package deft
   :ensure t
@@ -404,21 +430,28 @@ Example:
 
 (use-package js2-mode
   :ensure t
+  :mode ("\\.\\(?:m?js\\|jsonc?\\)\\'" . js2-mode)
   :config
   (load-file "~/.emacs.d/lisp/lang-javascript.el"))
 
 (use-package typescript-mode
   :ensure t
+  :mode ("\\.tsx?\\'" . typescript-mode)
   :config
   (load-file "~/.emacs.d/lisp/lang-typescript.el"))
 
 (use-package web-mode
   :ensure t
+  :mode ("\\.\\(?:phtml\\|tpl\\.php\\|[agj]sp\\|as[cp]x\\|erb\\|mustache\\|djhtml\\|html?\\|jsx\\)\\'" . web-mode)
   :config
   (load-file "~/.emacs.d/lisp/init-web-mode.el"))
 
 (use-package emmet-mode
   :ensure t
+  :hook ((sgml-mode . emmet-mode)
+         (html-mode . emmet-mode)
+         (web-mode . emmet-mode)
+         (css-mode . emmet-mode))
   :config
   (load-file "~/.emacs.d/lisp/init-emmet-mode.el"))
 
@@ -427,23 +460,28 @@ Example:
   :mode "\\.less\\'")
 
 (use-package skewer-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package nodejs-repl
-  :ensure t)
+  :ensure t
+  :commands nodejs-repl)
 
 (use-package php-mode
   :ensure t
+  :defer t
   :config
   (load-file "~/.emacs.d/lisp/lang-php.el"))
 
 (use-package go-mode
   :ensure t
+  :defer t
   :config
   (load-file "~/.emacs.d/lisp/lang-go.el"))
 
 (use-package rust-mode
   :ensure t
+  :defer t
   :config
   (load-file "~/.emacs.d/lisp/lang-rust.el"))
 
@@ -469,27 +507,33 @@ Example:
 
 (use-package circe
   :ensure t
+  :commands circe
   :config
   (load-file "~/.emacs.d/lisp/init-irc.el"))
 
 (use-package swift-mode
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package clojure-mode
   :ensure t
+  :defer t
   :config
   (load-file "~/.emacs.d/lisp/lang-clojure.el"))
 
 (use-package cider
   :ensure t
+  :defer t
   :config
   (require 'widget))
 
 (use-package inf-clojure
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package ein
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package pyenv-mode
   :ensure t
@@ -508,14 +552,15 @@ Example:
 
 (use-package android-mode
   :ensure t
+  :defer t
+  :functions set-android-path-from-shell-PATH
   :config
   (defun set-android-path-from-shell-PATH ()
-    (let ((android-path
-           (replace-regexp-in-string
-            "[ \t\n]*$"
-            ""
-            (shell-command-to-string "$SHELL --login -i -c 'echo $ANDROID_HOME'"))))
-      (setenv "ANDROID_HOME" android-path)))
+    "Set ANDROID_HOME from cached shell values.
+
+Example:
+  (set-android-path-from-shell-PATH)"
+    (setenv "ANDROID_HOME" (get-env-from-shell "ANDROID_HOME")))
   (when (and window-system (eq system-type 'darwin))
     (set-android-path-from-shell-PATH)))
 
@@ -526,7 +571,8 @@ Example:
   :commands lsp)
 
 (use-package lsp-ui
-  :ensure t)
+  :ensure t
+  :hook (lsp-mode . lsp-ui-mode))
 
 (use-package gptel
   :ensure t
@@ -546,11 +592,13 @@ Example:
 ;; Removed popup/pos-tip to avoid legacy deps; keep UI simple
 
 (use-package visual-fill-column
-  :ensure t)
+  :ensure t
+  :defer t)
 
 
 (use-package lsp-pyright
-  :ensure t)
+  :ensure t
+  :after lsp-mode)
 
 ;; Dependencies (good to have them explicit)
 (use-package dash :ensure t)
@@ -658,12 +706,15 @@ Example:
         (message matching-text)))))
 
 ;; Colors in *compilation*
+(defvar compilation-filter-start)
 (defun colorize-buffer ()
-  (progn
-    (require 'ansi-color)
-    (read-only-mode)
-    (ansi-color-apply-on-region (point-min) (point-max))
-    (read-only-mode)))
+  "Apply ANSI colors to newly inserted compilation output.
+
+Example:
+  (add-hook (quote compilation-filter-hook) (function colorize-buffer))"
+  (require 'ansi-color)
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))
 (add-hook 'compilation-filter-hook 'colorize-buffer)
 
 ;; Flyspell (auto-spelling)
