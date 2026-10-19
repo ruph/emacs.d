@@ -213,4 +213,27 @@
   (should (commandp 'ruph/vterm-project))
   (should (eq (lookup-key global-map (kbd "C-c t")) 'ghostel-project)))
 
+(ert-deftest startup/ghostel-editing-keys-route-input ()
+  "Shell shortcuts send editing bytes; alternate-screen apps keep their keys."
+  (ruph/startup-test--initialize)
+  (require 'ghostel)
+  (let (sent)
+    (cl-letf (((symbol-function 'ghostel-alt-screen-p) (lambda () nil))
+              ((symbol-function 'ghostel-send-string)
+               (lambda (sequence) (setq sent sequence))))
+      (dolist (binding '(("s-<backspace>" . "\C-u") ("s-DEL" . "\C-u")
+                         ("M-<left>" . "\eb") ("M-<right>" . "\ef")
+                         ("C-<left>" . "\eb") ("C-<right>" . "\ef")))
+        (call-interactively
+         (lookup-key ghostel-semi-char-mode-map (kbd (car binding))))
+        (should (equal sent (cdr binding)))))
+    (cl-letf (((symbol-function 'ghostel-alt-screen-p) (lambda () t))
+              ((symbol-function 'ghostel-send-key)
+               (lambda (key modifiers) (setq sent (list key modifiers))))
+              ((symbol-function 'ghostel-send-string)
+               (lambda (_) (ert-fail "TUI received shell editing bytes"))))
+      (call-interactively
+       (lookup-key ghostel-semi-char-mode-map (kbd "C-<left>")))
+      (should (equal sent '("left" "ctrl"))))))
+
 ;;; startup-tests.el ends here

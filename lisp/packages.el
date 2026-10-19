@@ -4,6 +4,9 @@
 (require 'package)
 (require 'cl-lib)
 (declare-function get-env-from-shell "init-shell-env" (variable))
+(declare-function keymap-unset-key "packages" (key mode))
+(declare-function ruph/text-mode-completion-setup "packages" ())
+(declare-function cape-keyword "cape" (&optional interactive))
 
 ;; Set TLS settings for macOS compatibility
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -374,9 +377,29 @@ Example:
 (ruph/ensure-archives-for 'ghostel)
 (use-package ghostel
   :ensure t
+  :functions (ghostel-alt-screen-p ghostel-send-key ghostel-send-string)
   :commands (ghostel ghostel-project)
   :bind ("C-c t" . ghostel-project)
   :preface
+  (defvar ruph/ghostel-edit-debug nil
+    "Log editing-key routing when non-nil.
+
+Example:
+  (setq ruph/ghostel-edit-debug t)")
+
+  (defun ruph/ghostel-send-edit-key (key modifiers sequence)
+    "Send shell editing SEQUENCE, or encoded KEY and MODIFIERS in a TUI.
+
+Example:
+  (ruph/ghostel-send-edit-key \"left\" \"alt\" \"\\eb\")"
+    (let ((alternate-screen (ghostel-alt-screen-p)))
+      (when ruph/ghostel-edit-debug
+        (message "[Ghostel] DEBUG EditKey key=%s modifiers=%s alternate_screen=%s"
+                 key modifiers alternate-screen))
+      (if alternate-screen
+          (ghostel-send-key key modifiers)
+        (ghostel-send-string sequence))))
+
   (defun ruph/ghostel-disable-snippets ()
     "Disable snippets and their automatic activation in a Ghostel buffer.
 
@@ -385,7 +408,23 @@ Example:
     (setq-local yas-dont-activate-functions t)
     (yas-minor-mode -1)
     (message "[Ghostel] INFO SnippetsDisabled buffer=%s" (buffer-name)))
-  :hook (ghostel-mode . ruph/ghostel-disable-snippets))
+  :hook (ghostel-mode . ruph/ghostel-disable-snippets)
+  :config
+  ;; Translate editor gestures to zsh/readline's Emacs bindings only in
+  ;; semi-char mode.  Char mode keeps Ghostel's native key encoding.
+  (dolist (binding '(("s-<backspace>" "backspace" "super" "\C-u")
+                     ("s-DEL" "backspace" "super" "\C-u")
+                     ("M-<left>" "left" "alt" "\eb")
+                     ("M-<right>" "right" "alt" "\ef")
+                     ("C-<left>" "left" "ctrl" "\eb")
+                     ("C-<right>" "right" "ctrl" "\ef")))
+    (let ((key (nth 1 binding))
+          (modifiers (nth 2 binding))
+          (sequence (nth 3 binding)))
+      (define-key ghostel-semi-char-mode-map (kbd (car binding))
+                  (lambda ()
+                    (interactive)
+                    (ruph/ghostel-send-edit-key key modifiers sequence))))))
 
 (use-package deft
   :ensure t

@@ -4,6 +4,8 @@
 (defvar bkp-file-name-handler-alist)
 (declare-function server-running-p "server")
 (declare-function cua--select-keymaps "cua-base")
+(declare-function get-env-from-shell "init-shell-env" (variable))
+(declare-function set-exec-path-from-shell-PATH "init-shell-env" ())
 (defvar server-socket-dir)
 (defvar fringe-mode)
 (defvar savehist-file)
@@ -446,8 +448,12 @@ Example:
   (setq
    uniquify-buffer-name-style 'post-forward
    uniquify-separator ":"
-   uniquify-after-kill-buffer-p t       ;; rename after killing uniquified
-   uniquify-ignore-buffers-re "^\\*"))  ;; don't muck with special buffers
+   uniquify-ignore-buffers-re "^\\*")  ;; don't muck with special buffers
+  ;; Emacs 31 renamed this option; retain compatibility with Emacs 30.
+  (set (if (boundp 'uniquify-after-kill-buffer-flag)
+           'uniquify-after-kill-buffer-flag
+         'uniquify-after-kill-buffer-p)
+       t))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

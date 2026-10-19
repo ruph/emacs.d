@@ -264,6 +264,16 @@ CHEAT SHEET
 * **C-u C-c t** - new project terminal
 * **C-c C-t**   - toggle copy mode
 * **C-c C-c**   - interrupt command
+* **s-Backspace** - delete input back to the line start (Command on macOS)
+* **M-left/right** or **C-left/right** - move by word (Option or Ctrl)
+* **C-c C-l**   - compose input with normal Emacs editing, then send with RET
+* **C-c C-j**   - return to direct terminal input
+* **C-c M-p/n** - navigate previous/next shell prompt
+
+The custom editing shortcuts apply in semi-char mode with Emacs-style shell
+bindings (`bindkey -e` in zsh). Alternate-screen apps receive the original
+encoded keys; char mode retains native key handling. On macOS, use left Option
+for Meta; this config leaves right Option available for character entry.
 
 
 ### NOTES (deft) ###

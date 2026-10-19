@@ -143,6 +143,12 @@ Important: (add especially important remarks here; can be omitted if there aren'
 
 ### Entries (latest on top)
 
+[2026-10-19 13:49 UTC]
+Context: Make Ghostel shell input support Command-Backspace and Option/Ctrl arrow word movement while preserving terminal application key protocols.
+Decisions: Added semi-char bindings using Ghostel's public input APIs: C-u for backward line deletion and ESC b/f for word motion. Alternate-screen applications receive the original encoded keys; char mode retains upstream handling. Added opt-in routing logs and documented line editing, copy mode, and prompt navigation.
+Findings: The user's zsh uses bindkey -e. Ghostel supplies line mode and automatic shell integration, so no shell configuration changes or extra packages were necessary. Eleven ERT checks pass, including shell-byte and alternate-screen routing checks.
+Risks: Shell translations assume Emacs-style line editing. Applications on the primary screen also receive them; use char mode for original key encoding. Physical macOS shortcuts still depend on OS interception and modifier settings; GUI interaction was not verified.
+
 [2026-10-18 21:58 UTC]
 Context: Further improve GUI boot time and investigate editing latency after the first deferred-loading pass.
 Decisions:
