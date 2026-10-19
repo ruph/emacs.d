@@ -12,11 +12,14 @@ GEMINI.md
 # .emacs.d 
 el-get/
 elpa/
+eln-cache/
+url/
 recentf
 tramp
 transient/
 network-security.data
 projectile-bookmarks.eld
+projectile-frecency.eld
 quelpa/
 auto-save-list/
 *.~undo-tree~

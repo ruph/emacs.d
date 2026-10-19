@@ -2,17 +2,17 @@
 
 (require 'gptel-openai-oauth)
 
-(defvar ruph/gptel-openai-subscription-model 'gpt-5.5
+(defvar ruph/gptel-openai-subscription-model "gpt-6.1-sol"
   "Default model for the ChatGPT/Codex subscription backend.
 
 Example:
-  (setq ruph/gptel-openai-subscription-model 'gpt-5.5)")
+  (setq ruph/gptel-openai-subscription-model \"gpt-6.1-sol\")")
 
-(defvar ruph/gptel-openai-subscription-reasoning-effort "high"
+(defvar ruph/gptel-openai-subscription-reasoning-effort "low"
   "Reasoning effort for the ChatGPT/Codex subscription backend.
 
 Example:
-  (setq ruph/gptel-openai-subscription-reasoning-effort \"high\")")
+  (setq ruph/gptel-openai-subscription-reasoning-effort \"low\")")
 
 (defvar ruph/gptel-openai-subscription-backend-name "OpenAI-sub"
   "Display name for the ChatGPT/Codex subscription backend.
